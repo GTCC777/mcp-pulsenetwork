@@ -34,7 +34,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "game",
         "path": "/api/scan/game",
-        "price": "$1.00",
+        "price": "$0.50",
         "description": "Deep single-match analysis: de-vigged sportsbook consensus + proprietary stats/weather analytics + props; 3 ranked +EV plays with full reasoning.",
         "params": {
           "sport": { "type": "string", "description": "mlb | nba | nfl | nhl | wnba | soccer_epl | tennis | mma | esports", "required": true, "example": "mlb" },

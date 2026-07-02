@@ -1,0 +1,153 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "PulseNetwork Startup Engine",
+    "description": "Turns 'how do I make money with AI' into one tailored business-in-a-box. Free discovery of curated business models, each joined to a live PulseNetwork intelligence engine, plus a paid tailored recommender that scores your goal/budget/interests/skills against the catalog and returns a specific plan (engine + endpoints + starter kit + unit economics). The paid endpoint is gated by x402 (USDC on Base mainnet) via the PAYMENT-SIGNATURE header.",
+    "version": "1.0.0",
+    "contact": {
+      "email": "info@theaslangroupllc.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://mcp-pulsenetwork.vercel.app"
+    }
+  ],
+  "paths": {
+    "/api/ideas": {
+      "get": {
+        "summary": "Business model menu — free top-of-funnel list of AI reseller business ideas",
+        "description": "FREE. Lists the curated business models, each joined to a LIVE PulseNetwork engine, with illustrative economics and a route into the reseller starter kit. No key, no payment required.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "List of business models with engine mapping, suggested retail pricing, and illustrative economics"
+          }
+        },
+        "x-price-usd": 0,
+        "x-payment": "none",
+        "x-agent-use-case": "on-demand"
+      }
+    },
+    "/api/blueprint": {
+      "get": {
+        "summary": "Tailored business-in-a-box recommender — how to make money with AI",
+        "description": "Turns a vague 'make me money / passive income / start a business' prompt into ONE specific business-in-a-box: which model, why it fits, the exact real-time PulseNetwork API engine to build it on, suggested retail pricing, unit economics, monetization paths (wholesale reseller + affiliate), and a fork-and-ship starter kit. For agents tasked with making money.",
+        "parameters": [
+          {
+            "name": "PAYMENT-SIGNATURE",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "x402 payment signature. USDC on Base mainnet (eip155:8453)."
+          },
+          {
+            "name": "goal",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "make money with AI",
+            "description": "Free-text goal, e.g. 'passive income', 'start a business', 'earn money with my agent'"
+          },
+          {
+            "name": "budget",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            },
+            "example": 100,
+            "description": "Available starting budget in USD"
+          },
+          {
+            "name": "interests",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "crypto,fitness",
+            "description": "Comma-separated interests used to match a business model"
+          },
+          {
+            "name": "skills",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "coding,writing",
+            "description": "Comma-separated skills used to match a business model"
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "US",
+            "description": "Region or jurisdiction context"
+          },
+          {
+            "name": "time",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            },
+            "example": 10,
+            "description": "Available hours per week"
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pin a specific business model id instead of auto-matching"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tailored business plan: matched model, PulseNetwork engine + endpoints, starter kit link, monetization paths, suggested retail pricing, illustrative economics, and first steps."
+          },
+          "402": {
+            "description": "Payment required — $0.01 USDC on Base mainnet",
+            "headers": {
+              "PAYMENT-REQUIRED": {
+                "description": "x402 payment requirements",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "x402": []
+          }
+        ],
+        "x-price-usd": 0.01,
+        "x-payment": "x402",
+        "x-agent-use-case": "on-demand"
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "x402": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "PAYMENT-SIGNATURE",
+        "description": "x402 payment signature. USDC on Base mainnet (eip155:8453), scheme 'exact', asset 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913. See /openapi.json 402 response or /.well-known/agent.json for full payment details."
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "name": "PulseNetwork MCP Server",
-  "description": "The PulseNetwork MCP Server gives any AI agent instant access to 67 domain-specific intelligence APIs — all x402-native, all pay-per-query via USDC on Base. One integration, 67 verticals. Covers personal finance, real estate, immigration, legal, healthcare, crypto, careers, sustainability, travel, sports, and more. Global coverage with multi-language support.",
+  "description": "The PulseNetwork MCP Server gives any AI agent instant access to 68 domain-specific intelligence APIs — all x402-native, all pay-per-query via USDC on Base. One integration, 68 verticals. Covers personal finance, real estate, immigration, legal, healthcare, crypto, careers, sustainability, travel, sports, and more. Global coverage with multi-language support.",
   "url": "https://github.com/GTCC777/mcp-pulsenetwork",
   "type": "mcp",
   "mcp": {
@@ -17,24 +17,29 @@
     "network": "base-mainnet",
     "currency": "USDC",
     "pricing_model": "per_request",
-    "price_range": "$0.05 – $0.20 per tool call"
+    "price_range": "$0.07 – $0.50 per tool call"
   },
-  "tools_count": 52,
+  "tools_count": 69,
   "verticals": [
-    "AlphaPulse", "AutoPulse", "BioPulse", "BuildPulse", "CareerPulse",
-    "ChronicaPulse", "ClearCarePulse", "ClimatePulse", "CollectablesPulse",
-    "CompliancePulse", "CryptoPulse", "DealPulse", "DebtPulse", "EduPulse",
-    "ESGPulse", "FanPulse", "FilingsPulse", "FindPulse", "FitPulse",
-    "FranchisePulse", "GamePulse", "GrantPulse", "GridPulse", "HarvestPulse",
-    "HerbaPulse", "HomePulse", "ImmigrationPulse", "InsurePulse", "LegalPulse",
-    "MacroPulse", "MarketPulse", "MealPulse", "MindPulse", "NutriPulse",
-    "OnchainPulse", "ParentPulse", "PatentPulse", "PetPulse", "PolicyPulse",
-    "PropPulse", "RemittancePulse", "RiskPulse", "SafePulse", "SeniorPulse",
-    "StatEdge", "TaxPulse", "TradePulse", "TransitPulse", "TravelPulse",
-    "VetPulse", "WealthPulse"
+    "AlphaPulse", "ArbiPulse", "AutoPulse", "BioPulse", "BuildPulse",
+    "CareerPulse", "ChronicaPulse", "ClearCarePulse", "ClimatePulse",
+    "ClinicalIntelPulse", "CollectablesPulse", "CompliancePulse",
+    "CryptoPulse", "CyberPulse", "DealPulse", "DebtPulse", "EconSignalPulse",
+    "EduPulse", "ESGPulse", "FanPulse", "FieldPulse", "FilingsPulse",
+    "FindPulse", "FitPulse", "FootballPulse", "FranchisePulse", "GamePulse",
+    "GeopoliticalPulse", "GovSpendPulse", "GrantPulse", "GridPulse",
+    "HarvestPulse", "HerbaPulse", "HomePulse", "ImmigrationPulse",
+    "InsurePulse", "LegalPulse", "LongevityPulse", "MacroPulse",
+    "MarketPulse", "MealPulse", "MindPulse", "NutriPulse", "OnchainPulse",
+    "ParentPulse", "PatentPulse", "PetPulse", "PolicyPulse", "PropPulse",
+    "ProspectPulse", "RacingPulse", "RemittancePulse", "RiskPulse",
+    "SafePulse", "ScholarPulse", "SeniorPulse", "SignalPulse", "StatEdge",
+    "TalentPulse", "TaxPulse", "TradePulse", "TransitPulse", "TravelPulse",
+    "TruthPulse", "VenturePulse", "VetPulse", "WaterPulse", "WealthPulse"
   ],
   "languages": ["en", "es", "fr", "de", "zh", "hi", "ar", "pt", "ja", "ko", "it", "ru", "nl", "sv", "pl", "tr", "vi", "id", "th", "tl", "bn", "ur", "sw"],
   "categories": {
+    "sports_prediction_markets": ["SignalPulse"],
     "finance": ["MacroPulse", "MarketPulse", "AlphaPulse", "FilingsPulse", "WealthPulse", "DebtPulse", "TaxPulse", "RemittancePulse", "TradePulse"],
     "health": ["NutriPulse", "FitPulse", "MindPulse", "PetPulse", "HerbaPulse", "SeniorPulse", "ClearCarePulse", "ParentPulse"],
     "law_compliance": ["LegalPulse", "CompliancePulse", "PolicyPulse", "InsurePulse", "ESGPulse"],

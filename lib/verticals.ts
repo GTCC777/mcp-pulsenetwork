@@ -1744,7 +1744,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "careerpulse": {
     "name": "CareerPulse",
-    "baseUrl": "https://careerpulse.vercel.app",
+    "baseUrl": "https://careerpulse-steel.vercel.app",
     "description": "Global career intelligence API serving the world's 3.5 billion workers. 10 endpoints: salary benchmarking (any role + any country, sourced from BLS, OECD, ILO, Glassdoor, Levels.fyi), industry outlook",
     "globalCoverage": "Global",
     "endpoints": [
@@ -9280,8 +9280,8 @@ export const VERTICALS: Record<string, Vertical> = {
         }
       },
       {
-        "action": "audit",
-        "path": "/api/insure/audit",
+        "action": "review",
+        "path": "/api/insure/review",
         "price": "$0.10",
         "description": "Annual insurance coverage audit",
         "params": {
@@ -11051,7 +11051,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "parentpulse": {
     "name": "ParentPulse",
-    "baseUrl": "https://parentpulse.vercel.app",
+    "baseUrl": "https://parentpulse-delta.vercel.app",
     "description": "ParentPulse — child development and parenting intelligence: developmental milestones, nutrition guidance, pediatric health, sleep science, school selection, discipline strategies, childcare cost, and ",
     "globalCoverage": "Global",
     "endpoints": [

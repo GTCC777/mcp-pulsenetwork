@@ -1,10 +1,10 @@
 # PulseNetwork MCP Server
 
-**67 AI-powered intelligence verticals. One integration. Pay-per-query via x402 on Base.**
+**68 AI-powered intelligence verticals. One integration. Pay-per-query via x402 on Base.**
 
-PulseNetwork is the most comprehensive x402-native intelligence network available. Add one block to your Claude Desktop config and your agent gains access to 67 domain-specific intelligence APIs — finance, legal, healthcare, immigration, real estate, crypto, careers, travel, sustainability, and more — all paying autonomously via USDC on Base.
+PulseNetwork is the most comprehensive x402-native intelligence network available. Add one block to your Claude Desktop config and your agent gains access to 68 domain-specific intelligence APIs — finance, legal, healthcare, immigration, real estate, crypto, careers, travel, sustainability, sports/prediction markets, and more — all paying autonomously via USDC on Base.
 
-No API keys. No subscriptions. Agents pay per query, $0.05–$0.20 each.
+No API keys. No subscriptions. Agents pay per query, $0.015–$1.00 each.
 
 ---
 
@@ -48,7 +48,7 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (Mac) or 
 }
 ```
 
-Restart Claude Desktop. You now have 67 intelligence verticals available.
+Restart Claude Desktop. You now have 68 intelligence verticals available.
 
 ### 4. Add to Cursor / Windsurf / any MCP client
 
@@ -92,7 +92,8 @@ Same config pattern — point `command` at `npx` and pass your key via env.
 | **insurepulse** | Insurance carrier comparisons, coverage gap analysis | $0.08–$0.15 |
 | **alphapulse** | Stock earnings analysis, analyst sentiment, insider activity | $0.10 |
 | **marketpulse** | Sector rotation, sentiment indicators, weekly market briefs | $0.08 |
-| **onchainpulse** | DeFi protocol analysis, token metrics, wallet intelligence | $0.05–$0.10 |
+| **onchainpulse** | Onchain finance intelligence + flagship pre-trade token-safety scanners: Solana memecoin (`/api/memecoin`) and multi-chain EVM honeypot/rug detection (`/api/evmtoken`, Base/Ethereum/BSC/Arbitrum/Polygon/Optimism/Avalanche), plus legislation, RWA tokenization, DeFi yield | $0.015–$0.10 |
+| **signalpulse** | Institutional-grade trading & prediction-market intelligence: sports/fantasy analysis, de-vigged sportsbook consensus, Polymarket/Kalshi/Manifold/PredictIt edges, racing, crypto/FX/macro scans; free daily sample | $0.50–$1.00 |
 | **biopulse** | Species occurrence, birding intelligence (1B+ eBird records) | $0.05–$0.08 |
 | **safepulse** | CPSC/FDA/NHTSA recalls across all consumer product categories | $0.05–$0.08 |
 | **chronicapulse** | Library of Congress: 30M+ historical newspaper pages 1770–1963 | $0.08–$0.10 |
@@ -161,7 +162,7 @@ Claude calls `discover` with `category: data` and returns the relevant options.
 - **Network:** Base mainnet (`eip155:8453`)
 - **Token:** USDC (`0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`)
 - **Protocol:** [x402](https://x402.org) — open standard by the Linux Foundation
-- **Price range:** $0.05–$0.20 per query
+- **Price range:** $0.015–$1.00 per query
 - **No subscription, no API key** — agents pay autonomously per request
 
 ---
@@ -176,6 +177,18 @@ This is infrastructure. Build agents on top:
 - **Relocation agent** — combines ImmigrationPulse + TransitPulse + RiskPulse + TaxPulse
 
 Each agent builds on PulseNetwork as the intelligence layer, paying per query, running autonomously.
+
+---
+
+## Agent Skill (`npx skills`)
+
+PulseNetwork ships as an installable [agent skill](https://skills.sh) — one artifact that teaches Claude Code, Cursor, and Bankr agents how to discover and pay PulseNetwork endpoints (via MCP or direct x402 HTTP).
+
+```bash
+npx skills add github.com/GTCC777/mcp-pulsenetwork
+```
+
+The skill lives at [`skills/pulsenetwork/SKILL.md`](skills/pulsenetwork/SKILL.md).
 
 ---
 

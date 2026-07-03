@@ -1,6 +1,6 @@
 ---
 name: pulsenetwork
-description: "Pay-per-query access to 68 specialized intelligence APIs via x402 (USDC on Base or Solana, no API keys, no subscription). Use this skill when an agent needs a paid data/intelligence endpoint, especially for token-safety / honeypot / rugpull scanning before a trade (Solana memecoins via mint address, EVM tokens via contract on Base/Ethereum/BSC/Arbitrum/Polygon/Optimism/Avalanche), crypto security and wallet-risk checks, DeFi yield/APY intelligence, sports and fantasy predictions and prediction-market edges (NFL/NBA/MLB/golf/racing, Polymarket/Kalshi), insurance estimates, immigration and visa scoring, real-estate, legal letters, clinical/medical intel, careers/salary, travel, and dozens more domains. Each call returns structured JSON for roughly $0.015 to $1.00. Trigger when the user asks whether a token is safe / a honeypot / a rug, to scan a contract, for the best NFL pick or fantasy start-sit, for DeFi yield, or any question better answered by a live paid data API than by training knowledge. Two ways to call: the PulseNetwork MCP server, or direct x402 HTTP."
+description: "Pay-per-query access to 68 intelligence APIs via x402 (real USDC charges on Base or Solana per call, no API keys, no subscription, no refunds). Use when an agent needs live paid data instead of training knowledge: pre-trade token-safety scans (Solana memecoin / EVM honeypot-rug checks by mint or contract address across Base/Ethereum/BSC/Arbitrum/Polygon/Optimism/Avalanche), crypto wallet-risk and DeFi yield intelligence, sports/fantasy picks and prediction-market edges (NFL/NBA/MLB/golf/racing, Polymarket/Kalshi), insurance, immigration/visa, real-estate, legal letters, clinical intel, careers, travel, and more. Each call costs $0.015-$2.00 in USDC and returns structured JSON. Trigger on: \"is this token a rug/honeypot\", \"scan this contract\", \"best NFL pick\", \"fantasy start-sit\", \"DeFi yield\", or any question better served by a live paid API. Calls the hosted PulseNetwork MCP server or raw x402 HTTP; requires a funded USDC wallet - no free tier except one daily sample."
 metadata:
   homepage: https://pulse.theaslangroupllc.com
   settlement: x402 USDC on Base (eip155:8453) and Solana mainnet
@@ -9,7 +9,7 @@ metadata:
 
 # PulseNetwork
 
-PulseNetwork is an x402-native network of **68 intelligence verticals / 675 paid endpoints**. Agents pay per query in USDC (Base or Solana) — no API keys, no accounts, no subscription. Every endpoint returns structured JSON.
+PulseNetwork is an x402-native network of **68 intelligence verticals / 733 paid endpoints**. Agents pay per query in USDC (Base or Solana) — no API keys, no accounts, no subscription. Every endpoint returns structured JSON.
 
 There are **two integration paths**. Use the hosted MCP server inside Claude Desktop/Code/Cursor, or call any endpoint directly over x402 HTTP from any agent or language.
 
@@ -33,7 +33,7 @@ There are **two integration paths**. Use the hosted MCP server inside Claude Des
 | Crypto / market / FX scan | `GET signalpulse.theaslangroupllc.com/api/scan/crypto` or `/api/scan/market` | $2.00 | de-vigged, calibrated synthesis reads |
 | FREE sample | `GET signalpulse.theaslangroupllc.com/api/scan/sample` | FREE | pick-of-the-day, no payment, no key |
 
-Discover the full catalog (all 68 verticals, 675 endpoints) at **https://pulse.theaslangroupllc.com**, its **/llms.txt**, or each vertical's own `/openapi.json` and `/.well-known/agent.json`.
+Discover the full catalog (all 68 verticals, 733 endpoints) at **https://pulse.theaslangroupllc.com**, its **/llms.txt**, or each vertical's own `/openapi.json` and `/.well-known/agent.json`.
 
 ## Path 1 — Hosted MCP (no install)
 

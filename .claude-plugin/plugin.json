@@ -1,0 +1,16 @@
+{
+  "name": "pulsenetwork",
+  "displayName": "PulseNetwork",
+  "version": "1.0.0",
+  "description": "Pay-per-call x402 access to 68 intelligence APIs (token safety, sports/prediction-market, insurance, immigration, and more) settled in USDC on Base or Solana. Real money is spent on every call.",
+  "author": {
+    "name": "The Aslan Group LLC",
+    "email": "info@theaslangroupllc.com",
+    "url": "https://pulse.theaslangroupllc.com"
+  },
+  "homepage": "https://pulse.theaslangroupllc.com",
+  "repository": "https://github.com/GTCC777/mcp-pulsenetwork",
+  "license": "Apache-2.0",
+  "keywords": ["x402", "usdc", "crypto", "token-safety", "sports", "prediction-markets", "mcp", "payments"],
+  "defaultEnabled": false
+}

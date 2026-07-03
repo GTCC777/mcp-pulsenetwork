@@ -12240,14 +12240,14 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "nutripulse": {
     "name": "NutriPulse",
-    "baseUrl": "https://nutripulse.vercel.app",
+    "baseUrl": "https://nutripulse-alpha.vercel.app",
     "description": "Global nutrition intelligence API. PubMed-grounded supplement analysis, macro/micronutrient planning, food database lookups, glucose/metabolic health guidance, lab result interpretation, longevity nut",
     "globalCoverage": "Global",
     "endpoints": [
       {
         "action": "research",
         "path": "/api/nutrition/research",
-        "price": "FREE",
+        "price": "$0.10",
         "description": "Nutrition research synthesis",
         "params": {
           "topic": {
@@ -12265,7 +12265,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "food",
         "path": "/api/nutrition/food",
-        "price": "FREE",
+        "price": "$0.08",
         "description": "Food nutrition profile",
         "params": {
           "query": {
@@ -12283,7 +12283,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "supplement",
         "path": "/api/nutrition/supplement",
-        "price": "FREE",
+        "price": "$0.10",
         "description": "Supplement analysis",
         "params": {
           "name": {
@@ -12301,7 +12301,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "plan",
         "path": "/api/nutrition/plan",
-        "price": "FREE",
+        "price": "$0.15",
         "description": "Personalized nutrition plan",
         "params": {
           "goal": {
@@ -12329,7 +12329,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "compare",
         "path": "/api/nutrition/compare",
-        "price": "FREE",
+        "price": "$0.08",
         "description": "Food comparison",
         "params": {
           "foods": {
@@ -12347,7 +12347,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "analyze",
         "path": "/api/nutrition/analyze",
-        "price": "FREE",
+        "price": "$0.08",
         "description": "Meal analysis",
         "params": {
           "meal": {
@@ -12370,7 +12370,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "stack",
         "path": "/api/nutrition/stack",
-        "price": "FREE",
+        "price": "$0.12",
         "description": "Supplement stack",
         "params": {
           "goal": {
@@ -12393,7 +12393,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "glucose",
         "path": "/api/nutrition/glucose",
-        "price": "FREE",
+        "price": "$0.10",
         "description": "CGM glucose pattern interpretation",
         "params": {
           "pattern": {
@@ -12421,7 +12421,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "interactions",
         "path": "/api/nutrition/interactions",
-        "price": "FREE",
+        "price": "$0.10",
         "description": "Supplement interaction checker",
         "params": {
           "supplements": {
@@ -12444,7 +12444,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "labs",
         "path": "/api/nutrition/labs",
-        "price": "FREE",
+        "price": "$0.15",
         "description": "Blood work interpretation",
         "params": {
           "markers": {
@@ -12472,7 +12472,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "longevity",
         "path": "/api/nutrition/longevity",
-        "price": "FREE",
+        "price": "$0.10",
         "description": "Longevity protocol synthesis",
         "params": {
           "age": {
@@ -12500,7 +12500,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "prenatal",
         "path": "/api/nutrition/prenatal",
-        "price": "FREE",
+        "price": "$0.10",
         "description": "Prenatal nutrition by trimester",
         "params": {
           "trimester": {

@@ -138,6 +138,131 @@
         "x-payment": "x402",
         "x-agent-use-case": "on-demand"
       }
+    },
+    "/api/affiliate/register": {
+      "post": {
+        "summary": "Self-serve affiliate code registration — zero-build passive income",
+        "description": "FREE. Registers a referral code tied to a Base wallet. Append ?ref=CODE (or an x-referral-code header) to any PulseNetwork x402 request you route, and earn a share of what it pays — settled monthly in USDC on Base. No key, no approval queue.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["code", "wallet", "contact"],
+                "properties": {
+                  "code": { "type": "string", "pattern": "^[a-z0-9-]{3,20}$", "example": "myagent" },
+                  "wallet": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$", "description": "Base (EVM) address for USDC payouts" },
+                  "contact": { "type": "string", "description": "Email or Telegram handle" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Code registered — returns share_rate (25%), usage (?ref= param / header), and stats_url" },
+          "400": { "description": "Invalid code/wallet/contact" },
+          "409": { "description": "Code already taken" }
+        },
+        "x-price-usd": 0,
+        "x-payment": "none",
+        "x-agent-use-case": "discovery"
+      }
+    },
+    "/api/affiliate/stats": {
+      "get": {
+        "summary": "Public affiliate code stats — revenue, calls, distinct buyers, earnings owed",
+        "description": "FREE, public, read-only. Codes are not secrets (they ride in a public ?ref= param), so anyone holding a code can check its performance.",
+        "parameters": [
+          { "name": "code", "in": "query", "required": true, "schema": { "type": "string" }, "description": "The referral code to look up" }
+        ],
+        "responses": {
+          "200": { "description": "total_rev_usd, calls, distinct_buyers, share_rate, est_earnings_usd, paid_usd, owed_usd, status" },
+          "404": { "description": "Unknown code" }
+        },
+        "x-price-usd": 0,
+        "x-payment": "none",
+        "x-agent-use-case": "on-demand"
+      }
+    },
+    "/api/wholesale/register": {
+      "post": {
+        "summary": "Self-serve prepaid wholesale key — low-build reselling at 50% of retail",
+        "description": "FREE to mint, ships with a $0.25 trial balance. Issues a pk_live_ key billed at 50% of retail per call (prepaid balance, floored at $0.005/call) against any of PulseNetwork's 733 endpoints via the x-internal-key header. Balance hits zero → calls fall through to the normal x402 retail gate, no overdraft risk.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["contact"],
+                "properties": {
+                  "contact": { "type": "string", "description": "Email or Telegram handle" },
+                  "scope": { "type": "string", "description": "CSV of vertical/endpoint substrings, default \"*\" (whole fleet)", "example": "*" },
+                  "desired_prefix": { "type": "string", "description": "Cosmetic key prefix, [a-z0-9-]{1,20}" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Key minted (shown once) — billing, rate, scope, trial_balance_usd, limits, usage example, deposit + stats URLs" },
+          "400": { "description": "Invalid contact/scope/prefix" },
+          "429": { "description": "Rate limited — max 2 signups/hour per IP" }
+        },
+        "x-price-usd": 0,
+        "x-payment": "none",
+        "x-agent-use-case": "discovery"
+      }
+    },
+    "/api/wholesale/stats": {
+      "get": {
+        "summary": "Wholesale key status and balance lookup (holder-only)",
+        "description": "FREE. Possession of the full key is the secret — same trust model as using the key itself.",
+        "parameters": [
+          { "name": "key", "in": "query", "required": true, "schema": { "type": "string" }, "description": "Your pk_live_ wholesale key" }
+        ],
+        "responses": {
+          "200": { "description": "active, billing, scope, rate, balance_usd, calls_today, limits, created, deposit_url_hint" },
+          "400": { "description": "Invalid or missing key" },
+          "404": { "description": "Unknown key" }
+        },
+        "x-price-usd": 0,
+        "x-payment": "none",
+        "x-agent-use-case": "on-demand"
+      }
+    },
+    "/api/wholesale/deposit": {
+      "get": {
+        "summary": "Top up a wholesale key's prepaid balance via x402 USDC",
+        "description": "Real on-chain USDC top-up (Base or Solana) — no invoicing, no off-chain payment method. Balance credits atomically on settlement, usable immediately for wholesale-priced calls.",
+        "parameters": [
+          { "name": "key", "in": "query", "required": true, "schema": { "type": "string" }, "description": "Your pk_live_ wholesale key" },
+          { "name": "tier", "in": "query", "required": true, "schema": { "type": "number", "enum": [5, 25, 100] }, "description": "Deposit tier in USD" },
+          {
+            "name": "PAYMENT-SIGNATURE",
+            "in": "header",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "x402 payment signature. USDC on Base mainnet (eip155:8453)."
+          }
+        ],
+        "responses": {
+          "200": { "description": "credited_usd, new_balance_usd, key_prefix" },
+          "402": {
+            "description": "Payment required — $5, $25, or $100 USDC on Base mainnet (the chosen tier)",
+            "headers": {
+              "PAYMENT-REQUIRED": { "description": "x402 payment requirements", "schema": { "type": "string" } }
+            }
+          },
+          "404": { "description": "Unknown key" },
+          "410": { "description": "Key has been revoked" }
+        },
+        "security": [ { "x402": [] } ],
+        "x-price-usd": 5,
+        "x-payment": "x402",
+        "x-agent-use-case": "on-demand"
+      }
     }
   },
   "components": {

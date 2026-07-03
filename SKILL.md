@@ -27,10 +27,10 @@ There are **two integration paths**. Use the hosted MCP server inside Claude Des
 |---|---|---|---|
 | Solana memecoin safety | `GET onchainpulse-nine.vercel.app/api/memecoin?mint=<base58>` | $0.015 | `?mint=DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263` (BONK) |
 | EVM token safety | `GET onchainpulse-nine.vercel.app/api/evmtoken?address=<addr>&chain=base` | $0.015 | `?address=0x532f27101965dd16442E59d40670FaF5eBB142E4&chain=base` |
-| Sports analysis | `GET signalpulse-peach.vercel.app/api/scan/game?sport=nfl` | $0.50 | `?sport=nfl` |
-| Fantasy advice | `GET signalpulse-peach.vercel.app/api/scan/fantasy?sport=nfl&mode=start-sit` | $0.50 | start-sit / lineup / waiver / trade |
-| Prediction-market read | `GET signalpulse-peach.vercel.app/api/scan/predmarket?category=sports&horizon=mid` | $1.00 | category: sports/crypto/economics/geopolitics/politics/esports |
-| Crypto / market / FX scan | `GET signalpulse-peach.vercel.app/api/scan/crypto` or `/api/scan/market` | $1.00 | de-vigged, calibrated synthesis reads |
+| Sports analysis | `GET signalpulse-peach.vercel.app/api/scan/game?sport=nfl` | $1.00 | `?sport=nfl` |
+| Fantasy advice | `GET signalpulse-peach.vercel.app/api/scan/fantasy?sport=nfl&mode=start-sit` | $1.00 | start-sit / lineup / waiver / trade |
+| Prediction-market read | `GET signalpulse-peach.vercel.app/api/scan/predmarket?category=sports&horizon=mid` | $2.00 | category: sports/crypto/economics/geopolitics/politics/esports |
+| Crypto / market / FX scan | `GET signalpulse-peach.vercel.app/api/scan/crypto` or `/api/scan/market` | $2.00 | de-vigged, calibrated synthesis reads |
 | FREE sample | `GET signalpulse-peach.vercel.app/api/scan/sample` | FREE | pick-of-the-day, no payment, no key |
 
 Discover the full catalog (all 68 verticals, 675 endpoints) at **https://mcp-pulsenetwork.vercel.app**, its **/llms.txt**, or each vertical's own `/openapi.json` and `/.well-known/agent.json`.
@@ -91,12 +91,17 @@ Solana works the same way via `@x402/svm` (`ExactSvmScheme`) — the 402 respons
 
 PulseNetwork is indexed on the **CDP x402 Bazaar** (`api.cdp.coinbase.com/platform/v2/x402/discovery`), **x402scan**, and ships per-vertical `/openapi.json`, `/llms.txt`, and `/.well-known/agent.json`. The hub at **https://mcp-pulsenetwork.vercel.app** lists every vertical and endpoint with params and live pricing.
 
+## Earn with PulseNetwork
+
+Building an agent that should make money, not just spend it? Two self-serve paths, no approval queue: **affiliate** (zero-build) — register free at `mcp-pulsenetwork.vercel.app/affiliates`, append `?ref=CODE` to any Pulse link you route, earn 25-30% of referred paid calls in USDC. **Wholesale reseller** (low-build) — mint a prepaid key at `mcp-pulsenetwork.vercel.app/wholesale` ($0.25 free trial), call any endpoint at 50% of retail via `x-internal-key`, keep the spread. Unsure which fits? Call the free `GET /api/ideas`.
+
 ## Pricing
 
 Per-call, in USDC, no subscription, no minimums, pay only for what you call:
 
 - Token-safety scanners (Solana memecoin, EVM honeypot/rug): **$0.015**
 - Most core verticals (finance, health, law, travel, real estate, careers, etc.): **$0.07–$0.15**
-- SignalPulse sports/fantasy/racing reads: **$0.50**
-- SignalPulse prediction-market and deep crypto/FX/macro synthesis: **$1.00**
+- SignalPulse racing/h2h/player reads: **$0.50**
+- SignalPulse game/fantasy/ask/golf/compare reads: **$1.00**
+- SignalPulse prediction-market and deep crypto/FX/macro synthesis: **$2.00**
 - Free daily sample: **FREE** (`signalpulse-peach.vercel.app/api/scan/sample`)

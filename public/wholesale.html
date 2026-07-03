@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PulseNetwork Wholesale — resell 733 endpoints at 50% of retail</title>
+<meta name="description" content="Monetize your AI agent by reselling real intelligence: get a prepaid wholesale key to any PulseNetwork endpoint at 50% of retail. Wrap it in your own product, set your own price, keep the spread — a low-build way to make money online with AI. Self-serve, free $0.25 trial, top up with USDC.">
+<link rel="canonical" href="https://mcp-pulsenetwork.vercel.app/wholesale">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PulseNetwork Wholesale — resell 733 endpoints at 50% of retail">
+<meta property="og:description" content="Self-serve prepaid wholesale keys — 50% of retail on any endpoint, free $0.25 trial balance, top up with a single x402 USDC payment. Monetize your AI agent without building your own data pipeline.">
+<meta property="og:url" content="https://mcp-pulsenetwork.vercel.app/wholesale">
+<meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#0a0d14;--panel:#121826;--panel2:#0e1421;--line:#1f2937;--ink:#e8edf5;--mut:#94a3b8;--acc:#4ade80;--acc2:#38bdf8;--paid:#fbbf24;--bad:#f87171}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--acc2);text-decoration:none}a:hover{text-decoration:underline}
+code{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:.85em}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+header.top{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(10,13,20,.85);backdrop-filter:blur(8px);z-index:10}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+.logo{font-weight:700;letter-spacing:-.02em}.logo b{color:var(--acc)}
+.nav a{color:var(--mut);margin-left:18px;font-size:14px}
+.hero{padding:60px 0 32px;text-align:center;border-bottom:1px solid var(--line);background:radial-gradient(1200px 400px at 50% -10%,rgba(74,222,128,.08),transparent)}
+.hero h1{font-size:clamp(28px,4.6vw,44px);line-height:1.12;letter-spacing:-.03em;margin:0 0 16px;font-weight:800}
+.hero h1 .g{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p.sub{font-size:clamp(15px,2vw,18px);color:var(--mut);max-width:640px;margin:0 auto 22px}
+.stats{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin:22px 0 6px}
+.stat b{display:block;font-size:24px;color:var(--ink);font-weight:800}.stat span{font-size:12.5px;color:var(--mut)}
+.cta{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:24px}
+.btn{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:600;font-size:15px;border:none;cursor:pointer;font-family:inherit}
+.btn.primary{background:var(--acc);color:#04210f}.btn.primary:hover{filter:brightness(1.08)}
+.btn.ghost{border:1px solid var(--line);color:var(--ink);background:transparent}.btn.ghost:hover{text-decoration:none;border-color:var(--acc2)}
+section{padding:44px 0;border-bottom:1px solid var(--line)}
+h2{font-size:22px;letter-spacing:-.02em;margin:0 0 8px}
+h3{font-size:16px;margin:0 0 6px}
+.lead{color:var(--mut);max-width:720px;margin:0 0 22px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:700px){.grid2,.grid3{grid-template-columns:1fr}}
+.feat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+.feat p{margin:6px 0 0;color:var(--mut);font-size:14px}
+.feat ul{margin:8px 0 0;padding-left:18px;color:var(--mut);font-size:14px}
+pre{background:#0b1322;border:1px solid var(--line);border-radius:12px;padding:16px;overflow:auto;font-size:12.5px;color:#cbd5e1;margin:10px 0 0}
+.example{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:14px}
+.example .price{float:right;font-size:12px;font-weight:700;color:var(--paid);background:rgba(251,191,36,.14);padding:3px 8px;border-radius:6px}
+.example p{color:var(--mut);font-size:14px;margin:6px 0 0}
+.mathrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;font-size:13px}
+.mathrow span{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.mathrow span.win{color:var(--acc);border-color:rgba(74,222,128,.3)}
+form{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px}
+label{display:block;font-size:13px;color:var(--mut);margin:14px 0 6px}
+label:first-child{margin-top:0}
+input[type=text],input[type=email]{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:11px 13px;color:var(--ink);font-size:14.5px;font-family:inherit}
+input:focus{outline:none;border-color:var(--acc2)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.formrow-btn{margin-top:18px}
+.result{margin-top:16px;padding:14px;border-radius:10px;font-size:13.5px;display:none;white-space:pre-wrap;word-break:break-word}
+.result.ok{display:block;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);color:var(--ink)}
+.result.err{display:block;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:var(--ink)}
+.stat-box{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+@media(max-width:600px){.stat-box{grid-template-columns:1fr 1fr}}
+.stat-box div{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+.stat-box b{display:block;font-size:18px}
+.stat-box span{font-size:11px;color:var(--mut)}
+.lookup-row{display:flex;gap:10px}
+.lookup-row input{flex:1}
+.tier-row{display:flex;gap:10px;flex-wrap:wrap}
+.tier-btn{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 18px;color:var(--ink);cursor:pointer;font-family:inherit;font-size:14px}
+.tier-btn.active,.tier-btn:hover{border-color:var(--acc2)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+td,th{text-align:left;padding:8px 10px;border-top:1px solid var(--line);color:var(--mut)}
+th{color:var(--ink);font-size:13px}
+.note{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.25);border-radius:10px;padding:14px 16px;font-size:13.5px;color:var(--mut);margin-top:16px}
+footer{padding:36px 0;color:var(--mut);font-size:14px}
+footer a{color:var(--mut)}
+.kv{color:var(--mut);font-size:13px;margin-top:10px}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <span class="logo">Pulse<b>Network</b></span>
+  <nav class="nav"><a href="/#catalog">Catalog</a><a href="#how">How it works</a><a href="#signup">Get a key</a><a href="#stats">My balance</a><a href="/affiliates">Affiliates</a></nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <h1>Our 733 endpoints.<br><span class="g">Your product. Keep the spread.</span></h1>
+  <p class="sub">Wrap any PulseNetwork intelligence endpoint in your own app, agent, or ACP offering. You get it at 50% of retail through a prepaid wholesale key; you set your own retail price and keep everything above wholesale. No invoices, no revenue share to reconcile — you already own 100% of what you charge. This is how you monetize an AI agent and earn USDC automatically without building your own data pipeline — a fast, low-build path to passive income with AI.</p>
+  <div class="stats">
+    <div class="stat"><b>50%</b><span>of retail, always</span></div>
+    <div class="stat"><b>$0.25</b><span>free trial balance</span></div>
+    <div class="stat"><b>733</b><span>endpoints, 68 verticals</span></div>
+  </div>
+  <div class="cta">
+    <a class="btn primary" href="#signup">Get a wholesale key</a>
+    <a class="btn ghost" href="https://github.com/GTCC777/pulse-starter-kit">10-minute ACP reseller kit ↗</a>
+  </div>
+</div></div>
+
+<section id="how"><div class="wrap">
+  <h2>How it works</h2>
+  <div class="grid3">
+    <div class="feat">
+      <h3>1. Register a key</h3>
+      <p>Self-serve, instant. You get a <code>pk_live_…</code> key with a $0.25 free trial balance — enough to test real calls before you ever pay us anything.</p>
+    </div>
+    <div class="feat">
+      <h3>2. Call any endpoint</h3>
+      <p>Send it as <code>x-internal-key</code> on any PulseNetwork request. Each call deducts wholesale cost (50% of that endpoint's retail price, floored at $0.005) from your balance — no per-call crypto payment, no wallet in your hot path.</p>
+    </div>
+    <div class="feat">
+      <h3>3. Top up when low</h3>
+      <p>Deposits are themselves an x402 call: hit the deposit URL, pay the 402 in USDC (Base or Solana), and your balance credits automatically the moment it settles. On-chain-verified — no invoicing, no trust required.</p>
+    </div>
+  </div>
+  <div class="note">When your balance hits zero, wholesale pricing simply stops — calls fall through to the normal retail x402 gate (a real payment would then be required through whatever path you've built, or the call fails). There's no overdraft and no surprise bill.</div>
+</div></section>
+
+<section id="example"><div class="wrap">
+  <h2>Worked example</h2>
+  <p class="lead">Real numbers from the live catalog today (verify anytime: <a href="https://onchainpulse-nine.vercel.app/openapi.json">onchainpulse openapi.json</a>):</p>
+  <div class="example">
+    <span class="price">$0.015 retail today</span>
+    <h3>OnchainPulse — EVM token safety scan (<code>/api/evmtoken</code>)</h3>
+    <p>Pre-trade rug/honeypot verdict, deterministic, multi-chain. A trading bot or wallet-safety layer calling this on every token a user looks at.</p>
+    <div class="mathrow">
+      <span>Retail today: <b>$0.015</b></span>
+      <span>Your wholesale cost: <b>$0.0075</b> (50%)</span>
+      <span class="win">You resell at $0.03 → ~4x your cost, ~2x retail</span>
+    </div>
+  </div>
+  <p class="kv">Prices change as the catalog is tuned — the 50% wholesale rate is constant, so your margin math always starts from whatever the live retail price is at call time. Full catalog + every current price: <a href="/#catalog">mcp-pulsenetwork.vercel.app/#catalog</a>.</p>
+</div></section>
+
+<section id="coverage"><div class="wrap">
+  <h2>Current wholesale door coverage</h2>
+  <p class="lead">Honest current-state note: prepaid wholesale billing is rolling out fleet-wide, vertical by vertical. Today:</p>
+  <table>
+    <tr><th>Surface</th><th>Status</th></tr>
+    <tr><td>PulseNetwork hub (this site — <code>/api/blueprint</code>, <code>/api/ideas</code>)</td><td>Live, prepaid wholesale</td></tr>
+    <tr><td>OnchainPulse (EVM + Solana token safety, on-chain intel)</td><td>Live, prepaid wholesale</td></tr>
+    <tr><td>SignalPulse — most verticals</td><td>Live, prepaid wholesale</td></tr>
+    <tr><td>SignalPulse — <code>scan/*</code> (prediction-market/sports flagship)</td><td>Master-key only today — premium synthesis, not yet open to self-serve wholesale</td></tr>
+    <tr><td>Remaining ~65 verticals</td><td>Scoped-key infrastructure exists fleet-wide; prepaid billing sweep in progress</td></tr>
+  </table>
+  <p class="kv">A key's <code>scope</code> only grants access to verticals that have wholesale billing wired — an out-of-scope or not-yet-wired call simply falls through to the normal retail x402 gate, same as running out of balance.</p>
+</div></section>
+
+<section id="acp"><div class="wrap">
+  <h2>Prefer a ready-made reseller?</h2>
+  <p class="lead">The <a href="https://github.com/GTCC777/pulse-starter-kit">pulse-starter-kit</a> is a fork-and-ship template that turns a wholesale key into a live Virtuals ACP agent in about 10 minutes: edit one JSON file to point your offering at a PulseNetwork endpoint, drop in your key, deploy. It already speaks the prepaid wholesale model above.</p>
+  <a class="btn ghost" href="https://github.com/GTCC777/pulse-starter-kit">Get the starter kit ↗</a>
+</div></section>
+
+<section id="signup"><div class="wrap">
+  <h2>Get a wholesale key</h2>
+  <p class="lead">Self-serve, instant, $0.25 free trial balance included.</p>
+  <form id="signup-form" autocomplete="off">
+    <label for="contact">Contact (email or Telegram handle)</label>
+    <input type="text" id="contact" name="contact" placeholder="you@example.com or @yourhandle" required>
+
+    <label for="scope">Scope (optional — comma-separated vertical names or endpoint paths, default all)</label>
+    <input type="text" id="scope" name="scope" placeholder="onchainpulse,/api/evmtoken (leave blank for *)">
+
+    <label for="desired_prefix">Desired key prefix (optional, cosmetic)</label>
+    <input type="text" id="desired_prefix" name="desired_prefix" placeholder="e.g. yourbrand">
+
+    <div class="hp" aria-hidden="true">
+      <label for="company">Company</label>
+      <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="formrow-btn"><button class="btn primary" type="submit">Get my key</button></div>
+    <div id="signup-result" class="result"></div>
+  </form>
+</div></section>
+
+<section id="stats"><div class="wrap">
+  <h2>Check your balance</h2>
+  <p class="lead">Paste your full key — possession of the key is the credential, same as using it to call an endpoint.</p>
+  <div class="lookup-row">
+    <input type="text" id="lookup-key" placeholder="pk_live_…">
+    <button class="btn ghost" id="lookup-btn" type="button">Look up</button>
+  </div>
+  <div id="stats-result" class="result"></div>
+  <div class="stat-box" id="stats-box" style="display:none">
+    <div><b id="s-active">—</b><span>active</span></div>
+    <div><b id="s-rate">—</b><span>your rate</span></div>
+    <div><b id="s-balance">—</b><span>balance</span></div>
+    <div><b id="s-calls">—</b><span>calls today</span></div>
+    <div><b id="s-scope">—</b><span>scope</span></div>
+    <div><b id="s-limits">—</b><span>rate limits</span></div>
+  </div>
+
+  <h3 style="margin-top:28px">Top up your balance</h3>
+  <p class="lead">Pick a tier — this opens the deposit URL in a new tab. Point an x402-capable wallet or agent at it; the 402 asks for exactly that amount in USDC (Base or Solana).</p>
+  <div class="tier-row">
+    <button class="tier-btn" data-tier="5">$5</button>
+    <button class="tier-btn" data-tier="25">$25</button>
+    <button class="tier-btn" data-tier="100">$100</button>
+  </div>
+  <div id="deposit-result" class="result"></div>
+</section>
+
+<footer><div class="wrap">
+  <strong>PulseNetwork Wholesale</strong> — self-serve prepaid reselling, 50% of retail on any wired endpoint. Part of the <a href="/">PulseNetwork</a> agent-payable intelligence network.<br>
+  <span class="kv"><a href="/">Home</a> · <a href="/#catalog">Catalog</a> · <a href="/affiliates">Affiliates</a> · <a href="https://github.com/GTCC777/pulse-starter-kit">Starter kit</a> · <a href="/llms.txt">llms.txt</a></span>
+</div></footer>
+
+<script>
+(function(){
+  var form = document.getElementById('signup-form');
+  var out = document.getElementById('signup-result');
+  var lastKey = '';
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    out.className = 'result';
+    out.textContent = 'Registering…';
+    out.style.display = 'block';
+    var body = {
+      contact: document.getElementById('contact').value.trim(),
+      scope: document.getElementById('scope').value.trim(),
+      desired_prefix: document.getElementById('desired_prefix').value.trim(),
+      company: document.getElementById('company').value
+    };
+    fetch('/api/wholesale/register', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function(r){ return r.json().then(function(j){ return { status: r.status, body: j }; }); })
+      .then(function(res){
+        if (res.status === 201 && res.body.key) {
+          lastKey = res.body.key;
+          document.getElementById('lookup-key').value = lastKey;
+          out.className = 'result ok';
+          out.textContent = 'Your key (save it now — shown once):\n' + res.body.key + '\n\n' +
+            'Rate: ' + (res.body.rate * 100) + '% of retail\n' +
+            'Trial balance: $' + res.body.trial_balance_usd + '\n' +
+            'Use as header: ' + res.body.usage.header + '\n\n' +
+            res.body.usage.billing_note;
+        } else {
+          out.className = 'result err';
+          out.textContent = 'Error: ' + (res.body.error || 'unknown error') + (res.body.detail ? ('\n' + res.body.detail) : '');
+        }
+      })
+      .catch(function(){
+        out.className = 'result err';
+        out.textContent = 'Network error — try again shortly.';
+      });
+  });
+
+  var lookupBtn = document.getElementById('lookup-btn');
+  var lookupInput = document.getElementById('lookup-key');
+  var statsResult = document.getElementById('stats-result');
+  var statsBox = document.getElementById('stats-box');
+  function lookup(){
+    var key = lookupInput.value.trim();
+    statsBox.style.display = 'none';
+    statsResult.className = 'result';
+    statsResult.textContent = 'Looking up…';
+    statsResult.style.display = 'block';
+    fetch('/api/wholesale/stats?key=' + encodeURIComponent(key))
+      .then(function(r){ return r.json().then(function(j){ return { status: r.status, body: j }; }); })
+      .then(function(res){
+        if (res.status === 200) {
+          statsResult.style.display = 'none';
+          statsBox.style.display = 'grid';
+          document.getElementById('s-active').textContent = res.body.active ? 'yes' : 'revoked';
+          document.getElementById('s-rate').textContent = res.body.rate ? (res.body.rate * 100) + '%' : '—';
+          document.getElementById('s-balance').textContent = '$' + res.body.balance_usd.toFixed(4);
+          document.getElementById('s-calls').textContent = res.body.calls_today;
+          document.getElementById('s-scope').textContent = (res.body.scope || []).join(', ') || '*';
+          document.getElementById('s-limits').textContent = (res.body.limits.per_min || '—') + '/min, ' + (res.body.limits.per_day || '—') + '/day';
+        } else {
+          statsResult.className = 'result err';
+          statsResult.textContent = 'Error: ' + (res.body.error || 'unknown error') + (res.body.detail ? ('\n' + res.body.detail) : '');
+        }
+      })
+      .catch(function(){
+        statsResult.className = 'result err';
+        statsResult.textContent = 'Network error — try again shortly.';
+      });
+  }
+  lookupBtn.addEventListener('click', lookup);
+  lookupInput.addEventListener('keydown', function(e){ if (e.key === 'Enter') lookup(); });
+
+  var depositResult = document.getElementById('deposit-result');
+  [].slice.call(document.querySelectorAll('.tier-btn')).forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var key = lookupInput.value.trim();
+      if (!key) {
+        depositResult.className = 'result err';
+        depositResult.textContent = 'Enter your key above first.';
+        depositResult.style.display = 'block';
+        return;
+      }
+      var url = '/api/wholesale/deposit?key=' + encodeURIComponent(key) + '&tier=' + btn.getAttribute('data-tier');
+      window.open(url, '_blank');
+      depositResult.className = 'result ok';
+      depositResult.textContent = 'Opened the deposit URL in a new tab — it returns a 402 Payment Required for $' + btn.getAttribute('data-tier') + '. Pay it with an x402-capable wallet/agent; your balance credits automatically on settlement.';
+      depositResult.style.display = 'block';
+    });
+  });
+})();
+</script>
+</body>
+</html>

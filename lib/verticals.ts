@@ -1,5 +1,5 @@
 // AUTO-GENERATED from live openapi.json across all PulseNetwork verticals.
-// 67 verticals, 661 endpoints. Regenerate with /tmp/gen-verticals.cjs
+// 68 verticals, 733 endpoints. Regenerate with tools/gen-verticals.mjs
 
 export interface VerticalEndpoint {
   action: string;
@@ -28,135 +28,326 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "sample",
         "path": "/api/scan/sample",
         "price": "FREE",
-        "description": "FREE pick-of-the-day — a full-depth sample of the sports engine on one featured matchup. No payment, no key.",
+        "description": "FREE pick-of-the-day — a full-depth sample of SignalPulse's sports intelligence on one featured matchup (de-vigged sportsbook consensus + proprietary stats/weather analytics). No payment, no API key.",
         "params": {}
       },
       {
         "action": "game",
         "path": "/api/scan/game",
-        "price": "$0.50",
-        "description": "Deep single-match analysis: de-vigged sportsbook consensus + proprietary stats/weather analytics + props; 3 ranked +EV plays with full reasoning.",
+        "price": "$1.00",
+        "description": "Deep single-match analysis for AI sports & research agents — a full multi-engine read of any game: de-vigged sportsbook consensus (Bovada/FanDuel/Pinnacle), sharp-line moves, proprietary xG/EPA/Statcast/map-pool analytics, venue weather and altitude physics, injuries and props. Returns 3 ranked +EV plays with full reasoning, props included.",
         "params": {
-          "sport": { "type": "string", "description": "mlb | nba | nfl | nhl | wnba | soccer_epl | tennis | mma | esports", "required": true, "example": "mlb" },
-          "event": { "type": "string", "description": "matchup hint, e.g. yankees-red-sox", "required": false },
-          "market_type": { "type": "string", "description": "optional focus: moneyline | spread | total | props", "required": false }
+          "sport": {
+            "type": "string",
+            "description": "mlb | nba | nfl | nhl | wnba | soccer_epl | tennis | mma | esports …",
+            "required": true,
+            "example": "mlb"
+          },
+          "event": {
+            "type": "string",
+            "description": "Matchup hint, e.g. yankees-red-sox.",
+            "required": false,
+            "example": "yankees-red-sox"
+          },
+          "market_type": {
+            "type": "string",
+            "description": "Optional market focus (hint, not a cap).",
+            "required": false
+          }
         }
       },
       {
         "action": "predmarket",
         "path": "/api/scan/predmarket",
-        "price": "$0.50",
-        "description": "Cross-venue prediction-market superforecaster across Polymarket/Kalshi/Manifold/PredictIt; calibrated probabilities, edge and full analysis (props included).",
+        "price": "$2.00",
+        "description": "Calibrated superforecaster scan of prediction markets for AI research & trading agents — a base-rate-anchored read across Polymarket, Kalshi, Manifold and PredictIt: cross-venue divergence, order-book and whale flow, and for sports the de-vigged sportsbook consensus plus proprietary team-strength and weather engines. Returns mispriced markets with probabilities, edge and full commentary, props included.",
         "params": {
-          "category": { "type": "string", "description": "crypto | economics | geopolitics | politics | sports | esports", "required": true, "example": "sports" },
-          "horizon": { "type": "string", "description": "short | mid | long", "required": false }
+          "category": {
+            "type": "string",
+            "description": "Prediction-market category to scan.",
+            "required": true,
+            "example": "sports"
+          },
+          "horizon": {
+            "type": "string",
+            "description": "short: order-flow/dislocation. mid: positioning + catalyst. long: base-rate/calibration.",
+            "required": false,
+            "example": "mid"
+          }
         }
       },
       {
         "action": "racing",
         "path": "/api/scan/racing",
         "price": "$0.50",
-        "description": "Today's GB/IRE racing card scanned for the single highest-EV selection + value picks, horse or greyhound; RPR/Topspeed, draw/trap bias, pace, going×form, trainer/jockey records, live exchange + forecast prices for genuine EV.",
+        "description": "Today's GB/IRE racing card scanned for AI betting & research agents — the single highest expected-value selection plus value picks across every race, horse or greyhound. Horses: RPR/Topspeed, draw bias, pace shape, going×form and trainer/jockey conditional course/going records. Greyhounds: early-speed, trap affinity, overall run-time, track trap-bias. Live exchange + forecast prices give genuine EV.",
         "params": {
-          "type": { "type": "string", "description": "horse | greyhound (default horse)", "required": false, "example": "horse" },
-          "market_type": { "type": "string", "description": "optional focus: win | place | each-way | forecast | tricast", "required": false }
+          "type": {
+            "type": "string",
+            "description": "Race discipline to scan (default horse).",
+            "required": false,
+            "example": "horse"
+          },
+          "market_type": {
+            "type": "string",
+            "description": "Optional bet-type focus (hint, not a cap).",
+            "required": false
+          }
         }
       },
       {
         "action": "h2h",
         "path": "/api/scan/h2h",
         "price": "$0.50",
-        "description": "Player head-to-head — a targeted read of two named players against each other (golf/tennis/MMA): the betting matchup verdict (favoured side, EV, edge) AND the fantasy h2h (who scores more DFS points) plus props. Golf SG/course-fit/history, tennis surface/form, combat style matchup.",
+        "description": "Player head-to-head for AI betting & research agents — a targeted read of TWO named players against each other in any matchup sport (golf, tennis, MMA). Returns the betting matchup verdict (favoured side, EV, edge) AND the fantasy head-to-head (who scores more DFS/fantasy points), plus data-backed props.",
         "params": {
-          "sport": { "type": "string", "description": "golf | tennis | mma …", "required": true, "example": "golf" },
-          "player_a": { "type": "string", "description": "first player (or players=a-vs-b)", "required": true, "example": "fitzpatrick" },
-          "player_b": { "type": "string", "description": "second player", "required": true, "example": "mcilroy" },
-          "market": { "type": "string", "description": "optional focus: matchup | props | fantasy", "required": false }
+          "sport": {
+            "type": "string",
+            "description": "golf | tennis | mma … (any matchup sport the engine covers).",
+            "required": true,
+            "example": "golf"
+          },
+          "player_a": {
+            "type": "string",
+            "description": "First player (or use players=a-vs-b).",
+            "required": true,
+            "example": "fitzpatrick"
+          },
+          "player_b": {
+            "type": "string",
+            "description": "Second player.",
+            "required": true,
+            "example": "mcilroy"
+          },
+          "market": {
+            "type": "string",
+            "description": "Optional focus (hint, not a cap).",
+            "required": false
+          }
         }
       },
       {
         "action": "compare",
         "path": "/api/scan/compare",
-        "price": "$0.50",
-        "description": "Compare & rank 2+ named players against each other — golf 3-balls, DFS player pools, season-long start/sit, 'best of these': a ranked list with projections + the single best betting play + the best fantasy/DFS value (points-per-dollar). The N-way generalization of h2h.",
+        "price": "$1.00",
+        "description": "Compare & rank 2+ named players against each other for AI betting, fantasy & research agents — golf 3-balls, DFS player pools, season-long start/sit, 'best of these'. Returns a ranked list (each with a projection) plus the single best betting play AND the best fantasy/DFS value.",
         "params": {
-          "sport": { "type": "string", "description": "golf | tennis | mma …", "required": true, "example": "golf" },
-          "players": { "type": "string", "description": "2–12 names: a-vs-b-vs-c, comma-separated, or repeated player=", "required": true, "example": "scheffler-vs-schauffele-vs-morikawa" },
-          "market": { "type": "string", "description": "optional purpose: value | fantasy | props | start-sit", "required": false }
+          "sport": {
+            "type": "string",
+            "description": "golf | tennis | mma … (any sport the engine covers).",
+            "required": true,
+            "example": "golf"
+          },
+          "players": {
+            "type": "string",
+            "description": "2–12 names — a-vs-b-vs-c, comma-separated, or repeated ?player=.",
+            "required": true,
+            "example": "scheffler-vs-schauffele-vs-morikawa"
+          },
+          "market": {
+            "type": "string",
+            "description": "Optional purpose (hint, not a cap).",
+            "required": false
+          }
         }
       },
       {
         "action": "fantasy",
         "path": "/api/scan/fantasy",
-        "price": "$0.50",
-        "description": "Direct fantasy advice (fully open — explicit recommendations, not just analysis): start/sit, DFS lineup (salary cap, points-per-dollar), waiver pickups and trade analysis. Returns the committed call + a ranked board with projected points, floor/ceiling, usage & matchup + a lineup build or trade verdict. Projects fantasy points from usage×matchup (NFL/MLB/NBA/golf); market optional.",
+        "price": "$1.00",
+        "description": "Direct fantasy advice for AI agents — start/sit, DFS lineup (salary cap, points-per-dollar), waiver pickups and trade analysis. FULLY OPEN: returns committed recommendations (who to start, accept/decline the trade), not just analysis. Projects fantasy points from the underlying data (golf SG/course-fit; NFL/MLB/NBA usage/role/matchup); the betting market is optional, never the gate.",
         "params": {
-          "sport": { "type": "string", "description": "nfl | mlb | nba | golf …", "required": true, "example": "nfl" },
-          "mode": { "type": "string", "description": "start-sit (default) | lineup | waiver | trade", "required": false, "example": "start-sit" },
-          "players": { "type": "string", "description": "candidate pool — 1–16 names (a-vs-b, comma, or repeated player=); required for start-sit/lineup/waiver", "required": false, "example": "saquon-barkley-vs-bijan-robinson" },
-          "give": { "type": "string", "description": "trade mode — player(s) you would send", "required": false },
-          "get": { "type": "string", "description": "trade mode — player(s) you would receive", "required": false },
-          "scoring": { "type": "string", "description": "optional: ppr | half-ppr | standard | dfs", "required": false },
-          "slots": { "type": "string", "description": "optional — how many to start", "required": false }
+          "sport": {
+            "type": "string",
+            "description": "nfl | mlb | nba | golf … (any sport the engine covers).",
+            "required": true,
+            "example": "nfl"
+          },
+          "mode": {
+            "type": "string",
+            "description": "The fantasy decision type.",
+            "required": false,
+            "example": "start-sit"
+          },
+          "players": {
+            "type": "string",
+            "description": "Candidate pool — 1 to 16 names (a-vs-b, comma-separated, or repeated ?player=). Required for start-sit/lineup/waiver.",
+            "required": false,
+            "example": "saquon-barkley-vs-bijan-robinson"
+          },
+          "give": {
+            "type": "string",
+            "description": "Trade mode — player(s) you would send.",
+            "required": false,
+            "example": "ceedee-lamb"
+          },
+          "get": {
+            "type": "string",
+            "description": "Trade mode — player(s) you would receive.",
+            "required": false,
+            "example": "bijan-robinson"
+          },
+          "scoring": {
+            "type": "string",
+            "description": "Optional scoring format.",
+            "required": false
+          },
+          "slots": {
+            "type": "integer",
+            "description": "Optional — how many to start (start-sit / lineup).",
+            "required": false
+          }
         }
       },
       {
         "action": "player",
         "path": "/api/scan/player",
         "price": "$0.50",
-        "description": "Single-player stat-projected outlook — data-backed prop projections (the stat is projected from the underlying data even when no book posts a line) + the fantasy projection (points, floor/ceiling, start-worthiness) + the form/role/matchup read. Golf SG/course-fit; NFL/MLB/NBA usage/role/matchup. Betting props = analysis, fantasy = a direct call.",
+        "description": "Single-player stat-projected outlook for AI betting, fantasy & research agents — data-backed prop projections (the stat is projected from the underlying data even when no book posts a line), the fantasy projection (points, floor/ceiling, start-worthiness) and the form/role/matchup read. Golf strokes-gained/course-fit; NFL/MLB/NBA usage/role/matchup.",
         "params": {
-          "sport": { "type": "string", "description": "mlb | nfl | nba | golf …", "required": true, "example": "mlb" },
-          "player": { "type": "string", "description": "a single player name", "required": true, "example": "aaron-judge" },
-          "market": { "type": "string", "description": "optional focus: a stat/prop, fantasy, or props", "required": false }
+          "sport": {
+            "type": "string",
+            "description": "mlb | nfl | nba | golf … (any sport the engine covers).",
+            "required": true,
+            "example": "mlb"
+          },
+          "player": {
+            "type": "string",
+            "description": "A single player name.",
+            "required": true,
+            "example": "aaron-judge"
+          },
+          "market": {
+            "type": "string",
+            "description": "Optional focus — a stat/prop, 'fantasy', or 'props'.",
+            "required": false,
+            "example": "total-bases"
+          }
         }
       },
       {
         "action": "ask",
         "path": "/api/scan/ask",
-        "price": "$0.50",
-        "description": "Free-text front door — ask any sports/prediction-market question in plain language. Auto-detects the sport, pulls live intelligence, and answers with an explicit DATA-vs-OPINION split (every claim cites its stat; judgment labeled) + a betting/fantasy angle + best_endpoint (a pointer to the deepest named endpoint). Honest when out of coverage: it routes, it doesn't bluff.",
+        "price": "$1.00",
+        "description": "Ask any sports or prediction-market question in plain language — the front door to SignalPulse's deep engines. Returns a data-grounded answer with an explicit DATA-vs-OPINION split (every claim cites its stat; judgment is labeled), a betting or fantasy angle when relevant, and a pointer to the deepest named endpoint. Honest when a question is outside coverage — it routes, it doesn't bluff.",
         "params": {
-          "q": { "type": "string", "description": "a free-text sports/markets question (aliases: question, ask)", "required": true, "example": "is Aaron Judge a good DFS play tonight against Skubal" },
-          "sport": { "type": "string", "description": "optional — force the sport instead of auto-detecting", "required": false }
+          "q": {
+            "type": "string",
+            "description": "A free-text sports/markets question (aliases: question, ask).",
+            "required": true,
+            "example": "is Aaron Judge a good DFS play tonight against Skubal"
+          },
+          "sport": {
+            "type": "string",
+            "description": "Optional — force the sport instead of auto-detecting.",
+            "required": false,
+            "example": "mlb"
+          }
         }
       },
       {
         "action": "golf",
         "path": "/api/scan/golf",
-        "price": "$0.50",
-        "description": "Whole-field golf scan — reads the ENTIRE tournament field (PGA ShotLink strokes-gained + ESPN) and surfaces the single highest-EV play across every bet type (outright/each-way/top-N/matchup/make-cut/first-round-leader), led by course-fit + the tee-time weather wave. For named golfers use compare or h2h. Tournament weeks only.",
+        "price": "$1.00",
+        "description": "Whole-field golf scan for AI betting, fantasy & research agents — reads the ENTIRE tournament field (PGA ShotLink strokes-gained + ESPN) and surfaces the single highest-EV play across every bet type (outright / each-way / top-N / matchup / make-cut / first-round-leader), led by course-fit and the tee-time weather wave. For named golfers use /api/scan/compare or /api/scan/h2h.",
         "params": {
-          "market": { "type": "string", "description": "optional bet-type hint: outright | each-way | top-10 | matchup | make-cut | first-round-leader | dfs", "required": false }
+          "market": {
+            "type": "string",
+            "description": "Optional bet-type hint: outright | each-way | top-10 | matchup | make-cut | first-round-leader | dfs.",
+            "required": false,
+            "example": "matchup"
+          }
         }
       },
       {
         "action": "crypto",
         "path": "/api/scan/crypto",
-        "price": "$0.50",
-        "description": "Crypto market scan — multi-layer read of BTC/ETH and the top-25: regime, breadth, on-chain cycle, derivatives positioning, funding extremes, liquidations.",
-        "params": { "style": { "type": "string", "description": "scalp | intraday | swing", "required": false } }
+        "price": "$2.00",
+        "description": "Institutional-grade crypto market scan for AI financial & trading agents — 40+ live intelligence layers (regime, breadth, on-chain cycle, derivatives positioning, funding extremes, liquidation context, ETF/stablecoin flows) synthesized into a decision-ready read: directional bias, confidence, full rationale, key factors, adversarial pre-mortem.",
+        "params": {
+          "style": {
+            "type": "string",
+            "description": "Scan horizon",
+            "required": false,
+            "example": "intraday"
+          }
+        }
       },
       {
         "action": "market",
         "path": "/api/scan/market",
-        "price": "$0.50",
-        "description": "Cross-asset scan across FX majors, metals and equity indices — the single best opportunity with full multi-layer rationale.",
-        "params": { "style": { "type": "string", "description": "scalp | intraday | swing", "required": false } }
+        "price": "$2.00",
+        "description": "Institutional cross-asset market scan for AI financial & trading agents — multi-layer read across FX majors, metals, and equity indices: regime, COT positioning, yield spreads, carry, real yields, VIX term structure, options gamma, and macro, synthesized into a decision-ready read: best instrument, directional bias, confidence, full rationale, key factors.",
+        "params": {
+          "style": {
+            "type": "string",
+            "description": "Trading style: scalp (1H chart, tight targets ~20 pips), intraday (4H chart, exit before NY close), longterm (daily chart, structural position).",
+            "required": false,
+            "example": "intraday"
+          }
+        }
       },
       {
         "action": "forex",
         "path": "/api/scan/forex",
         "price": "$0.50",
-        "description": "FX scan across 28 pairs — ICT structure, carry, COT positioning, real yields and session timing.",
-        "params": { "style": { "type": "string", "description": "scalp | intraday | swing", "required": false } }
+        "description": "Institutional forex market scan for AI financial & trading agents — multi-layer read across the 28 majors and crosses: rate differentials, COT positioning, carry, policy divergence, yield spreads, and cross-asset macro regime, synthesized into a decision-ready read: best pair, directional bias, confidence, full rationale, key factors.",
+        "params": {
+          "style": {
+            "type": "string",
+            "description": "Trading style: scalp (1H, ICT structure, ≤20 pip targets), intraday (4H), longterm (daily).",
+            "required": false,
+            "example": "intraday"
+          }
+        }
       },
       {
         "action": "event",
         "path": "/api/scan/event",
+        "price": "$1.00",
+        "description": "Institutional economic-event scan for AI financial & trading agents — historical-reaction study for a scheduled macro release (NFP, CPI, FOMC and more): how the affected FX pairs have moved after similar surprises, the surprise read, macro context, and which pair has the cleanest reaction profile, with directional bias, confidence, and full rationale.",
+        "params": {
+          "event": {
+            "type": "string",
+            "description": "Economic event name. Examples: NFP, FOMC, CPI, ECB, BOE, RBA, GDP, PCE",
+            "required": true,
+            "example": "NFP"
+          }
+        }
+      },
+      {
+        "action": "options",
+        "path": "/api/scan/options",
         "price": "$0.50",
-        "description": "Macro-event scan — directional read around a scheduled print (NFP/CPI/Fed) using market and prediction-market signals.",
-        "params": { "event": { "type": "string", "description": "nfp | cpi | fomc …", "required": true, "example": "nfp" } }
+        "description": "Institutional equity-options volatility scan for AI financial & trading agents — VRP (variance risk premium), IV term structure, GEX regime, max-pain and unusual options activity across liquid optionable names, synthesized into a decision-ready read: best ticker, vol/directional bias, confidence, full rationale, key factors.",
+        "params": {
+          "signal_type": {
+            "type": "string",
+            "description": "Options horizon",
+            "required": false,
+            "example": "mid_term"
+          },
+          "strategy": {
+            "type": "string",
+            "description": "Strategy filter",
+            "required": false,
+            "example": "best_available"
+          }
+        }
+      },
+      {
+        "action": "futures",
+        "path": "/api/scan/futures",
+        "price": "$0.50",
+        "description": "Institutional futures market scan for AI financial & trading agents — multi-layer read across the futures complex (equity index, rates, energy, metals, grains): COT positioning (disaggregated + financial), seasonality, term structure, and macro regime, synthesized into a decision-ready read: best contract, directional bias, confidence, full rationale, key factors.",
+        "params": {
+          "style": {
+            "type": "string",
+            "description": "Scan horizon",
+            "required": false,
+            "example": "intraday"
+          }
+        }
       }
     ]
   },
@@ -169,7 +360,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "discover",
         "path": "/api/alpha/discover",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Cross-platform provider discovery",
         "params": {
           "instrument": {
@@ -349,7 +540,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "vaults",
         "path": "/api/alpha/vaults",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "DeFi vault discovery",
         "params": {
           "protocol": {
@@ -377,7 +568,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "vet",
         "path": "/api/alpha/vet",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Provider due diligence",
         "params": {
           "provider": {
@@ -428,7 +619,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "asia",
         "path": "/api/alpha/asia",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Asia-Pacific copy trading discovery",
         "params": {
           "instrument": {
@@ -451,7 +642,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "alternative",
         "path": "/api/alpha/alternative",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Alternative and niche strategies",
         "params": {
           "category": {
@@ -460,7 +651,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "us_accessible": {
-            "type": "string",
+            "type": "boolean",
             "description": "us_accessible",
             "required": false
           },
@@ -515,8 +706,8 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "all"
           },
           "min_profit_usd": {
-            "type": "string",
-            "description": "min_profit_usd",
+            "type": "number",
+            "description": "Minimum net profit per $1,000 stake",
             "required": false
           },
           "chain": {
@@ -546,14 +737,15 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "all"
           },
           "min_spread_bps": {
-            "type": "string",
+            "type": "integer",
             "description": "min_spread_bps",
             "required": false
           },
           "stablecoin_only": {
-            "type": "string",
+            "type": "boolean",
             "description": "stablecoin_only",
-            "required": false
+            "required": false,
+            "example": "false"
           }
         }
       },
@@ -570,7 +762,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "all"
           },
           "min_apy": {
-            "type": "string",
+            "type": "number",
             "description": "min_apy",
             "required": false
           },
@@ -585,7 +777,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "flash",
         "path": "/api/flash",
-        "price": "$0.10",
+        "price": "$0.75",
         "description": "Flash Loan Strategy Builder",
         "params": {
           "protocol": {
@@ -601,7 +793,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "USDC"
           },
           "amount": {
-            "type": "string",
+            "type": "number",
             "description": "amount",
             "required": false
           },
@@ -609,7 +801,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "chain",
             "required": false,
-            "example": "ethereum"
+            "example": "base"
           },
           "strategy": {
             "type": "string",
@@ -642,7 +834,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "min_profit_pct": {
-            "type": "string",
+            "type": "number",
             "description": "min_profit_pct",
             "required": false
           }
@@ -651,16 +843,17 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "crypto",
         "path": "/api/crypto",
-        "price": "$0.10",
+        "price": "$0.07",
         "description": "CEX Spot Price Arbitrage",
         "params": {
           "pair": {
             "type": "string",
             "description": "pair",
-            "required": false
+            "required": false,
+            "example": "BTC/USDT"
           },
           "amount_usd": {
-            "type": "string",
+            "type": "number",
             "description": "amount_usd",
             "required": false
           },
@@ -684,7 +877,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "WETH"
           },
           "amount_usd": {
-            "type": "string",
+            "type": "number",
             "description": "amount_usd",
             "required": false
           },
@@ -698,14 +891,13 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "execute",
         "path": "/api/execute",
-        "price": "$0.10",
+        "price": "$0.75",
         "description": "Execution Package Builder",
         "params": {
           "opportunity_type": {
             "type": "string",
             "description": "opportunity_type",
-            "required": true,
-            "example": "perps"
+            "required": true
           },
           "asset": {
             "type": "string",
@@ -713,7 +905,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "amount_usd": {
-            "type": "string",
+            "type": "number",
             "description": "amount_usd",
             "required": false
           },
@@ -726,12 +918,13 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "chain",
             "required": false,
-            "example": "ethereum"
+            "example": "base"
           },
           "slippage_bps": {
-            "type": "string",
+            "type": "integer",
             "description": "slippage_bps",
-            "required": false
+            "required": false,
+            "example": "50"
           },
           "long_venue": {
             "type": "string",
@@ -748,21 +941,22 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "calculator",
         "path": "/api/calculator",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Arbitrage Profit Calculator",
         "params": {
           "trade_size_usd": {
-            "type": "string",
+            "type": "number",
             "description": "trade_size_usd",
-            "required": false
+            "required": false,
+            "example": "10000"
           },
           "entry_price": {
-            "type": "string",
+            "type": "number",
             "description": "entry_price",
             "required": false
           },
           "exit_price": {
-            "type": "string",
+            "type": "number",
             "description": "exit_price",
             "required": false
           },
@@ -773,39 +967,46 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "spot"
           },
           "taker_fee_bps": {
-            "type": "string",
+            "type": "number",
             "description": "taker_fee_bps",
-            "required": false
+            "required": false,
+            "example": "10"
           },
           "gas_usd": {
-            "type": "string",
+            "type": "number",
             "description": "gas_usd",
-            "required": false
+            "required": false,
+            "example": "0.5"
           },
           "slippage_bps": {
-            "type": "string",
+            "type": "number",
             "description": "slippage_bps",
-            "required": false
+            "required": false,
+            "example": "5"
           },
           "flash_fee_bps": {
-            "type": "string",
+            "type": "number",
             "description": "flash_fee_bps",
-            "required": false
+            "required": false,
+            "example": "0"
           },
           "bridge_fee_usd": {
-            "type": "string",
+            "type": "number",
             "description": "bridge_fee_usd",
-            "required": false
+            "required": false,
+            "example": "0"
           },
           "withdrawal_fee_usd": {
-            "type": "string",
+            "type": "number",
             "description": "withdrawal_fee_usd",
-            "required": false
+            "required": false,
+            "example": "0"
           },
           "days": {
-            "type": "string",
+            "type": "number",
             "description": "days",
-            "required": false
+            "required": false,
+            "example": "1"
           }
         }
       },
@@ -818,7 +1019,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "ticker": {
             "type": "string",
             "description": "ticker",
-            "required": false
+            "required": false,
+            "example": "IBIT"
           },
           "region": {
             "type": "string",
@@ -830,7 +1032,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "type",
             "required": false,
-            "example": "equity"
+            "example": "any"
           }
         }
       },
@@ -844,13 +1046,13 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "commodity",
             "required": false,
-            "example": "oil"
+            "example": "natural-gas"
           },
           "unit": {
             "type": "string",
             "description": "unit",
             "required": false,
-            "example": "bbl"
+            "example": "auto"
           },
           "regions": {
             "type": "string",
@@ -862,7 +1064,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "pairs",
         "path": "/api/pairs",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Statistical Arbitrage (Pairs Trading)",
         "params": {
           "asset_a": {
@@ -882,9 +1084,10 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "crypto"
           },
           "lookback_days": {
-            "type": "string",
+            "type": "integer",
             "description": "lookback_days",
-            "required": false
+            "required": false,
+            "example": "30"
           }
         }
       }
@@ -899,7 +1102,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "recall",
         "path": "/api/auto/recall",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "NHTSA safety recall lookup",
         "params": {
           "vin": {
@@ -908,7 +1111,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "year": {
-            "type": "string",
+            "type": "integer",
             "description": "year",
             "required": false
           },
@@ -936,7 +1139,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "description": "Known problems and reliability analysis",
         "params": {
           "year": {
-            "type": "string",
+            "type": "integer",
             "description": "year",
             "required": true
           },
@@ -992,7 +1195,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "year": {
-            "type": "string",
+            "type": "integer",
             "description": "year",
             "required": false
           },
@@ -1006,7 +1209,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "value",
         "path": "/api/auto/value",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Market value estimate",
         "params": {
           "vin": {
@@ -1015,7 +1218,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "year": {
-            "type": "string",
+            "type": "integer",
             "description": "year",
             "required": false
           },
@@ -1030,7 +1233,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "mileage": {
-            "type": "string",
+            "type": "integer",
             "description": "mileage",
             "required": false
           },
@@ -1038,7 +1241,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "condition",
             "required": false,
-            "example": "excellent"
+            "example": "good"
           },
           "lang": {
             "type": "string",
@@ -1069,17 +1272,17 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "annual_miles": {
-            "type": "string",
+            "type": "integer",
             "description": "Annual mileage (default: 12,000)",
             "required": false
           },
           "electricity_rate": {
-            "type": "string",
+            "type": "number",
             "description": "Local electricity rate in $/kWh",
             "required": false
           },
           "gas_price": {
-            "type": "string",
+            "type": "number",
             "description": "Local gas price in $/gallon",
             "required": false
           },
@@ -1107,7 +1310,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "year": {
-            "type": "string",
+            "type": "integer",
             "description": "year",
             "required": false
           },
@@ -1126,11 +1329,11 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "inspect",
         "path": "/api/auto/inspect",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Pre-purchase inspection checklist",
         "params": {
           "year": {
-            "type": "string",
+            "type": "integer",
             "description": "year",
             "required": false
           },
@@ -1145,7 +1348,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "mileage": {
-            "type": "string",
+            "type": "integer",
             "description": "mileage",
             "required": false
           },
@@ -1159,7 +1362,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "parts",
         "path": "/api/auto/parts",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Parts pricing and sourcing",
         "params": {
           "vehicle": {
@@ -1182,11 +1385,11 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "tco",
         "path": "/api/auto/tco",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Total cost of ownership (5-year)",
         "params": {
           "year": {
-            "type": "string",
+            "type": "integer",
             "description": "year",
             "required": false
           },
@@ -1201,12 +1404,12 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "purchase_price": {
-            "type": "string",
+            "type": "integer",
             "description": "Purchase price in USD",
             "required": false
           },
           "annual_miles": {
-            "type": "string",
+            "type": "integer",
             "description": "annual_miles",
             "required": false
           },
@@ -1233,7 +1436,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "species",
         "path": "/api/bio/species",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Species profile",
         "params": {
           "species": {
@@ -1251,7 +1454,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "sightings",
         "path": "/api/bio/sightings",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Recent wildlife sightings",
         "params": {
           "location": {
@@ -1260,17 +1463,17 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "lat": {
-            "type": "string",
+            "type": "number",
             "description": "lat",
             "required": false
           },
           "lng": {
-            "type": "string",
+            "type": "number",
             "description": "lng",
             "required": false
           },
           "radius": {
-            "type": "string",
+            "type": "integer",
             "description": "Radius in km (max 100, default 25)",
             "required": false
           },
@@ -1293,17 +1496,17 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "lat": {
-            "type": "string",
+            "type": "number",
             "description": "lat",
             "required": false
           },
           "lng": {
-            "type": "string",
+            "type": "number",
             "description": "lng",
             "required": false
           },
           "dist": {
-            "type": "string",
+            "type": "integer",
             "description": "Search radius in km (max 50, default 25)",
             "required": false
           },
@@ -1317,7 +1520,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "invasive",
         "path": "/api/bio/invasive",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Invasive species alerts",
         "params": {
           "region": {
@@ -1362,12 +1565,12 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "lat": {
-            "type": "string",
+            "type": "number",
             "description": "lat",
             "required": false
           },
           "lng": {
-            "type": "string",
+            "type": "number",
             "description": "lng",
             "required": false
           },
@@ -1381,7 +1584,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "identify",
         "path": "/api/bio/identify",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Species identification",
         "params": {
           "description": {
@@ -1418,12 +1621,12 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "lat": {
-            "type": "string",
+            "type": "number",
             "description": "lat",
             "required": false
           },
           "lng": {
-            "type": "string",
+            "type": "number",
             "description": "lng",
             "required": false
           },
@@ -1446,12 +1649,12 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "lat": {
-            "type": "string",
+            "type": "number",
             "description": "lat",
             "required": false
           },
           "lng": {
-            "type": "string",
+            "type": "number",
             "description": "lng",
             "required": false
           },
@@ -1552,7 +1755,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "estimate",
         "path": "/api/build/estimate",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "/api/build/estimate",
         "params": {
           "project": {
@@ -1585,7 +1788,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "inspect",
         "path": "/api/build/inspect",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "/api/build/inspect",
         "params": {
           "stage": {
@@ -1636,7 +1839,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "permit",
         "path": "/api/build/permit",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "/api/build/permit",
         "params": {
           "project": {
@@ -1782,7 +1985,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "outlook",
         "path": "/api/career/outlook",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Industry job market outlook — growth, hiring trends, top employers by country",
         "params": {
           "sector": {
@@ -1935,7 +2138,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "remote",
         "path": "/api/career/remote",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Remote work intelligence — best remote roles, companies, and cross-border setup",
         "params": {
           "role": {
@@ -1959,7 +2162,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "certify",
         "path": "/api/career/certify",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Certification roadmap — highest-ROI certs in order, with study resources",
         "params": {
           "role": {
@@ -2017,7 +2220,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "layoff",
         "path": "/api/career/layoff",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Layoff support — severance review, legal rights, benefits continuation, next steps",
         "params": {
           "country": {
@@ -2054,7 +2257,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "search",
         "path": "/api/chronica/search",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Archive search",
         "params": {
           "q": {
@@ -2087,7 +2290,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "person",
         "path": "/api/chronica/person",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Person research",
         "params": {
           "name": {
@@ -2148,7 +2351,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "event",
         "path": "/api/chronica/event",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Historical event coverage",
         "params": {
           "event": {
@@ -2176,7 +2379,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "place",
         "path": "/api/chronica/place",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Place history",
         "params": {
           "place": {
@@ -2204,7 +2407,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "immigration",
         "path": "/api/chronica/immigration",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Immigration research",
         "params": {
           "name": {
@@ -2265,7 +2468,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "business",
         "path": "/api/chronica/business",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Business history",
         "params": {
           "business": {
@@ -2293,7 +2496,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "timeline",
         "path": "/api/chronica/timeline",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Chronological timeline",
         "params": {
           "subject": {
@@ -2304,8 +2507,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "type": {
             "type": "string",
             "description": "type",
-            "required": false,
-            "example": "person"
+            "required": false
           },
           "year_start": {
             "type": "string",
@@ -2335,7 +2537,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "search",
         "path": "/api/care/search",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Procedure price search",
         "params": {
           "procedure": {
@@ -2351,7 +2553,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "radius": {
             "type": "string",
             "description": "Search radius in miles",
-            "required": false
+            "required": false,
+            "example": "25"
           },
           "lang": {
             "type": "string",
@@ -2386,7 +2589,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "episode",
         "path": "/api/care/episode",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Total episode cost breakdown",
         "params": {
           "procedure": {
@@ -2424,7 +2627,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "oop",
         "path": "/api/care/oop",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Out-of-pocket cost calculator",
         "params": {
           "procedure": {
@@ -2607,7 +2810,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "now",
         "path": "/api/climate/now",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Current conditions",
         "params": {
           "location": {
@@ -2618,8 +2821,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "units": {
             "type": "string",
             "description": "Defaults to imperial (°F, mph, inches)",
-            "required": false,
-            "example": "imperial"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -2631,7 +2833,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "forecast",
         "path": "/api/climate/forecast",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Multi-day forecast",
         "params": {
           "location": {
@@ -2640,15 +2842,14 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "days": {
-            "type": "string",
+            "type": "integer",
             "description": "Number of days (1–7, default 7)",
             "required": false
           },
           "units": {
             "type": "string",
             "description": "units",
-            "required": false,
-            "example": "imperial"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -2671,14 +2872,12 @@ export const VERTICALS: Record<string, Vertical> = {
           "activity": {
             "type": "string",
             "description": "activity",
-            "required": true,
-            "example": "hiking"
+            "required": true
           },
           "units": {
             "type": "string",
             "description": "units",
-            "required": false,
-            "example": "imperial"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -2690,7 +2889,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "severe",
         "path": "/api/climate/severe",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Severe weather and preparedness",
         "params": {
           "location": {
@@ -2701,8 +2900,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "units": {
             "type": "string",
             "description": "units",
-            "required": false,
-            "example": "imperial"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -2730,8 +2928,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "units": {
             "type": "string",
             "description": "units",
-            "required": false,
-            "example": "imperial"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -2743,7 +2940,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "air",
         "path": "/api/climate/air",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Real-time air quality + health risk assessment",
         "params": {
           "location": {
@@ -2761,7 +2958,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "smoke",
         "path": "/api/climate/smoke",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Wildfire smoke tracking and respiratory risk assessment",
         "params": {
           "location": {
@@ -2779,7 +2976,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "grow",
         "path": "/api/climate/grow",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Agricultural grow-day modeling and frost date analysis",
         "params": {
           "location": {
@@ -2802,7 +2999,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "event",
         "path": "/api/climate/event",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Event weather suitability and planning assessment",
         "params": {
           "location": {
@@ -2838,47 +3035,69 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "pipeline-scan",
         "path": "/api/clinical/pipeline-scan",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Phase 2/3 pipeline scan",
         "params": {
+          "condition": {
+            "type": "string",
+            "description": "Disease or condition — e.g. 'Non-Small Cell Lung Cancer' | 'Alzheimer Disease' | 'Type 2 Diabetes'",
+            "required": false
+          },
           "phase": {
             "type": "string",
             "description": "phase",
             "required": false,
-            "example": "phase2"
+            "example": "both"
           },
           "status": {
             "type": "string",
             "description": "status",
             "required": false,
             "example": "active"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "approval-outlook",
         "path": "/api/clinical/approval-outlook",
-        "price": "$0.10",
+        "price": "$0.25",
         "description": "FDA/EMA approval probability",
         "params": {
+          "condition": {
+            "type": "string",
+            "description": "Disease or condition — e.g. 'Non-Small Cell Lung Cancer' | 'Alzheimer Disease' | 'Type 2 Diabetes'",
+            "required": false
+          },
           "horizon": {
             "type": "string",
             "description": "horizon",
             "required": false,
-            "example": "12m"
+            "example": "18m"
           },
           "agency": {
             "type": "string",
             "description": "agency",
             "required": false,
-            "example": "FDA"
+            "example": "both"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "sponsor-intel",
         "path": "/api/clinical/sponsor-intel",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Pharma/biotech pipeline intelligence",
         "params": {
           "sponsor": {
@@ -2890,21 +3109,38 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "focus",
             "required": false,
-            "example": "pipeline"
+            "example": "all"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "disease-landscape",
         "path": "/api/clinical/disease-landscape",
-        "price": "$0.10",
+        "price": "$0.35",
         "description": "Full disease landscape report",
         "params": {
+          "condition": {
+            "type": "string",
+            "description": "Disease or condition — e.g. 'Non-Small Cell Lung Cancer' | 'Alzheimer Disease' | 'Type 2 Diabetes'",
+            "required": false
+          },
           "depth": {
             "type": "string",
             "description": "depth",
             "required": false,
             "example": "standard"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -2918,42 +3154,82 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "NCT identifier — e.g. NCT04368728",
             "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "mechanism-map",
         "path": "/api/clinical/mechanism-map",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Drug target and MOA landscape",
         "params": {
+          "condition": {
+            "type": "string",
+            "description": "Disease or condition — e.g. 'Non-Small Cell Lung Cancer' | 'Alzheimer Disease' | 'Type 2 Diabetes'",
+            "required": false
+          },
           "mechanism": {
             "type": "string",
             "description": "Optional focus — e.g. 'BTK inhibitor' | 'CAR-T' | 'IL-17'",
             "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "global-trials",
         "path": "/api/clinical/global-trials",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Global clinical trial landscape",
         "params": {
+          "condition": {
+            "type": "string",
+            "description": "Disease or condition — e.g. 'Non-Small Cell Lung Cancer' | 'Alzheimer Disease' | 'Type 2 Diabetes'",
+            "required": false
+          },
           "region": {
             "type": "string",
             "description": "region",
             "required": false,
             "example": "global"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "failure-analysis",
         "path": "/api/clinical/failure-analysis",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Clinical trial failure analysis",
-        "params": {}
+        "params": {
+          "condition": {
+            "type": "string",
+            "description": "Disease or condition — e.g. 'Non-Small Cell Lung Cancer' | 'Alzheimer Disease' | 'Type 2 Diabetes'",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
+          }
+        }
       },
       {
         "action": "patient-finder",
@@ -2961,6 +3237,11 @@ export const VERTICALS: Record<string, Vertical> = {
         "price": "$0.10",
         "description": "Recruiting trial finder (plain language)",
         "params": {
+          "condition": {
+            "type": "string",
+            "description": "Disease or condition — e.g. 'Non-Small Cell Lung Cancer' | 'Alzheimer Disease' | 'Type 2 Diabetes'",
+            "required": false
+          },
           "country": {
             "type": "string",
             "description": "Optional country filter — e.g. 'United States' | 'Germany' | 'Australia'",
@@ -2970,27 +3251,44 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "phase",
             "required": false,
-            "example": "phase2"
+            "example": "any"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "deal-signal",
         "path": "/api/clinical/deal-signal",
-        "price": "$0.10",
+        "price": "$0.35",
         "description": "Biotech M&A and licensing deal signals",
         "params": {
+          "condition": {
+            "type": "string",
+            "description": "Disease or condition — e.g. 'Non-Small Cell Lung Cancer' | 'Alzheimer Disease' | 'Type 2 Diabetes'",
+            "required": false
+          },
           "deal_type": {
             "type": "string",
             "description": "deal_type",
             "required": false,
-            "example": "acquisition"
+            "example": "both"
           },
           "stage": {
             "type": "string",
             "description": "stage",
             "required": false,
-            "example": "phase2"
+            "example": "both"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
           }
         }
       }
@@ -3028,7 +3326,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "grade",
         "path": "/api/collect/grade",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Grading service guide",
         "params": {
           "item": {
@@ -3069,7 +3367,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "invest",
         "path": "/api/collect/invest",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Investment signal — buy/hold/sell with analysis",
         "params": {
           "item": {
@@ -3128,7 +3426,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "storage",
         "path": "/api/collect/storage",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Preservation and storage guide",
         "params": {
           "item": {
@@ -3146,13 +3444,77 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "insurance",
         "path": "/api/collect/insurance",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Collectibles insurance guide",
         "params": {
           "item": {
             "type": "string",
             "description": "item",
             "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "population",
+        "path": "/api/collect/population",
+        "price": "$0.08",
+        "description": "Population report and grade scarcity",
+        "params": {
+          "item": {
+            "type": "string",
+            "description": "Collectible description (e.g. 1952 Topps Mickey Mantle)",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "provenance",
+        "path": "/api/collect/provenance",
+        "price": "$0.10",
+        "description": "Provenance and ownership research",
+        "params": {
+          "item": {
+            "type": "string",
+            "description": "Collectible description (e.g. 1952 Topps Mickey Mantle)",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "nft",
+        "path": "/api/collect/nft",
+        "price": "$0.10",
+        "description": "NFT contract safety & floor scan (on-chain GoPlus + market context)",
+        "params": {
+          "contract": {
+            "type": "string",
+            "description": "NFT contract address — enables the on-chain risk scan (recommended)",
+            "required": false
+          },
+          "chain": {
+            "type": "string",
+            "description": "ethereum | base | polygon | arbitrum | optimism | bsc | avalanche (default ethereum)",
+            "required": false
+          },
+          "collection": {
+            "type": "string",
+            "description": "Collection name — for floor/sentiment context when no contract is known",
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -3172,7 +3534,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "privacy",
         "path": "/api/comply/privacy",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Data privacy law by jurisdiction",
         "params": {
           "country": {
@@ -3195,7 +3557,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "kyc",
         "path": "/api/comply/kyc",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "KYC/AML requirements by jurisdiction",
         "params": {
           "country": {
@@ -3218,7 +3580,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "corporate",
         "path": "/api/comply/corporate",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Corporate compliance and entity setup",
         "params": {
           "country": {
@@ -3241,7 +3603,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "employment",
         "path": "/api/comply/employment",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Employment law and HR compliance",
         "params": {
           "country": {
@@ -3264,12 +3626,12 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "sector",
         "path": "/api/comply/sector",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Industry-specific regulatory compliance",
         "params": {
           "sector": {
             "type": "string",
-            "description": "Industry sector — fintech | crypto | banking | insurance | healthcare | food | ai | real-estate | investment-management. Also accepts 'indus",
+            "description": "Industry sector — fintech | crypto | banking | insurance | healthcare | food | ai | real-estate | investment-management. Also accepts 'industry'",
             "required": true
           },
           "country": {
@@ -3287,7 +3649,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "cyber",
         "path": "/api/comply/cyber",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Cybersecurity compliance requirements",
         "params": {
           "country": {
@@ -3315,7 +3677,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "esg",
         "path": "/api/comply/esg",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "ESG and sustainability reporting requirements",
         "params": {
           "country": {
@@ -3348,7 +3710,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "news",
         "path": "/api/comply/news",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Regulatory intelligence and enforcement news",
         "params": {
           "country": {
@@ -3385,37 +3747,40 @@ export const VERTICALS: Record<string, Vertical> = {
           "chain": {
             "type": "string",
             "description": "Filter by chain: ethereum, base, arbitrum, berachain, solana, or all",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "risk": {
             "type": "string",
             "description": "Risk profile filter",
             "required": false,
-            "example": "conservative"
+            "example": "moderate"
           }
         }
       },
       {
         "action": "strategy",
         "path": "/api/strategy",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Personalized DeFi strategy builder",
         "params": {
           "capital": {
-            "type": "string",
+            "type": "number",
             "description": "Capital in USD",
-            "required": false
+            "required": false,
+            "example": "10000"
           },
           "risk": {
             "type": "string",
             "description": "risk",
             "required": false,
-            "example": "conservative"
+            "example": "moderate"
           },
           "chain": {
             "type": "string",
             "description": "chain",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "goal": {
             "type": "string",
@@ -3424,9 +3789,10 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "yield"
           },
           "timeframe": {
-            "type": "string",
+            "type": "integer",
             "description": "Investment timeframe in days",
-            "required": false
+            "required": false,
+            "example": "180"
           }
         }
       },
@@ -3440,12 +3806,13 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "value_tier",
             "required": false,
-            "example": "small"
+            "example": "medium"
           },
           "setup": {
             "type": "string",
             "description": "Current custody setup description",
-            "required": false
+            "required": false,
+            "example": "exchange custody"
           }
         }
       },
@@ -3458,7 +3825,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "category": {
             "type": "string",
             "description": "Threat category: phishing, drainer, sim_swap, rug_pull, flash_loan, or all",
-            "required": false
+            "required": false,
+            "example": "all"
           }
         }
       },
@@ -3471,13 +3839,14 @@ export const VERTICALS: Record<string, Vertical> = {
           "country": {
             "type": "string",
             "description": "country",
-            "required": false
+            "required": false,
+            "example": "US"
           },
           "priority": {
             "type": "string",
             "description": "priority",
             "required": false,
-            "example": "fees"
+            "example": "security"
           },
           "experience": {
             "type": "string",
@@ -3490,18 +3859,20 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "tax",
         "path": "/api/tax",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Crypto tax guidance",
         "params": {
           "country": {
             "type": "string",
             "description": "country",
-            "required": false
+            "required": false,
+            "example": "US"
           },
           "activities": {
             "type": "string",
             "description": "Comma-separated: hold, trade, defi, mining, staking, nft, business",
-            "required": false
+            "required": false,
+            "example": "hold,trade"
           },
           "tax_year": {
             "type": "string",
@@ -3519,7 +3890,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "country": {
             "type": "string",
             "description": "country",
-            "required": false
+            "required": false,
+            "example": "US"
           },
           "goal": {
             "type": "string",
@@ -3544,12 +3916,14 @@ export const VERTICALS: Record<string, Vertical> = {
           "country": {
             "type": "string",
             "description": "country",
-            "required": false
+            "required": false,
+            "example": "US"
           },
           "use_case": {
             "type": "string",
             "description": "use_case",
-            "required": false
+            "required": false,
+            "example": "daily spending"
           }
         }
       },
@@ -3562,7 +3936,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "country": {
             "type": "string",
             "description": "country",
-            "required": false
+            "required": false,
+            "example": "US"
           },
           "profile": {
             "type": "string",
@@ -3581,18 +3956,51 @@ export const VERTICALS: Record<string, Vertical> = {
           "business_type": {
             "type": "string",
             "description": "business_type",
-            "required": false
+            "required": false,
+            "example": "ecommerce"
           },
           "country": {
             "type": "string",
             "description": "country",
-            "required": false
+            "required": false,
+            "example": "US"
           },
           "integration": {
             "type": "string",
             "description": "integration",
             "required": false,
             "example": "ecommerce"
+          }
+        }
+      },
+      {
+        "action": "research-brief",
+        "path": "/api/research-brief",
+        "price": "$0.50",
+        "description": "Institutional-grade crypto market research brief — decision-ready synthesis of spot, derivatives (funding/options skew/DVOL), on-chain flows, regional premiums, and macro-event odds. Built for AI financial-advisor agents.",
+        "params": {
+          "assets": {
+            "type": "string",
+            "description": "Comma-separated focus assets",
+            "required": false,
+            "example": "BTC,ETH"
+          },
+          "horizon": {
+            "type": "string",
+            "description": "Analysis horizon",
+            "required": false,
+            "example": "1week"
+          },
+          "focus": {
+            "type": "string",
+            "description": "Lens to emphasize",
+            "required": false,
+            "example": "all"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language code",
+            "required": false
           }
         }
       }
@@ -3625,7 +4033,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "vuln-scan",
         "path": "/api/cyber/vuln-scan",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Vulnerability scan — all known CVEs for any software + version",
         "params": {
           "software": {
@@ -3653,7 +4061,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "cisa-kev",
         "path": "/api/cyber/cisa-kev",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "CISA KEV — Known Exploited Vulnerabilities catalog search",
         "params": {
           "vendor": {
@@ -3662,7 +4070,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "days": {
-            "type": "string",
+            "type": "integer",
             "description": "Entries added in last N days (default: 90)",
             "required": false
           },
@@ -3681,7 +4089,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "osint",
         "path": "/api/cyber/osint",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "OSINT — domain and IP intelligence for authorized defensive use",
         "params": {
           "target": {
@@ -3699,7 +4107,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "threat-intel",
         "path": "/api/cyber/threat-intel",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Threat intelligence — global threat actors and campaigns by sector and region",
         "params": {
           "industry": {
@@ -3722,7 +4130,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "ransomware-intel",
         "path": "/api/cyber/ransomware-intel",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Ransomware intelligence — group profiles, victim patterns, TTPs, defensive playbook",
         "params": {
           "group": {
@@ -3740,7 +4148,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "breach-check",
         "path": "/api/cyber/breach-check",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Breach check — domain breach history and credential exposure intelligence",
         "params": {
           "domain": {
@@ -3758,14 +4166,13 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "compliance-gap",
         "path": "/api/cyber/compliance-gap",
-        "price": "$0.10",
+        "price": "$0.25",
         "description": "Compliance gap analysis — global security frameworks (SOC2, ISO27001, GDPR, NIS2, PDPA, POPIA, LGPD...)",
         "params": {
           "framework": {
             "type": "string",
             "description": "Compliance framework",
-            "required": true,
-            "example": "SOC2"
+            "required": true
           },
           "sector": {
             "type": "string",
@@ -3782,7 +4189,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "dark-web-monitor",
         "path": "/api/cyber/dark-web-monitor",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Dark web monitor — brand and domain underground intelligence (ethical OSINT)",
         "params": {
           "brand": {
@@ -3800,7 +4207,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "attack-surface",
         "path": "/api/cyber/attack-surface",
-        "price": "$0.10",
+        "price": "$0.25",
         "description": "Attack surface assessment — external risk analysis for authorized defensive use",
         "params": {
           "company": {
@@ -3831,7 +4238,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "store",
         "path": "/api/deals/store",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Store coupon codes and promotions",
         "params": {
           "store": {
@@ -3849,7 +4256,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "item",
         "path": "/api/deals/item",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Best deal on a specific product",
         "params": {
           "query": {
@@ -3858,7 +4265,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "budget": {
-            "type": "string",
+            "type": "number",
             "description": "Maximum budget in USD",
             "required": false
           },
@@ -3872,7 +4279,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "compare",
         "path": "/api/deals/compare",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Live price comparison across retailers",
         "params": {
           "item": {
@@ -3913,7 +4320,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "subscriptions",
         "path": "/api/deals/subscriptions",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Subscription audit — cancel vs. keep analysis with cost savings",
         "params": {
           "services": {
@@ -3931,7 +4338,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "cards",
         "path": "/api/deals/cards",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Credit card cashback optimization for a purchase or category",
         "params": {
           "category": {
@@ -3972,7 +4379,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "student",
         "path": "/api/deals/student",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Student discounts on software, services, food, and travel",
         "params": {
           "category": {
@@ -3995,7 +4402,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "history",
         "path": "/api/deals/history",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Price history and best-time-to-buy analysis for a product",
         "params": {
           "query": {
@@ -4037,8 +4444,12 @@ export const VERTICALS: Record<string, Vertical> = {
           "method": {
             "type": "string",
             "description": "method",
-            "required": false,
-            "example": "avalanche"
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
+            "required": false
           }
         }
       },
@@ -4057,13 +4468,24 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "Monthly income in USD",
             "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
+            "required": false
           }
         }
       },
       {
         "action": "negotiate",
         "path": "/api/debt/negotiate",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Creditor negotiation playbook",
         "params": {
           "creditor": {
@@ -4079,6 +4501,18 @@ export const VERTICALS: Record<string, Vertical> = {
           "months_behind": {
             "type": "string",
             "description": "Number of months behind on payments",
+            "required": false,
+            "example": "0"
+          },
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
             "required": false
           }
         }
@@ -4086,7 +4520,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "settle",
         "path": "/api/debt/settle",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Debt settlement analysis",
         "params": {
           "creditor": {
@@ -4102,11 +4536,18 @@ export const VERTICALS: Record<string, Vertical> = {
           "months_behind": {
             "type": "string",
             "description": "months_behind",
-            "required": false
+            "required": false,
+            "example": "90"
           },
           "debt_type": {
             "type": "string",
             "description": "debt_type",
+            "required": false,
+            "example": "credit_card"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
             "required": false
           }
         }
@@ -4114,9 +4555,15 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "collections",
         "path": "/api/debt/collections",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Debt collector rights",
         "params": {
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
+          },
           "collector": {
             "type": "string",
             "description": "Collection agency name",
@@ -4126,24 +4573,36 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "situation",
             "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
+            "required": false
           }
         }
       },
       {
         "action": "statute",
         "path": "/api/debt/statute",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Statute of limitations lookup",
         "params": {
           "debt_type": {
             "type": "string",
             "description": "credit_card | medical | student_loan | auto | personal_loan",
-            "required": false
+            "required": false,
+            "example": "credit_card"
           },
           "state": {
             "type": "string",
             "description": "US state code (e.g., TX, CA)",
             "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
           },
           "province": {
             "type": "string",
@@ -4154,15 +4613,26 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "Date of last payment (YYYY-MM-DD) for expiry calculation",
             "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
+            "required": false
           }
         }
       },
       {
         "action": "garnishment",
         "path": "/api/debt/garnishment",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Wage garnishment analysis",
         "params": {
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
+          },
           "state": {
             "type": "string",
             "description": "state",
@@ -4171,11 +4641,17 @@ export const VERTICALS: Record<string, Vertical> = {
           "debt_type": {
             "type": "string",
             "description": "debt_type",
-            "required": false
+            "required": false,
+            "example": "credit_card"
           },
           "income": {
             "type": "string",
             "description": "income",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
             "required": false
           }
         }
@@ -4183,9 +4659,15 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "student",
         "path": "/api/debt/student",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Student loan strategy",
         "params": {
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
+          },
           "balance": {
             "type": "string",
             "description": "balance",
@@ -4211,6 +4693,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "CA province or UK plan type",
             "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
+            "required": false
           }
         }
       },
@@ -4225,6 +4712,12 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "score",
             "required": true
           },
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
+          },
           "negatives": {
             "type": "string",
             "description": "Comma-separated list of negative items",
@@ -4233,6 +4726,11 @@ export const VERTICALS: Record<string, Vertical> = {
           "goal": {
             "type": "string",
             "description": "goal",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
             "required": false
           }
         }
@@ -4246,16 +4744,29 @@ export const VERTICALS: Record<string, Vertical> = {
           "score": {
             "type": "string",
             "description": "score",
-            "required": false
+            "required": false,
+            "example": "0"
+          },
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
           },
           "goal_score": {
             "type": "string",
             "description": "goal_score",
-            "required": false
+            "required": false,
+            "example": "700"
           },
           "income": {
             "type": "string",
             "description": "income",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
             "required": false
           }
         }
@@ -4263,9 +4774,15 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "dispute",
         "path": "/api/debt/dispute",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Credit dispute guide",
         "params": {
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
+          },
           "negative_items": {
             "type": "string",
             "description": "negative_items",
@@ -4275,15 +4792,26 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "bureau",
             "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
+            "required": false
           }
         }
       },
       {
         "action": "insolvency",
         "path": "/api/debt/insolvency",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Insolvency analysis",
         "params": {
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
+          },
           "income": {
             "type": "string",
             "description": "income",
@@ -4302,6 +4830,11 @@ export const VERTICALS: Record<string, Vertical> = {
           "state": {
             "type": "string",
             "description": "state",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
             "required": false
           }
         }
@@ -4327,15 +4860,26 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "insurance",
             "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
+            "required": false
           }
         }
       },
       {
         "action": "tax",
         "path": "/api/debt/tax",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Tax debt relief",
         "params": {
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
+          },
           "amount_owed": {
             "type": "string",
             "description": "amount_owed",
@@ -4344,11 +4888,17 @@ export const VERTICALS: Record<string, Vertical> = {
           "years_behind": {
             "type": "string",
             "description": "years_behind",
-            "required": false
+            "required": false,
+            "example": "1"
           },
           "situation": {
             "type": "string",
             "description": "situation",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
             "required": false
           }
         }
@@ -4356,14 +4906,13 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "bnpl",
         "path": "/api/debt/bnpl",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "BNPL true cost analysis",
         "params": {
           "platform": {
             "type": "string",
             "description": "platform",
-            "required": true,
-            "example": "Affirm"
+            "required": true
           },
           "balance": {
             "type": "string",
@@ -4378,6 +4927,11 @@ export const VERTICALS: Record<string, Vertical> = {
           "payment_amount": {
             "type": "string",
             "description": "payment_amount",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
             "required": false
           }
         }
@@ -4403,9 +4957,20 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "state",
             "required": false
           },
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
+          },
           "lender": {
             "type": "string",
             "description": "lender",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
             "required": false
           }
         }
@@ -4413,13 +4978,20 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "mortgage-relief",
         "path": "/api/debt/mortgage-relief",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Mortgage relief options",
         "params": {
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
+          },
           "months_behind": {
             "type": "string",
             "description": "months_behind",
-            "required": false
+            "required": false,
+            "example": "1"
           },
           "servicer": {
             "type": "string",
@@ -4429,6 +5001,12 @@ export const VERTICALS: Record<string, Vertical> = {
           "loan_type": {
             "type": "string",
             "description": "Conventional | FHA | VA | USDA",
+            "required": false,
+            "example": "Conventional"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
             "required": false
           }
         }
@@ -4458,7 +5036,18 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "homeowner",
             "required": false,
-            "example": "true"
+            "example": "false"
+          },
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
+            "required": false
           }
         }
       },
@@ -4472,20 +5061,43 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "debts",
             "required": true
+          },
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
+            "required": false
           }
         }
       },
       {
         "action": "rights",
         "path": "/api/debt/rights",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Consumer debt rights",
-        "params": {}
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
+            "required": false
+          }
+        }
       },
       {
         "action": "freedom-roadmap",
         "path": "/api/debt/freedom-roadmap",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Debt freedom roadmap",
         "params": {
           "debts": {
@@ -4502,6 +5114,17 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "savings",
             "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction for country-specific rules and programs",
+            "required": false,
+            "example": "US"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1 code). Claude responds natively in any language.",
+            "required": false
           }
         }
       }
@@ -4516,14 +5139,30 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "nightlights",
         "path": "/api/econsignal/nightlights",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Satellite nighttime lights vs official GDP",
         "params": {
+          "country": {
+            "type": "string",
+            "description": "Country name — e.g. 'India' | 'Brazil' | 'Germany' | 'Nigeria'",
+            "required": false
+          },
+          "iso2": {
+            "type": "string",
+            "description": "ISO2 country code for World Bank data — e.g. IN | BR | DE | NG",
+            "required": false
+          },
           "period": {
             "type": "string",
             "description": "Analysis period",
             "required": false,
-            "example": "1y"
+            "example": "5y"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -4532,88 +5171,277 @@ export const VERTICALS: Record<string, Vertical> = {
         "path": "/api/econsignal/gdp-tracker",
         "price": "$0.10",
         "description": "GDP tracker — history + IMF forecasts",
-        "params": {}
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "Country name — e.g. 'India' | 'Brazil' | 'Germany' | 'Nigeria'",
+            "required": false
+          },
+          "iso2": {
+            "type": "string",
+            "description": "ISO2 country code for World Bank data — e.g. IN | BR | DE | NG",
+            "required": false
+          },
+          "iso3": {
+            "type": "string",
+            "description": "ISO3 country code for IMF data — e.g. IND | BRA | DEU | NGA",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
+          }
+        }
       },
       {
         "action": "inflation-signals",
         "path": "/api/econsignal/inflation-signals",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Multi-source inflation signals",
-        "params": {}
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "Country name — e.g. 'India' | 'Brazil' | 'Germany' | 'Nigeria'",
+            "required": false
+          },
+          "iso2": {
+            "type": "string",
+            "description": "ISO2 country code for World Bank data — e.g. IN | BR | DE | NG",
+            "required": false
+          },
+          "iso3": {
+            "type": "string",
+            "description": "ISO3 country code for IMF data — e.g. IND | BRA | DEU | NGA",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
+          }
+        }
       },
       {
         "action": "country-brief",
         "path": "/api/econsignal/country-brief",
-        "price": "$0.10",
+        "price": "$0.25",
         "description": "Full sovereign intelligence brief",
         "params": {
+          "country": {
+            "type": "string",
+            "description": "Country name — e.g. 'India' | 'Brazil' | 'Germany' | 'Nigeria'",
+            "required": false
+          },
+          "iso2": {
+            "type": "string",
+            "description": "ISO2 country code for World Bank data — e.g. IN | BR | DE | NG",
+            "required": false
+          },
+          "iso3": {
+            "type": "string",
+            "description": "ISO3 country code for IMF data — e.g. IND | BRA | DEU | NGA",
+            "required": false
+          },
           "focus": {
             "type": "string",
             "description": "Analysis focus area",
             "required": false,
-            "example": "investment"
+            "example": "all"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "divergence",
         "path": "/api/econsignal/divergence",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Official stats vs alternative data divergence",
-        "params": {}
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "Country name — e.g. 'India' | 'Brazil' | 'Germany' | 'Nigeria'",
+            "required": false
+          },
+          "iso2": {
+            "type": "string",
+            "description": "ISO2 country code for World Bank data — e.g. IN | BR | DE | NG",
+            "required": false
+          },
+          "iso3": {
+            "type": "string",
+            "description": "ISO3 country code for IMF data — e.g. IND | BRA | DEU | NGA",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
+          }
+        }
       },
       {
         "action": "recession-signals",
         "path": "/api/econsignal/recession-signals",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Recession probability signals",
-        "params": {}
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "Country name — e.g. 'India' | 'Brazil' | 'Germany' | 'Nigeria'",
+            "required": false
+          },
+          "iso2": {
+            "type": "string",
+            "description": "ISO2 country code for World Bank data — e.g. IN | BR | DE | NG",
+            "required": false
+          },
+          "iso3": {
+            "type": "string",
+            "description": "ISO3 country code for IMF data — e.g. IND | BRA | DEU | NGA",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
+          }
+        }
       },
       {
         "action": "frontier-intel",
         "path": "/api/econsignal/frontier-intel",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Frontier and emerging market intelligence",
         "params": {
+          "country": {
+            "type": "string",
+            "description": "Country name — e.g. 'India' | 'Brazil' | 'Germany' | 'Nigeria'",
+            "required": false
+          },
+          "iso2": {
+            "type": "string",
+            "description": "ISO2 country code for World Bank data — e.g. IN | BR | DE | NG",
+            "required": false
+          },
+          "iso3": {
+            "type": "string",
+            "description": "ISO3 country code for IMF data — e.g. IND | BRA | DEU | NGA",
+            "required": false
+          },
           "lens": {
             "type": "string",
             "description": "Intelligence lens",
             "required": false,
-            "example": "investment"
+            "example": "all"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "trade-flows",
         "path": "/api/econsignal/trade-flows",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Global trade flow analysis",
         "params": {
+          "country": {
+            "type": "string",
+            "description": "Country name — e.g. 'India' | 'Brazil' | 'Germany' | 'Nigeria'",
+            "required": false
+          },
+          "iso2": {
+            "type": "string",
+            "description": "ISO2 country code for World Bank data — e.g. IN | BR | DE | NG",
+            "required": false
+          },
+          "iso3": {
+            "type": "string",
+            "description": "ISO3 country code for IMF data — e.g. IND | BRA | DEU | NGA",
+            "required": false
+          },
           "partner": {
             "type": "string",
             "description": "Optional trade partner country for bilateral analysis — e.g. 'United States' | 'China' | 'Germany'",
             "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "credit-stress",
         "path": "/api/econsignal/credit-stress",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Sovereign credit and banking stress",
-        "params": {}
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "Country name — e.g. 'India' | 'Brazil' | 'Germany' | 'Nigeria'",
+            "required": false
+          },
+          "iso2": {
+            "type": "string",
+            "description": "ISO2 country code for World Bank data — e.g. IN | BR | DE | NG",
+            "required": false
+          },
+          "iso3": {
+            "type": "string",
+            "description": "ISO3 country code for IMF data — e.g. IND | BRA | DEU | NGA",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
+          }
+        }
       },
       {
         "action": "sanctions-impact",
         "path": "/api/econsignal/sanctions-impact",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Sanctions impact measurement",
         "params": {
+          "country": {
+            "type": "string",
+            "description": "Country name — e.g. 'India' | 'Brazil' | 'Germany' | 'Nigeria'",
+            "required": false
+          },
+          "iso2": {
+            "type": "string",
+            "description": "ISO2 country code for World Bank data — e.g. IN | BR | DE | NG",
+            "required": false
+          },
           "regime": {
             "type": "string",
             "description": "Sanctions regime to analyze",
             "required": false,
-            "example": "OFAC"
+            "example": "all"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
           }
         }
       }
@@ -4675,15 +5503,15 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "questions": {
-            "type": "string",
+            "type": "integer",
             "description": "questions",
-            "required": false
+            "required": false,
+            "example": "5"
           },
           "difficulty": {
             "type": "string",
             "description": "difficulty",
-            "required": false,
-            "example": "easy"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -4695,7 +5523,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "explain",
         "path": "/api/study/explain",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Concept explainer — any topic at any level from 5th grade to PhD",
         "params": {
           "concept": {
@@ -4729,8 +5557,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "exam": {
             "type": "string",
             "description": "exam",
-            "required": true,
-            "example": "NCLEX"
+            "required": true
           },
           "date": {
             "type": "string",
@@ -4738,9 +5565,10 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "hours_per_week": {
-            "type": "string",
+            "type": "integer",
             "description": "hours_per_week",
-            "required": false
+            "required": false,
+            "example": "15"
           },
           "lang": {
             "type": "string",
@@ -4752,7 +5580,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "prep",
         "path": "/api/exam/prep",
-        "price": "$0.10",
+        "price": "$1.00",
         "description": "Exam-style practice questions — 200+ exams, rubric-matched difficulty",
         "params": {
           "exam": {
@@ -4766,15 +5594,15 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "questions": {
-            "type": "string",
+            "type": "integer",
             "description": "questions",
-            "required": false
+            "required": false,
+            "example": "5"
           },
           "difficulty": {
             "type": "string",
             "description": "difficulty",
-            "required": false,
-            "example": "easy"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -4786,7 +5614,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "flashcards",
         "path": "/api/exam/flashcards",
-        "price": "$0.10",
+        "price": "$0.50",
         "description": "Spaced-repetition flashcard set — import into Anki or Quizlet",
         "params": {
           "exam": {
@@ -4805,9 +5633,10 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "count": {
-            "type": "string",
+            "type": "integer",
             "description": "count",
-            "required": false
+            "required": false,
+            "example": "10"
           },
           "lang": {
             "type": "string",
@@ -4817,9 +5646,9 @@ export const VERTICALS: Record<string, Vertical> = {
         }
       },
       {
-        "action": "exam-explain",
+        "action": "explain",
         "path": "/api/exam/explain",
-        "price": "$0.10",
+        "price": "$0.50",
         "description": "Exam format explainer — complete breakdown of any exam structure and strategy",
         "params": {
           "exam": {
@@ -4842,7 +5671,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "mock",
         "path": "/api/exam/mock",
-        "price": "$0.10",
+        "price": "$1.00",
         "description": "Full mock exam simulation — timed, scored, with performance report",
         "params": {
           "exam": {
@@ -4851,9 +5680,10 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "duration": {
-            "type": "string",
+            "type": "integer",
             "description": "Duration in minutes",
-            "required": false
+            "required": false,
+            "example": "60"
           },
           "lang": {
             "type": "string",
@@ -4898,7 +5728,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "grade",
         "path": "/api/exam/grade",
-        "price": "$0.10",
+        "price": "$1.00",
         "description": "Rubric-based exam grading — written response scoring with detailed feedback",
         "params": {
           "exam": {
@@ -4923,6 +5753,118 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "co-op-guide",
+        "path": "/api/edu/co-op-guide",
+        "price": "$0.10",
+        "description": "Homeschool co-op finder",
+        "params": {
+          "state": {
+            "type": "string",
+            "description": "State",
+            "required": true
+          },
+          "city": {
+            "type": "string",
+            "description": "City",
+            "required": false
+          },
+          "child_ages": {
+            "type": "string",
+            "description": "Child ages (e.g. 5-10, all ages)",
+            "required": false
+          },
+          "focus": {
+            "type": "string",
+            "description": "Focus (academic, social, both)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "curriculum-match",
+        "path": "/api/edu/curriculum-match",
+        "price": "$0.10",
+        "description": "Homeschool curriculum matcher",
+        "params": {
+          "grade": {
+            "type": "string",
+            "description": "Grade level (K-12)",
+            "required": true
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject",
+            "required": true
+          },
+          "style": {
+            "type": "string",
+            "description": "Learning style (any, structured, eclectic, etc.)",
+            "required": false
+          },
+          "religious": {
+            "type": "string",
+            "description": "Religious preference (none, christian, etc.)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "essay",
+        "path": "/api/edu/essay",
+        "price": "$0.25",
+        "description": "Admissions essay review",
+        "params": {
+          "essay": {
+            "type": "string",
+            "description": "Essay text",
+            "required": true
+          },
+          "school": {
+            "type": "string",
+            "description": "Target school",
+            "required": false
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Essay prompt",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "homeschool-laws",
+        "path": "/api/edu/homeschool-laws",
+        "price": "$0.10",
+        "description": "Homeschool law lookup",
+        "params": {
+          "state": {
+            "type": "string",
+            "description": "State",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
       }
     ]
   },
@@ -4935,7 +5877,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "csrd",
         "path": "/api/esg/csrd",
-        "price": "$0.10",
+        "price": "$0.25",
         "description": "CSRD compliance roadmap",
         "params": {
           "sector": {
@@ -4956,36 +5898,39 @@ export const VERTICALS: Record<string, Vertical> = {
           "jurisdiction": {
             "type": "string",
             "description": "Company's primary jurisdiction",
-            "required": false
+            "required": false,
+            "example": "EU"
           },
           "listed": {
-            "type": "string",
+            "type": "boolean",
             "description": "Whether the company is publicly listed",
-            "required": false
+            "required": false,
+            "example": "true"
           },
           "lang": {
             "type": "string",
             "description": "Response language (ISO 639-1)",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "framework",
         "path": "/api/esg/framework",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "ESG framework navigator",
         "params": {
           "company_type": {
             "type": "string",
             "description": "Type of organization",
-            "required": false,
-            "example": "large-public"
+            "required": false
           },
           "jurisdiction": {
             "type": "string",
             "description": "Primary regulatory jurisdiction",
-            "required": false
+            "required": false,
+            "example": "EU"
           },
           "sector": {
             "type": "string",
@@ -5001,14 +5946,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "company",
         "path": "/api/esg/company",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Company ESG intelligence",
         "params": {
           "company": {
@@ -5025,14 +5971,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "emissions",
         "path": "/api/esg/emissions",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Carbon and emissions intelligence",
         "params": {
           "entity": {
@@ -5060,14 +6007,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "sector",
         "path": "/api/esg/sector",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "SASB sector ESG materiality",
         "params": {
           "sector": {
@@ -5084,14 +6032,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "taxonomy",
         "path": "/api/esg/taxonomy",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "EU Taxonomy alignment check",
         "params": {
           "activity": {
@@ -5119,14 +6068,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "supply-chain",
         "path": "/api/esg/supply-chain",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Supply chain ESG due diligence",
         "params": {
           "company": {
@@ -5153,7 +6103,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -5182,14 +6133,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "greenwashing",
         "path": "/api/esg/greenwashing",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Greenwashing risk detector",
         "params": {
           "claims": {
@@ -5211,14 +6163,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "disclosure",
         "path": "/api/esg/disclosure",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "ESG disclosure builder",
         "params": {
           "framework": {
@@ -5247,7 +6200,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       }
@@ -5285,7 +6239,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "character",
         "path": "/api/fan/character",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Character or artist deep profile",
         "params": {
           "franchise": {
@@ -5308,7 +6262,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "quiz",
         "path": "/api/fan/quiz",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "AI-generated trivia set",
         "params": {
           "franchise": {
@@ -5336,7 +6290,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "easter-eggs",
         "path": "/api/fan/easter-eggs",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Easter egg and hidden meaning analysis",
         "params": {
           "artist": {
@@ -5387,7 +6341,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "sorting",
         "path": "/api/fan/sorting",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Personality-based character/faction sorting",
         "params": {
           "franchise": {
@@ -5497,7 +6451,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "yield-forecast",
         "path": "/api/yield-forecast",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Yield and production forecast for any crop and region",
         "params": {
           "crop": {
@@ -5511,70 +6465,74 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "lat": {
-            "type": "string",
+            "type": "number",
             "description": "Latitude (alternative to region name)",
             "required": false
           },
           "lon": {
-            "type": "string",
+            "type": "number",
             "description": "Longitude (alternative to region name)",
             "required": false
           },
           "lang": {
             "type": "string",
             "description": "Response language ISO 639-1",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "weather-risk",
         "path": "/api/weather-risk",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "7-14 day crop-specific weather risk assessment",
         "params": {
           "lat": {
-            "type": "string",
+            "type": "number",
             "description": "Field latitude",
             "required": true
           },
           "lon": {
-            "type": "string",
+            "type": "number",
             "description": "Field longitude",
             "required": true
           },
           "crop": {
             "type": "string",
             "description": "Crop being assessed",
-            "required": false
+            "required": false,
+            "example": "wheat"
           },
           "lang": {
             "type": "string",
             "description": "Response language",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "soil-intel",
         "path": "/api/soil-intel",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Live soil moisture, temperature, and evapotranspiration intelligence",
         "params": {
           "lat": {
-            "type": "string",
+            "type": "number",
             "description": "Field latitude",
             "required": true
           },
           "lon": {
-            "type": "string",
+            "type": "number",
             "description": "Field longitude",
             "required": true
           },
           "lang": {
             "type": "string",
             "description": "Response language",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -5595,52 +6553,56 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "lat": {
-            "type": "string",
+            "type": "number",
             "description": "Field latitude",
             "required": false
           },
           "lon": {
-            "type": "string",
+            "type": "number",
             "description": "Field longitude",
             "required": false
           },
           "lang": {
             "type": "string",
             "description": "Response language",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "irrigation",
         "path": "/api/irrigation",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "ET0-based irrigation recommendation and water budget",
         "params": {
           "lat": {
-            "type": "string",
+            "type": "number",
             "description": "Field latitude",
             "required": true
           },
           "lon": {
-            "type": "string",
+            "type": "number",
             "description": "Field longitude",
             "required": true
           },
           "crop": {
             "type": "string",
             "description": "Crop type (affects crop coefficient Kc)",
-            "required": false
+            "required": false,
+            "example": "wheat"
           },
           "soil_type": {
             "type": "string",
             "description": "Soil type: sandy, loam, clay, silt-loam, sandy-loam, clay-loam",
-            "required": false
+            "required": false,
+            "example": "loam"
           },
           "lang": {
             "type": "string",
             "description": "Response language",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -5658,14 +6620,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "input-cost",
         "path": "/api/input-cost",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Fertilizer, seed, and crop protection cost intelligence",
         "params": {
           "crop": {
@@ -5676,7 +6639,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "region": {
             "type": "string",
             "description": "Region: 'US Corn Belt', 'Brazil', 'EU', 'India', 'Australia', 'Black Sea', 'Southeast Asia', etc.",
-            "required": false
+            "required": false,
+            "example": "United States"
           },
           "hectares": {
             "type": "string",
@@ -5686,23 +6650,24 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "planting-window",
         "path": "/api/planting-window",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Optimal planting window based on soil temperature and frost dates",
         "params": {
           "lat": {
-            "type": "string",
+            "type": "number",
             "description": "Field latitude",
             "required": true
           },
           "lon": {
-            "type": "string",
+            "type": "number",
             "description": "Field longitude",
             "required": true
           },
@@ -5714,14 +6679,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "season-brief",
         "path": "/api/season-brief",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Comprehensive seasonal agricultural intelligence brief",
         "params": {
           "crop": {
@@ -5735,19 +6701,50 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "lat": {
-            "type": "string",
+            "type": "number",
             "description": "Lat (alternative to region name for field-level context)",
             "required": false
           },
           "lon": {
-            "type": "string",
+            "type": "number",
             "description": "Lon",
             "required": false
           },
           "lang": {
             "type": "string",
             "description": "Response language",
-            "required": false
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "crop-health",
+        "path": "/api/crop-health",
+        "price": "$0.10",
+        "description": "Crop health assessment from satellite + soil data",
+        "params": {
+          "lat": {
+            "type": "number",
+            "description": "Latitude of the field (e.g. 41.88 for Iowa, 48.85 for Paris, -33.87 for Sydney)",
+            "required": true
+          },
+          "lon": {
+            "type": "number",
+            "description": "Longitude of the field",
+            "required": true
+          },
+          "crop": {
+            "type": "string",
+            "description": "Crop name: wheat, corn/maize, rice, soybean, cotton, coffee, cocoa, barley, canola, sugarcane, potato, tomato, cassava, millet, sorghum, palm-oil, etc.",
+            "required": false,
+            "example": "wheat"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language ISO 639-1 code (en, es, fr, pt, zh, hi, ar, id, sw, etc.)",
+            "required": false,
+            "example": "en"
           }
         }
       }
@@ -5773,8 +6770,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "exchange": {
             "type": "string",
             "description": "Exchange code — enables precise source targeting and jurisdiction-correct filing terminology",
-            "required": false,
-            "example": "NYSE"
+            "required": false
           },
           "query": {
             "type": "string",
@@ -5791,7 +6787,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "summary",
         "path": "/api/filings/summary",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "10-K / Annual Report plain-language summary",
         "params": {
           "ticker": {
@@ -5866,7 +6862,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "ipo",
         "path": "/api/filings/ipo",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "IPO / S-1 prospectus deep dive",
         "params": {
           "company": {
@@ -5917,7 +6913,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "redflags",
         "path": "/api/filings/redflags",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Forensic accounting red flag scan",
         "params": {
           "ticker": {
@@ -5940,7 +6936,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "compare",
         "path": "/api/filings/compare",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Side-by-side competitor comparison from filings",
         "params": {
           "ticker1": {
@@ -5973,19 +6969,18 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "search",
         "path": "/api/filings/search",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Full-text filing search across all public databases",
         "params": {
           "query": {
             "type": "string",
-            "description": "Any topic, risk, disclosure theme, or specific language (e.g. 'artificial intelligence risk factors', 'going concern', 'China supply chain e",
+            "description": "Any topic, risk, disclosure theme, or specific language (e.g. 'artificial intelligence risk factors', 'going concern', 'China supply chain exposure')",
             "required": true
           },
           "form_type": {
             "type": "string",
             "description": "form_type",
-            "required": false,
-            "example": "10-K"
+            "required": false
           },
           "date_from": {
             "type": "string",
@@ -6046,7 +7041,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "alternative",
         "path": "/api/find/alternative",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Cheaper alternatives",
         "params": {
           "product": {
@@ -6064,7 +7059,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "hidden",
         "path": "/api/find/hidden",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Hidden gem products",
         "params": {
           "category": {
@@ -6082,7 +7077,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "used",
         "path": "/api/find/used",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Used/refurbished sourcing guide",
         "params": {
           "product": {
@@ -6159,7 +7154,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "rental",
         "path": "/api/find/rental",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Rent vs buy analysis",
         "params": {
           "item": {
@@ -6182,7 +7177,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "recall",
         "path": "/api/find/recall",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Product recall lookup",
         "params": {
           "product": {
@@ -6219,11 +7214,10 @@ export const VERTICALS: Record<string, Vertical> = {
           "level": {
             "type": "string",
             "description": "level",
-            "required": false,
-            "example": "beginner"
+            "required": false
           },
           "days": {
-            "type": "string",
+            "type": "integer",
             "description": "Days per week (default: 4)",
             "required": false
           },
@@ -6237,7 +7231,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "exercise",
         "path": "/api/fit/exercise",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Exercise form guide",
         "params": {
           "exercise": {
@@ -6264,15 +7258,14 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "weight": {
-            "type": "string",
+            "type": "integer",
             "description": "Body weight in lbs",
             "required": false
           },
           "activity": {
             "type": "string",
             "description": "activity",
-            "required": false,
-            "example": "sedentary"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -6284,7 +7277,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "supplement",
         "path": "/api/fit/supplement",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Evidence-based supplement analysis",
         "params": {
           "goal": {
@@ -6320,7 +7313,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "supplements",
         "path": "/api/fit/supplements",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Evidence-graded supplement efficacy tier list by goal",
         "params": {
           "goal": {
@@ -6376,7 +7369,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "sleep",
         "path": "/api/fit/sleep",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Athletic sleep optimization and CBT-I protocol",
         "params": {
           "issue": {
@@ -6494,7 +7487,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -6523,7 +7517,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -6556,7 +7551,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -6577,7 +7573,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "minute": {
-            "type": "string",
+            "type": "integer",
             "description": "minute",
             "required": false
           },
@@ -6589,7 +7585,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -6602,7 +7599,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "leagues": {
             "type": "string",
             "description": "leagues",
-            "required": false
+            "required": false,
+            "example": "PL,PD,BL1,SA,FL1"
           },
           "date": {
             "type": "string",
@@ -6616,14 +7614,16 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "value"
           },
           "max_legs": {
-            "type": "string",
+            "type": "integer",
             "description": "max_legs",
-            "required": false
+            "required": false,
+            "example": "5"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -6646,7 +7646,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -6674,7 +7675,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -6707,7 +7709,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -6731,12 +7734,13 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "home_away",
             "required": false,
-            "example": "home"
+            "example": "both"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -6765,12 +7769,13 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "window",
             "required": false,
-            "example": "summer"
+            "example": "current"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       }
@@ -6785,7 +7790,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "fdd",
         "path": "/api/franchise/fdd",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Franchise Disclosure Document analysis",
         "params": {
           "franchisor": {
@@ -6803,7 +7808,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "discover",
         "path": "/api/franchise/discover",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Franchise opportunity discovery",
         "params": {
           "industry": {
@@ -6836,7 +7841,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "compare",
         "path": "/api/franchise/compare",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Side-by-side franchise comparison",
         "params": {
           "concepts": {
@@ -6854,7 +7859,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "vet",
         "path": "/api/franchise/vet",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Franchise due diligence",
         "params": {
           "franchisor": {
@@ -6946,7 +7951,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "sba",
         "path": "/api/franchise/sba",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "SBA eligibility and franchise financing",
         "params": {
           "franchisor": {
@@ -6969,7 +7974,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "broker",
         "path": "/api/franchise/broker",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Franchise broker and consultant guidance",
         "params": {
           "location": {
@@ -7000,7 +8005,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "deals",
         "path": "/api/gaming/deals",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Game deals",
         "params": {
           "genre": {
@@ -7013,7 +8018,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "worth-it",
         "path": "/api/gaming/worth-it",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Buy or wait verdict",
         "params": {
           "game": {
@@ -7026,7 +8031,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "meta",
         "path": "/api/gaming/meta",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Game meta analysis",
         "params": {
           "game": {
@@ -7039,7 +8044,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "trending",
         "path": "/api/gaming/trending",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Trending games",
         "params": {}
       },
@@ -7050,9 +8055,10 @@ export const VERTICALS: Record<string, Vertical> = {
         "description": "PC gaming setup",
         "params": {
           "budget": {
-            "type": "string",
+            "type": "integer",
             "description": "Budget in USD ($200-$10,000)",
-            "required": false
+            "required": false,
+            "example": "1500"
           }
         }
       },
@@ -7078,7 +8084,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "invest",
         "path": "/api/cards/invest",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Set investment analysis",
         "params": {
           "set": {
@@ -7089,14 +8095,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "game": {
             "type": "string",
             "description": "game",
-            "required": false
+            "required": false,
+            "example": "pokemon"
           }
         }
       },
       {
         "action": "deal",
         "path": "/api/cards/deal",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "eBay card deal finder",
         "params": {
           "card": {
@@ -7107,28 +8114,29 @@ export const VERTICALS: Record<string, Vertical> = {
           "game": {
             "type": "string",
             "description": "game",
-            "required": false
+            "required": false,
+            "example": "pokemon"
           }
         }
       },
       {
         "action": "matches",
         "path": "/api/esports/matches",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Esports matches",
         "params": {
           "game": {
             "type": "string",
             "description": "game",
             "required": false,
-            "example": "lol"
+            "example": "valorant"
           }
         }
       },
       {
         "action": "team",
         "path": "/api/esports/team",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Esports team profile",
         "params": {
           "name": {
@@ -7139,7 +8147,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "game": {
             "type": "string",
             "description": "game",
-            "required": false
+            "required": false,
+            "example": "lol"
           }
         }
       },
@@ -7152,7 +8161,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "game": {
             "type": "string",
             "description": "game",
-            "required": false
+            "required": false,
+            "example": "lol"
           },
           "match": {
             "type": "string",
@@ -7175,6 +8185,117 @@ export const VERTICALS: Record<string, Vertical> = {
           "game": {
             "type": "string",
             "description": "game",
+            "required": false,
+            "example": "lol"
+          }
+        }
+      },
+      {
+        "action": "portfolio",
+        "path": "/api/cards/portfolio",
+        "price": "$0.10",
+        "description": "Trading card portfolio valuation",
+        "params": {
+          "cards": {
+            "type": "string",
+            "description": "Comma-separated card list",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "achievements",
+        "path": "/api/gaming/achievements",
+        "price": "$0.08",
+        "description": "Achievement hunting guide",
+        "params": {
+          "game": {
+            "type": "string",
+            "description": "Game title",
+            "required": true
+          },
+          "achievement": {
+            "type": "string",
+            "description": "Specific achievement (optional)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "specs",
+        "path": "/api/gaming/specs",
+        "price": "$0.08",
+        "description": "PC compatibility check",
+        "params": {
+          "game": {
+            "type": "string",
+            "description": "Game title",
+            "required": true
+          },
+          "cpu": {
+            "type": "string",
+            "description": "CPU model",
+            "required": false
+          },
+          "gpu": {
+            "type": "string",
+            "description": "GPU model",
+            "required": false
+          },
+          "ram": {
+            "type": "string",
+            "description": "RAM (GB)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "subscription",
+        "path": "/api/gaming/subscription",
+        "price": "$0.08",
+        "description": "Gaming subscription value calculator",
+        "params": {
+          "games": {
+            "type": "string",
+            "description": "Comma-separated games you play",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "time",
+        "path": "/api/gaming/time",
+        "price": "$0.05",
+        "description": "Game completion time estimator",
+        "params": {
+          "game": {
+            "type": "string",
+            "description": "Game title",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
             "required": false
           }
         }
@@ -7190,7 +8311,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "country-risk",
         "path": "/api/geopolitical/country-risk",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Country Risk Assessment",
         "params": {
           "country": {
@@ -7201,14 +8322,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language ISO 639-1 code (en, es, fr, de, ar, zh, pt, ja, ko, ru)",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "conflict-scan",
         "path": "/api/geopolitical/conflict-scan",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Conflict Scan",
         "params": {
           "region": {
@@ -7217,21 +8339,23 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "days": {
-            "type": "string",
+            "type": "integer",
             "description": "Lookback window in days",
-            "required": false
+            "required": false,
+            "example": "90"
           },
           "lang": {
             "type": "string",
             "description": "Response language ISO 639-1 code",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "sanctions-intel",
         "path": "/api/geopolitical/sanctions-intel",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Sanctions Intelligence",
         "params": {
           "target": {
@@ -7242,14 +8366,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language ISO 639-1 code",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "election-watch",
         "path": "/api/geopolitical/election-watch",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Election Watch",
         "params": {
           "country": {
@@ -7265,14 +8390,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language ISO 639-1 code",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "trade-tension",
         "path": "/api/geopolitical/trade-tension",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Trade Tension Analyzer",
         "params": {
           "country_a": {
@@ -7288,14 +8414,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language ISO 639-1 code",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "regime-brief",
         "path": "/api/geopolitical/regime-brief",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Regime Brief",
         "params": {
           "country": {
@@ -7306,14 +8433,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language ISO 639-1 code",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "event-impact",
         "path": "/api/geopolitical/event-impact",
-        "price": "$0.10",
+        "price": "$0.25",
         "description": "Geopolitical Event Impact",
         "params": {
           "event": {
@@ -7324,14 +8452,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language ISO 639-1 code",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "instability-signal",
         "path": "/api/geopolitical/instability-signal",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Instability Early Warning Signal",
         "params": {
           "country": {
@@ -7342,14 +8471,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language ISO 639-1 code",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "supply-chain-risk",
         "path": "/api/geopolitical/supply-chain-risk",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Supply Chain Geopolitical Risk",
         "params": {
           "sector": {
@@ -7360,14 +8490,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language ISO 639-1 code",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "regional-brief",
         "path": "/api/geopolitical/regional-brief",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Regional Situational Brief",
         "params": {
           "region": {
@@ -7378,7 +8509,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language ISO 639-1 code",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       }
@@ -7393,7 +8525,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "us-contracts",
         "path": "/api/govspend/us-contracts",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "US federal contract awards",
         "params": {
           "keyword": {
@@ -7412,26 +8544,28 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "year_from": {
-            "type": "string",
+            "type": "integer",
             "description": "Fiscal year start — e.g. 2024, 2025",
             "required": false
           },
           "limit": {
-            "type": "string",
+            "type": "integer",
             "description": "Number of results (5, 10, or 20)",
-            "required": false
+            "required": false,
+            "example": "10"
           },
           "lang": {
             "type": "string",
             "description": "Response language",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "us-opportunities",
         "path": "/api/govspend/us-opportunities",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "US active solicitations (SAM.gov)",
         "params": {
           "keyword": {
@@ -7445,26 +8579,29 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "active": {
-            "type": "string",
+            "type": "boolean",
             "description": "Only return open solicitations",
-            "required": false
+            "required": false,
+            "example": "true"
           },
           "limit": {
-            "type": "string",
+            "type": "integer",
             "description": "Number of results",
-            "required": false
+            "required": false,
+            "example": "10"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "eu-tenders",
         "path": "/api/govspend/eu-tenders",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "EU procurement tenders (TED)",
         "params": {
           "keyword": {
@@ -7483,21 +8620,23 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "limit": {
-            "type": "string",
+            "type": "integer",
             "description": "limit",
-            "required": false
+            "required": false,
+            "example": "10"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "uk-contracts",
         "path": "/api/govspend/uk-contracts",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "UK government contracts",
         "params": {
           "keyword": {
@@ -7508,14 +8647,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "global-opportunities",
         "path": "/api/govspend/global-opportunities",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Global procurement opportunities",
         "params": {
           "keyword": {
@@ -7531,14 +8671,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "agency-intel",
         "path": "/api/govspend/agency-intel",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "US agency spending intelligence",
         "params": {
           "agency": {
@@ -7554,14 +8695,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "competitor-awards",
         "path": "/api/govspend/competitor-awards",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Competitor federal award analysis",
         "params": {
           "keyword": {
@@ -7577,14 +8719,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "development-bank",
         "path": "/api/govspend/development-bank",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Development bank procurement",
         "params": {
           "keyword": {
@@ -7600,14 +8743,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "contract-brief",
         "path": "/api/govspend/contract-brief",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Full contract intelligence brief",
         "params": {
           "keyword": {
@@ -7628,7 +8772,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       }
@@ -7643,12 +8788,12 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "match",
         "path": "/api/grant/match",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Personalized grant matching",
         "params": {
           "org_type": {
             "type": "string",
-            "description": "nonprofit | small_business | individual | public_university | private_university | state_government | local_government | tribal | for_profit",
+            "description": "nonprofit | small_business | individual | public_university | private_university | state_government | local_government | tribal | for_profit | other",
             "required": true
           },
           "mission": {
@@ -7737,7 +8882,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "foundation",
         "path": "/api/grant/foundation",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Foundation grant intelligence",
         "params": {
           "mission": {
@@ -7803,7 +8948,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "apply",
         "path": "/api/grant/apply",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Grant application strategy",
         "params": {
           "grant_name": {
@@ -7836,7 +8981,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "deadline",
         "path": "/api/grant/deadline",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Grant deadline tracker",
         "params": {
           "category": {
@@ -7850,9 +8995,10 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "days": {
-            "type": "string",
+            "type": "integer",
             "description": "days",
-            "required": false
+            "required": false,
+            "example": "90"
           },
           "lang": {
             "type": "string",
@@ -7864,14 +9010,13 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "writer",
         "path": "/api/grant/writer",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Grant narrative drafting",
         "params": {
           "section": {
             "type": "string",
             "description": "section",
-            "required": true,
-            "example": "problem_statement"
+            "required": true
           },
           "org_type": {
             "type": "string",
@@ -7908,7 +9053,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "eu",
         "path": "/api/grant/eu",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "EU funding intelligence",
         "params": {
           "org_type": {
@@ -7941,7 +9086,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "global",
         "path": "/api/grant/global",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Global development funding",
         "params": {
           "sector": {
@@ -7982,7 +9127,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "prices",
         "path": "/api/energy/prices",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Electricity prices by state",
         "params": {
           "state": {
@@ -7995,7 +9140,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "grid",
         "path": "/api/energy/grid",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Power grid status by region",
         "params": {
           "region": {
@@ -8008,7 +9153,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "renewable",
         "path": "/api/energy/renewable",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Renewable energy profile by state",
         "params": {
           "state": {
@@ -8021,7 +9166,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "natural-gas",
         "path": "/api/energy/natural-gas",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Henry Hub natural gas briefing",
         "params": {}
       },
@@ -8041,7 +9186,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "ev-cost",
         "path": "/api/energy/ev-cost",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "EV charging cost vs gasoline",
         "params": {
           "state": {
@@ -8050,9 +9195,10 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "miles": {
-            "type": "string",
+            "type": "integer",
             "description": "Annual miles (1,000-100,000)",
-            "required": false
+            "required": false,
+            "example": "12000"
           }
         }
       },
@@ -8073,16 +9219,17 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "system_kw": {
-            "type": "string",
+            "type": "number",
             "description": "System size in kW (2-20)",
-            "required": false
+            "required": false,
+            "example": "6"
           }
         }
       },
       {
         "action": "appliance",
         "path": "/api/energy/appliance",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Home appliance energy cost calculator",
         "params": {
           "appliance": {
@@ -8096,12 +9243,12 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "usage_hours": {
-            "type": "string",
+            "type": "integer",
             "description": "Daily usage hours (default varies by appliance)",
             "required": false
           },
           "age_years": {
-            "type": "string",
+            "type": "integer",
             "description": "Appliance age in years (affects upgrade ROI calculation)",
             "required": false
           }
@@ -8119,12 +9266,12 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "monthly_bill": {
-            "type": "string",
+            "type": "integer",
             "description": "Average monthly electricity bill in USD",
             "required": false
           },
           "has_solar": {
-            "type": "string",
+            "type": "boolean",
             "description": "true if existing or planned solar system",
             "required": false
           },
@@ -8138,7 +9285,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "carbon",
         "path": "/api/energy/carbon",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Household electricity carbon footprint",
         "params": {
           "state": {
@@ -8147,12 +9294,12 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "monthly_kwh": {
-            "type": "string",
+            "type": "integer",
             "description": "Average monthly electricity consumption in kWh",
             "required": false
           },
           "household_size": {
-            "type": "string",
+            "type": "integer",
             "description": "Number of people in household",
             "required": false
           }
@@ -8161,7 +9308,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "community-solar",
         "path": "/api/energy/community-solar",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Community solar enrollment by ZIP code",
         "params": {
           "zip": {
@@ -8170,7 +9317,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "monthly_bill": {
-            "type": "string",
+            "type": "integer",
             "description": "Average monthly electricity bill in USD",
             "required": false
           },
@@ -8184,7 +9331,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "tou",
         "path": "/api/energy/tou",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Time-of-use rate optimization",
         "params": {
           "state": {
@@ -8198,17 +9345,17 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "has_ev": {
-            "type": "string",
+            "type": "boolean",
             "description": "true if household has an EV (major TOU savings driver)",
             "required": false
           },
           "has_solar": {
-            "type": "string",
+            "type": "boolean",
             "description": "true if household has solar (affects TOU export credit optimization)",
             "required": false
           },
           "monthly_bill": {
-            "type": "string",
+            "type": "integer",
             "description": "Average monthly electricity bill in USD",
             "required": false
           }
@@ -8225,7 +9372,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "find",
         "path": "/api/harvest/find",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Local Farm & Market Finder",
         "params": {
           "zip": {
@@ -8234,16 +9381,17 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "radius": {
-            "type": "string",
+            "type": "integer",
             "description": "Search radius in miles",
-            "required": false
+            "required": false,
+            "example": "25"
           }
         }
       },
       {
         "action": "season",
         "path": "/api/harvest/season",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Seasonal Produce Calendar",
         "params": {
           "state": {
@@ -8254,11 +9402,10 @@ export const VERTICALS: Record<string, Vertical> = {
           "country": {
             "type": "string",
             "description": "Country (for international calendar)",
-            "required": false,
-            "example": "UK"
+            "required": false
           },
           "month": {
-            "type": "string",
+            "type": "integer",
             "description": "Month (1-12). Defaults to current month.",
             "required": false
           }
@@ -8267,7 +9414,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "labels",
         "path": "/api/harvest/labels",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Food Label Decoder",
         "params": {
           "label": {
@@ -8280,7 +9427,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "organic",
         "path": "/api/harvest/organic",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Certified Organic Farm Finder",
         "params": {
           "state": {
@@ -8298,14 +9445,14 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "dirty-dozen",
         "path": "/api/harvest/dirty-dozen",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Dirty Dozen & Clean Fifteen",
         "params": {}
       },
       {
         "action": "food-hub",
         "path": "/api/harvest/food-hub",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Regional Food Hub Finder",
         "params": {
           "zip": {
@@ -8314,9 +9461,10 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "radius": {
-            "type": "string",
+            "type": "integer",
             "description": "Search radius in miles",
-            "required": false
+            "required": false,
+            "example": "75"
           }
         }
       },
@@ -8354,7 +9502,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "agritourism",
         "path": "/api/harvest/agritourism",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Agritourism & U-Pick Finder",
         "params": {
           "zip": {
@@ -8368,9 +9516,10 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "radius": {
-            "type": "string",
+            "type": "integer",
             "description": "Search radius in miles",
-            "required": false
+            "required": false,
+            "example": "50"
           }
         }
       },
@@ -8383,12 +9532,14 @@ export const VERTICALS: Record<string, Vertical> = {
           "location": {
             "type": "string",
             "description": "City/state or region",
-            "required": false
+            "required": false,
+            "example": "US"
           },
           "household_size": {
-            "type": "string",
+            "type": "integer",
             "description": "Number of people in household",
-            "required": false
+            "required": false,
+            "example": "2"
           }
         }
       },
@@ -8401,7 +9552,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "items": {
             "type": "string",
             "description": "Produce items to compare (space or comma separated)",
-            "required": false
+            "required": false,
+            "example": "strawberries tomatoes lettuce"
           },
           "location": {
             "type": "string",
@@ -8413,22 +9565,108 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "roadmap",
         "path": "/api/harvest/roadmap",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Farm-to-Table Lifestyle Roadmap",
         "params": {
           "location": {
             "type": "string",
             "description": "City, state, or region",
-            "required": false
+            "required": false,
+            "example": "US"
           },
           "weekly_budget": {
             "type": "string",
             "description": "Weekly food budget in USD",
-            "required": false
+            "required": false,
+            "example": "150"
           },
           "goals": {
             "type": "string",
             "description": "Specific goals (e.g. reduce pesticides, support local farms, eat seasonally)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "food-preservation",
+        "path": "/api/harvest/food-preservation",
+        "price": "$0.10",
+        "description": "Food preservation guide",
+        "params": {
+          "method": {
+            "type": "string",
+            "description": "Method (canning, fermenting, dehydrating, freezing, pickling)",
+            "required": true
+          },
+          "produce": {
+            "type": "string",
+            "description": "Produce to preserve",
+            "required": true
+          },
+          "quantity": {
+            "type": "string",
+            "description": "Quantity (e.g. small batch)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "foraging-intel",
+        "path": "/api/harvest/foraging-intel",
+        "price": "$0.10",
+        "description": "Foraging intelligence",
+        "params": {
+          "state": {
+            "type": "string",
+            "description": "State or region",
+            "required": true
+          },
+          "season": {
+            "type": "string",
+            "description": "Season (spring, summer, fall, winter)",
+            "required": false
+          },
+          "type": {
+            "type": "string",
+            "description": "Type (plants, mushrooms, berries, all)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "livestock-basics",
+        "path": "/api/harvest/livestock-basics",
+        "price": "$0.10",
+        "description": "Backyard livestock guide",
+        "params": {
+          "animal": {
+            "type": "string",
+            "description": "Animal (chickens, goats, bees, etc.)",
+            "required": true
+          },
+          "climate": {
+            "type": "string",
+            "description": "Climate (temperate, arid, etc.)",
+            "required": false
+          },
+          "land_size_sqft": {
+            "type": "string",
+            "description": "Available land in sq ft",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
             "required": false
           }
         }
@@ -8444,7 +9682,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "herb",
         "path": "/api/herba/herb",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Herb profile",
         "params": {
           "herb": {
@@ -8455,8 +9693,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "tradition": {
             "type": "string",
             "description": "tradition",
-            "required": false,
-            "example": "tcm"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -8537,7 +9774,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "skin",
         "path": "/api/herba/skin",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Natural skincare ingredient",
         "params": {
           "ingredient": {
@@ -8560,7 +9797,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "tradition",
         "path": "/api/herba/tradition",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Healing tradition deep dive",
         "params": {
           "tradition": {
@@ -8578,7 +9815,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "practitioner",
         "path": "/api/herba/practitioner",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Practitioner guide",
         "params": {
           "type": {
@@ -8601,7 +9838,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "cannabis",
         "path": "/api/herba/cannabis",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Cannabis and cannabinoid intelligence",
         "params": {
           "topic": {
@@ -8612,8 +9849,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "compound": {
             "type": "string",
             "description": "Default: both",
-            "required": false,
-            "example": "cbd"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -8693,7 +9929,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "home_value": {
-            "type": "string",
+            "type": "integer",
             "description": "Current estimated home value in USD",
             "required": false
           },
@@ -8707,14 +9943,13 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "maintain",
         "path": "/api/home/maintain",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Seasonal maintenance checklist",
         "params": {
           "season": {
             "type": "string",
             "description": "Defaults to current season",
-            "required": false,
-            "example": "spring"
+            "required": false
           },
           "region": {
             "type": "string",
@@ -8731,7 +9966,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "rent",
         "path": "/api/home/rent",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Rental market analysis",
         "params": {
           "zip": {
@@ -8750,7 +9985,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "bedrooms": {
-            "type": "string",
+            "type": "integer",
             "description": "bedrooms",
             "required": false
           },
@@ -8762,6 +9997,151 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "contractor",
+        "path": "/api/home/contractor",
+        "price": "$0.10",
+        "description": "Contractor vetting guide",
+        "params": {
+          "trade": {
+            "type": "string",
+            "description": "Trade (plumber, electrician, roofer, etc.)",
+            "required": true
+          },
+          "zip": {
+            "type": "string",
+            "description": "ZIP code",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "energy",
+        "path": "/api/home/energy",
+        "price": "$0.10",
+        "description": "Home energy efficiency",
+        "params": {
+          "home_type": {
+            "type": "string",
+            "description": "Home type (single-family, condo, etc.)",
+            "required": false
+          },
+          "zip": {
+            "type": "string",
+            "description": "ZIP code",
+            "required": false
+          },
+          "age": {
+            "type": "string",
+            "description": "Home age (years)",
+            "required": false
+          },
+          "sqft": {
+            "type": "string",
+            "description": "Square footage",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "maintenance",
+        "path": "/api/home/maintenance",
+        "price": "$0.08",
+        "description": "Personalized home maintenance calendar",
+        "params": {
+          "region": {
+            "type": "string",
+            "description": "Region",
+            "required": true
+          },
+          "home_age": {
+            "type": "string",
+            "description": "Home age (years)",
+            "required": false
+          },
+          "season": {
+            "type": "string",
+            "description": "Season (spring, summer, fall, winter, all)",
+            "required": false
+          },
+          "features": {
+            "type": "string",
+            "description": "Home features (pool, well, etc.)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "roi",
+        "path": "/api/home/roi",
+        "price": "$0.10",
+        "description": "Home improvement resale ROI",
+        "params": {
+          "project": {
+            "type": "string",
+            "description": "Project (kitchen remodel, deck, etc.)",
+            "required": true
+          },
+          "region": {
+            "type": "string",
+            "description": "Region",
+            "required": false
+          },
+          "home_value": {
+            "type": "string",
+            "description": "Current home value USD",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "smart",
+        "path": "/api/home/smart",
+        "price": "$0.08",
+        "description": "Smart home ecosystem advisor",
+        "params": {
+          "ecosystem": {
+            "type": "string",
+            "description": "Ecosystem (Alexa, HomeKit, Google Home)",
+            "required": false
+          },
+          "room": {
+            "type": "string",
+            "description": "Room",
+            "required": false
+          },
+          "budget": {
+            "type": "string",
+            "description": "Budget USD",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
             "required": false
           }
         }
@@ -8777,7 +10157,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "visa",
         "path": "/api/visa",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Visa requirements — any nationality + any destination",
         "params": {
           "nationality": {
@@ -8808,7 +10188,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "pathway",
         "path": "/api/pathway",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Permanent residency roadmap — every pathway ranked for nationality + destination",
         "params": {
           "nationality": {
@@ -8843,7 +10223,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "nomad",
         "path": "/api/nomad",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Digital nomad visa finder — 50+ countries ranked by income threshold + lifestyle",
         "params": {
           "income": {
@@ -8861,8 +10241,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "preference": {
             "type": "string",
             "description": "preference",
-            "required": false,
-            "example": "balanced"
+            "required": false
           },
           "region": {
             "type": "string",
@@ -8879,14 +10258,13 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "citizenship",
         "path": "/api/citizenship",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Citizenship by investment, ancestry, and naturalization intelligence",
         "params": {
           "type": {
             "type": "string",
             "description": "type",
-            "required": true,
-            "example": "investment"
+            "required": true
           },
           "budget": {
             "type": "string",
@@ -8989,8 +10367,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "priority": {
             "type": "string",
             "description": "priority",
-            "required": false,
-            "example": "balanced"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -9002,7 +10379,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "compare",
         "path": "/api/compare",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Side-by-side immigration comparison across multiple destination countries",
         "params": {
           "nationality": {
@@ -9073,12 +10450,12 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "United States"
           },
           "with_attorney": {
-            "type": "string",
+            "type": "boolean",
             "description": "Include attorney fee estimate (default: true)",
             "required": false
           },
           "family_size": {
-            "type": "string",
+            "type": "integer",
             "description": "Number of dependents to include in cost model",
             "required": false
           },
@@ -9109,8 +10486,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "education": {
             "type": "string",
             "description": "Highest level of education completed",
-            "required": false,
-            "example": "phd"
+            "required": false
           },
           "clb": {
             "type": "string",
@@ -9136,19 +10512,19 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "Whether applicant has a valid job offer from a qualifying employer",
             "required": false,
-            "example": "true"
+            "example": "false"
           },
           "nomination": {
             "type": "string",
             "description": "Whether applicant has a provincial/state nomination (adds +600 CRS for Canada)",
             "required": false,
-            "example": "true"
+            "example": "false"
           },
           "partner": {
             "type": "string",
             "description": "Whether applicant has a spouse/common-law partner with qualifying skills/language",
             "required": false,
-            "example": "true"
+            "example": "false"
           },
           "occupation": {
             "type": "string",
@@ -9163,7 +10539,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language (BCP-47 code, e.g. 'hi' for Hindi, 'zh' for Chinese)",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       }
@@ -9210,27 +10587,27 @@ export const VERTICALS: Record<string, Vertical> = {
         "description": "Life insurance needs calculator",
         "params": {
           "age": {
-            "type": "string",
+            "type": "integer",
             "description": "Applicant age",
             "required": false
           },
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "Annual gross income in USD",
             "required": false
           },
           "dependents": {
-            "type": "string",
+            "type": "integer",
             "description": "Number of financial dependents",
             "required": false
           },
           "mortgage": {
-            "type": "string",
+            "type": "number",
             "description": "Remaining mortgage balance in USD",
             "required": false
           },
           "debt": {
-            "type": "string",
+            "type": "number",
             "description": "Other debt (student loans, auto, credit card) in USD",
             "required": false
           },
@@ -9258,17 +10635,17 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "value": {
-            "type": "string",
+            "type": "number",
             "description": "Home value or purchase price in USD",
             "required": false
           },
           "sqft": {
-            "type": "string",
+            "type": "integer",
             "description": "Square footage",
             "required": false
           },
           "current_coverage": {
-            "type": "string",
+            "type": "number",
             "description": "Current dwelling coverage amount in USD",
             "required": false
           },
@@ -9282,8 +10659,8 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "review",
         "path": "/api/insure/review",
-        "price": "$0.10",
-        "description": "Annual insurance coverage audit",
+        "price": "$0.15",
+        "description": "Annual insurance coverage review",
         "params": {
           "policies": {
             "type": "string",
@@ -9296,8 +10673,13 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "net_worth": {
+            "type": "number",
+            "description": "Estimated net worth (in local currency) for umbrella/liability sizing",
+            "required": false
+          },
+          "country": {
             "type": "string",
-            "description": "Estimated net worth in USD (for umbrella/liability sizing)",
+            "description": "ISO country code (e.g. US, UK, DE, CA, AU) — tailors norms and benchmark anchors. Default US.",
             "required": false
           },
           "lang": {
@@ -9310,7 +10692,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "renters",
         "path": "/api/insure/renters",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Renters insurance guide",
         "params": {
           "zip": {
@@ -9319,18 +10701,206 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "value": {
-            "type": "string",
+            "type": "number",
             "description": "Estimated personal property value in USD",
             "required": false
           },
           "dog": {
-            "type": "string",
+            "type": "boolean",
             "description": "Whether tenant has a dog (affects liability)",
             "required": false
           },
           "net_worth": {
-            "type": "string",
+            "type": "number",
             "description": "Estimated net worth in USD",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "business",
+        "path": "/api/insure/business",
+        "price": "$0.10",
+        "description": "Business insurance guidance",
+        "params": {
+          "business_type": {
+            "type": "string",
+            "description": "Business type (e.g. consulting, retail, contractor)",
+            "required": false
+          },
+          "state": {
+            "type": "string",
+            "description": "State (e.g. Texas, CA)",
+            "required": false
+          },
+          "employees": {
+            "type": "string",
+            "description": "Employee count",
+            "required": false
+          },
+          "revenue": {
+            "type": "string",
+            "description": "Annual revenue USD",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "claim",
+        "path": "/api/insure/claim",
+        "price": "$0.08",
+        "description": "Insurance claims guidance",
+        "params": {
+          "insurance_type": {
+            "type": "string",
+            "description": "Insurance type (auto, home, renters)",
+            "required": false
+          },
+          "situation": {
+            "type": "string",
+            "description": "What happened",
+            "required": false
+          },
+          "damage_estimate": {
+            "type": "string",
+            "description": "Estimated damage USD",
+            "required": false
+          },
+          "deductible": {
+            "type": "string",
+            "description": "Policy deductible USD",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "disability",
+        "path": "/api/insure/disability",
+        "price": "$0.10",
+        "description": "Disability insurance analysis",
+        "params": {
+          "occupation": {
+            "type": "string",
+            "description": "Occupation",
+            "required": false
+          },
+          "income": {
+            "type": "string",
+            "description": "Annual income USD",
+            "required": false
+          },
+          "employer_ltd": {
+            "type": "string",
+            "description": "Existing employer long-term disability (yes/no/details)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "life-event",
+        "path": "/api/insure/life-event",
+        "price": "$0.10",
+        "description": "Life-event insurance checklist",
+        "params": {
+          "event": {
+            "type": "string",
+            "description": "Life event (marriage, baby, home-purchase, divorce)",
+            "required": false
+          },
+          "details": {
+            "type": "string",
+            "description": "Additional context",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "rate",
+        "path": "/api/insure/rate",
+        "price": "$0.08",
+        "description": "Insurance rate optimizer",
+        "params": {
+          "insurance_type": {
+            "type": "string",
+            "description": "Insurance type (auto, home, etc.)",
+            "required": false
+          },
+          "state": {
+            "type": "string",
+            "description": "State",
+            "required": false
+          },
+          "current_premium": {
+            "type": "string",
+            "description": "Current premium USD",
+            "required": false
+          },
+          "profile": {
+            "type": "string",
+            "description": "Policyholder profile",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "umbrella",
+        "path": "/api/insure/umbrella",
+        "price": "$0.08",
+        "description": "Umbrella insurance analysis",
+        "params": {
+          "net_worth": {
+            "type": "string",
+            "description": "Net worth USD",
+            "required": false
+          },
+          "owns_home": {
+            "type": "string",
+            "description": "Owns home (yes/no)",
+            "required": false
+          },
+          "teen_drivers": {
+            "type": "string",
+            "description": "Teen drivers (yes/no)",
+            "required": false
+          },
+          "rental_property": {
+            "type": "string",
+            "description": "Owns rental property (yes/no)",
+            "required": false
+          },
+          "situation": {
+            "type": "string",
+            "description": "Additional context",
             "required": false
           },
           "lang": {
@@ -9351,14 +10921,13 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "letter",
         "path": "/api/legal/letter",
-        "price": "$0.10",
+        "price": "$0.25",
         "description": "Advocacy letter writer",
         "params": {
           "type": {
             "type": "string",
             "description": "type",
-            "required": false,
-            "example": "medical-bill"
+            "required": false
           },
           "situation": {
             "type": "string",
@@ -9498,7 +11067,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "small-claims",
         "path": "/api/legal/small-claims",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Small claims court guide",
         "params": {
           "state": {
@@ -9522,8 +11091,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "type": {
             "type": "string",
             "description": "type",
-            "required": false,
-            "example": "trademark"
+            "required": false
           },
           "situation": {
             "type": "string",
@@ -9535,7 +11103,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "rights",
         "path": "/api/legal/rights",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Know your rights",
         "params": {
           "situation": {
@@ -9556,7 +11124,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "biomarker",
         "path": "/api/longevity/biomarker",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Biomarker interpretation through longevity science lens",
         "params": {
           "biomarker": {
@@ -9579,7 +11147,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "supplement-intel",
         "path": "/api/longevity/supplement-intel",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Evidence-graded longevity supplement intelligence",
         "params": {
           "compound": {
@@ -9597,11 +11165,11 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "protocol-builder",
         "path": "/api/longevity/protocol-builder",
-        "price": "$0.10",
+        "price": "$0.25",
         "description": "Personalized longevity protocol — exercise, nutrition, sleep, supplements",
         "params": {
           "age": {
-            "type": "string",
+            "type": "integer",
             "description": "Age in years — e.g. 35 | 52 | 65",
             "required": true
           },
@@ -9644,7 +11212,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "recruiting_only": {
-            "type": "string",
+            "type": "boolean",
             "description": "Show only recruiting trials (default: true)",
             "required": false
           },
@@ -9676,7 +11244,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "country-longevity",
         "path": "/api/longevity/country-longevity",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "WHO country longevity profile — life expectancy, HALE, healthcare, initiatives",
         "params": {
           "country": {
@@ -9694,12 +11262,12 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "epigenetic-clock",
         "path": "/api/longevity/epigenetic-clock",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Epigenetic aging clocks — biological age science, testing, and reversal",
         "params": {
           "topic": {
             "type": "string",
-            "description": "Topic — e.g. GrimAge | DunedinPACE | biological age overview | how to reverse biological aging | epigenetic reprogramming | how to test biol",
+            "description": "Topic — e.g. GrimAge | DunedinPACE | biological age overview | how to reverse biological aging | epigenetic reprogramming | how to test biological age",
             "required": false
           },
           "lang": {
@@ -9712,12 +11280,12 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "diet-intel",
         "path": "/api/longevity/diet-intel",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Evidence-graded dietary analysis for longevity and healthspan",
         "params": {
           "diet": {
             "type": "string",
-            "description": "Diet pattern — e.g. Mediterranean | time-restricted eating | fasting mimicking diet | Blue Zone plant-based | MIND diet | caloric restrictio",
+            "description": "Diet pattern — e.g. Mediterranean | time-restricted eating | fasting mimicking diet | Blue Zone plant-based | MIND diet | caloric restriction | ketogenic | Japanese traditional",
             "required": true
           },
           "lang": {
@@ -9730,7 +11298,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "longevity-drug",
         "path": "/api/longevity/longevity-drug",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Pharmaceutical longevity intelligence — rapamycin, metformin, senolytics",
         "params": {
           "drug": {
@@ -9748,7 +11316,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "longevity-clinic",
         "path": "/api/longevity/longevity-clinic",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Global longevity clinic guide — destinations, treatments, red flags",
         "params": {
           "country": {
@@ -9785,29 +11353,27 @@ export const VERTICALS: Record<string, Vertical> = {
           "session": {
             "type": "string",
             "description": "Trading session. Auto-detected from UTC time if omitted.",
-            "required": false,
-            "example": "asian"
+            "required": false
           }
         }
       },
       {
         "action": "event-pulse",
         "path": "/api/event-pulse",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Economic event deep-dive",
         "params": {
           "event": {
             "type": "string",
             "description": "Economic event identifier",
-            "required": true,
-            "example": "NFP"
+            "required": true
           }
         }
       },
       {
         "action": "crypto-pulse",
         "path": "/api/crypto-pulse",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Crypto market context",
         "params": {}
       },
@@ -9827,8 +11393,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "session": {
             "type": "string",
             "description": "Trading session. Auto-detected from UTC time if omitted.",
-            "required": false,
-            "example": "asian"
+            "required": false
           }
         }
       },
@@ -9838,6 +11403,54 @@ export const VERTICALS: Record<string, Vertical> = {
         "price": "$0.10",
         "description": "Weekly economic calendar",
         "params": {}
+      },
+      {
+        "action": "cot",
+        "path": "/api/cot",
+        "price": "$0.15",
+        "description": "CFTC Commitment-of-Traders positioning for FX and commodity agents — institutional net positioning and weekly shifts across 7 major pairs plus gold and WTI, with crowding and contrarian signals.",
+        "params": {}
+      },
+      {
+        "action": "eia-inventory",
+        "path": "/api/eia-inventory",
+        "price": "$0.10",
+        "description": "Weekly EIA petroleum inventory intelligence for energy and macro agents — crude, gasoline and distillate builds and draws versus expectations, with the oil-price and CAD/NOK implications.",
+        "params": {}
+      },
+      {
+        "action": "intermarket",
+        "path": "/api/intermarket",
+        "price": "$0.15",
+        "description": "Cross-asset intermarket synthesis for macro agents — bond yields, equities, commodities and FX read together to surface the dominant regime and the divergences that tend to lead price.",
+        "params": {}
+      },
+      {
+        "action": "rates-differential",
+        "path": "/api/rates-differential",
+        "price": "$0.10",
+        "description": "Interest-rate differential and carry intelligence for FX agents — G10 policy rates, yield spreads and the carry-trade map that drives durable currency trends.",
+        "params": {}
+      },
+      {
+        "action": "regime",
+        "path": "/api/regime",
+        "price": "$0.10",
+        "description": "Macro regime classifier for multi-asset agents — labels the current environment (risk-on/off, reflation, stagflation, tightening) and its directional implications for FX, rates and equities.",
+        "params": {}
+      },
+      {
+        "action": "sentiment",
+        "path": "/api/sentiment",
+        "price": "$0.05",
+        "description": "Real-time directional sentiment for any forex pair or gold — retail crowd positioning, COT institutional alignment, and a clear contrarian bias call. Built for FX trading and advisor agents.",
+        "params": {
+          "pair": {
+            "type": "string",
+            "description": "pair",
+            "required": false
+          }
+        }
       }
     ]
   },
@@ -9850,7 +11463,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "llm-visibility",
         "path": "/api/market/llm-visibility",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "LLM visibility analysis",
         "params": {
           "brand": {
@@ -9873,7 +11486,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "content-brief",
         "path": "/api/market/content-brief",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Dual-optimized content brief",
         "params": {
           "topic": {
@@ -9934,7 +11547,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "roi-forecast",
         "path": "/api/market/roi-forecast",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Marketing ROI forecast",
         "params": {
           "industry": {
@@ -9985,7 +11598,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "ad-copy",
         "path": "/api/market/ad-copy",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Ready-to-use ad copy variants",
         "params": {
           "platform": {
@@ -10018,7 +11631,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "email-sequence",
         "path": "/api/market/email-sequence",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Email nurture sequence",
         "params": {
           "product": {
@@ -10046,7 +11659,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "social-strategy",
         "path": "/api/market/social-strategy",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Platform social media strategy",
         "params": {
           "platform": {
@@ -10074,7 +11687,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "local-seo",
         "path": "/api/market/local-seo",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Local SEO optimization guide",
         "params": {
           "business": {
@@ -10128,7 +11741,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "plan",
         "path": "/api/meal/plan",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Weekly meal plan",
         "params": {
           "dietary": {
@@ -10161,7 +11774,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "recipe",
         "path": "/api/meal/recipe",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Recipe with technique tips",
         "params": {
           "dish": {
@@ -10248,7 +11861,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "dietary",
         "path": "/api/meal/dietary",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Dietary restriction guide",
         "params": {
           "dietary": {
@@ -10294,7 +11907,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "substitute",
         "path": "/api/meal/substitute",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Ingredient substitutions",
         "params": {
           "ingredient": {
@@ -10312,7 +11925,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "leftover",
         "path": "/api/meal/leftover",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Leftover transformation",
         "params": {
           "leftovers": {
@@ -10325,7 +11938,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "kitchen",
         "path": "/api/meal/kitchen",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Kitchen equipment advisor",
         "params": {
           "cooking_style": {
@@ -10468,7 +12081,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "technique",
         "path": "/api/mind/technique",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Evidence-based coping technique guide",
         "params": {
           "concern": {
@@ -10496,7 +12109,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "sleep",
         "path": "/api/mind/sleep",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Sleep disorder guidance (CBT-I protocol)",
         "params": {
           "concern": {
@@ -10524,7 +12137,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "grief",
         "path": "/api/mind/grief",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Grief and loss support",
         "params": {
           "situation": {
@@ -10580,7 +12193,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "workplace",
         "path": "/api/mind/workplace",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Workplace mental health guidance",
         "params": {
           "situation": {
@@ -10608,7 +12221,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "crisis",
         "path": "/api/mind/crisis",
-        "price": "$0.10",
+        "price": "FREE",
         "description": "Crisis resource routing — ALWAYS FREE",
         "params": {
           "country": {
@@ -10634,7 +12247,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "research",
         "path": "/api/nutrition/research",
-        "price": "$0.10",
+        "price": "FREE",
         "description": "Nutrition research synthesis",
         "params": {
           "topic": {
@@ -10652,7 +12265,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "food",
         "path": "/api/nutrition/food",
-        "price": "$0.10",
+        "price": "FREE",
         "description": "Food nutrition profile",
         "params": {
           "query": {
@@ -10670,7 +12283,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "supplement",
         "path": "/api/nutrition/supplement",
-        "price": "$0.10",
+        "price": "FREE",
         "description": "Supplement analysis",
         "params": {
           "name": {
@@ -10688,25 +12301,23 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "plan",
         "path": "/api/nutrition/plan",
-        "price": "$0.10",
+        "price": "FREE",
         "description": "Personalized nutrition plan",
         "params": {
           "goal": {
             "type": "string",
             "description": "goal",
-            "required": false,
-            "example": "muscle-gain"
+            "required": false
           },
           "calories": {
-            "type": "string",
+            "type": "integer",
             "description": "calories",
             "required": false
           },
           "diet": {
             "type": "string",
             "description": "diet",
-            "required": false,
-            "example": "omnivore"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -10718,7 +12329,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "compare",
         "path": "/api/nutrition/compare",
-        "price": "$0.10",
+        "price": "FREE",
         "description": "Food comparison",
         "params": {
           "foods": {
@@ -10736,7 +12347,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "analyze",
         "path": "/api/nutrition/analyze",
-        "price": "$0.10",
+        "price": "FREE",
         "description": "Meal analysis",
         "params": {
           "meal": {
@@ -10759,7 +12370,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "stack",
         "path": "/api/nutrition/stack",
-        "price": "$0.10",
+        "price": "FREE",
         "description": "Supplement stack",
         "params": {
           "goal": {
@@ -10770,12 +12381,146 @@ export const VERTICALS: Record<string, Vertical> = {
           "budget": {
             "type": "string",
             "description": "budget",
-            "required": false,
-            "example": "budget"
+            "required": false
           },
           "lang": {
             "type": "string",
             "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "glucose",
+        "path": "/api/nutrition/glucose",
+        "price": "FREE",
+        "description": "CGM glucose pattern interpretation",
+        "params": {
+          "pattern": {
+            "type": "string",
+            "description": "Glucose pattern description or readings",
+            "required": true
+          },
+          "context": {
+            "type": "string",
+            "description": "Additional context",
+            "required": false
+          },
+          "goals": {
+            "type": "string",
+            "description": "Health goals",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "interactions",
+        "path": "/api/nutrition/interactions",
+        "price": "FREE",
+        "description": "Supplement interaction checker",
+        "params": {
+          "supplements": {
+            "type": "string",
+            "description": "Comma-separated supplements",
+            "required": true
+          },
+          "medications": {
+            "type": "string",
+            "description": "Comma-separated medications",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "labs",
+        "path": "/api/nutrition/labs",
+        "price": "FREE",
+        "description": "Blood work interpretation",
+        "params": {
+          "markers": {
+            "type": "string",
+            "description": "Comma-separated lab markers and values",
+            "required": true
+          },
+          "age": {
+            "type": "string",
+            "description": "Age",
+            "required": false
+          },
+          "sex": {
+            "type": "string",
+            "description": "Sex",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "longevity",
+        "path": "/api/nutrition/longevity",
+        "price": "FREE",
+        "description": "Longevity protocol synthesis",
+        "params": {
+          "age": {
+            "type": "string",
+            "description": "Age",
+            "required": true
+          },
+          "goals": {
+            "type": "string",
+            "description": "Goals",
+            "required": false
+          },
+          "conditions": {
+            "type": "string",
+            "description": "Existing conditions",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "prenatal",
+        "path": "/api/nutrition/prenatal",
+        "price": "FREE",
+        "description": "Prenatal nutrition by trimester",
+        "params": {
+          "trimester": {
+            "type": "string",
+            "description": "Trimester (1, 2, 3)",
+            "required": true
+          },
+          "age": {
+            "type": "string",
+            "description": "Age",
+            "required": false
+          },
+          "conditions": {
+            "type": "string",
+            "description": "Existing conditions",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
             "required": false
           }
         }
@@ -10791,7 +12536,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "legislation",
         "path": "/api/legislation",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Legislative intelligence — plain English bill translation with sector impact",
         "params": {
           "q": {
@@ -10814,14 +12559,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language (ISO 639-1 code)",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "rwa",
         "path": "/api/rwa",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Real world asset intelligence — market data and institutional tracking",
         "params": {
           "action": {
@@ -10838,14 +12584,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "scenario",
         "path": "/api/scenario",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Sector impact scenario modeling — if/then structural analysis",
         "params": {
           "trigger": {
@@ -10856,7 +12603,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "sector": {
             "type": "string",
             "description": "Sector to focus on, or 'all' for comprehensive coverage",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "action": {
             "type": "string",
@@ -10867,7 +12615,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -10891,7 +12640,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -10911,19 +12661,20 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "topic",
             "required": false,
-            "example": "rwa"
+            "example": "all"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "compliance",
         "path": "/api/compliance",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Regulatory compliance intelligence — jurisdiction-specific framework guidance",
         "params": {
           "jurisdiction": {
@@ -10945,14 +12696,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "tokenize",
         "path": "/api/tokenize",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Tokenization intelligence — how to tokenize any asset type",
         "params": {
           "asset_type": {
@@ -10969,39 +12721,41 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "yield",
         "path": "/api/yield",
-        "price": "$0.10",
+        "price": "$0.25",
         "description": "Tokenized yield intelligence — live rates and risk-adjusted comparison",
         "params": {
           "action": {
             "type": "string",
             "description": "action",
             "required": false,
-            "example": "stablecoin"
+            "example": "compare"
           },
           "risk": {
             "type": "string",
             "description": "Risk tolerance for recommendations framing",
             "required": false,
-            "example": "low"
+            "example": "medium"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "glossary",
         "path": "/api/glossary",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Plain English decoder — any onchain finance or regulatory term",
         "params": {
           "term": {
@@ -11013,12 +12767,13 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "context",
             "required": false,
-            "example": "regulatory"
+            "example": "general"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -11032,7 +12787,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "scope",
             "required": false,
-            "example": "us"
+            "example": "global"
           },
           "timeframe": {
             "type": "string",
@@ -11043,7 +12798,42 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "memecoin",
+        "path": "/api/memecoin",
+        "price": "$0.015",
+        "description": "Solana memecoin pre-trade safety + momentum verdict (deterministic, no-LLM)",
+        "params": {
+          "mint": {
+            "type": "string",
+            "description": "SPL token mint address (base58)",
+            "required": true,
+            "example": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"
+          }
+        }
+      },
+      {
+        "action": "evmtoken",
+        "path": "/api/evmtoken",
+        "price": "$0.015",
+        "description": "EVM memecoin pre-trade safety + momentum verdict (deterministic, no-LLM, multi-chain)",
+        "params": {
+          "address": {
+            "type": "string",
+            "description": "ERC-20 token contract address (0x + 40 hex)",
+            "required": true,
+            "example": "0x532f27101965dd16442E59d40670FaF5eBB142E4"
+          },
+          "chain": {
+            "type": "string",
+            "description": "EVM chain (default base)",
+            "required": false,
+            "example": "base"
           }
         }
       }
@@ -11084,7 +12874,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "safety",
         "path": "/api/parent/safety",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Product safety recall check",
         "params": {
           "product_type": {
@@ -11140,7 +12930,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "activity",
         "path": "/api/parent/activity",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Activity and extracurricular finder",
         "params": {
           "age": {
@@ -11177,7 +12967,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "finance",
         "path": "/api/parent/finance",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Family financial planning",
         "params": {
           "children": {
@@ -11283,7 +13073,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "childcare",
         "path": "/api/parent/childcare",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Childcare options comparison",
         "params": {
           "zip": {
@@ -11310,6 +13100,31 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "health",
+        "path": "/api/parent/health",
+        "price": "$0.10",
+        "description": "Pediatric symptom triage",
+        "params": {
+          "age_months": {
+            "type": "string",
+            "description": "age_months",
+            "required": false,
+            "example": "18"
+          },
+          "symptoms": {
+            "type": "string",
+            "description": "symptoms",
+            "required": false,
+            "example": "fever,rash"
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
       }
     ]
   },
@@ -11322,7 +13137,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "global",
         "path": "/api/patent/global",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Jurisdiction-specific patent search — EPO, CNIPA, KIPO, JPO, WIPO PCT, DPMA, UKIPO, CIPO, IP Australia, INPI",
         "params": {
           "q": {
@@ -11332,9 +13147,9 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "jurisdiction": {
             "type": "string",
-            "description": "Patent office code. EP = EPO (Europe), WO = WIPO PCT (international), CN = CNIPA (China), KR = KIPO (Korea), JP = JPO (Japan), DE = DPMA (Ge",
+            "description": "Patent office code. EP = EPO (Europe), WO = WIPO PCT (international), CN = CNIPA (China), KR = KIPO (Korea), JP = JPO (Japan), DE = DPMA (Germany), GB = UKIPO, CA = CIPO (Canada), AU = IP Australia, IN = IPO India, BR = INPI (Brazil)",
             "required": false,
-            "example": "US"
+            "example": "WO"
           },
           "type": {
             "type": "string",
@@ -11352,7 +13167,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "search",
         "path": "/api/patent/search",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Global patent search (USPTO + global synthesis)",
         "params": {
           "q": {
@@ -11376,7 +13191,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "cliff",
         "path": "/api/patent/cliff",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Pharma patent cliff analysis",
         "params": {
           "drug": {
@@ -11394,7 +13209,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "fto",
         "path": "/api/patent/fto",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Freedom-to-operate analysis",
         "params": {
           "technology": {
@@ -11405,7 +13220,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "country": {
             "type": "string",
             "description": "Target jurisdiction (e.g. US, EU, China, Japan, global)",
-            "required": false
+            "required": false,
+            "example": "global"
           },
           "lang": {
             "type": "string",
@@ -11435,7 +13251,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "prior-art",
         "path": "/api/patent/prior-art",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Prior art search",
         "params": {
           "invention": {
@@ -11453,7 +13269,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "status",
         "path": "/api/patent/status",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Patent status lookup",
         "params": {
           "id": {
@@ -11494,14 +13310,13 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "sep",
         "path": "/api/patent/sep",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Standard Essential Patent landscape",
         "params": {
           "standard": {
             "type": "string",
             "description": "Technology standard",
-            "required": true,
-            "example": "5g"
+            "required": true
           },
           "lang": {
             "type": "string",
@@ -11513,7 +13328,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "competitor",
         "path": "/api/patent/competitor",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Competitor R&D intelligence",
         "params": {
           "company": {
@@ -11536,7 +13351,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "trademark",
         "path": "/api/patent/trademark",
-        "price": "$0.10",
+        "price": "$0.06",
         "description": "Trademark clearance search",
         "params": {
           "mark": {
@@ -11578,7 +13393,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "species": {
             "type": "string",
             "description": "Animal species",
-            "required": false
+            "required": false,
+            "example": "dog"
           },
           "age": {
             "type": "string",
@@ -11611,7 +13427,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "species": {
             "type": "string",
             "description": "species",
-            "required": false
+            "required": false,
+            "example": "dog"
           },
           "lang": {
             "type": "string",
@@ -11634,7 +13451,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "species": {
             "type": "string",
             "description": "species",
-            "required": false
+            "required": false,
+            "example": "dog"
           },
           "lang": {
             "type": "string",
@@ -11646,7 +13464,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "medication",
         "path": "/api/pet/medication",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Veterinary drug reference",
         "params": {
           "drug": {
@@ -11657,7 +13475,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "species": {
             "type": "string",
             "description": "species",
-            "required": false
+            "required": false,
+            "example": "dog"
           },
           "weight": {
             "type": "string",
@@ -11679,7 +13498,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "breed",
         "path": "/api/pet/breed",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Breed health and care guide",
         "params": {
           "breed": {
@@ -11699,6 +13518,161 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "cost",
+        "path": "/api/pet/cost",
+        "price": "$0.08",
+        "description": "Vet procedure cost estimator",
+        "params": {
+          "procedure": {
+            "type": "string",
+            "description": "Procedure name",
+            "required": true
+          },
+          "species": {
+            "type": "string",
+            "description": "Species (dog, cat, etc.)",
+            "required": false
+          },
+          "region": {
+            "type": "string",
+            "description": "Region",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "insurance",
+        "path": "/api/pet/insurance",
+        "price": "$0.10",
+        "description": "Pet insurance comparison",
+        "params": {
+          "species": {
+            "type": "string",
+            "description": "Species (dog, cat, etc.)",
+            "required": false
+          },
+          "breed": {
+            "type": "string",
+            "description": "Breed",
+            "required": false
+          },
+          "age": {
+            "type": "string",
+            "description": "Pet age",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "senior",
+        "path": "/api/pet/senior",
+        "price": "$0.10",
+        "description": "Senior pet care",
+        "params": {
+          "species": {
+            "type": "string",
+            "description": "Species (dog, cat, etc.)",
+            "required": false
+          },
+          "breed": {
+            "type": "string",
+            "description": "Breed",
+            "required": false
+          },
+          "age": {
+            "type": "string",
+            "description": "Pet age",
+            "required": false
+          },
+          "conditions": {
+            "type": "string",
+            "description": "Existing conditions",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "toxin",
+        "path": "/api/pet/toxin",
+        "price": "$0.10",
+        "description": "Pet toxicity assessment",
+        "params": {
+          "substance": {
+            "type": "string",
+            "description": "Substance ingested",
+            "required": true
+          },
+          "species": {
+            "type": "string",
+            "description": "Species (dog, cat, etc.)",
+            "required": false
+          },
+          "weight": {
+            "type": "string",
+            "description": "Pet weight",
+            "required": false
+          },
+          "amount_ingested": {
+            "type": "string",
+            "description": "Amount ingested",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "travel",
+        "path": "/api/pet/travel",
+        "price": "$0.08",
+        "description": "Pet travel guide",
+        "params": {
+          "destination": {
+            "type": "string",
+            "description": "Destination",
+            "required": true
+          },
+          "species": {
+            "type": "string",
+            "description": "Species (dog, cat, etc.)",
+            "required": false
+          },
+          "breed": {
+            "type": "string",
+            "description": "Breed",
+            "required": false
+          },
+          "origin": {
+            "type": "string",
+            "description": "Origin country (default US)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
       }
     ]
   },
@@ -11711,7 +13685,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "legislation",
         "path": "/api/legislation",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Legislation — plain English translation of any bill globally",
         "params": {
           "q": {
@@ -11734,14 +13708,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language (ISO 639-1 code)",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "impact",
         "path": "/api/impact",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Impact — who is affected and what they must do",
         "params": {
           "q": {
@@ -11752,7 +13727,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "sector": {
             "type": "string",
             "description": "Sector focus (or 'all')",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "entity_type": {
             "type": "string",
@@ -11762,25 +13738,27 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "scenario",
         "path": "/api/scenario",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Scenarios — if/then sector impact modeling",
         "params": {
           "trigger": {
             "type": "string",
-            "description": "The development to model (e.g. 'federal $15 minimum wage passes', 'FTC non-compete ban upheld', 'California single-payer healthcare enacted'",
+            "description": "The development to model (e.g. 'federal $15 minimum wage passes', 'FTC non-compete ban upheld', 'California single-payer healthcare enacted')",
             "required": false
           },
           "sector": {
             "type": "string",
             "description": "sector",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "action": {
             "type": "string",
@@ -11791,7 +13769,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -11811,12 +13790,13 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "topic",
             "required": false,
-            "example": "healthcare"
+            "example": "all"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -11845,14 +13825,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "compliance",
         "path": "/api/compliance",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Compliance — what to do after a law passes",
         "params": {
           "law": {
@@ -11863,24 +13844,27 @@ export const VERTICALS: Record<string, Vertical> = {
           "jurisdiction": {
             "type": "string",
             "description": "jurisdiction",
-            "required": false
+            "required": false,
+            "example": "us"
           },
           "entity_type": {
             "type": "string",
             "description": "Entity type (employer|landlord|healthcare_provider|tech_company|retailer|restaurant|contractor|etc)",
-            "required": false
+            "required": false,
+            "example": "employer"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "regulation",
         "path": "/api/regulation",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Federal regulation — agency rules via Federal Register",
         "params": {
           "agency": {
@@ -11897,19 +13881,20 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "action",
             "required": false,
-            "example": "proposed"
+            "example": "all"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "compare",
         "path": "/api/compare",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Compare — cross-jurisdiction policy comparison",
         "params": {
           "topic": {
@@ -11920,12 +13905,14 @@ export const VERTICALS: Record<string, Vertical> = {
           "jurisdictions": {
             "type": "string",
             "description": "Comma-separated jurisdictions (e.g. 'US,EU,UK,Canada,Australia')",
-            "required": false
+            "required": false,
+            "example": "US,EU,UK,Canada,Australia"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -11938,30 +13925,33 @@ export const VERTICALS: Record<string, Vertical> = {
           "sector": {
             "type": "string",
             "description": "Policy sector (healthcare|employment|environment|tech|finance|realestate|food|all)",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "jurisdiction": {
             "type": "string",
             "description": "jurisdiction",
-            "required": false
+            "required": false,
+            "example": "us"
           },
           "lookahead": {
-            "type": "string",
+            "type": "integer",
             "description": "Days ahead to surface deadlines",
             "required": false,
-            "example": "30"
+            "example": "90"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "translate",
         "path": "/api/translate",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Translate — decode any legal or regulatory text into plain English",
         "params": {
           "text": {
@@ -11973,7 +13963,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "context",
             "required": false,
-            "example": "regulatory"
+            "example": "general"
           },
           "entity_type": {
             "type": "string",
@@ -11983,6 +13973,63 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "court",
+        "path": "/api/court",
+        "price": "$0.15",
+        "description": "Court decision intelligence",
+        "params": {
+          "court": {
+            "type": "string",
+            "description": "Court (scotus, cjeu, all, etc.)",
+            "required": false
+          },
+          "topic": {
+            "type": "string",
+            "description": "Topic or case area",
+            "required": false
+          },
+          "action": {
+            "type": "string",
+            "description": "Action (recent, search, etc.)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "treaty",
+        "path": "/api/treaty",
+        "price": "$0.10",
+        "description": "International treaty and trade-agreement intelligence",
+        "params": {
+          "type": {
+            "type": "string",
+            "description": "Type (fta, climate, tax, all, etc.)",
+            "required": false
+          },
+          "topic": {
+            "type": "string",
+            "description": "Topic",
+            "required": false
+          },
+          "parties": {
+            "type": "string",
+            "description": "Parties involved",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
             "required": false
           }
         }
@@ -12002,12 +14049,12 @@ export const VERTICALS: Record<string, Vertical> = {
         "description": "Mortgage analysis — current rates, payment breakdown, max price, lender links",
         "params": {
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "Annual gross income",
             "required": true
           },
           "down": {
-            "type": "string",
+            "type": "number",
             "description": "Down payment in USD. Defaults to 20%.",
             "required": false
           },
@@ -12017,7 +14064,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "debt": {
-            "type": "string",
+            "type": "number",
             "description": "Existing monthly debt payments (car, student loans)",
             "required": false
           },
@@ -12035,12 +14082,12 @@ export const VERTICALS: Record<string, Vertical> = {
         "description": "True affordability analysis — stress-free vs. bank-qualifying ceiling",
         "params": {
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "Annual gross income",
             "required": true
           },
           "down": {
-            "type": "string",
+            "type": "number",
             "description": "Available down payment",
             "required": false
           },
@@ -12050,7 +14097,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "debt": {
-            "type": "string",
+            "type": "number",
             "description": "Existing monthly debt payments",
             "required": false
           },
@@ -12068,7 +14115,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "description": "Rent vs. buy decision model — break-even, 5-year wealth comparison, recommendation",
         "params": {
           "rent": {
-            "type": "string",
+            "type": "number",
             "description": "Current monthly rent in local currency",
             "required": true
           },
@@ -12078,12 +14125,12 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "savings": {
-            "type": "string",
+            "type": "number",
             "description": "Available savings / potential down payment",
             "required": false
           },
           "years": {
-            "type": "string",
+            "type": "number",
             "description": "Planned years in home. Defaults to 5.",
             "required": false
           },
@@ -12097,26 +14144,26 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "refi",
         "path": "/api/prop/refi",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Refinance opportunity analysis — break-even, monthly savings, cash-out potential",
         "params": {
           "rate": {
-            "type": "string",
+            "type": "number",
             "description": "Current interest rate as percentage (e.g. 7.25)",
             "required": true
           },
           "balance": {
-            "type": "string",
+            "type": "number",
             "description": "Remaining loan balance",
             "required": true
           },
           "years_left": {
-            "type": "string",
+            "type": "number",
             "description": "Years remaining on current loan. Defaults to 25.",
             "required": false
           },
           "home_value": {
-            "type": "string",
+            "type": "number",
             "description": "Current home value (enables cash-out analysis)",
             "required": false
           },
@@ -12148,7 +14195,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "invest",
         "path": "/api/prop/invest",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Investment property ROI — cap rate, cash-on-cash, 5-year projection, investment grade",
         "params": {
           "location": {
@@ -12269,7 +14316,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "landlord",
         "path": "/api/prop/landlord",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Landlord toolkit — rent pricing, tenant screening, lease law, local regulations",
         "params": {
           "location": {
@@ -12311,7 +14358,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "mineral-potential",
         "path": "/api/prospect/mineral-potential",
-        "price": "$0.10",
+        "price": "$0.25",
         "description": "Mineral prospectivity assessment",
         "params": {
           "region": {
@@ -12320,12 +14367,12 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "lat": {
-            "type": "string",
+            "type": "number",
             "description": "Latitude (decimal degrees)",
             "required": false
           },
           "lon": {
-            "type": "string",
+            "type": "number",
             "description": "Longitude (decimal degrees)",
             "required": false
           },
@@ -12337,14 +14384,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language (ISO 639-1) | en | es | fr | pt | ru | zh | id | ar",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "deposit-intel",
         "path": "/api/prospect/deposit-intel",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Mineral deposit intelligence",
         "params": {
           "deposit": {
@@ -12355,37 +14403,39 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language (ISO 639-1)",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "critical-minerals-scan",
         "path": "/api/prospect/critical-minerals-scan",
-        "price": "$0.10",
+        "price": "$0.25",
         "description": "Critical minerals country endowment scan",
         "params": {
           "country": {
             "type": "string",
-            "description": "Country or region | DRC | Chile | Indonesia | Australia | Greenland | Kazakhstan | Philippines | Argentina | Canada | Zambia | Zimbabwe | Gu",
+            "description": "Country or region | DRC | Chile | Indonesia | Australia | Greenland | Kazakhstan | Philippines | Argentina | Canada | Zambia | Zimbabwe | Guinea | Papua New Guinea | Brazil",
             "required": true
           },
           "lang": {
             "type": "string",
             "description": "Response language (ISO 639-1) | en | es | fr | pt | ru | zh | id | ar | ja | ko",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "jurisdiction-entry",
         "path": "/api/prospect/jurisdiction-entry",
-        "price": "$0.10",
+        "price": "$0.25",
         "description": "Exploration jurisdiction entry-risk assessment",
         "params": {
           "country": {
             "type": "string",
-            "description": "Country | Canada | Australia | Chile | Peru | DRC | Ghana | Tanzania | Kazakhstan | Philippines | Greenland | Ecuador | Bolivia | Zambia | N",
+            "description": "Country | Canada | Australia | Chile | Peru | DRC | Ghana | Tanzania | Kazakhstan | Philippines | Greenland | Ecuador | Bolivia | Zambia | Namibia | Mongolia | Brazil | Mexico | Colombia",
             "required": true
           },
           "commodity": {
@@ -12396,7 +14446,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language (ISO 639-1) | en | es | fr | pt | ru | zh | ar",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -12407,12 +14458,12 @@ export const VERTICALS: Record<string, Vertical> = {
         "description": "Free satellite scene availability + remote sensing guide",
         "params": {
           "lat": {
-            "type": "string",
+            "type": "number",
             "description": "Latitude (decimal degrees) | -23.8 | 39.5 | -0.5 | 60.2",
             "required": true
           },
           "lon": {
-            "type": "string",
+            "type": "number",
             "description": "Longitude (decimal degrees) | 119.4 | -117.3 | 28.6 | 25.4",
             "required": true
           },
@@ -12424,14 +14475,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language (ISO 639-1)",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "geochemical-anomaly",
         "path": "/api/prospect/geochemical-anomaly",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "USGS geochemical anomaly characterization",
         "params": {
           "region": {
@@ -12440,36 +14492,38 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "lat": {
-            "type": "string",
+            "type": "number",
             "description": "Latitude (decimal degrees)",
             "required": false
           },
           "lon": {
-            "type": "string",
+            "type": "number",
             "description": "Longitude (decimal degrees)",
             "required": false
           },
           "elements": {
             "type": "string",
             "description": "Comma-separated elements | Au,As,Sb | Cu,Mo,Au | Ni,Co,Cr | Li,Cs,Rb",
-            "required": false
+            "required": false,
+            "example": "Au,Cu,As,Pb,Zn"
           },
           "lang": {
             "type": "string",
             "description": "Response language (ISO 639-1)",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "social-license-risk",
         "path": "/api/prospect/social-license-risk",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Social license risk assessment",
         "params": {
           "location": {
             "type": "string",
-            "description": "Location | Peru Cajamarca | Pebble Alaska | West Papua Indonesia | Ring of Fire Ontario | Northern BC Canada | Limpopo South Africa | Oaxaca",
+            "description": "Location | Peru Cajamarca | Pebble Alaska | West Papua Indonesia | Ring of Fire Ontario | Northern BC Canada | Limpopo South Africa | Oaxaca Mexico",
             "required": true
           },
           "project": {
@@ -12480,37 +14534,39 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language (ISO 639-1) | en | es | fr | pt | id | tl",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "commodity-supply-intel",
         "path": "/api/prospect/commodity-supply-intel",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Commodity supply/demand intelligence",
         "params": {
           "commodity": {
             "type": "string",
-            "description": "Mining commodity | lithium | cobalt | nickel | copper | gold | silver | uranium | graphite | REE | platinum | palladium | manganese | zinc |",
+            "description": "Mining commodity | lithium | cobalt | nickel | copper | gold | silver | uranium | graphite | REE | platinum | palladium | manganese | zinc | lead | tin | molybdenum | tungsten | vanadium | gallium | antimony | tellurium | indium",
             "required": true
           },
           "lang": {
             "type": "string",
             "description": "Response language (ISO 639-1) | en | es | fr | pt | zh | ja | ko | de | ar | ru",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "oil-gas-basin",
         "path": "/api/prospect/oil-gas-basin",
-        "price": "$0.10",
+        "price": "$0.25",
         "description": "Oil & gas basin analysis",
         "params": {
           "basin": {
             "type": "string",
-            "description": "Basin or region | Permian Basin | Santos Basin Brazil | Rovuma Basin | East African Rift | Cooper Basin Australia | Tarim Basin | Barents Se",
+            "description": "Basin or region | Permian Basin | Santos Basin Brazil | Rovuma Basin | East African Rift | Cooper Basin Australia | Tarim Basin | Barents Sea | Guyana-Suriname | Browse Basin | Namibe Basin Angola | Vaca Muerta Argentina",
             "required": true
           },
           "country": {
@@ -12521,14 +14577,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language (ISO 639-1) | en | es | fr | pt | ru | zh | ar | id",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "exploration-brief",
         "path": "/api/prospect/exploration-brief",
-        "price": "$0.10",
+        "price": "$0.35",
         "description": "Comprehensive exploration target brief (premium)",
         "params": {
           "region": {
@@ -12537,19 +14594,20 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "lat": {
-            "type": "string",
+            "type": "number",
             "description": "Latitude (decimal degrees)",
             "required": false
           },
           "lon": {
-            "type": "string",
+            "type": "number",
             "description": "Longitude (decimal degrees)",
             "required": false
           },
           "commodity": {
             "type": "string",
             "description": "Primary commodity | gold | copper | lithium | nickel | cobalt | REE | uranium | silver",
-            "required": false
+            "required": false,
+            "example": "gold"
           },
           "country": {
             "type": "string",
@@ -12559,7 +14617,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language (ISO 639-1) | en | es | fr | pt | ru | zh | ar",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       }
@@ -12580,7 +14639,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "regions": {
             "type": "string",
             "description": "regions",
-            "required": false
+            "required": false,
+            "example": "uk,au,us,eu"
           }
         }
       },
@@ -12593,18 +14653,19 @@ export const VERTICALS: Record<string, Vertical> = {
           "sport": {
             "type": "string",
             "description": "sport",
-            "required": false,
-            "example": "horse_racing_uk"
+            "required": false
           },
           "min_profit": {
-            "type": "string",
+            "type": "number",
             "description": "Minimum profit % filter",
-            "required": false
+            "required": false,
+            "example": "0"
           },
           "regions": {
             "type": "string",
             "description": "regions",
-            "required": false
+            "required": false,
+            "example": "uk,au,us,eu"
           }
         }
       },
@@ -12782,11 +14843,10 @@ export const VERTICALS: Record<string, Vertical> = {
           "mode": {
             "type": "string",
             "description": "mode",
-            "required": true,
-            "example": "arb"
+            "required": true
           },
           "bankroll": {
-            "type": "string",
+            "type": "number",
             "description": "Total bankroll (arb mode)",
             "required": false
           },
@@ -12796,17 +14856,17 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "single_odds": {
-            "type": "string",
+            "type": "number",
             "description": "Decimal odds for single selection (ev mode)",
             "required": false
           },
           "true_prob": {
-            "type": "string",
+            "type": "number",
             "description": "Your estimated true win probability 0-1 (ev mode)",
             "required": false
           },
           "stake": {
-            "type": "string",
+            "type": "number",
             "description": "Stake amount (ev mode)",
             "required": false
           }
@@ -12823,7 +14883,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "corridor",
         "path": "/api/remit/corridor",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Corridor intelligence",
         "params": {
           "from": {
@@ -12889,7 +14949,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "rate",
         "path": "/api/remit/rate",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "FX rate and markup analysis",
         "params": {
           "from_currency": {
@@ -12917,7 +14977,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "receive",
         "path": "/api/remit/receive",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Receive-country guide",
         "params": {
           "country": {
@@ -12940,7 +15000,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "mobile",
         "path": "/api/remit/mobile",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Mobile money ecosystem",
         "params": {
           "country": {
@@ -13001,7 +15061,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "news",
         "path": "/api/remit/news",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Remittance industry news",
         "params": {
           "from": {
@@ -13078,7 +15138,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "travel",
         "path": "/api/risk/travel",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Travel safety assessment",
         "params": {
           "country": {
@@ -13161,6 +15221,116 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "alerts",
+        "path": "/api/risk/alerts",
+        "price": "$0.10",
+        "description": "Situational security alerts",
+        "params": {
+          "location": {
+            "type": "string",
+            "description": "Location",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "evac",
+        "path": "/api/risk/evac",
+        "price": "$0.10",
+        "description": "Evacuation plan",
+        "params": {
+          "location": {
+            "type": "string",
+            "description": "Location",
+            "required": true
+          },
+          "nationality": {
+            "type": "string",
+            "description": "Nationality",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "nomad",
+        "path": "/api/risk/nomad",
+        "price": "$0.10",
+        "description": "Digital nomad score",
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "Country",
+            "required": true
+          },
+          "city": {
+            "type": "string",
+            "description": "City",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "sanctions",
+        "path": "/api/risk/sanctions",
+        "price": "$0.15",
+        "description": "Sanctions exposure analysis",
+        "params": {
+          "entity": {
+            "type": "string",
+            "description": "Entity name",
+            "required": true
+          },
+          "entity_type": {
+            "type": "string",
+            "description": "Entity type (person, company, vessel)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "supply",
+        "path": "/api/risk/supply",
+        "price": "$0.15",
+        "description": "Supply chain risk",
+        "params": {
+          "product": {
+            "type": "string",
+            "description": "Product or component",
+            "required": true
+          },
+          "country": {
+            "type": "string",
+            "description": "Country",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
       }
     ]
   },
@@ -13173,14 +15343,13 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "recall",
         "path": "/api/safe/recall",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Active recall dashboard",
         "params": {
           "category": {
             "type": "string",
             "description": "Filter by recall category",
-            "required": false,
-            "example": "all"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -13192,7 +15361,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "product",
         "path": "/api/safe/product",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Consumer product safety",
         "params": {
           "product": {
@@ -13243,7 +15412,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "food",
         "path": "/api/safe/food",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Food and drug recall",
         "params": {
           "product": {
@@ -13254,8 +15423,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "type": {
             "type": "string",
             "description": "type",
-            "required": false,
-            "example": "food"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -13313,7 +15481,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "score",
         "path": "/api/safe/score",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Brand safety score",
         "params": {
           "brand": {
@@ -13336,7 +15504,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "eu",
         "path": "/api/safe/eu",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "EU Safety Gate alerts",
         "params": {
           "category": {
@@ -13390,7 +15558,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "search",
         "path": "/api/search",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Scholarship search",
         "params": {
           "major": {
@@ -13406,8 +15574,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "level": {
             "type": "string",
             "description": "Education level",
-            "required": false,
-            "example": "undergraduate"
+            "required": false
           },
           "gpa": {
             "type": "string",
@@ -13415,7 +15582,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "Household income for need-based filtering",
             "required": false
           },
@@ -13434,7 +15601,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "global",
         "path": "/api/global",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "International scholarship matching",
         "params": {
           "nationality": {
@@ -13495,7 +15662,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "erasmus",
         "path": "/api/erasmus",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Erasmus+ program guide",
         "params": {
           "from": {
@@ -13519,7 +15686,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "duration": {
-            "type": "string",
+            "type": "number",
             "description": "Duration in months (2-12)",
             "required": false
           },
@@ -13533,7 +15700,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "aid",
         "path": "/api/aid",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "US financial aid estimate",
         "params": {
           "college": {
@@ -13542,25 +15709,24 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "Household AGI",
             "required": true
           },
           "family_size": {
-            "type": "string",
+            "type": "number",
             "description": "Household size (default: 4)",
             "required": false
           },
           "assets": {
-            "type": "string",
+            "type": "number",
             "description": "Reportable assets (exclude retirement accounts)",
             "required": false
           },
           "dependency_status": {
             "type": "string",
             "description": "Dependency status",
-            "required": false,
-            "example": "dependent"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -13576,17 +15742,17 @@ export const VERTICALS: Record<string, Vertical> = {
         "description": "FAFSA strategy",
         "params": {
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "Household AGI",
             "required": true
           },
           "family_size": {
-            "type": "string",
+            "type": "number",
             "description": "Household size",
             "required": false
           },
           "assets": {
-            "type": "string",
+            "type": "number",
             "description": "Reportable assets (NOT retirement accounts — those are exempt)",
             "required": false
           },
@@ -13610,7 +15776,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "loans",
         "path": "/api/loans",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Student loan repayment strategy",
         "params": {
           "country": {
@@ -13619,12 +15785,12 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "balance": {
-            "type": "string",
+            "type": "number",
             "description": "Total loan balance",
             "required": true
           },
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "Annual income",
             "required": true
           },
@@ -13634,12 +15800,12 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "family_size": {
-            "type": "string",
+            "type": "number",
             "description": "For US IDR plan calculations",
             "required": false
           },
           "years_in_repayment": {
-            "type": "string",
+            "type": "number",
             "description": "Years already in repayment",
             "required": false
           },
@@ -13677,7 +15843,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "years_in_service": {
-            "type": "string",
+            "type": "number",
             "description": "Years in qualifying employment",
             "required": false
           },
@@ -13710,7 +15876,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "debt": {
-            "type": "string",
+            "type": "number",
             "description": "Total expected debt at graduation",
             "required": true
           },
@@ -13734,7 +15900,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "merit",
         "path": "/api/merit",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Merit aid strategy",
         "params": {
           "gpa": {
@@ -13767,7 +15933,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "deadline",
         "path": "/api/deadline",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Scholarship deadline tracker",
         "params": {
           "country": {
@@ -13819,7 +15985,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "word_limit": {
-            "type": "string",
+            "type": "number",
             "description": "Word limit",
             "required": false
           },
@@ -13846,7 +16012,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "medicare",
         "path": "/api/senior/medicare",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Medicare plan guidance",
         "params": {
           "zip": {
@@ -13856,7 +16022,7 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "situation": {
             "type": "string",
-            "description": "Enrollment scenario — e.g. 'turning 65', 'comparing plans', 'losing employer coverage at 67', 'enrolling due to disability', 'reviewing Part",
+            "description": "Enrollment scenario — e.g. 'turning 65', 'comparing plans', 'losing employer coverage at 67', 'enrolling due to disability', 'reviewing Part D'",
             "required": false
           },
           "lang": {
@@ -13869,7 +16035,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "facility",
         "path": "/api/senior/facility",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Care facility evaluation guide",
         "params": {
           "location": {
@@ -13880,11 +16046,10 @@ export const VERTICALS: Record<string, Vertical> = {
           "type": {
             "type": "string",
             "description": "Facility type. Defaults to assisted-living.",
-            "required": false,
-            "example": "assisted-living"
+            "required": false
           },
           "budget": {
-            "type": "string",
+            "type": "number",
             "description": "Monthly budget in local currency (USD for US, GBP for UK, AUD for Australia, CAD for Canada)",
             "required": false
           },
@@ -13907,7 +16072,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "age": {
-            "type": "string",
+            "type": "number",
             "description": "Patient age — used to calibrate Beers Criteria thresholds (most critical for ages 65–75 vs. 85+)",
             "required": false
           },
@@ -13930,17 +16095,17 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "Monthly gross income in USD (Social Security, pension, wages)",
             "required": false
           },
           "assets": {
-            "type": "string",
+            "type": "number",
             "description": "Total countable assets in USD — excludes primary home and one vehicle",
             "required": false
           },
           "veteran": {
-            "type": "string",
+            "type": "boolean",
             "description": "Set true to include VA Aid & Attendance and other veteran-specific benefits in the assessment",
             "required": false
           },
@@ -13959,7 +16124,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "situation": {
             "type": "string",
-            "description": "Description of the caregiving situation (e.g. 'caring for 85yo mother with dementia, living 200 miles away', 'husband with Parkinson's, need",
+            "description": "Description of the caregiving situation (e.g. 'caring for 85yo mother with dementia, living 200 miles away', 'husband with Parkinson's, need respite care options in Manchester UK')",
             "required": true
           },
           "location": {
@@ -13991,7 +16156,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "days_since": {
-            "type": "string",
+            "type": "number",
             "description": "Days since the loss — calibrates guidance to immediate (0–7 days), short-term (1–4 weeks), or ongoing estate (1–12 months) phases",
             "required": false
           },
@@ -14015,17 +16180,16 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "situation": {
             "type": "string",
-            "description": "Describe the situation (e.g. 'parents have no POA, father showing memory decline', 'need healthcare proxy before surgery', 'sibling disputes",
+            "description": "Describe the situation (e.g. 'parents have no POA, father showing memory decline', 'need healthcare proxy before surgery', 'sibling disputes who controls decisions')",
             "required": false
           },
           "has_poa": {
             "type": "string",
             "description": "Whether an existing POA is in place — affects urgency and next steps",
-            "required": false,
-            "example": "true"
+            "required": false
           },
           "capacity_concern": {
-            "type": "string",
+            "type": "boolean",
             "description": "Set true if there are concerns about the senior's cognitive capacity to sign legal documents — triggers guardianship guidance",
             "required": false
           },
@@ -14043,17 +16207,17 @@ export const VERTICALS: Record<string, Vertical> = {
         "description": "Cognitive decline staging and dementia care trajectory",
         "params": {
           "mmse_score": {
-            "type": "string",
+            "type": "number",
             "description": "Mini-Mental State Examination score (0–30). 24–30 normal, 18–23 mild, 0–17 severe.",
             "required": false
           },
           "moca_score": {
-            "type": "string",
+            "type": "number",
             "description": "Montreal Cognitive Assessment score (0–30). Below 26 indicates possible impairment.",
             "required": false
           },
           "cdr_score": {
-            "type": "string",
+            "type": "number",
             "description": "Clinical Dementia Rating (0, 0.5, 1, 2, 3). 0=normal, 0.5=very mild, 1=mild, 2=moderate, 3=severe.",
             "required": false
           },
@@ -14077,7 +16241,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "nh-compare",
         "path": "/api/senior/nh-compare",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Nursing home quality comparison (CMS Care Compare data)",
         "params": {
           "facilities": {
@@ -14100,7 +16264,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "property-tax",
         "path": "/api/senior/property-tax",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Senior property tax relief programs by state",
         "params": {
           "state": {
@@ -14109,22 +16273,22 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "age": {
-            "type": "string",
+            "type": "number",
             "description": "Homeowner age — many programs begin at 62, 65, or 70",
             "required": false
           },
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "Annual household income in USD — required for income-tested programs",
             "required": false
           },
           "home_value": {
-            "type": "string",
+            "type": "number",
             "description": "Estimated home value in USD — used to estimate annual savings",
             "required": false
           },
           "veteran": {
-            "type": "string",
+            "type": "boolean",
             "description": "Set true to include veteran-specific property tax exemptions (available in every state)",
             "required": false
           },
@@ -14152,12 +16316,12 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "Monthly income in USD — determines Extra Help eligibility (2024 limit: $1,903/month individual)",
             "required": false
           },
           "on_medicare": {
-            "type": "string",
+            "type": "boolean",
             "description": "Whether the senior is enrolled in Medicare Part D — affects Extra Help vs. manufacturer PAP eligibility",
             "required": false
           },
@@ -14180,22 +16344,22 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "Monthly household income in USD",
             "required": false
           },
           "household_size": {
-            "type": "string",
+            "type": "number",
             "description": "Number of people in the household — SNAP limits vary by household size",
             "required": false
           },
           "own_home": {
-            "type": "string",
+            "type": "boolean",
             "description": "Whether the senior owns their home — affects LIHEAP eligibility and some SNAP asset tests",
             "required": false
           },
           "medical_expenses": {
-            "type": "string",
+            "type": "number",
             "description": "Monthly out-of-pocket medical expenses — seniors can deduct excess medical costs to qualify for SNAP",
             "required": false
           },
@@ -14209,26 +16373,26 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "veterans",
         "path": "/api/senior/veterans",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "VA Aid & Attendance and senior veteran benefits",
         "params": {
           "veteran_age": {
-            "type": "string",
+            "type": "number",
             "description": "Veteran age",
             "required": false
           },
           "care_cost": {
-            "type": "string",
+            "type": "number",
             "description": "Monthly unreimbursed care costs in USD (home health aide, assisted living, adult day care)",
             "required": false
           },
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "Monthly gross income in USD (Social Security, pension, other)",
             "required": false
           },
           "assets": {
-            "type": "string",
+            "type": "number",
             "description": "Total net worth in USD excluding primary home and vehicle — VA uses a $155,356 asset limit (2024)",
             "required": false
           },
@@ -14238,7 +16402,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "surviving_spouse": {
-            "type": "string",
+            "type": "boolean",
             "description": "Set true if the applicant is a surviving spouse of a veteran — unlocks Survivors Pension and Aid & Attendance for surviving spouses",
             "required": false
           },
@@ -14265,7 +16429,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "sport": {
             "type": "string",
-            "description": "Sport or league code. Global coverage: EPL/LALIGA/BUNDESLIGA/SERIEA/LIGUE1/UCL for European soccer; AFL/NRL/NBL for Australia; SIXNATIONS/NR",
+            "description": "Sport or league code. Global coverage: EPL/LALIGA/BUNDESLIGA/SERIEA/LIGUE1/UCL for European soccer; AFL/NRL/NBL for Australia; SIXNATIONS/NRL for rugby; F1 for Formula 1; CRICKET_IPL/CRICKET_BBL for cricket.",
             "required": false,
             "example": "NFL"
           }
@@ -14274,7 +16438,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "injuries",
         "path": "/api/injuries",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Injury report with fantasy and betting impact",
         "params": {
           "sport": {
@@ -14299,7 +16463,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "sport": {
             "type": "string",
             "description": "Any sport/league code — global soccer leagues (EPL, LALIGA, etc.) fully supported",
-            "required": false
+            "required": false,
+            "example": "NFL"
           },
           "week": {
             "type": "string",
@@ -14317,7 +16482,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "sport": {
             "type": "string",
             "description": "sport",
-            "required": false
+            "required": false,
+            "example": "NFL"
           },
           "week": {
             "type": "string",
@@ -14329,13 +16495,14 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "recap",
         "path": "/api/recap",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Post-game recap with fantasy and betting implications",
         "params": {
           "sport": {
             "type": "string",
             "description": "sport",
-            "required": false
+            "required": false,
+            "example": "NBA"
           },
           "team": {
             "type": "string",
@@ -14352,14 +16519,14 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "sport": {
             "type": "string",
-            "description": "Sport code. F1 pulls live data from Jolpica API. All others use real-time Tavily synthesis from authoritative sources (formula1.com, ESPNcri",
-            "required": true,
-            "example": "F1"
+            "description": "Sport code. F1 pulls live data from Jolpica API. All others use real-time Tavily synthesis from authoritative sources (formula1.com, ESPNcricinfo, Cricbuzz, worldrugby.org, BBC Sport, etc.)",
+            "required": true
           },
           "action": {
             "type": "string",
-            "description": "F1: race|standings|qualifying|calendar. Cricket: match|series|ipl|standings. Rugby: match|tournament|standings. Tennis: tournament|rankings|",
-            "required": false
+            "description": "F1: race|standings|qualifying|calendar. Cricket: match|series|ipl|standings. Rugby: match|tournament|standings. Tennis: tournament|rankings|draw|match. Others: preview|results|standings|analysis.",
+            "required": false,
+            "example": "preview"
           },
           "detail": {
             "type": "string",
@@ -14377,7 +16544,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "sport": {
             "type": "string",
             "description": "sport",
-            "required": false
+            "required": false,
+            "example": "NFL"
           },
           "situation": {
             "type": "string",
@@ -14408,7 +16576,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "sport": {
             "type": "string",
             "description": "sport",
-            "required": false
+            "required": false,
+            "example": "NBA"
           },
           "ref": {
             "type": "string",
@@ -14420,13 +16589,14 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "rest",
         "path": "/api/rest",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Rest and schedule advantage analysis",
         "params": {
           "sport": {
             "type": "string",
             "description": "sport",
-            "required": false
+            "required": false,
+            "example": "NBA"
           },
           "team": {
             "type": "string",
@@ -14443,13 +16613,14 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "injury-impact",
         "path": "/api/injury-impact",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Single player injury impact analysis",
         "params": {
           "sport": {
             "type": "string",
             "description": "sport",
-            "required": false
+            "required": false,
+            "example": "NFL"
           },
           "player": {
             "type": "string",
@@ -14474,7 +16645,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "salary",
         "path": "/api/talent/salary",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Salary benchmarking — any role, any location globally",
         "params": {
           "role": {
@@ -14495,8 +16666,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "experience": {
             "type": "string",
             "description": "Experience filter (default: all)",
-            "required": false,
-            "example": "entry"
+            "required": false
           },
           "currency": {
             "type": "string",
@@ -14513,7 +16683,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "remote-compliance",
         "path": "/api/talent/remote-compliance",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Remote work compliance — jurisdiction-specific legal intelligence",
         "params": {
           "country": {
@@ -14541,7 +16711,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "employer-of-record",
         "path": "/api/talent/employer-of-record",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Employer of record cost model — full employer cost breakdown by country",
         "params": {
           "country": {
@@ -14550,7 +16720,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "salary": {
-            "type": "string",
+            "type": "number",
             "description": "Annual gross salary in local currency (optional, for cost model)",
             "required": false
           },
@@ -14564,7 +16734,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "skills-demand",
         "path": "/api/talent/skills-demand",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Skills demand intelligence — real-time market signal for any skill or role globally",
         "params": {
           "skills": {
@@ -14587,7 +16757,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "visa",
         "path": "/api/talent/visa",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Work visa intelligence — all pathways for any nationality/destination pair",
         "params": {
           "nationality": {
@@ -14615,7 +16785,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "talent-market",
         "path": "/api/talent/talent-market",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Talent market intelligence — supply/demand dynamics, hubs, and competitive landscape",
         "params": {
           "role": {
@@ -14638,7 +16808,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "compensation",
         "path": "/api/talent/compensation",
-        "price": "$0.10",
+        "price": "$0.25",
         "description": "Executive compensation benchmarking — total comp for senior and C-suite roles globally",
         "params": {
           "role": {
@@ -14699,7 +16869,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "skills-gap",
         "path": "/api/talent/skills-gap",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Skills gap intelligence — where employer demand outpaces supply, with reskilling pathways",
         "params": {
           "industry": {
@@ -14722,7 +16892,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "cost-comparison",
         "path": "/api/talent/cost-comparison",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Multi-country hiring cost comparison — CFO-grade employer cost model across countries",
         "params": {
           "role": {
@@ -14738,8 +16908,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "experience": {
             "type": "string",
             "description": "Experience level (default: mid)",
-            "required": false,
-            "example": "entry"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -14782,7 +16951,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "compare",
         "path": "/api/tax/compare",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Multi-country tax comparison",
         "params": {
           "countries": {
@@ -14820,7 +16989,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "nomad",
         "path": "/api/tax/nomad",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Digital nomad tax optimization",
         "params": {
           "nationality": {
@@ -14853,7 +17022,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "treaty",
         "path": "/api/tax/treaty",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Tax treaty analysis",
         "params": {
           "country1": {
@@ -14881,7 +17050,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "structure",
         "path": "/api/tax/structure",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Corporate tax structuring",
         "params": {
           "objective": {
@@ -14919,7 +17088,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "crypto",
         "path": "/api/tax/crypto",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Cryptocurrency tax by jurisdiction",
         "params": {
           "country": {
@@ -14947,7 +17116,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "expat",
         "path": "/api/tax/expat",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Expat tax obligations",
         "params": {
           "nationality": {
@@ -15011,7 +17180,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "classify",
         "path": "/api/trade/classify",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "HS code classification",
         "params": {
           "product": {
@@ -15029,7 +17198,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "tariff",
         "path": "/api/trade/tariff",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Tariff rates by HS code and country pair",
         "params": {
           "hs_code": {
@@ -15057,7 +17226,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "landed",
         "path": "/api/trade/landed",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Full landed cost calculator",
         "params": {
           "product": {
@@ -15100,7 +17269,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "fta",
         "path": "/api/trade/fta",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Free Trade Agreement analyzer",
         "params": {
           "from_country": {
@@ -15133,7 +17302,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "sanctions",
         "path": "/api/trade/sanctions",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Sanctions and trade restrictions screening",
         "params": {
           "country": {
@@ -15166,7 +17335,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "market",
         "path": "/api/trade/market",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Market entry intelligence",
         "params": {
           "product": {
@@ -15199,7 +17368,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "compliance",
         "path": "/api/trade/compliance",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Export compliance — EAR/ITAR/dual-use",
         "params": {
           "product": {
@@ -15275,7 +17444,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "nearshore",
         "path": "/api/trade/nearshore",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Nearshoring and reshoring advisor",
         "params": {
           "current_country": {
@@ -15313,7 +17482,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "supplier-risk",
         "path": "/api/trade/supplier-risk",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Supplier country risk — UFLPA, ESG, and geopolitical",
         "params": {
           "country": {
@@ -15374,7 +17543,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "news",
         "path": "/api/trade/news",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Trade policy intelligence",
         "params": {
           "from_country": {
@@ -15410,7 +17579,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "status",
         "path": "/api/transit/status",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Live Service Status",
         "params": {
           "city": {
@@ -15428,7 +17597,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "city",
         "path": "/api/transit/city",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "City Transit Intelligence Brief",
         "params": {
           "city": {
@@ -15441,7 +17610,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "route",
         "path": "/api/transit/route",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Route Reliability Analysis",
         "params": {
           "city": {
@@ -15485,14 +17654,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "time": {
             "type": "string",
             "description": "time",
-            "required": false
+            "required": false,
+            "example": "9am"
           }
         }
       },
       {
         "action": "airport",
         "path": "/api/transit/airport",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Airport Transit Guide",
         "params": {
           "city": {
@@ -15515,7 +17685,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "agencies",
         "path": "/api/transit/agencies",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Transit Agencies Lookup",
         "params": {
           "city": {
@@ -15528,7 +17698,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "delays",
         "path": "/api/transit/delays",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Current Transit Delays",
         "params": {
           "city": {
@@ -15546,7 +17716,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "delays-history",
         "path": "/api/transit/delays-history",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Historical Delay Patterns",
         "params": {
           "city": {
@@ -15564,7 +17734,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "trip",
         "path": "/api/transit/trip",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Transit Trip Planning",
         "params": {
           "from": {
@@ -15615,7 +17785,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "compare",
         "path": "/api/transit/compare",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "City-to-City Transit Comparison",
         "params": {
           "city_a": {
@@ -15638,7 +17808,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "carfree",
         "path": "/api/transit/carfree",
-        "price": "$0.10",
+        "price": "$0.12",
         "description": "Car-Free Livability Score",
         "params": {
           "city": {
@@ -15656,7 +17826,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "visitor",
         "path": "/api/transit/visitor",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "First-Timer Visitor Guide",
         "params": {
           "city": {
@@ -15690,7 +17860,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "waits",
         "path": "/api/parks/waits",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Live park wait times",
         "params": {
           "park": {
@@ -15708,7 +17878,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "hours",
         "path": "/api/parks/hours",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Park hours and schedule",
         "params": {
           "park": {
@@ -15731,7 +17901,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "crowds",
         "path": "/api/parks/crowds",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Crowd prediction",
         "params": {
           "park": {
@@ -15754,7 +17924,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "weather",
         "path": "/api/travel/weather",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Travel weather forecast",
         "params": {
           "destination": {
@@ -15772,7 +17942,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "deals",
         "path": "/api/travel/deals",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Travel deals",
         "params": {
           "destination": {
@@ -15790,7 +17960,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "plan",
         "path": "/api/travel/plan",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Trip itinerary",
         "params": {
           "destination": {
@@ -15799,21 +17969,20 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "days": {
-            "type": "string",
+            "type": "integer",
             "description": "days",
-            "required": false
+            "required": false,
+            "example": "5"
           },
           "style": {
             "type": "string",
             "description": "style",
-            "required": false,
-            "example": "cultural"
+            "required": false
           },
           "budget": {
             "type": "string",
             "description": "budget",
-            "required": false,
-            "example": "budget"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -15825,7 +17994,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "visa",
         "path": "/api/travel/visa",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Visa requirements by nationality and destination",
         "params": {
           "nationality": {
@@ -15853,7 +18022,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "insurance",
         "path": "/api/travel/insurance",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Travel insurance comparison and recommendation",
         "params": {
           "destination": {
@@ -15864,16 +18033,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "trip_type": {
             "type": "string",
             "description": "Trip type — determines coverage priorities",
-            "required": false,
-            "example": "vacation"
+            "required": false
           },
           "duration_days": {
-            "type": "string",
+            "type": "number",
             "description": "Trip duration in days",
             "required": false
           },
           "trip_cost_usd": {
-            "type": "string",
+            "type": "number",
             "description": "Total prepaid trip cost in USD — for cancellation coverage sizing",
             "required": false
           },
@@ -15896,7 +18064,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "duration": {
-            "type": "string",
+            "type": "number",
             "description": "Trip duration in days",
             "required": false
           },
@@ -15908,8 +18076,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "bag_type": {
             "type": "string",
             "description": "Luggage constraint",
-            "required": false,
-            "example": "carry-on"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -15932,11 +18099,10 @@ export const VERTICALS: Record<string, Vertical> = {
           "style": {
             "type": "string",
             "description": "Travel style (default: mid-range)",
-            "required": false,
-            "example": "budget"
+            "required": false
           },
           "duration": {
-            "type": "string",
+            "type": "number",
             "description": "Number of days for total estimate",
             "required": false
           },
@@ -15950,7 +18116,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "currency",
         "path": "/api/travel/currency",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Currency exchange rates and money tips for destination",
         "params": {
           "from": {
@@ -15964,7 +18130,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "amount": {
-            "type": "string",
+            "type": "number",
             "description": "Amount to convert for reference calculation",
             "required": false
           },
@@ -15978,7 +18144,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "phrasebook",
         "path": "/api/travel/phrasebook",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Essential travel phrasebook by destination language",
         "params": {
           "destination": {
@@ -16001,7 +18167,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "translate",
         "path": "/api/travel/translate",
-        "price": "$0.10",
+        "price": "$0.03",
         "description": "Real-time travel translation (menus, signs, conversations)",
         "params": {
           "text": {
@@ -16022,6 +18188,34 @@ export const VERTICALS: Record<string, Vertical> = {
           "context": {
             "type": "string",
             "description": "Context hint (menu, sign, conversation, product)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "health",
+        "path": "/api/travel/health",
+        "price": "$0.08",
+        "description": "Destination health advisories and vaccine requirements",
+        "params": {
+          "destination": {
+            "type": "string",
+            "description": "Destination country or region",
+            "required": true
+          },
+          "nationality": {
+            "type": "string",
+            "description": "Traveler nationality — some vaccines required only for specific nationals",
+            "required": false
+          },
+          "trip_duration": {
+            "type": "string",
+            "description": "Trip duration (affects prophylaxis recommendations)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
             "required": false
           }
         }
@@ -16048,24 +18242,27 @@ export const VERTICALS: Record<string, Vertical> = {
           "agency": {
             "type": "string",
             "description": "FBI | CIA | NSA | DEA | DOJ | DHS | all",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "country": {
             "type": "string",
             "description": "US | UK | CA | AU | all",
-            "required": false
+            "required": false,
+            "example": "US"
           },
           "lang": {
             "type": "string",
             "description": "en | es | fr | de | ja | pt | it | nl | ko | zh | ar",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "foia-draft",
         "path": "/api/truth/foia-draft",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "FOIA request letter generator",
         "params": {
           "records_sought": {
@@ -16081,29 +18278,33 @@ export const VERTICALS: Record<string, Vertical> = {
           "country": {
             "type": "string",
             "description": "US | UK | CA | AU | NZ | IE | IN | BR | DE | FR | EU",
-            "required": false
+            "required": false,
+            "example": "US"
           },
           "requester_type": {
             "type": "string",
             "description": "individual | journalist | researcher | nonprofit",
-            "required": false
+            "required": false,
+            "example": "individual"
           },
           "fee_waiver": {
             "type": "string",
             "description": "yes | no",
-            "required": false
+            "required": false,
+            "example": "yes"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "court-case",
         "path": "/api/truth/court-case",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Court case intelligence",
         "params": {
           "case_name": {
@@ -16114,24 +18315,27 @@ export const VERTICALS: Record<string, Vertical> = {
           "jurisdiction": {
             "type": "string",
             "description": "US | UK | CA | AU | international | ICC | ECHR | auto",
-            "required": false
+            "required": false,
+            "example": "auto"
           },
           "focus": {
             "type": "string",
             "description": "all | charges | verdict | sentence | rulings | timeline",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "evidence-extract",
         "path": "/api/truth/evidence-extract",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Forensic evidence extraction",
         "params": {
           "case_name": {
@@ -16142,17 +18346,20 @@ export const VERTICALS: Record<string, Vertical> = {
           "evidence_type": {
             "type": "string",
             "description": "all | toxicology | autopsy | dna | financial | ballistics | digital",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "jurisdiction": {
             "type": "string",
             "description": "US | UK | CA | AU | auto",
-            "required": false
+            "required": false,
+            "example": "auto"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -16170,17 +18377,20 @@ export const VERTICALS: Record<string, Vertical> = {
           "source": {
             "type": "string",
             "description": "cia | fbi | nsa | nara | uk | all",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "era": {
             "type": "string",
             "description": "1940s | 1950s | cold-war | 1970s | 1980s | post-911 | recent | all",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -16198,24 +18408,27 @@ export const VERTICALS: Record<string, Vertical> = {
           "country": {
             "type": "string",
             "description": "US | FR | UK | BR | CL | AU | CA | all",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "focus": {
             "type": "string",
             "description": "incident | investigation | testimony | evidence | all",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "conspiracy-brief",
         "path": "/api/truth/conspiracy-brief",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Conspiracy theory evidence brief",
         "params": {
           "topic": {
@@ -16226,19 +18439,21 @@ export const VERTICALS: Record<string, Vertical> = {
           "depth": {
             "type": "string",
             "description": "overview | deep-dive",
-            "required": false
+            "required": false,
+            "example": "deep-dive"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "entity-network",
         "path": "/api/truth/entity-network",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Entity connection mapping",
         "params": {
           "subject": {
@@ -16249,40 +18464,46 @@ export const VERTICALS: Record<string, Vertical> = {
           "depth": {
             "type": "string",
             "description": "direct | extended",
-            "required": false
+            "required": false,
+            "example": "direct"
           },
           "include": {
             "type": "string",
             "description": "individuals | organizations | cases | all",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "new-releases",
         "path": "/api/truth/new-releases",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Latest FOIA and court releases feed",
         "params": {
           "category": {
             "type": "string",
             "description": "foia | court | declassified | uap | all",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "country": {
             "type": "string",
             "description": "US | UK | CA | AU | EU | all",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "limit": {
-            "type": "string",
+            "type": "integer",
             "description": "5 | 10 | 20",
-            "required": false
+            "required": false,
+            "example": "10"
           },
           "filter": {
             "type": "string",
@@ -16292,14 +18513,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "media-vs-record",
         "path": "/api/truth/media-vs-record",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Media narrative vs. court record",
         "params": {
           "case_or_topic": {
@@ -16310,19 +18532,21 @@ export const VERTICALS: Record<string, Vertical> = {
           "jurisdiction": {
             "type": "string",
             "description": "US | UK | CA | AU | auto",
-            "required": false
+            "required": false,
+            "example": "auto"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "international-foia",
         "path": "/api/truth/international-foia",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "International FOI search and request drafting",
         "params": {
           "topic": {
@@ -16338,12 +18562,14 @@ export const VERTICALS: Record<string, Vertical> = {
           "include_draft": {
             "type": "string",
             "description": "yes | no",
-            "required": false
+            "required": false,
+            "example": "yes"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       }
@@ -16364,29 +18590,33 @@ export const VERTICALS: Record<string, Vertical> = {
           "sector": {
             "type": "string",
             "description": "fintech | saas | biotech | ai | climate | consumer | b2b | deeptech | any",
-            "required": false
+            "required": false,
+            "example": "any"
           },
           "stage": {
             "type": "string",
             "description": "pre-seed | seed | series-a | series-b | growth | any",
-            "required": false
+            "required": false,
+            "example": "any"
           },
           "region": {
             "type": "string",
             "description": "us | eu | uk | apac | latam | mena | africa | global",
-            "required": false
+            "required": false,
+            "example": "global"
           },
           "lang": {
             "type": "string",
             "description": "en | es | fr | de | ja | pt | it | nl | ko | zh | ar",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "investor-match",
         "path": "/api/startup/investor-match",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Investor matching engine",
         "params": {
           "description": {
@@ -16397,17 +18627,20 @@ export const VERTICALS: Record<string, Vertical> = {
           "stage": {
             "type": "string",
             "description": "pre-seed | seed | series-a | series-b",
-            "required": false
+            "required": false,
+            "example": "seed"
           },
           "sector": {
             "type": "string",
             "description": "fintech | saas | biotech | ai | climate | consumer | b2b | deeptech | any",
-            "required": false
+            "required": false,
+            "example": "any"
           },
           "region": {
             "type": "string",
             "description": "us | eu | uk | apac | latam | mena | africa | global",
-            "required": false
+            "required": false,
+            "example": "global"
           },
           "check_size": {
             "type": "string",
@@ -16417,14 +18650,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "pitch-score",
         "path": "/api/startup/pitch-score",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Pitch deck scoring",
         "params": {
           "description": {
@@ -16435,24 +18669,27 @@ export const VERTICALS: Record<string, Vertical> = {
           "stage": {
             "type": "string",
             "description": "pre-seed | seed | series-a | series-b",
-            "required": false
+            "required": false,
+            "example": "seed"
           },
           "sector": {
             "type": "string",
             "description": "fintech | saas | biotech | ai | climate | consumer | b2b | deeptech | any",
-            "required": false
+            "required": false,
+            "example": "any"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "term-sheet",
         "path": "/api/startup/term-sheet",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "Term sheet decoder",
         "params": {
           "terms": {
@@ -16463,75 +18700,85 @@ export const VERTICALS: Record<string, Vertical> = {
           "stage": {
             "type": "string",
             "description": "pre-seed | seed | series-a | series-b",
-            "required": false
+            "required": false,
+            "example": "seed"
           },
           "is_safe": {
             "type": "string",
             "description": "true | false — whether this is a SAFE note",
-            "required": false
+            "required": false,
+            "example": "false"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "cap-table",
         "path": "/api/startup/cap-table",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Cap table dilution modeler",
         "params": {
           "founders_pct": {
-            "type": "string",
+            "type": "number",
             "description": "Current founder ownership percentage — e.g. 80",
             "required": true
           },
           "raise_usd": {
-            "type": "string",
+            "type": "number",
             "description": "Amount being raised in USD — e.g. 2000000",
             "required": true
           },
           "pre_money_usd": {
-            "type": "string",
+            "type": "number",
             "description": "Pre-money valuation in USD — e.g. 8000000",
             "required": true
           },
           "existing_investors_pct": {
-            "type": "string",
+            "type": "number",
             "description": "Existing investor ownership percentage",
-            "required": false
+            "required": false,
+            "example": "0"
           },
           "option_pool_pct": {
-            "type": "string",
+            "type": "number",
             "description": "Current option pool percentage",
-            "required": false
+            "required": false,
+            "example": "10"
           },
           "option_pool_increase_pct": {
-            "type": "string",
+            "type": "number",
             "description": "New option pool percentage required by investors",
-            "required": false
+            "required": false,
+            "example": "0"
           },
           "structure": {
             "type": "string",
             "description": "priced | safe | note",
-            "required": false
+            "required": false,
+            "example": "priced"
           },
           "stage": {
             "type": "string",
             "description": "stage",
-            "required": false
+            "required": false,
+            "example": "seed"
           },
           "sector": {
             "type": "string",
             "description": "sector",
-            "required": false
+            "required": false,
+            "example": "any"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -16544,34 +18791,39 @@ export const VERTICALS: Record<string, Vertical> = {
           "sector": {
             "type": "string",
             "description": "fintech | saas | biotech | ai | climate | consumer | b2b | deeptech | any",
-            "required": false
+            "required": false,
+            "example": "any"
           },
           "stage": {
             "type": "string",
             "description": "idea | pre-seed | seed | series-a",
-            "required": false
+            "required": false,
+            "example": "pre-seed"
           },
           "region": {
             "type": "string",
             "description": "us | eu | uk | apac | latam | mena | africa | global",
-            "required": false
+            "required": false,
+            "example": "global"
           },
           "equity_max": {
-            "type": "string",
+            "type": "number",
             "description": "Maximum equity percentage willing to give up — e.g. 7",
-            "required": false
+            "required": false,
+            "example": "10"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "market-size",
         "path": "/api/startup/market-size",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "TAM/SAM/SOM market size analysis",
         "params": {
           "description": {
@@ -16582,24 +18834,27 @@ export const VERTICALS: Record<string, Vertical> = {
           "geography": {
             "type": "string",
             "description": "global | us | eu | uk | apac | latam | mena | africa | specific country",
-            "required": false
+            "required": false,
+            "example": "global"
           },
           "approach": {
             "type": "string",
             "description": "top-down | bottom-up | both",
-            "required": false
+            "required": false,
+            "example": "both"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "legal-formation",
         "path": "/api/startup/legal-formation",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Startup legal formation guide",
         "params": {
           "country": {
@@ -16615,12 +18870,14 @@ export const VERTICALS: Record<string, Vertical> = {
           "target_markets": {
             "type": "string",
             "description": "Where you plan to sell — e.g. US, EU",
-            "required": false
+            "required": false,
+            "example": "global"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -16638,55 +18895,64 @@ export const VERTICALS: Record<string, Vertical> = {
           "stage": {
             "type": "string",
             "description": "pre-seed | seed | series-a | series-b",
-            "required": false
+            "required": false,
+            "example": "seed"
           },
           "sector": {
             "type": "string",
             "description": "fintech | saas | biotech | ai | climate | consumer | b2b | deeptech | any",
-            "required": false
+            "required": false,
+            "example": "any"
           },
           "region": {
             "type": "string",
             "description": "us | eu | uk | apac | latam | mena | africa | global",
-            "required": false
+            "required": false,
+            "example": "global"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "due-diligence",
         "path": "/api/startup/due-diligence",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Investor due diligence prep",
         "params": {
           "stage": {
             "type": "string",
             "description": "seed | series-a | series-b | growth",
-            "required": false
+            "required": false,
+            "example": "seed"
           },
           "sector": {
             "type": "string",
             "description": "fintech | saas | biotech | ai | climate | consumer | b2b | deeptech | any",
-            "required": false
+            "required": false,
+            "example": "any"
           },
           "region": {
             "type": "string",
             "description": "us | eu | uk | apac | global",
-            "required": false
+            "required": false,
+            "example": "global"
           },
           "focus": {
             "type": "string",
             "description": "legal | financial | technical | all",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       }
@@ -16701,7 +18967,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "disability",
         "path": "/api/vet/disability",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "VA disability rating analysis",
         "params": {
           "conditions": {
@@ -16724,11 +18990,11 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "aid-attendance",
         "path": "/api/vet/aid-attendance",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "VA Aid & Attendance pension eligibility",
         "params": {
           "age": {
-            "type": "string",
+            "type": "number",
             "description": "Veteran age",
             "required": false
           },
@@ -16738,22 +19004,22 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "Monthly gross income in USD (Social Security, pension, other)",
             "required": false
           },
           "assets": {
-            "type": "string",
+            "type": "number",
             "description": "Total net worth in USD excluding primary home and one vehicle",
             "required": false
           },
           "care_cost": {
-            "type": "string",
+            "type": "number",
             "description": "Monthly unreimbursed care costs in USD — deducted from income for pension calculation",
             "required": false
           },
           "surviving_spouse": {
-            "type": "string",
+            "type": "boolean",
             "description": "Set true if applicant is a surviving spouse of a veteran — unlocks Survivors Pension and different Aid & Attendance rates",
             "required": false
           },
@@ -16767,7 +19033,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "tdiu",
         "path": "/api/vet/tdiu",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "TDIU (Total Disability Individual Unemployability) eligibility",
         "params": {
           "rating": {
@@ -16781,7 +19047,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "Current annual income — TDIU requires below federal poverty threshold for marginal employment (~$15,000)",
             "required": false
           },
@@ -16795,7 +19061,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "claim-builder",
         "path": "/api/vet/claim-builder",
-        "price": "$0.10",
+        "price": "$0.20",
         "description": "VA disability claim evidence strategy",
         "params": {
           "conditions": {
@@ -16875,7 +19141,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "dependents": {
-            "type": "string",
+            "type": "boolean",
             "description": "Whether veteran has dependents — affects DEA transferability and some benefit calculations",
             "required": false
           },
@@ -16912,7 +19178,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "home-loan",
         "path": "/api/vet/home-loan",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "VA home loan benefit analysis",
         "params": {
           "disability_rating": {
@@ -16921,12 +19187,12 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "purchase_price": {
-            "type": "string",
+            "type": "number",
             "description": "Target home purchase price in USD — used to calculate funding fee savings and PMI comparison",
             "required": false
           },
           "prior_va_loan": {
-            "type": "string",
+            "type": "boolean",
             "description": "Whether veteran has used a VA loan before — triggers entitlement restoration guidance",
             "required": false
           },
@@ -16945,18 +19211,50 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "discounts",
         "path": "/api/vet/discounts",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Verified veteran discounts by category",
         "params": {
           "category": {
             "type": "string",
             "description": "Discount category. Defaults to all.",
-            "required": false,
-            "example": "travel"
+            "required": false
           },
           "disability_rating": {
             "type": "string",
             "description": "VA disability rating — some discounts (national parks pass, additional state benefits) require service-connected disability",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language — any language supported",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "healthcare",
+        "path": "/api/vet/healthcare",
+        "price": "$0.08",
+        "description": "VA healthcare priority group and coverage analysis",
+        "params": {
+          "priority_group": {
+            "type": "string",
+            "description": "Current VA priority group if known (1–8)",
+            "required": false
+          },
+          "income": {
+            "type": "number",
+            "description": "Annual household income — affects priority group 5–8 placement and copay amounts",
+            "required": false
+          },
+          "disability_rating": {
+            "type": "string",
+            "description": "VA disability rating — service-connected veterans (any rating) are Priority Group 1–3",
+            "required": false
+          },
+          "dependents": {
+            "type": "boolean",
+            "description": "Set true to include CHAMPVA coverage analysis for dependents",
             "required": false
           },
           "lang": {
@@ -16977,7 +19275,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "groundwater",
         "path": "/api/water/groundwater",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Groundwater levels (USGS)",
         "params": {
           "state": {
@@ -16986,21 +19284,23 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "limit": {
-            "type": "string",
+            "type": "integer",
             "description": "Number of monitoring sites (5, 10, or 20)",
-            "required": false
+            "required": false,
+            "example": "10"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "streamflow",
         "path": "/api/water/streamflow",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Streamflow — river discharge (USGS)",
         "params": {
           "state": {
@@ -17014,21 +19314,23 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           },
           "limit": {
-            "type": "string",
+            "type": "integer",
             "description": "limit",
-            "required": false
+            "required": false,
+            "example": "10"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "drought",
         "path": "/api/water/drought",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Drought status (US Drought Monitor)",
         "params": {
           "state": {
@@ -17039,14 +19341,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "quality",
         "path": "/api/water/quality",
-        "price": "$0.10",
+        "price": "$0.08",
         "description": "Water quality (EPA WQP + USGS)",
         "params": {
           "state": {
@@ -17057,19 +19360,21 @@ export const VERTICALS: Record<string, Vertical> = {
           "parameter": {
             "type": "string",
             "description": "nitrates | phosphorus | ph | lead | arsenic | bacteria | pfas | turbidity",
-            "required": false
+            "required": false,
+            "example": "nitrates"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "aquifer",
         "path": "/api/water/aquifer",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Aquifer sustainability analysis",
         "params": {
           "aquifer": {
@@ -17085,14 +19390,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "flood-risk",
         "path": "/api/water/flood-risk",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Flood risk intelligence",
         "params": {
           "location": {
@@ -17108,14 +19414,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "global-stress",
         "path": "/api/water/global-stress",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Global water stress by country/basin",
         "params": {
           "region": {
@@ -17126,19 +19433,21 @@ export const VERTICALS: Record<string, Vertical> = {
           "focus": {
             "type": "string",
             "description": "agriculture | municipal | industrial | conflict | investment | all",
-            "required": false
+            "required": false,
+            "example": "all"
           },
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "agriculture-use",
         "path": "/api/water/agriculture-use",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Agricultural water use intelligence",
         "params": {
           "state": {
@@ -17154,14 +19463,15 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       },
       {
         "action": "supply-brief",
         "path": "/api/water/supply-brief",
-        "price": "$0.10",
+        "price": "$0.50",
         "description": "Municipal water supply brief",
         "params": {
           "location": {
@@ -17177,7 +19487,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
-            "required": false
+            "required": false,
+            "example": "en"
           }
         }
       }
@@ -17192,31 +19503,31 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "snapshot",
         "path": "/api/wealth/snapshot",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Financial health snapshot",
         "params": {
           "age": {
-            "type": "string",
+            "type": "integer",
             "description": "age",
             "required": true
           },
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "Annual income in USD",
             "required": true
           },
           "savings": {
-            "type": "string",
+            "type": "number",
             "description": "savings",
             "required": false
           },
           "debt": {
-            "type": "string",
+            "type": "number",
             "description": "debt",
             "required": false
           },
           "expenses": {
-            "type": "string",
+            "type": "number",
             "description": "Monthly expenses in USD",
             "required": false
           },
@@ -17230,31 +19541,32 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "retire",
         "path": "/api/wealth/retire",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Retirement readiness projection",
         "params": {
           "age": {
-            "type": "string",
+            "type": "integer",
             "description": "age",
             "required": true
           },
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "income",
             "required": true
           },
           "savings": {
-            "type": "string",
+            "type": "number",
             "description": "savings",
             "required": false
           },
           "retire_at": {
-            "type": "string",
+            "type": "integer",
             "description": "retire_at",
-            "required": false
+            "required": false,
+            "example": "65"
           },
           "target_income": {
-            "type": "string",
+            "type": "number",
             "description": "target_income",
             "required": false
           },
@@ -17277,7 +19589,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "extra": {
-            "type": "string",
+            "type": "number",
             "description": "extra",
             "required": false
           },
@@ -17300,15 +19612,15 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "monthly": {
-            "type": "string",
+            "type": "number",
             "description": "monthly",
-            "required": false
+            "required": false,
+            "example": "3000"
           },
           "credit_score": {
             "type": "string",
             "description": "credit_score",
-            "required": false,
-            "example": "good"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -17324,22 +19636,23 @@ export const VERTICALS: Record<string, Vertical> = {
         "description": "Mortgage affordability analysis",
         "params": {
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "income",
             "required": true
           },
           "down": {
-            "type": "string",
+            "type": "number",
             "description": "down",
             "required": true
           },
           "location": {
             "type": "string",
             "description": "location",
-            "required": false
+            "required": false,
+            "example": "US"
           },
           "debt": {
-            "type": "string",
+            "type": "number",
             "description": "debt",
             "required": false
           },
@@ -17353,7 +19666,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "debt-negotiate",
         "path": "/api/wealth/debt-negotiate",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "DIY debt negotiation protocol",
         "params": {
           "creditor": {
@@ -17362,7 +19675,7 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           },
           "balance": {
-            "type": "string",
+            "type": "number",
             "description": "balance",
             "required": false
           },
@@ -17392,8 +19705,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "action": {
             "type": "string",
             "description": "action",
-            "required": true,
-            "example": "find"
+            "required": true
           },
           "specialty": {
             "type": "string",
@@ -17435,16 +19747,16 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "ssa",
         "path": "/api/wealth/ssa",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Social Security claiming strategy",
         "params": {
           "birth_year": {
-            "type": "string",
+            "type": "integer",
             "description": "Year of birth (used to calculate Full Retirement Age)",
             "required": true
           },
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "Annual earnings (for benefit estimate context)",
             "required": false
           },
@@ -17457,8 +19769,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "health": {
             "type": "string",
             "description": "health",
-            "required": false,
-            "example": "good"
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -17470,11 +19781,11 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "tax",
         "path": "/api/wealth/tax",
-        "price": "$0.10",
+        "price": "$0.15",
         "description": "Year-end tax optimization",
         "params": {
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "income",
             "required": true
           },
@@ -17508,12 +19819,12 @@ export const VERTICALS: Record<string, Vertical> = {
         "description": "Roth vs Traditional IRA/401k decision",
         "params": {
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "income",
             "required": true
           },
           "age": {
-            "type": "string",
+            "type": "integer",
             "description": "age",
             "required": true
           },
@@ -17526,8 +19837,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "employer_match": {
             "type": "string",
             "description": "employer_match",
-            "required": false,
-            "example": "yes"
+            "required": false
           },
           "state": {
             "type": "string",
@@ -17548,12 +19858,12 @@ export const VERTICALS: Record<string, Vertical> = {
         "description": "Emergency fund sizing",
         "params": {
           "income": {
-            "type": "string",
+            "type": "number",
             "description": "income",
             "required": true
           },
           "expenses": {
-            "type": "string",
+            "type": "number",
             "description": "Monthly expenses in USD",
             "required": false
           },
@@ -17564,12 +19874,12 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "stable"
           },
           "dependents": {
-            "type": "string",
+            "type": "integer",
             "description": "dependents",
             "required": false
           },
           "current_fund": {
-            "type": "string",
+            "type": "number",
             "description": "Existing emergency fund in USD",
             "required": false
           },
@@ -17589,8 +19899,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "relationship": {
             "type": "string",
             "description": "relationship",
-            "required": true,
-            "example": "spouse"
+            "required": true
           },
           "account_type": {
             "type": "string",
@@ -17599,17 +19908,17 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "traditional"
           },
           "balance": {
-            "type": "string",
+            "type": "number",
             "description": "balance",
             "required": false
           },
           "your_age": {
-            "type": "string",
+            "type": "integer",
             "description": "your_age",
             "required": false
           },
           "original_owner_age": {
-            "type": "string",
+            "type": "integer",
             "description": "Original owner's age at time of death",
             "required": false
           },

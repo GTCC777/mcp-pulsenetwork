@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PulseNetwork Affiliates — earn USDC on the API traffic your agent drives</title>
+<meta name="description" content="Make money online with a zero-build affiliate program: refer paid PulseNetwork API calls from your agent or tool and earn USDC automatically — 25-30% rev-share on Base. For developers whose agents/tools drive API traffic — not yet for human-audience influencers.">
+<link rel="canonical" href="https://mcp-pulsenetwork.vercel.app/affiliates">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PulseNetwork Affiliates — earn USDC on the API traffic your agent drives">
+<meta property="og:description" content="Self-serve rev-share program for agent-builders and resellers — a simple way to build passive income with AI. 25-30% of referred revenue, paid in USDC on Base.">
+<meta property="og:url" content="https://mcp-pulsenetwork.vercel.app/affiliates">
+<meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#0a0d14;--panel:#121826;--panel2:#0e1421;--line:#1f2937;--ink:#e8edf5;--mut:#94a3b8;--acc:#4ade80;--acc2:#38bdf8;--paid:#fbbf24;--bad:#f87171}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--acc2);text-decoration:none}a:hover{text-decoration:underline}
+code{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:.85em}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+header.top{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(10,13,20,.85);backdrop-filter:blur(8px);z-index:10}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+.logo{font-weight:700;letter-spacing:-.02em}.logo b{color:var(--acc)}
+.nav a{color:var(--mut);margin-left:18px;font-size:14px}
+.hero{padding:60px 0 32px;text-align:center;border-bottom:1px solid var(--line);background:radial-gradient(1200px 400px at 50% -10%,rgba(74,222,128,.08),transparent)}
+.hero h1{font-size:clamp(28px,4.6vw,44px);line-height:1.12;letter-spacing:-.03em;margin:0 0 16px;font-weight:800}
+.hero h1 .g{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p.sub{font-size:clamp(15px,2vw,18px);color:var(--mut);max-width:640px;margin:0 auto 22px}
+.stats{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin:22px 0 6px}
+.stat b{display:block;font-size:24px;color:var(--ink);font-weight:800}.stat span{font-size:12.5px;color:var(--mut)}
+.cta{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:24px}
+.btn{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:600;font-size:15px;border:none;cursor:pointer;font-family:inherit}
+.btn.primary{background:var(--acc);color:#04210f}.btn.primary:hover{filter:brightness(1.08)}
+.btn.ghost{border:1px solid var(--line);color:var(--ink);background:transparent}.btn.ghost:hover{text-decoration:none;border-color:var(--acc2)}
+section{padding:44px 0;border-bottom:1px solid var(--line)}
+h2{font-size:22px;letter-spacing:-.02em;margin:0 0 8px}
+h3{font-size:16px;margin:0 0 6px}
+.lead{color:var(--mut);max-width:720px;margin:0 0 22px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}}
+.feat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+.feat.for{border-color:rgba(74,222,128,.35)}
+.feat.not-for{border-color:rgba(248,113,113,.3)}
+.feat p{margin:6px 0 0;color:var(--mut);font-size:14px}
+.feat ul{margin:8px 0 0;padding-left:18px;color:var(--mut);font-size:14px}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;padding:3px 8px;border-radius:6px}
+.tag.yes{background:rgba(74,222,128,.14);color:var(--acc)}
+.tag.no{background:rgba(248,113,113,.14);color:var(--bad)}
+pre{background:#0b1322;border:1px solid var(--line);border-radius:12px;padding:16px;overflow:auto;font-size:12.5px;color:#cbd5e1;margin:10px 0 0}
+.example{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:14px}
+.example .price{float:right;font-size:12px;font-weight:700;color:var(--paid);background:rgba(251,191,36,.14);padding:3px 8px;border-radius:6px}
+.example p{color:var(--mut);font-size:14px;margin:6px 0 0}
+form{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px}
+label{display:block;font-size:13px;color:var(--mut);margin:14px 0 6px}
+label:first-child{margin-top:0}
+input[type=text],input[type=email]{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:11px 13px;color:var(--ink);font-size:14.5px;font-family:inherit}
+input:focus{outline:none;border-color:var(--acc2)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.formrow-btn{margin-top:18px}
+.result{margin-top:16px;padding:14px;border-radius:10px;font-size:13.5px;display:none;white-space:pre-wrap;word-break:break-word}
+.result.ok{display:block;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);color:var(--ink)}
+.result.err{display:block;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:var(--ink)}
+.stat-box{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+@media(max-width:600px){.stat-box{grid-template-columns:1fr 1fr}}
+.stat-box div{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+.stat-box b{display:block;font-size:18px}
+.stat-box span{font-size:11px;color:var(--mut)}
+.lookup-row{display:flex;gap:10px}
+.lookup-row input{flex:1}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+td,th{text-align:left;padding:8px 10px;border-top:1px solid var(--line);color:var(--mut)}
+th{color:var(--ink);font-size:13px}
+footer{padding:36px 0;color:var(--mut);font-size:14px}
+footer a{color:var(--mut)}
+.kv{color:var(--mut);font-size:13px;margin-top:10px}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <span class="logo">Pulse<b>Network</b></span>
+  <nav class="nav"><a href="/#catalog">Catalog</a><a href="#how">How it works</a><a href="#signup">Sign up</a><a href="#stats">My stats</a></nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <h1>Earn USDC on the<br><span class="g">API traffic your agent drives</span></h1>
+  <p class="sub">PulseNetwork is a network of ~68 pay-per-query intelligence APIs agents call and pay for in USDC. Tag the calls your agent or tool routes with a referral code and earn a share of what they spend — paid monthly, in USDC, on Base. It's one of the simplest ways to make money online with AI: no inventory, no support queue, just a link — earn USDC automatically as passive income with AI.</p>
+  <div class="stats">
+    <div class="stat"><b>25-30%</b><span>rev-share</span></div>
+    <div class="stat"><b>USDC</b><span>on Base, monthly</span></div>
+    <div class="stat"><b>per-call</b><span>attribution, no cookies</span></div>
+  </div>
+  <div class="cta">
+    <a class="btn primary" href="#signup">Get a referral code</a>
+    <a class="btn ghost" href="#stats">Check my stats</a>
+  </div>
+</div></div>
+
+<section id="who"><div class="wrap">
+  <h2>Who this is for</h2>
+  <p class="lead">Be honest about this: right now the program only makes sense if <strong>your traffic can actually pay a 402</strong>. That means agents and tools, not people clicking a link.</p>
+  <div class="grid2">
+    <div class="feat for">
+      <span class="tag yes">This is for you</span>
+      <h3>Agent builders &amp; resellers</h3>
+      <p>You're building or operating an AI agent, chatbot, SaaS tool, or dev product that calls PulseNetwork endpoints on a user's behalf — and the wallet paying the x402 charge is a machine (yours, your platform's, or your user's agent).</p>
+      <ul>
+        <li>Wire a PulseNetwork endpoint into your product as the intelligence engine</li>
+        <li>Route agent traffic to us as a reseller, sub-agent, or MCP/skill integration</li>
+        <li>Build tooling (skills, plugins, connectors) that other builders adopt</li>
+      </ul>
+    </div>
+    <div class="feat not-for">
+      <span class="tag no">Not yet — coming later</span>
+      <h3>Human-audience influencers</h3>
+      <p>If your audience is people (a newsletter, a TikTok, a Discord of humans), a raw <code>?ref=</code> link today sends them to a bare x402 <code>402 Payment Required</code> JSON response — no wallet, no checkout, nothing a person can act on. That's a bounce, not a sale.</p>
+      <p>A human-facing product (wallet-connect, checkout, a real UI) is coming. When it ships, this program opens to consumer creators too. Until then, don't spend audience goodwill promoting a link your followers can't actually use.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <h2>How attribution works</h2>
+  <p class="lead">There's no cookie, no session window, no "last click within 30 days." Attribution is <strong>per tagged call</strong> — the code has to ride on the actual request that gets paid.</p>
+  <div class="grid2">
+    <div class="feat">
+      <h3>1. Tag the call</h3>
+      <p>Add your code to any PulseNetwork x402 request, either way:</p>
+      <pre><code>?ref=your-code
+
+# or
+
+x-referral-code: your-code</code></pre>
+    </div>
+    <div class="feat">
+      <h3>2. It settles, you're credited</h3>
+      <p>The moment that specific call settles payment, the revenue, call count, and payer are logged against your code — instantly, on our existing analytics pipeline. No batch jobs, no manual reconciliation on our end.</p>
+    </div>
+  </div>
+  <p class="kv">This means: promotion has to route <em>actual API calls</em> through your code — a link a human clicks and abandons earns nothing, but every real call your integration makes on a user's behalf is credited the moment it settles.</p>
+</div></section>
+
+<section id="examples"><div class="wrap">
+  <h2>Integration examples</h2>
+  <p class="lead">Three real endpoints, real prices, picked because their audiences already route repeat, machine-driven traffic:</p>
+
+  <div class="example">
+    <span class="price">$0.50/call</span>
+    <h3>SignalPulse — fantasy sports advice</h3>
+    <p><code>GET https://signalpulse-peach.vercel.app/api/scan/fantasy?ref=your-code</code></p>
+    <p>Start/sit, DFS lineup construction, waiver pickups, trade analysis — fully open, committed recommendations. A fantasy-sports bot or Discord tool calling this weekly per user racks up volume fast during the season.</p>
+  </div>
+
+  <div class="example">
+    <span class="price">$1.00/call</span>
+    <h3>EduPulse — exam-style practice questions</h3>
+    <p><code>GET https://edupulse-xi-blond.vercel.app/api/exam/prep?ref=your-code</code></p>
+    <p>200+ exams, rubric-matched difficulty. A test-prep app or tutoring bot generating daily practice sets per student has high-frequency, high-intent repeat calls — the best unit economics in the fleet.</p>
+  </div>
+
+  <div class="example">
+    <span class="price">$0.015/call</span>
+    <h3>OnchainPulse — EVM token safety scan</h3>
+    <p><code>GET https://onchainpulse-nine.vercel.app/api/evmtoken?ref=your-code&amp;address=0x…&amp;chain=base</code></p>
+    <p>Pre-trade rug/honeypot verdict, deterministic, multi-chain. Low per-call price but this is where agent-builder volume already clusters — a trading bot or wallet-safety layer calling this on every token a user looks at adds up.</p>
+  </div>
+
+  <p class="kv">Full catalog + every price: <a href="/#catalog">mcp-pulsenetwork.vercel.app/#catalog</a>. Any of the ~660 endpoints across ~68 verticals works the same way — append <code>?ref=your-code</code> or set the header.</p>
+</div></section>
+
+<section id="signup"><div class="wrap">
+  <h2>Get a referral code</h2>
+  <p class="lead">Self-serve, instant. Pick a code, give us a Base (EVM) address for payouts, and a way to reach you.</p>
+  <form id="signup-form" autocomplete="off">
+    <label for="code">Desired code</label>
+    <input type="text" id="code" name="code" placeholder="e.g. your-brand-name" pattern="[a-z0-9-]{3,20}" required>
+
+    <label for="wallet">Payout wallet (Base / EVM address)</label>
+    <input type="text" id="wallet" name="wallet" placeholder="0x…" pattern="0x[a-fA-F0-9]{40}" required>
+
+    <label for="contact">Contact (email or Telegram handle)</label>
+    <input type="text" id="contact" name="contact" placeholder="you@example.com or @yourhandle" required>
+
+    <div class="hp" aria-hidden="true">
+      <label for="company">Company</label>
+      <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="formrow-btn"><button class="btn primary" type="submit">Register code</button></div>
+    <div id="signup-result" class="result"></div>
+  </form>
+</div></section>
+
+<section id="stats"><div class="wrap">
+  <h2>Check your stats</h2>
+  <p class="lead">Public, read-only, no login — anyone with a code can look up its performance.</p>
+  <div class="lookup-row">
+    <input type="text" id="lookup-code" placeholder="your-code">
+    <button class="btn ghost" id="lookup-btn" type="button">Look up</button>
+  </div>
+  <div id="stats-result" class="result"></div>
+  <div class="stat-box" id="stats-box" style="display:none">
+    <div><b id="s-rev">—</b><span>referred revenue</span></div>
+    <div><b id="s-calls">—</b><span>referred calls</span></div>
+    <div><b id="s-buyers">—</b><span>distinct buyers</span></div>
+    <div><b id="s-rate">—</b><span>your share rate</span></div>
+    <div><b id="s-earned">—</b><span>est. earnings</span></div>
+    <div><b id="s-owed">—</b><span>owed (unpaid)</span></div>
+  </div>
+</div></section>
+
+<section id="payouts"><div class="wrap">
+  <h2>Payout terms</h2>
+  <table>
+    <tr><th>Frequency</th><td>Monthly</td></tr>
+    <tr><th>Currency / chain</th><td>USDC on Base</td></tr>
+    <tr><th>Rate</th><td>25% by default at signup (20-30% range for negotiated partners)</td></tr>
+    <tr><th>Review</th><td>Manual review while the program is young — we look at every payout batch by hand before sending; expect some delay, not an automated same-day payout yet</td></tr>
+    <tr><th>Minimum</th><td>No hard minimum, but sub-cent balances may be batched into the following month</td></tr>
+  </table>
+  <p class="kv">Questions about a payout or a partnership rate above 25%? Reach out via the contact you registered with.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <strong>PulseNetwork Affiliates</strong> — self-serve rev-share on referred x402 revenue. Part of the <a href="/">PulseNetwork</a> agent-payable intelligence network.<br>
+  <span class="kv"><a href="/">Home</a> · <a href="/#catalog">Catalog</a> · <a href="/llms.txt">llms.txt</a></span>
+</div></footer>
+
+<script>
+(function(){
+  var form = document.getElementById('signup-form');
+  var out = document.getElementById('signup-result');
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    out.className = 'result';
+    out.textContent = 'Registering…';
+    out.style.display = 'block';
+    var body = {
+      code: document.getElementById('code').value.trim().toLowerCase(),
+      wallet: document.getElementById('wallet').value.trim(),
+      contact: document.getElementById('contact').value.trim(),
+      company: document.getElementById('company').value
+    };
+    fetch('/api/affiliate/register', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function(r){ return r.json().then(function(j){ return { status: r.status, body: j }; }); })
+      .then(function(res){
+        if (res.status === 201) {
+          out.className = 'result ok';
+          out.textContent = 'Registered! Code: ' + res.body.code + '\n' +
+            'Use: ?ref=' + res.body.code + '  or  x-referral-code: ' + res.body.code + '\n' +
+            'Stats: ' + res.body.stats_url + '\n\n' + (res.body.note || '');
+        } else {
+          out.className = 'result err';
+          out.textContent = 'Error: ' + (res.body.error || 'unknown error') + (res.body.detail ? ('\n' + res.body.detail) : '');
+        }
+      })
+      .catch(function(e){
+        out.className = 'result err';
+        out.textContent = 'Network error — try again shortly.';
+      });
+  });
+
+  var lookupBtn = document.getElementById('lookup-btn');
+  var lookupInput = document.getElementById('lookup-code');
+  var statsResult = document.getElementById('stats-result');
+  var statsBox = document.getElementById('stats-box');
+  function lookup(){
+    var code = lookupInput.value.trim().toLowerCase();
+    statsBox.style.display = 'none';
+    statsResult.className = 'result';
+    statsResult.textContent = 'Looking up…';
+    statsResult.style.display = 'block';
+    fetch('/api/affiliate/stats?code=' + encodeURIComponent(code))
+      .then(function(r){ return r.json().then(function(j){ return { status: r.status, body: j }; }); })
+      .then(function(res){
+        if (res.status === 200) {
+          statsResult.style.display = 'none';
+          statsBox.style.display = 'grid';
+          document.getElementById('s-rev').textContent = '$' + res.body.total_rev_usd.toFixed(4);
+          document.getElementById('s-calls').textContent = res.body.calls;
+          document.getElementById('s-buyers').textContent = res.body.distinct_buyers;
+          document.getElementById('s-rate').textContent = (res.body.share_rate * 100).toFixed(0) + '%';
+          document.getElementById('s-earned').textContent = '$' + res.body.est_earnings_usd.toFixed(4);
+          document.getElementById('s-owed').textContent = '$' + res.body.owed_usd.toFixed(4);
+        } else {
+          statsResult.className = 'result err';
+          statsResult.textContent = 'Error: ' + (res.body.error || 'unknown error') + (res.body.detail ? ('\n' + res.body.detail) : '');
+        }
+      })
+      .catch(function(){
+        statsResult.className = 'result err';
+        statsResult.textContent = 'Network error — try again shortly.';
+      });
+  }
+  lookupBtn.addEventListener('click', lookup);
+  lookupInput.addEventListener('keydown', function(e){ if (e.key === 'Enter') lookup(); });
+})();
+</script>
+</body>
+</html>

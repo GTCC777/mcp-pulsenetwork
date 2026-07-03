@@ -17,7 +17,7 @@
     "network": "base-mainnet",
     "currency": "USDC",
     "pricing_model": "per_request",
-    "price_range": "$0.07 – $0.50 per tool call"
+    "price_range": "$0.015 – $2.00 per tool call"
   },
   "tools_count": 69,
   "verticals": [

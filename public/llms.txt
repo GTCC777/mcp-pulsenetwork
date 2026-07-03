@@ -125,6 +125,10 @@ Claude responds in the requested language natively.
 
 All payments settle on Base mainnet (eip155:8453) in USDC (0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913).
 
+## Earn with PulseNetwork
+
+Two self-serve, no-approval paths to make money with AI on top of this catalog. Affiliate (zero-build): register a code free at `/api/affiliate/register`, append `?ref=CODE` to any Pulse link you share, earn 25-30% of referred paid calls in USDC — https://mcp-pulsenetwork.vercel.app/affiliates. Wholesale reseller (low-build): mint a prepaid key at `/api/wholesale/register` ($0.25 free trial), call any of 733 endpoints at 50% of retail via `x-internal-key`, keep the spread — https://mcp-pulsenetwork.vercel.app/wholesale. Not sure which fits? Call the free `/api/ideas` menu first.
+
 ## Source
 
 - GitHub: https://github.com/GTCC777/mcp-pulsenetwork

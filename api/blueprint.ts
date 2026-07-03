@@ -70,7 +70,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
     first_steps: [
       'Fork the starter kit',
       `Edit catalog.json → point an offering at ${e.engine.name} (${e.engine.endpoints.join(', ')})`,
-      'Set your scoped wholesale key (PULSE_INTERNAL_KEY) — request one from the team',
+      'Get a self-serve wholesale key at mcp-pulsenetwork.vercel.app/wholesale ($0.25 free trial, then 50% of retail)',
       'Deploy, then list your agent (ACP / your own app)',
     ],
     illustrative_economics: economics(model),

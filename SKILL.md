@@ -2,7 +2,7 @@
 name: pulsenetwork
 description: "Pay-per-query access to 68 specialized intelligence APIs via x402 (USDC on Base or Solana, no API keys, no subscription). Use this skill when an agent needs a paid data/intelligence endpoint, especially for token-safety / honeypot / rugpull scanning before a trade (Solana memecoins via mint address, EVM tokens via contract on Base/Ethereum/BSC/Arbitrum/Polygon/Optimism/Avalanche), crypto security and wallet-risk checks, DeFi yield/APY intelligence, sports and fantasy predictions and prediction-market edges (NFL/NBA/MLB/golf/racing, Polymarket/Kalshi), insurance estimates, immigration and visa scoring, real-estate, legal letters, clinical/medical intel, careers/salary, travel, and dozens more domains. Each call returns structured JSON for roughly $0.015 to $1.00. Trigger when the user asks whether a token is safe / a honeypot / a rug, to scan a contract, for the best NFL pick or fantasy start-sit, for DeFi yield, or any question better answered by a live paid data API than by training knowledge. Two ways to call: the PulseNetwork MCP server, or direct x402 HTTP."
 metadata:
-  homepage: https://mcp-pulsenetwork.vercel.app
+  homepage: https://pulse.theaslangroupllc.com
   settlement: x402 USDC on Base (eip155:8453) and Solana mainnet
   auth: none (pay-per-call)
 ---
@@ -25,22 +25,22 @@ There are **two integration paths**. Use the hosted MCP server inside Claude Des
 
 | Capability | Endpoint | Price | Example |
 |---|---|---|---|
-| Solana memecoin safety | `GET onchainpulse-nine.vercel.app/api/memecoin?mint=<base58>` | $0.015 | `?mint=DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263` (BONK) |
-| EVM token safety | `GET onchainpulse-nine.vercel.app/api/evmtoken?address=<addr>&chain=base` | $0.015 | `?address=0x532f27101965dd16442E59d40670FaF5eBB142E4&chain=base` |
-| Sports analysis | `GET signalpulse-peach.vercel.app/api/scan/game?sport=nfl` | $1.00 | `?sport=nfl` |
-| Fantasy advice | `GET signalpulse-peach.vercel.app/api/scan/fantasy?sport=nfl&mode=start-sit` | $1.00 | start-sit / lineup / waiver / trade |
-| Prediction-market read | `GET signalpulse-peach.vercel.app/api/scan/predmarket?category=sports&horizon=mid` | $2.00 | category: sports/crypto/economics/geopolitics/politics/esports |
-| Crypto / market / FX scan | `GET signalpulse-peach.vercel.app/api/scan/crypto` or `/api/scan/market` | $2.00 | de-vigged, calibrated synthesis reads |
-| FREE sample | `GET signalpulse-peach.vercel.app/api/scan/sample` | FREE | pick-of-the-day, no payment, no key |
+| Solana memecoin safety | `GET onchainpulse.theaslangroupllc.com/api/memecoin?mint=<base58>` | $0.015 | `?mint=DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263` (BONK) |
+| EVM token safety | `GET onchainpulse.theaslangroupllc.com/api/evmtoken?address=<addr>&chain=base` | $0.015 | `?address=0x532f27101965dd16442E59d40670FaF5eBB142E4&chain=base` |
+| Sports analysis | `GET signalpulse.theaslangroupllc.com/api/scan/game?sport=nfl` | $1.00 | `?sport=nfl` |
+| Fantasy advice | `GET signalpulse.theaslangroupllc.com/api/scan/fantasy?sport=nfl&mode=start-sit` | $1.00 | start-sit / lineup / waiver / trade |
+| Prediction-market read | `GET signalpulse.theaslangroupllc.com/api/scan/predmarket?category=sports&horizon=mid` | $2.00 | category: sports/crypto/economics/geopolitics/politics/esports |
+| Crypto / market / FX scan | `GET signalpulse.theaslangroupllc.com/api/scan/crypto` or `/api/scan/market` | $2.00 | de-vigged, calibrated synthesis reads |
+| FREE sample | `GET signalpulse.theaslangroupllc.com/api/scan/sample` | FREE | pick-of-the-day, no payment, no key |
 
-Discover the full catalog (all 68 verticals, 675 endpoints) at **https://mcp-pulsenetwork.vercel.app**, its **/llms.txt**, or each vertical's own `/openapi.json` and `/.well-known/agent.json`.
+Discover the full catalog (all 68 verticals, 675 endpoints) at **https://pulse.theaslangroupllc.com**, its **/llms.txt**, or each vertical's own `/openapi.json` and `/.well-known/agent.json`.
 
 ## Path 1 — Hosted MCP (no install)
 
 Point any Streamable-HTTP MCP client at:
 
 ```
-https://mcp-pulsenetwork.vercel.app/mcp
+https://pulse.theaslangroupllc.com/mcp
 ```
 
 Fund the configured wallet with a few dollars of USDC on Base and every vertical below is callable as an MCP tool.
@@ -81,7 +81,7 @@ const client = new x402Client();
 client.register('eip155:8453', new ExactEvmScheme(privateKeyToAccount(process.env.PRIVATE_KEY)));
 const fetch402 = wrapFetchWithPayment(fetch, client);
 
-const res = await fetch402('https://onchainpulse-nine.vercel.app/api/memecoin?mint=DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263');
+const res = await fetch402('https://onchainpulse.theaslangroupllc.com/api/memecoin?mint=DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263');
 console.log(await res.json()); // { verdict: "CLEAR" | "CAUTION" | "AVOID", risk_score, evidence, ... }
 ```
 
@@ -89,11 +89,11 @@ Solana works the same way via `@x402/svm` (`ExactSvmScheme`) — the 402 respons
 
 ## Discovery surfaces
 
-PulseNetwork is indexed on the **CDP x402 Bazaar** (`api.cdp.coinbase.com/platform/v2/x402/discovery`), **x402scan**, and ships per-vertical `/openapi.json`, `/llms.txt`, and `/.well-known/agent.json`. The hub at **https://mcp-pulsenetwork.vercel.app** lists every vertical and endpoint with params and live pricing.
+PulseNetwork is indexed on the **CDP x402 Bazaar** (`api.cdp.coinbase.com/platform/v2/x402/discovery`), **x402scan**, and ships per-vertical `/openapi.json`, `/llms.txt`, and `/.well-known/agent.json`. The hub at **https://pulse.theaslangroupllc.com** lists every vertical and endpoint with params and live pricing.
 
 ## Earn with PulseNetwork
 
-Building an agent that should make money, not just spend it? Two self-serve paths, no approval queue: **affiliate** (zero-build) — register free at `mcp-pulsenetwork.vercel.app/affiliates`, append `?ref=CODE` to any Pulse link you route, earn 25-30% of referred paid calls in USDC. **Wholesale reseller** (low-build) — mint a prepaid key at `mcp-pulsenetwork.vercel.app/wholesale` ($0.25 free trial), call any endpoint at 50% of retail via `x-internal-key`, keep the spread. Unsure which fits? Call the free `GET /api/ideas`.
+Building an agent that should make money, not just spend it? Two self-serve paths, no approval queue: **affiliate** (zero-build) — register free at `pulse.theaslangroupllc.com/affiliates`, append `?ref=CODE` to any Pulse link you route, earn 25-30% of referred paid calls in USDC. **Wholesale reseller** (low-build) — mint a prepaid key at `pulse.theaslangroupllc.com/wholesale` ($0.25 free trial), call any endpoint at 50% of retail via `x-internal-key`, keep the spread. Unsure which fits? Call the free `GET /api/ideas`.
 
 ## Pricing
 
@@ -104,4 +104,4 @@ Per-call, in USDC, no subscription, no minimums, pay only for what you call:
 - SignalPulse racing/h2h/player reads: **$0.50**
 - SignalPulse game/fantasy/ask/golf/compare reads: **$1.00**
 - SignalPulse prediction-market and deep crypto/FX/macro synthesis: **$2.00**
-- Free daily sample: **FREE** (`signalpulse-peach.vercel.app/api/scan/sample`)
+- Free daily sample: **FREE** (`signalpulse.theaslangroupllc.com/api/scan/sample`)

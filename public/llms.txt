@@ -1,12 +1,12 @@
 # PulseNetwork MCP Server
 
-> One MCP server. 67 AI-powered intelligence verticals. All x402-native, pay-per-query via USDC on Base.
+> One MCP server. 68 AI-powered intelligence verticals. All x402-native, pay-per-query via USDC on Base.
 
 ## What is PulseNetwork?
 
 PulseNetwork is the most comprehensive x402-native intelligence network available. Each vertical is a domain-specific API that synthesizes free public data (government APIs, research databases, real-time feeds) through Claude into structured, actionable intelligence — all gated by x402 micropayments on Base mainnet.
 
-This MCP server wraps all 67 verticals into a single integration. One private key, one configuration, access to everything.
+This MCP server wraps all 68 verticals into a single integration. One private key, one configuration, access to everything.
 
 ## How to Connect
 
@@ -35,7 +35,7 @@ Each tool call costs $0.05–$0.20 in USDC on Base mainnet, charged to the walle
 ## Available Tools (52 total)
 
 ### discover
-Find the right vertical for any task. Returns categorized list of all 67 verticals.
+Find the right vertical for any task. Returns categorized list of all 68 verticals.
 - `category`: finance | health | law | travel | real-estate | crypto | career | data | global | all
 
 ### Finance & Markets
@@ -127,7 +127,7 @@ All payments settle on Base mainnet (eip155:8453) in USDC (0x833589fCD6eDb6E08f4
 
 ## Earn with PulseNetwork
 
-Two self-serve, no-approval paths to make money with AI on top of this catalog. Affiliate (zero-build): register a code free at `/api/affiliate/register`, append `?ref=CODE` to any Pulse link you share, earn 25-30% of referred paid calls in USDC — https://mcp-pulsenetwork.vercel.app/affiliates. Wholesale reseller (low-build): mint a prepaid key at `/api/wholesale/register` ($0.25 free trial), call any of 733 endpoints at 50% of retail via `x-internal-key`, keep the spread — https://mcp-pulsenetwork.vercel.app/wholesale. Not sure which fits? Call the free `/api/ideas` menu first.
+Two self-serve, no-approval paths to make money with AI on top of this catalog. Affiliate (zero-build): register a code free at `/api/affiliate/register`, append `?ref=CODE` to any Pulse link you share, earn 25-30% of referred paid calls in USDC — https://pulse.theaslangroupllc.com/affiliates. Wholesale reseller (low-build): mint a prepaid key at `/api/wholesale/register` ($0.25 free trial), call any of 733 endpoints at 50% of retail via `x-internal-key`, keep the spread — https://pulse.theaslangroupllc.com/wholesale. Not sure which fits? Call the free `/api/ideas` menu first.
 
 ## Source
 

@@ -1,6 +1,6 @@
 {
   "name": "mcp-pulsenetwork",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "PulseNetwork MCP Server — 67 AI-powered intelligence verticals (660+ endpoints), x402-native, pay-per-query via USDC on Base",
   "type": "module",
   "main": "dist/index.js",
@@ -16,7 +16,8 @@
     "build": "tsc",
     "prepare": "npm run build",
     "start": "node dist/index.js",
-    "dev": "tsx index.ts"
+    "dev": "tsx index.ts",
+    "check-drift": "node tools/check-drift.mjs"
   },
   "keywords": [
     "mcp",
@@ -42,7 +43,7 @@
     "type": "git",
     "url": "https://github.com/GTCC777/mcp-pulsenetwork"
   },
-  "homepage": "https://github.com/GTCC777/mcp-pulsenetwork#readme",
+  "homepage": "https://pulse.theaslangroupllc.com",
   "engines": {
     "node": ">=18.0.0"
   },

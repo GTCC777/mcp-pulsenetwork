@@ -1,0 +1,122 @@
+{
+  "$comment": "Curated business models for the Startup Engine. Each maps a business concept to a real PulseNetwork vertical + endpoints. CI-validated against lib/verticals.ts (tools/validate-models.mjs): unknown vertical = hard fail, unknown endpoint = warning. 'suggested_retail' is what the RESELLER charges their customer; wholesale via a scoped key is near-$0. Economics are ILLUSTRATIVE, never guarantees.",
+  "models": [
+    {
+      "id": "ai-tutor",
+      "title": "AI Exam-Prep Tutor",
+      "tagline": "Sell exam study guides, quizzes and flashcards per question.",
+      "audience": ["students", "test-prep centers", "bootcamps"],
+      "engine": { "vertical": "edupulse", "endpoints": ["/api/exam/prep", "/api/study/guide", "/api/exam/flashcards"] },
+      "suggested_retail": 1.5,
+      "playbook": "https://github.com/GTCC777/pulse-starter-kit/blob/main/playbooks/nclex-tutor.md",
+      "difficulty": "low",
+      "match_signals": { "interests": ["education", "teaching", "nursing", "students", "study", "exams", "learning"], "skills": ["teaching", "tutoring"], "budget_min": 0 },
+      "economics_template": "{units} students × ${retail} × 30d"
+    },
+    {
+      "id": "sports-desk",
+      "title": "Sports & Prediction-Market Intelligence",
+      "tagline": "Sell calibrated game reads, DFS lineups and prediction-market edges.",
+      "audience": ["bettors", "DFS players", "sports Discords", "fantasy leagues"],
+      "engine": { "vertical": "signalpulse", "endpoints": ["/api/scan/game", "/api/scan/fantasy", "/api/scan/predmarket"] },
+      "suggested_retail": 3.0,
+      "difficulty": "medium",
+      "match_signals": { "interests": ["sports", "betting", "fantasy", "dfs", "trading", "prediction markets", "nfl", "nba", "mlb"], "skills": ["trading"], "budget_min": 0 },
+      "economics_template": "{units} subscribers × ${retail} × 30d"
+    },
+    {
+      "id": "token-safety-bot",
+      "title": "Pre-Trade Token-Safety Bot",
+      "tagline": "Sell instant rug/honeypot checks to crypto trading agents & Telegram groups.",
+      "audience": ["crypto traders", "trading Telegrams", "sniping bots"],
+      "engine": { "vertical": "onchainpulse", "endpoints": ["/api/evmtoken", "/api/memecoin"] },
+      "suggested_retail": 0.05,
+      "playbook": "https://github.com/GTCC777/pulse-starter-kit/blob/main/playbooks/dfs-picks.md",
+      "difficulty": "low",
+      "match_signals": { "interests": ["crypto", "web3", "trading", "memecoins", "defi", "solana", "base"], "skills": ["crypto"], "budget_min": 0 },
+      "economics_template": "{units} scans × ${retail}"
+    },
+    {
+      "id": "immigration-advisor",
+      "title": "AI Immigration & Relocation Advisor",
+      "tagline": "Sell visa-eligibility checks and relocation pathways worldwide.",
+      "audience": ["expats", "students abroad", "remote workers", "relocation firms"],
+      "engine": { "vertical": "immigrationpulse", "endpoints": ["/api/visa", "/api/pathway", "/api/nomad"] },
+      "suggested_retail": 2.0,
+      "playbook": "https://github.com/GTCC777/pulse-starter-kit/blob/main/playbooks/visa-eligibility.md",
+      "difficulty": "low",
+      "match_signals": { "interests": ["immigration", "travel", "relocation", "visa", "expat", "digital nomad"], "skills": ["consulting"], "budget_min": 0 },
+      "economics_template": "{units} checks × ${retail} × 30d"
+    },
+    {
+      "id": "insurance-advisor",
+      "title": "AI Insurance Advisor",
+      "tagline": "Sell coverage analysis and policy audits (advice + affiliate handoff).",
+      "audience": ["consumers", "small businesses", "insurance affiliates"],
+      "engine": { "vertical": "insurepulse", "endpoints": ["/api/insure/auto", "/api/insure/life", "/api/insure/review"] },
+      "suggested_retail": 2.5,
+      "difficulty": "medium",
+      "match_signals": { "interests": ["insurance", "finance", "personal finance", "risk"], "skills": ["sales", "finance"], "budget_min": 0 },
+      "economics_template": "{units} reviews × ${retail} × 30d"
+    },
+    {
+      "id": "deal-finder",
+      "title": "AI Deal & Coupon Finder",
+      "tagline": "Sell stacked-discount and price-drop intel to shoppers and creators.",
+      "audience": ["shoppers", "deal Discords", "affiliate creators"],
+      "engine": { "vertical": "dealpulse", "endpoints": ["/api/deals/item", "/api/deals/stack", "/api/deals/compare"] },
+      "suggested_retail": 0.25,
+      "difficulty": "low",
+      "match_signals": { "interests": ["shopping", "deals", "coupons", "ecommerce", "savings"], "skills": ["marketing"], "budget_min": 0 },
+      "economics_template": "{units} lookups × ${retail}"
+    },
+    {
+      "id": "meal-plan-service",
+      "title": "AI Meal-Plan & Grocery Service",
+      "tagline": "Sell dietary meal plans, recipes and budget grocery lists on subscription.",
+      "audience": ["fitness clients", "busy families", "diet coaches"],
+      "engine": { "vertical": "mealpulse", "endpoints": ["/api/meal/plan", "/api/meal/grocery", "/api/meal/dietary"] },
+      "suggested_retail": 1.0,
+      "difficulty": "low",
+      "match_signals": { "interests": ["food", "fitness", "health", "nutrition", "cooking", "diet", "wellness"], "skills": ["coaching"], "budget_min": 0 },
+      "economics_template": "{units} plans × ${retail} × 4 wk"
+    },
+    {
+      "id": "travel-concierge",
+      "title": "AI Travel Concierge",
+      "tagline": "Sell trip plans, park-wait intel and travel-deal alerts — a travel agent in a box.",
+      "audience": ["travelers", "family-trip planners", "travel-agent side hustles"],
+      "engine": { "vertical": "travelpulse", "endpoints": ["/api/travel/plan", "/api/travel/deals", "/api/parks/waits"] },
+      "suggested_retail": 2.0,
+      "difficulty": "low",
+      "match_signals": { "interests": ["travel", "vacation", "trips", "theme parks", "tourism", "disney"], "skills": ["planning"], "budget_min": 0 },
+      "economics_template": "{units} trips × ${retail}"
+    },
+    {
+      "id": "affiliate-partner",
+      "title": "PulseNetwork Affiliate Partner",
+      "tagline": "Zero-build passive income: register a code at /api/affiliate/register, append ?ref=CODE to any Pulse endpoint link you share, and earn 25-30% of referred paid calls in USDC — automatically, monthly, on Base.",
+      "audience": ["content creators", "AI agent builders", "Discord/Telegram communities", "developer influencers"],
+      "engine": { "vertical": "signalpulse", "endpoints": ["/api/affiliate/register", "/api/affiliate/stats"] },
+      "suggested_retail": 0.5,
+      "playbook": "https://pulse.theaslangroupllc.com/affiliates",
+      "difficulty": "low",
+      "match_signals": { "interests": ["passive income", "affiliate marketing", "make money online", "content creation", "referrals", "monetize ai agent"], "skills": ["marketing", "content", "social media"], "budget_min": 0 },
+      "economics_template": "{units} referred paid calls × ${retail} avg call × ~27.5% commission, paid monthly in USDC",
+      "_engine_note": "Meta-model: this product IS the hub's own affiliate program, not a single fleet vertical. 'signalpulse' is used as the required verticals.ts anchor (validate() only hard-fails on an unknown vertical key — endpoint paths outside that vertical's catalog just warn); the real engine is every priced endpoint fleet-wide."
+    },
+    {
+      "id": "api-reseller",
+      "title": "PulseNetwork Wholesale Reseller",
+      "tagline": "Low-build: get a self-serve wholesale key at /api/wholesale/register ($0.25 free trial), wrap any of PulseNetwork's 733 endpoints at your own price via x-internal-key, and keep the spread — wholesale is 50% of retail.",
+      "audience": ["indie hackers", "agent builders", "SaaS founders", "ACP/marketplace sellers"],
+      "engine": { "vertical": "signalpulse", "endpoints": ["/api/wholesale/register", "/api/wholesale/stats", "/api/wholesale/deposit"] },
+      "suggested_retail": 1.0,
+      "playbook": "https://pulse.theaslangroupllc.com/wholesale",
+      "difficulty": "low",
+      "match_signals": { "interests": ["reselling", "api business", "wholesale", "saas", "monetize ai agent", "make money online", "passive income with ai"], "skills": ["development", "coding", "api integration"], "budget_min": 0.25 },
+      "economics_template": "{units} resold calls × ${retail} retail (wholesale ≈50% of retail) × 30d — see also https://github.com/GTCC777/pulse-starter-kit",
+      "_engine_note": "Meta-model: same anchor caveat as affiliate-partner — 'signalpulse' is the required verticals.ts key; the real product is reselling ANY of the fleet's 733 endpoints via a scoped wholesale key."
+    }
+  ]
+}

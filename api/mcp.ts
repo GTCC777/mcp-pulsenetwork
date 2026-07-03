@@ -49,7 +49,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
   await server.connect(transport);
 
   // Build a Web Request with a guaranteed-correct Accept header.
-  const host = (req.headers['x-forwarded-host'] as string) ?? req.headers.host ?? 'mcp-pulsenetwork.vercel.app';
+  const host = (req.headers['x-forwarded-host'] as string) ?? req.headers.host ?? 'pulse.theaslangroupllc.com';
   const proto = (req.headers['x-forwarded-proto'] as string) ?? 'https';
   const headers = new Headers();
   for (const [k, v] of Object.entries(req.headers)) if (typeof v === 'string') headers.set(k, v);

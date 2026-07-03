@@ -2,7 +2,8 @@
   "schema_version": "1.0",
   "name": "PulseNetwork MCP Server",
   "description": "The PulseNetwork MCP Server gives any AI agent instant access to 68 domain-specific intelligence APIs — all x402-native, all pay-per-query via USDC on Base. One integration, 68 verticals. Covers personal finance, real estate, immigration, legal, healthcare, crypto, careers, sustainability, travel, sports, and more. Global coverage with multi-language support.",
-  "url": "https://github.com/GTCC777/mcp-pulsenetwork",
+  "url": "https://pulse.theaslangroupllc.com",
+  "repository": "https://github.com/GTCC777/mcp-pulsenetwork",
   "type": "mcp",
   "mcp": {
     "transport": "stdio",

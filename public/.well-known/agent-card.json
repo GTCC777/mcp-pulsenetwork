@@ -2,14 +2,14 @@
   "protocolVersion": "0.3.0",
   "name": "PulseNetwork",
   "description": "Pay-per-query access to 67 specialized intelligence APIs over x402 (USDC on Base and Solana, no API keys, no subscription). Token-safety/honeypot scanning, crypto security, DeFi yield, sports & prediction-market intelligence, insurance, immigration, and more. Each call returns structured JSON for ~$0.015–$0.50.",
-  "url": "https://mcp-pulsenetwork.vercel.app",
+  "url": "https://pulse.theaslangroupllc.com",
   "preferredTransport": "HTTP+JSON",
   "version": "1.0.0",
   "provider": {
     "organization": "The Aslan Group LLC",
     "url": "https://theaslangroupllc.com"
   },
-  "documentationUrl": "https://mcp-pulsenetwork.vercel.app/llms.txt",
+  "documentationUrl": "https://pulse.theaslangroupllc.com/llms.txt",
   "capabilities": {
     "streaming": false,
     "pushNotifications": false,
@@ -21,13 +21,13 @@
     {
       "id": "token-safety-solana",
       "name": "Solana memecoin safety scan",
-      "description": "Honeypot, rug, mint/freeze-authority, LP-lock and holder-concentration verdict (CLEAR/CAUTION/AVOID) for any SPL token by mint. x402 ~$0.015. GET https://onchainpulse-nine.vercel.app/api/memecoin?mint=",
+      "description": "Honeypot, rug, mint/freeze-authority, LP-lock and holder-concentration verdict (CLEAR/CAUTION/AVOID) for any SPL token by mint. x402 ~$0.015. GET https://onchainpulse.theaslangroupllc.com/api/memecoin?mint=",
       "tags": ["honeypot", "rug", "memecoin", "solana", "token-safety", "x402"]
     },
     {
       "id": "token-safety-evm",
       "name": "EVM token safety scan",
-      "description": "Honeypot/rug/risk verdict for EVM tokens by contract on Base, Ethereum, BSC, Arbitrum, Polygon, Optimism, Avalanche. x402 ~$0.015. GET https://onchainpulse-nine.vercel.app/api/evmtoken?address=&chain=base",
+      "description": "Honeypot/rug/risk verdict for EVM tokens by contract on Base, Ethereum, BSC, Arbitrum, Polygon, Optimism, Avalanche. x402 ~$0.015. GET https://onchainpulse.theaslangroupllc.com/api/evmtoken?address=&chain=base",
       "tags": ["honeypot", "rug", "evm", "base", "token-safety", "x402"]
     },
     {
@@ -39,13 +39,13 @@
     {
       "id": "sports-prediction",
       "name": "Sports & prediction-market intelligence",
-      "description": "Calibrated sports, fantasy and prediction-market reads (NFL/NBA/MLB/golf/racing, Polymarket/Kalshi). x402 ~$0.50. GET https://signalpulse-peach.vercel.app/api/scan/{game,fantasy,predmarket}",
+      "description": "Calibrated sports, fantasy and prediction-market reads (NFL/NBA/MLB/golf/racing, Polymarket/Kalshi). x402 ~$0.50. GET https://signalpulse.theaslangroupllc.com/api/scan/{game,fantasy,predmarket}",
       "tags": ["sports", "fantasy", "prediction-market", "betting", "x402"]
     },
     {
       "id": "intelligence-network",
       "name": "67-vertical intelligence network",
-      "description": "Beyond crypto and sports: insurance estimates, immigration/visa scoring, real-estate, legal, clinical, careers, travel and more — pay-per-query via x402. Full catalog with params and pricing at https://mcp-pulsenetwork.vercel.app",
+      "description": "Beyond crypto and sports: insurance estimates, immigration/visa scoring, real-estate, legal, clinical, careers, travel and more — pay-per-query via x402. Full catalog with params and pricing at https://pulse.theaslangroupllc.com",
       "tags": ["intelligence", "data-api", "x402", "agent-payments"]
     }
   ]

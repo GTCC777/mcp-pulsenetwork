@@ -3,9 +3,9 @@
   "name": "PulseNetwork",
   "description": "Pay-per-query access to 67 specialized intelligence APIs over x402 (USDC on Base and Solana, no API keys). Token-safety/honeypot scanning for Solana memecoins and EVM tokens, crypto security and DeFi-yield intelligence, sports and prediction-market reads, insurance, immigration, and dozens more domains.",
   "services": [
-    { "name": "web", "endpoint": "https://mcp-pulsenetwork.vercel.app" },
-    { "name": "MCP", "endpoint": "https://mcp-pulsenetwork.vercel.app/mcp" },
-    { "name": "A2A", "endpoint": "https://mcp-pulsenetwork.vercel.app/.well-known/agent-card.json", "version": "0.3.0" }
+    { "name": "web", "endpoint": "https://pulse.theaslangroupllc.com" },
+    { "name": "MCP", "endpoint": "https://pulse.theaslangroupllc.com/mcp" },
+    { "name": "A2A", "endpoint": "https://pulse.theaslangroupllc.com/.well-known/agent-card.json", "version": "0.3.0" }
   ],
   "x402Support": true,
   "active": true,

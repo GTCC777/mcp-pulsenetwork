@@ -20,7 +20,7 @@ export interface Vertical {
 export const VERTICALS: Record<string, Vertical> = {
   "signalpulse": {
     "name": "SignalPulse",
-    "baseUrl": "https://signalpulse-peach.vercel.app",
+    "baseUrl": "https://signalpulse.theaslangroupllc.com",
     "description": "Institutional-grade trading & prediction-market intelligence for agents. Calibrated multi-engine reads across crypto, FX, macro-events, prediction markets (Polymarket/Kalshi/Manifold/PredictIt) and sports — de-vigged sportsbook consensus plus proprietary xG/EPA/Statcast/weather analytics. Agent analysis tier; the curated, sized, tracked calls are the premium service.",
     "globalCoverage": "Global",
     "endpoints": [
@@ -12529,7 +12529,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "onchainpulse": {
     "name": "OnchainPulse",
-    "baseUrl": "https://onchainpulse-nine.vercel.app",
+    "baseUrl": "https://onchainpulse.theaslangroupllc.com",
     "description": "Intelligence API for the onchain financial transition. Decodes legislation, tracks RWA tokenization, models sector scenarios, guides onchain integration. All endpoints require x402 payment (USDC on Ba",
     "globalCoverage": "Global",
     "endpoints": [

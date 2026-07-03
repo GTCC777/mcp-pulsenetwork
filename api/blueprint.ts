@@ -28,7 +28,7 @@ function str(v: unknown): string | undefined {
   return typeof s === 'string' && s.trim() ? s : undefined;
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
+async function handlerImpl(req: VercelRequest, res: VercelResponse): Promise<void> {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') { res.status(204).end(); return; }
 
@@ -70,7 +70,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
     first_steps: [
       'Fork the starter kit',
       `Edit catalog.json → point an offering at ${e.engine.name} (${e.engine.endpoints.join(', ')})`,
-      'Get a self-serve wholesale key at mcp-pulsenetwork.vercel.app/wholesale ($0.25 free trial, then 50% of retail)',
+      'Get a self-serve wholesale key at pulse.theaslangroupllc.com/wholesale ($0.25 free trial, then 50% of retail)',
       'Deploy, then list your agent (ACP / your own app)',
     ],
     illustrative_economics: economics(model),
@@ -80,3 +80,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
     disclaimer: 'Illustrative framework and unit economics — not an income guarantee.',
   });
 }
+
+export default async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
+  try {
+    await handlerImpl(req, res);
+  } catch (err) {
+    console.error('unhandled_handler_error', { url: req.url, err });
+    if (!res.headersSent) {
+      res.status(500).json({ error: 'upstream_failed', message: 'This request failed unexpectedly after payment processing began. If you were charged and did not receive a result, this is a bug on our side — please retry or contact support.' });
+    }
+  }
+}
+

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Panjiva (S&amp;P Global): what you're actually paying for — cheap alternative analysis (2026)</title>
+<meta name="description" content="Panjiva (S&amp;P Global) costs $1,000+/mo. Decomposition: the free public data underneath, what the subscription actually adds, rebuild recipe, licensing traps, and the pay-per-call alternative.">
+<link rel="canonical" href="https://pulse.theaslangroupllc.com/unbundled/panjiva/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Panjiva (S&P Global): what you're actually paying for","datePublished":"2026-07-06","author":{"@type":"Organization","name":"The Aslan Group LLC","url":"https://pulse.theaslangroupllc.com"},"publisher":{"@type":"Organization","name":"The Aslan Group LLC"},"mainEntityOfPage":"https://pulse.theaslangroupllc.com/unbundled/panjiva/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is there a cheap alternative to Panjiva (S&P Global)?","acceptedAnswer":{"@type":"Answer","text":"Yes. Panjiva (S&P Global)'s underlying data is public: CBP AMS vessel manifest data (public by statute (19 CFR 103.31)). Incumbent $12k+/yr. Per-shipment-history lookups at $0.25–1.00 serve diligence and sourcing use cases without the subscription."}},{"@type":"Question","name":"What data does Panjiva (S&P Global) actually use?","acceptedAnswer":{"@type":"Answer","text":"Entity resolution and search over US import bills of lading that are public by statute — 19 CFR 103.31 makes vessel manifest data publicly available. Key sources: CBP AMS vessel manifest data — public by statute (19 CFR 103.31)."}},{"@type":"Question","name":"Is it legal to rebuild Panjiva (S&P Global) from public data?","acceptedAnswer":{"@type":"Answer","text":"Facts and public-domain government data are not copyrightable, but there are real traps here: IMPORTS ONLY: AES export records are NOT public — do not promise export data Shippers can request confidentiality — some records are legitimately masked This is research, not legal advice."}}]}</script>
+<style>
+  :root{color-scheme:light dark}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:820px;margin:0 auto;padding:24px 20px;line-height:1.6;color:#1a1a1a;background:#fff}
+  @media (prefers-color-scheme:dark){body{color:#e6e6e6;background:#111}a{color:#8ab4f8}.card{background:#1b1b1b;border-color:#333}}
+  h1{font-size:1.6rem;line-height:1.3}h2{font-size:1.15rem;margin-top:2rem}
+  a{color:#0b57d0}
+  .verdict{display:inline-block;padding:4px 12px;border-radius:6px;color:#fff;font-weight:600;font-size:.9rem}
+  .card{border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:10px 0;background:#fafafa}
+  table{border-collapse:collapse;width:100%;font-size:.92rem}td,th{border:1px solid #ccc;padding:6px 10px;text-align:left;vertical-align:top}
+  .cta{border:2px solid #0b57d0;border-radius:8px;padding:14px 16px;margin:20px 0}
+  .fine{font-size:.8rem;opacity:.75;margin-top:2.5rem}
+  ol li,ul li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<p><a href="/unbundled/">← All decompositions</a> · <a href="/">PulseNetwork</a></p>
+<h1>Panjiva (S&amp;P Global): what you're actually paying for</h1>
+<p><span class="verdict" style="background:#0a7d33">Yes — rebuildable from free public data</span></p>
+<p><strong>Panjiva (S&amp;P Global) typically costs $1,000+/mo. Its core dataset is not proprietary: it is built on CBP AMS vessel manifest data — public sources you can access directly for free. What the subscription actually adds is entity resolution and search over US import bills of lading that are public by statute — 19 CFR 103.31 makes vessel manifest data publicly available.</strong></p>
+
+<h2>The free public data underneath</h2>
+<table><tr><th>Source</th><th>License</th><th>Access</th></tr>
+<tr><td>CBP AMS vessel manifest data</td><td>public by statute (19 CFR 103.31)</td><td>CBP FTP/DVD distribution — heavier ingestion than an API</td></tr>
+</table>
+
+<h2>Rebuild recipe</h2>
+<ol><li>Ingest CBP AMS manifest releases (bulk; plan real ETL)</li><li>Entity-resolve consignees/shippers (the true value-add — messy names)</li><li>Index by company, product description, ports; serve per-lookup</li><li>Proof of feasibility: ImportYeti serves this data free with a ~12-person team</li></ol>
+<p><strong>DIY difficulty:</strong> high — bulk ingestion + entity resolution; the data is free but not turnkey</p>
+
+<h2>The price math</h2>
+<p>Incumbent $12k+/yr. Per-shipment-history lookups at $0.25–1.00 serve diligence and sourcing use cases without the subscription.</p>
+
+<h2>Licensing and legal traps</h2><ul><li>IMPORTS ONLY: AES export records are NOT public — do not promise export data</li><li>Shippers can request confidentiality — some records are legitimately masked</li></ul>
+
+<div class="cta"><strong>The pay-per-call alternative, live today:</strong><ul><li>https://tradepulse.theaslangroupllc.com (tariff/compliance intel live today)</li></ul><p>TradePulse (enhancement planned — bills-of-lading ingestion is a heavier build) — no subscription, no seat license, USDC per call via <a href="https://www.x402.org">x402</a>. Agents can pay programmatically.</p></div>
+
+<div class="card"><strong>Decompose any data product programmatically:</strong> <code>GET https://pulse.theaslangroupllc.com/api/unbundle?product=Panjiva</code> — $1.00 per call via x402. 22 products decomposed; honest misses for everything else.</div>
+
+<p class="fine">Research as of 2026-07-06 by The Aslan Group LLC (info@theaslangroupllc.com). Product names are used nominatively to identify the products analyzed; all trademarks belong to their owners. Pricing is as publicly reported or contract-disclosed at research time and may change. This is research for build-vs-buy evaluation, not legal advice — verify licenses against the primary source before building.</p>
+</body>
+</html>

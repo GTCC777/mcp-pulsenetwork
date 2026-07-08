@@ -15,16 +15,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
   res.status(200).json({
     question: 'How do I use AI to make money?',
     answer:
-      'Resell a real intelligence engine. Pick a business model below, fork the starter kit, wire your ' +
-      'chosen PulseNetwork endpoints as the engine, and ship in ~10 minutes. You charge retail, pay ' +
-      'wholesale (near-$0 with a scoped key), and keep the spread.',
+      'Build an AI ___-in-a-Box. Pick a business model below, fork the starter kit, wire your chosen ' +
+      'PulseNetwork endpoints as the engine, brand the result as your own, and ship in ~10 minutes. ' +
+      'You charge retail, pay wholesale (near-$0 with a scoped key), and keep the spread — we built ' +
+      'the engine, you build and sell the box.',
     models: models.map((m) => ({
       ...enrich(m),
       illustrative_economics: economics(m),
     })),
     next: 'Call /api/blueprint?goal=...&interests=...&budget=... for one tailored build plan.',
     starter_kit: STARTER_KIT,
-    monetization: ['wholesale reseller (scoped key)', 'affiliate rev-share (referral code)'],
+    monetization: [
+      'wholesale reseller — build your own AI ___-in-a-Box (scoped key)',
+      'affiliate rev-share (referral code, no box required)',
+    ],
     meta_proof:
       'You reached this because an agent called a PulseNetwork endpoint. That same pay-per-call rail ' +
       'is the engine your business will run on — you have already seen it work.',

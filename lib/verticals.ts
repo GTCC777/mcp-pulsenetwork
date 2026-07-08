@@ -1,5 +1,5 @@
 // AUTO-GENERATED from live openapi.json across all PulseNetwork verticals.
-// 68 verticals, 733 endpoints. Regenerate with tools/gen-verticals.mjs
+// 73 verticals, 851 endpoints. Regenerate with tools/gen-verticals.mjs
 
 export interface VerticalEndpoint {
   action: string;
@@ -671,12 +671,14 @@ export const VERTICALS: Record<string, Vertical> = {
           "providers": {
             "type": "string",
             "description": "Comma-separated provider names (min 2)",
-            "required": true
+            "required": true,
+            "example": "Darwinex Zero, ZuluTrade"
           },
           "type": {
             "type": "string",
             "description": "type",
-            "required": false
+            "required": false,
+            "example": "copy"
           },
           "lang": {
             "type": "string",
@@ -897,7 +899,8 @@ export const VERTICALS: Record<string, Vertical> = {
           "opportunity_type": {
             "type": "string",
             "description": "opportunity_type",
-            "required": true
+            "required": false,
+            "example": "perps"
           },
           "asset": {
             "type": "string",
@@ -1416,6 +1419,58 @@ export const VERTICALS: Record<string, Vertical> = {
           "state": {
             "type": "string",
             "description": "state",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "financing",
+        "path": "/api/auto/financing",
+        "price": "$0.12",
+        "description": "Car financing / auto loan APR intelligence",
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "Country context for APR landscape and financing structures",
+            "required": false,
+            "example": "US"
+          },
+          "condition": {
+            "type": "string",
+            "description": "condition",
+            "required": false,
+            "example": "used"
+          },
+          "credit_tier": {
+            "type": "string",
+            "description": "credit_tier",
+            "required": false,
+            "example": "good"
+          },
+          "term_months": {
+            "type": "integer",
+            "description": "Loan term in months, e.g. 36/48/60/72/84",
+            "required": false,
+            "example": "60"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Loan principal — combine with apr + term_months for a deterministic monthly payment",
+            "required": false
+          },
+          "apr": {
+            "type": "number",
+            "description": "APR percent — combine with amount + term_months for a deterministic monthly payment",
+            "required": false
+          },
+          "down_payment": {
+            "type": "number",
+            "description": "down_payment",
             "required": false
           },
           "lang": {
@@ -2245,6 +2300,163 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "resume-critique",
+        "path": "/api/career/resume-critique",
+        "price": "$0.25",
+        "description": "Real resume critique — submit actual resume text for personalized feedback",
+        "params": {
+          "resume_text": {
+            "type": "string",
+            "description": "GET fallback for simple agents that cannot send a POST body — POST JSON body is preferred",
+            "required": false
+          },
+          "target_role": {
+            "type": "string",
+            "description": "target_role",
+            "required": false,
+            "example": "senior backend engineer"
+          },
+          "target_country": {
+            "type": "string",
+            "description": "target_country",
+            "required": false,
+            "example": "US"
+          },
+          "seniority": {
+            "type": "string",
+            "description": "seniority",
+            "required": false,
+            "example": "senior"
+          }
+        }
+      },
+      {
+        "action": "wage-rights",
+        "path": "/api/career/wage-rights",
+        "price": "$0.10",
+        "description": "Wage-Recovery Check (overtime, min wage, final pay, UK deductions)",
+        "params": {
+          "check": {
+            "type": "string",
+            "description": "Which check",
+            "required": true
+          },
+          "jurisdiction": {
+            "type": "string",
+            "description": "overtime/min_wage: US state, US, or CA-ON",
+            "required": false
+          },
+          "hourly_rate": {
+            "type": "number",
+            "description": "overtime: hourly rate",
+            "required": false
+          },
+          "weekly_hours": {
+            "type": "number",
+            "description": "overtime: hours/week",
+            "required": false
+          },
+          "weeks": {
+            "type": "number",
+            "description": "overtime: affected weeks",
+            "required": false
+          },
+          "daily_hours_max": {
+            "type": "number",
+            "description": "overtime: longest day (daily-OT rules)",
+            "required": false
+          },
+          "period_end": {
+            "type": "string",
+            "description": "overtime: last affected week (limitation math)",
+            "required": false
+          },
+          "paid_rate": {
+            "type": "number",
+            "description": "min_wage/uk: rate actually paid",
+            "required": false
+          },
+          "hours": {
+            "type": "number",
+            "description": "min_wage: hours in the period",
+            "required": false
+          },
+          "work_date": {
+            "type": "string",
+            "description": "min_wage: date (effective-dated rate selection)",
+            "required": false
+          },
+          "state": {
+            "type": "string",
+            "description": "final_pay: CA/NY/TX/FL/IL/WA/MA/CO",
+            "required": false
+          },
+          "separation": {
+            "type": "string",
+            "description": "final_pay",
+            "required": false
+          },
+          "last_day": {
+            "type": "string",
+            "description": "final_pay: last day worked",
+            "required": false
+          },
+          "daily_wage": {
+            "type": "number",
+            "description": "final_pay CA: daily wage (waiting-time math)",
+            "required": false
+          },
+          "amount_owed": {
+            "type": "number",
+            "description": "final_pay: unpaid wages",
+            "required": false
+          },
+          "deduction_date": {
+            "type": "string",
+            "description": "uk_deduction: (last) deduction date",
+            "required": false
+          },
+          "amount": {
+            "type": "number",
+            "description": "uk_deduction: amount deducted",
+            "required": false
+          },
+          "age": {
+            "type": "number",
+            "description": "uk_deduction: age (NMW band)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "wage-letter",
+        "path": "/api/career/wage-letter",
+        "price": "$2.00",
+        "description": "Citation-Locked Wage Demand Letter",
+        "params": {
+          "check": {
+            "type": "string",
+            "description": "Which document",
+            "required": true
+          },
+          "employer_name": {
+            "type": "string",
+            "description": "Employer for the letter",
+            "required": false
+          },
+          "worker_name": {
+            "type": "string",
+            "description": "Your name (placeholder if omitted)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Letter language",
+            "required": false
+          }
+        }
       }
     ]
   },
@@ -2528,6 +2740,163 @@ export const VERTICALS: Record<string, Vertical> = {
       }
     ]
   },
+  "citepulse": {
+    "name": "CitePulse",
+    "baseUrl": "https://citepulse.theaslangroupllc.com",
+    "description": "Academic citation analytics for AI research agents, grant offices, and PIs — bibliography verification, retraction detection, paper/author/institution/journal metrics, topic and funder impact scans, and grounded literature briefs. Built on open scholarly infrastructure (OpenAlex, Crossref). All endpoints require x402 payment (USDC on Base mainnet) via the PAYMENT-SIGNATURE header.",
+    "globalCoverage": "Global",
+    "endpoints": [
+      {
+        "action": "ref-check",
+        "path": "/api/ref-check",
+        "price": "$0.15",
+        "description": "Bibliography verification (flagship)",
+        "params": {
+          "citations": {
+            "type": "string",
+            "description": "Comma-separated list of DOIs and/or free-text references, up to 20 items.",
+            "required": true
+          }
+        }
+      },
+      {
+        "action": "paper",
+        "path": "/api/paper",
+        "price": "$0.05",
+        "description": "Single-paper lookup",
+        "params": {
+          "doi": {
+            "type": "string",
+            "description": "DOI (preferred, exact match)",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "description": "Paper title (used only if doi is omitted)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "author",
+        "path": "/api/author",
+        "price": "$0.10",
+        "description": "Author metrics",
+        "params": {
+          "name": {
+            "type": "string",
+            "description": "Author name to search",
+            "required": false
+          },
+          "openalex_id": {
+            "type": "string",
+            "description": "OpenAlex author ID for an exact, disambiguated lookup",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "institution",
+        "path": "/api/institution",
+        "price": "$0.15",
+        "description": "Institution research-output benchmark",
+        "params": {
+          "name": {
+            "type": "string",
+            "description": "Institution name to search",
+            "required": true
+          },
+          "compare_to": {
+            "type": "string",
+            "description": "Optional second institution name for a side-by-side benchmark",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "journal",
+        "path": "/api/journal",
+        "price": "$0.10",
+        "description": "Journal/venue intelligence",
+        "params": {
+          "name": {
+            "type": "string",
+            "description": "Journal/venue name or ISSN",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language, default en",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "topic-scan",
+        "path": "/api/topic-scan",
+        "price": "$0.20",
+        "description": "Rising-topic research scan",
+        "params": {
+          "topic": {
+            "type": "string",
+            "description": "Topic/field name or keyword",
+            "required": true
+          },
+          "years": {
+            "type": "integer",
+            "description": "Lookback window in years, default 3",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language, default en",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "funder-impact",
+        "path": "/api/funder-impact",
+        "price": "$0.20",
+        "description": "Funder research-impact brief",
+        "params": {
+          "funder": {
+            "type": "string",
+            "description": "Funder name",
+            "required": true
+          },
+          "years": {
+            "type": "integer",
+            "description": "Lookback window in years, default unlimited",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language, default en",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "literature-brief",
+        "path": "/api/literature-brief",
+        "price": "$0.25",
+        "description": "Grounded literature synthesis",
+        "params": {
+          "question": {
+            "type": "string",
+            "description": "The research question to synthesize",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language, default en",
+            "required": false
+          }
+        }
+      }
+    ]
+  },
   "clearcarepulse": {
     "name": "ClearCarePulse",
     "baseUrl": "https://clear-care-pulse.vercel.app",
@@ -2798,6 +3167,127 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "rights",
+        "path": "/api/care/rights",
+        "price": "$0.10",
+        "description": "Medical-Bill Rights Check (quiz-first)",
+        "params": {
+          "check": {
+            "type": "string",
+            "description": "Which check to run",
+            "required": true
+          },
+          "scenario": {
+            "type": "string",
+            "description": "surprise: what happened",
+            "required": false
+          },
+          "plan_type": {
+            "type": "string",
+            "description": "surprise: plan funding (ERISA nuance changes the enforcement route)",
+            "required": false
+          },
+          "service_role": {
+            "type": "string",
+            "description": "surprise: clinician role (never-waivable ancillary detection)",
+            "required": false
+          },
+          "consent_signed": {
+            "type": "boolean",
+            "description": "surprise: did you sign a notice-and-consent form",
+            "required": false
+          },
+          "balance_billed": {
+            "type": "number",
+            "description": "surprise: balance-billed amount",
+            "required": false
+          },
+          "gfe_amount": {
+            "type": "number",
+            "description": "gfe: the estimate",
+            "required": false
+          },
+          "billed_amount": {
+            "type": "number",
+            "description": "gfe: the bill",
+            "required": false
+          },
+          "bill_date": {
+            "type": "string",
+            "description": "gfe: bill date (120-day window)",
+            "required": false
+          },
+          "nonprofit": {
+            "type": "boolean",
+            "description": "assistance: is the hospital nonprofit",
+            "required": false
+          },
+          "household_size": {
+            "type": "number",
+            "description": "assistance: household size (FPL math)",
+            "required": false
+          },
+          "annual_income": {
+            "type": "number",
+            "description": "assistance: annual income (FPL math)",
+            "required": false
+          },
+          "first_statement_date": {
+            "type": "string",
+            "description": "assistance: first post-discharge statement (ECA/application windows)",
+            "required": false
+          },
+          "denial_date": {
+            "type": "string",
+            "description": "appeal: denial notice date",
+            "required": false
+          },
+          "claim_type": {
+            "type": "string",
+            "description": "appeal: claim type (decision windows differ)",
+            "required": false
+          },
+          "final_denial_date": {
+            "type": "string",
+            "description": "appeal: final internal denial (external-review window)",
+            "required": false
+          },
+          "msn_date": {
+            "type": "string",
+            "description": "msn: Medicare Summary Notice date",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "rights-letter",
+        "path": "/api/care/rights-letter",
+        "price": "$5.00",
+        "description": "Citation-Locked Medical-Bill Letter",
+        "params": {
+          "check": {
+            "type": "string",
+            "description": "Which document",
+            "required": true
+          },
+          "provider_name": {
+            "type": "string",
+            "description": "Provider/plan/hospital name",
+            "required": false
+          },
+          "patient_name": {
+            "type": "string",
+            "description": "Patient name (placeholder if omitted)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Letter language (default English)",
+            "required": false
+          }
+        }
       }
     ]
   },
@@ -2815,17 +3305,17 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "location": {
             "type": "string",
-            "description": "City name or location (e.g. Denver, CO)",
+            "description": "City, address, or lat,lon for current conditions (e.g. Denver, CO)",
             "required": true
           },
           "units": {
             "type": "string",
-            "description": "Defaults to imperial (°F, mph, inches)",
+            "description": "imperial (°F, mph, inches) or metric (°C, km/h, mm); defaults to imperial",
             "required": false
           },
           "lang": {
             "type": "string",
-            "description": "lang",
+            "description": "Response language code (e.g. es, fr, de); defaults to English",
             "required": false
           }
         }
@@ -2838,22 +3328,22 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "location": {
             "type": "string",
-            "description": "location",
+            "description": "City, address, or lat,lon to forecast",
             "required": true
           },
           "days": {
             "type": "integer",
-            "description": "Number of days (1–7, default 7)",
+            "description": "Number of days ahead to forecast (1–7, default 7)",
             "required": false
           },
           "units": {
             "type": "string",
-            "description": "units",
+            "description": "imperial (°F, mph) or metric (°C, km/h); defaults to imperial",
             "required": false
           },
           "lang": {
             "type": "string",
-            "description": "lang",
+            "description": "Response language code (e.g. es, fr, de); defaults to English",
             "required": false
           }
         }
@@ -2866,22 +3356,22 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "location": {
             "type": "string",
-            "description": "location",
+            "description": "City, address, or lat,lon for the activity",
             "required": true
           },
           "activity": {
             "type": "string",
-            "description": "activity",
+            "description": "Activity to assess conditions for",
             "required": true
           },
           "units": {
             "type": "string",
-            "description": "units",
+            "description": "imperial (°F, mph) or metric (°C, km/h); defaults to imperial",
             "required": false
           },
           "lang": {
             "type": "string",
-            "description": "lang",
+            "description": "Response language code (e.g. es, fr, de); defaults to English",
             "required": false
           }
         }
@@ -2894,17 +3384,17 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "location": {
             "type": "string",
-            "description": "location",
+            "description": "City, address, or lat,lon to assess for severe weather",
             "required": true
           },
           "units": {
             "type": "string",
-            "description": "units",
+            "description": "imperial (°F, mph) or metric (°C, km/h); defaults to imperial",
             "required": false
           },
           "lang": {
             "type": "string",
-            "description": "lang",
+            "description": "Response language code (e.g. es, fr, de); defaults to English",
             "required": false
           }
         }
@@ -2927,12 +3417,12 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "units": {
             "type": "string",
-            "description": "units",
+            "description": "imperial (°F, mph) or metric (°C, km/h); defaults to imperial",
             "required": false
           },
           "lang": {
             "type": "string",
-            "description": "lang",
+            "description": "Response language code (e.g. es, fr, de); defaults to English",
             "required": false
           }
         }
@@ -2945,12 +3435,12 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "location": {
             "type": "string",
-            "description": "City, address, or lat,lon",
+            "description": "City, address, or lat,lon to check air quality for",
             "required": true
           },
           "lang": {
             "type": "string",
-            "description": "lang",
+            "description": "Response language code (e.g. es, fr, de); defaults to English",
             "required": false
           }
         }
@@ -2963,12 +3453,12 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "location": {
             "type": "string",
-            "description": "location",
+            "description": "City, address, or lat,lon to check for wildfire smoke",
             "required": true
           },
           "lang": {
             "type": "string",
-            "description": "lang",
+            "description": "Response language code (e.g. es, fr, de); defaults to English",
             "required": false
           }
         }
@@ -2977,21 +3467,21 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "grow",
         "path": "/api/climate/grow",
         "price": "$0.08",
-        "description": "Agricultural grow-day modeling and frost date analysis",
+        "description": "Growing-season intelligence and frost date analysis",
         "params": {
           "location": {
             "type": "string",
-            "description": "location",
+            "description": "City, address, or lat,lon to generate a growing calendar for",
             "required": true
           },
           "crop": {
             "type": "string",
-            "description": "Target crop or plant type",
+            "description": "Specific crop or plant to tailor advice for (e.g. tomatoes, kale)",
             "required": false
           },
           "lang": {
             "type": "string",
-            "description": "lang",
+            "description": "Response language code (e.g. es, fr, de); defaults to English",
             "required": false
           }
         }
@@ -3004,22 +3494,22 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "location": {
             "type": "string",
-            "description": "location",
+            "description": "City, address, or lat,lon for the event",
             "required": true
           },
           "date": {
             "type": "string",
-            "description": "date",
-            "required": false
+            "description": "Target event date (YYYY-MM-DD)",
+            "required": true
           },
           "event_type": {
             "type": "string",
-            "description": "event_type",
+            "description": "Event type — tailors the guidance (e.g. wedding, marathon, outdoor-festival, camping)",
             "required": false
           },
           "lang": {
             "type": "string",
-            "description": "lang",
+            "description": "Response language code (e.g. es, fr, de); defaults to English",
             "required": false
           }
         }
@@ -4232,7 +4722,7 @@ export const VERTICALS: Record<string, Vertical> = {
   "dealpulse": {
     "name": "DealPulse",
     "baseUrl": "https://dealpulse-weld.vercel.app",
-    "description": "Global deal intelligence API. AI-synthesized best deals, price history, coupon discovery, cashback optimization, subscription audits, credit card stack analysis, grocery savings, student discounts, an",
+    "description": "Global deal intelligence API. AI-synthesized best deals, price history, coupon discovery, cashback optimization, subscription reviews, credit card stack analysis, grocery savings, student discounts, an",
     "globalCoverage": "Global",
     "endpoints": [
       {
@@ -4321,7 +4811,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "subscriptions",
         "path": "/api/deals/subscriptions",
         "price": "$0.08",
-        "description": "Subscription audit — cancel vs. keep analysis with cost savings",
+        "description": "Subscription review — cancel vs. keep analysis with cost savings",
         "params": {
           "services": {
             "type": "string",
@@ -4413,6 +4903,187 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "subscription-rights",
+        "path": "/api/deals/subscription-rights",
+        "price": "$0.10",
+        "description": "Subscription-trap rights check — state auto-renewal law duties, violations, and remedy math (deterministic, no LLM)",
+        "params": {
+          "state": {
+            "type": "string",
+            "description": "state",
+            "required": false
+          },
+          "seller_type": {
+            "type": "string",
+            "description": "seller_type",
+            "required": false
+          },
+          "product_kind": {
+            "type": "string",
+            "description": "product_kind",
+            "required": false
+          },
+          "signup_date": {
+            "type": "string",
+            "description": "signup_date",
+            "required": false
+          },
+          "signup_channel": {
+            "type": "string",
+            "description": "signup_channel",
+            "required": false
+          },
+          "last_renewal_date": {
+            "type": "string",
+            "description": "last_renewal_date",
+            "required": false
+          },
+          "initial_term_months": {
+            "type": "string",
+            "description": "initial_term_months",
+            "required": false
+          },
+          "renewal_term_months": {
+            "type": "string",
+            "description": "renewal_term_months",
+            "required": false
+          },
+          "trial_days": {
+            "type": "string",
+            "description": "trial_days",
+            "required": false
+          },
+          "total_charged": {
+            "type": "string",
+            "description": "total_charged",
+            "required": false
+          },
+          "written_contract": {
+            "type": "string",
+            "description": "written_contract",
+            "required": false
+          },
+          "small_business": {
+            "type": "string",
+            "description": "small_business",
+            "required": false
+          },
+          "no_disclosure": {
+            "type": "string",
+            "description": "no_disclosure",
+            "required": false
+          },
+          "no_consent": {
+            "type": "string",
+            "description": "no_consent",
+            "required": false
+          },
+          "no_renewal_reminder": {
+            "type": "string",
+            "description": "no_renewal_reminder",
+            "required": false
+          },
+          "no_trial_notice": {
+            "type": "string",
+            "description": "no_trial_notice",
+            "required": false
+          },
+          "cancel_attempted": {
+            "type": "string",
+            "description": "cancel_attempted",
+            "required": false
+          },
+          "cancel_blocked": {
+            "type": "string",
+            "description": "cancel_blocked",
+            "required": false
+          },
+          "cancel_channel_mismatch": {
+            "type": "string",
+            "description": "cancel_channel_mismatch",
+            "required": false
+          },
+          "price_increase_no_notice": {
+            "type": "string",
+            "description": "price_increase_no_notice",
+            "required": false
+          },
+          "discovery_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD you discovered the practice — drives OR 1-yr and GA 2-yr discovery clocks",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "subscription-letter",
+        "path": "/api/deals/subscription-letter",
+        "price": "$2.00",
+        "description": "Citation-locked subscription demand letter — refund / unconditional-gift / cancellation-obstruction ($2)",
+        "params": {
+          "state": {
+            "type": "string",
+            "description": "state",
+            "required": false
+          },
+          "seller_name": {
+            "type": "string",
+            "description": "seller_name",
+            "required": false
+          },
+          "consumer_name": {
+            "type": "string",
+            "description": "consumer_name",
+            "required": false
+          },
+          "total_charged": {
+            "type": "string",
+            "description": "total_charged",
+            "required": false
+          },
+          "no_consent": {
+            "type": "string",
+            "description": "no_consent",
+            "required": false
+          },
+          "cancel_blocked": {
+            "type": "string",
+            "description": "cancel_blocked",
+            "required": false
+          },
+          "no_renewal_reminder": {
+            "type": "string",
+            "description": "no_renewal_reminder",
+            "required": false
+          },
+          "signup_date": {
+            "type": "string",
+            "description": "signup_date",
+            "required": false
+          },
+          "signup_channel": {
+            "type": "string",
+            "description": "signup_channel",
+            "required": false
+          },
+          "product_kind": {
+            "type": "string",
+            "description": "product_kind",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          },
+          "discovery_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD you discovered the practice — OR letters are refused when >1 yr stale",
             "required": false
           }
         }
@@ -5758,27 +6429,29 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "co-op-guide",
         "path": "/api/edu/co-op-guide",
         "price": "$0.10",
-        "description": "Homeschool co-op finder",
+        "description": "Homeschool co-op finder — live web search for local groups and support communities",
         "params": {
           "state": {
             "type": "string",
-            "description": "State",
+            "description": "State or region — e.g. \"Texas\" | \"Ohio\"",
             "required": true
           },
           "city": {
             "type": "string",
-            "description": "City",
+            "description": "City or metro area — improves result specificity",
             "required": false
           },
           "child_ages": {
             "type": "string",
             "description": "Child ages (e.g. 5-10, all ages)",
-            "required": false
+            "required": false,
+            "example": "all ages"
           },
           "focus": {
             "type": "string",
-            "description": "Focus (academic, social, both)",
-            "required": false
+            "description": "Focus (academic, enrichment, both)",
+            "required": false,
+            "example": "both"
           },
           "lang": {
             "type": "string",
@@ -5791,7 +6464,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "curriculum-match",
         "path": "/api/edu/curriculum-match",
         "price": "$0.10",
-        "description": "Homeschool curriculum matcher",
+        "description": "Homeschool curriculum finder — personalized matches by grade, subject, and learning style",
         "params": {
           "grade": {
             "type": "string",
@@ -5805,13 +6478,15 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "style": {
             "type": "string",
-            "description": "Learning style (any, structured, eclectic, etc.)",
-            "required": false
+            "description": "Learning style",
+            "required": false,
+            "example": "any"
           },
           "religious": {
             "type": "string",
-            "description": "Religious preference (none, christian, etc.)",
-            "required": false
+            "description": "Religious preference (none, christian, catholic, etc. — default none includes all)",
+            "required": false,
+            "example": "none"
           },
           "lang": {
             "type": "string",
@@ -5824,11 +6499,11 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "essay",
         "path": "/api/edu/essay",
         "price": "$0.25",
-        "description": "Admissions essay review",
+        "description": "College admissions essay review — admissions-coach feedback",
         "params": {
           "essay": {
             "type": "string",
-            "description": "Essay text",
+            "description": "Essay text (min. 50 characters). Use POST body for long essays.",
             "required": true
           },
           "school": {
@@ -5852,16 +6527,1332 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "homeschool-laws",
         "path": "/api/edu/homeschool-laws",
         "price": "$0.10",
-        "description": "Homeschool law lookup",
+        "description": "Homeschool law lookup — legal requirements and compliance checklist by jurisdiction",
         "params": {
           "state": {
             "type": "string",
-            "description": "State",
+            "description": "US state name/abbreviation or country — e.g. \"California\" | \"TX\" | \"New York\"",
             "required": true
           },
           "lang": {
             "type": "string",
             "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "appeal-check",
+        "path": "/api/aid/appeal-check",
+        "price": "$0.50",
+        "description": "Financial-aid appeal screen — lane routing with statutes (deterministic, $0.50)",
+        "params": {
+          "circumstance": {
+            "type": "string",
+            "description": "What changed / the situation. One of: job_loss, dislocated_worker, income_drop_other, divorce_separation, death_of_provider, medical_expenses, k12_tuition, child_care, additional_in_college, severe_disability, homelessness, claimed_losses, forced_sale_farm_business, foreign_income, asset_change, qualifying_emergency, parental_abandonment, abusive_household, human_trafficking, refugee_asylee, parental_incarceration, unable_to_contact_parent, parents_refuse_support, parents_refuse_fafsa, unaccompanied_homeless, not_claimed_on_taxes, self_sufficient, standard_living_expenses, vacation_or_tithing",
+            "required": true,
+            "example": "job_loss"
+          },
+          "award_year": {
+            "type": "string",
+            "description": "Award year YYYY-YY (e.g. 2026-27; default current). Era-gated rules (OBBBA foreign-income strike eff. 2026-07-01) key off this",
+            "required": false
+          },
+          "age": {
+            "type": "string",
+            "description": "Student age — catches independence-by-age (24+) before appealing for nothing",
+            "required": false
+          },
+          "enrolled": {
+            "type": "string",
+            "description": "true|false — currently enrolled or admitted/aid-eligible (PJ unavailable after ceasing eligibility)",
+            "required": false
+          },
+          "medical_expenses_usd": {
+            "type": "string",
+            "description": "Medical circumstance: out-of-pocket expenses — runs the deterministic IPA 11% deny-risk screen (FSA AVG Ch.5)",
+            "required": false
+          },
+          "ipa_usd": {
+            "type": "string",
+            "description": "Income protection allowance from the FAFSA Submission Summary/ISIR (for the IPA screen)",
+            "required": false
+          },
+          "income_before_usd": {
+            "type": "string",
+            "description": "Income appeals: household income before the change",
+            "required": false,
+            "example": "85000"
+          },
+          "income_after_usd": {
+            "type": "string",
+            "description": "Income appeals: household income now/projected",
+            "required": false,
+            "example": "31000"
+          },
+          "school_says_no_appeals": {
+            "type": "string",
+            "description": "true if the school claims it does not do adjustments — flags the 20 USC 1087tt(a)(2)(A) blanket-denial prohibition",
+            "required": false
+          },
+          "charged_fee": {
+            "type": "string",
+            "description": "true if the school charged for the review — flags the 1087tt(a)(2)(B) no-fee rule",
+            "required": false
+          },
+          "unable_to_contact_parent": {
+            "type": "string",
+            "description": "Dependency-override gateway (1087vv(d)(9)): true if you cannot contact the parent(s)",
+            "required": false
+          },
+          "contact_poses_risk": {
+            "type": "string",
+            "description": "Dependency-override gateway: true if contact with parent(s) poses a risk to you",
+            "required": false
+          },
+          "foster_ward_orphan": {
+            "type": "string",
+            "description": "true if orphan/ward of court/foster care at 13+ — already independent (1087vv(d)(2))",
+            "required": false
+          },
+          "emancipated_guardianship": {
+            "type": "string",
+            "description": "true if emancipated or in court-ordered legal guardianship (1087vv(d)(3))",
+            "required": false
+          },
+          "veteran_active_duty": {
+            "type": "string",
+            "description": "true if veteran or active duty (1087vv(d)(4))",
+            "required": false
+          },
+          "grad_student": {
+            "type": "string",
+            "description": "true if graduate/professional student (1087vv(d)(5))",
+            "required": false
+          },
+          "married": {
+            "type": "string",
+            "description": "true if married and not separated (1087vv(d)(6))",
+            "required": false
+          },
+          "has_dependents": {
+            "type": "string",
+            "description": "true if you have legal dependents other than a spouse (1087vv(d)(7))",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "appeal-letter",
+        "path": "/api/aid/appeal-letter",
+        "price": "$5.00",
+        "description": "Financial-aid appeal letter — citation-backed, ready to send ($5.00)",
+        "params": {
+          "circumstance": {
+            "type": "string",
+            "description": "What changed / the situation. One of: job_loss, dislocated_worker, income_drop_other, divorce_separation, death_of_provider, medical_expenses, k12_tuition, child_care, additional_in_college, severe_disability, homelessness, claimed_losses, forced_sale_farm_business, foreign_income, asset_change, qualifying_emergency, parental_abandonment, abusive_household, human_trafficking, refugee_asylee, parental_incarceration, unable_to_contact_parent, parents_refuse_support, parents_refuse_fafsa, unaccompanied_homeless, not_claimed_on_taxes, self_sufficient, standard_living_expenses, vacation_or_tithing",
+            "required": true,
+            "example": "job_loss"
+          },
+          "award_year": {
+            "type": "string",
+            "description": "Award year YYYY-YY (e.g. 2026-27; default current). Era-gated rules (OBBBA foreign-income strike eff. 2026-07-01) key off this",
+            "required": false
+          },
+          "age": {
+            "type": "string",
+            "description": "Student age — catches independence-by-age (24+) before appealing for nothing",
+            "required": false
+          },
+          "enrolled": {
+            "type": "string",
+            "description": "true|false — currently enrolled or admitted/aid-eligible (PJ unavailable after ceasing eligibility)",
+            "required": false
+          },
+          "medical_expenses_usd": {
+            "type": "string",
+            "description": "Medical circumstance: out-of-pocket expenses — runs the deterministic IPA 11% deny-risk screen (FSA AVG Ch.5)",
+            "required": false
+          },
+          "ipa_usd": {
+            "type": "string",
+            "description": "Income protection allowance from the FAFSA Submission Summary/ISIR (for the IPA screen)",
+            "required": false
+          },
+          "income_before_usd": {
+            "type": "string",
+            "description": "Income appeals: household income before the change",
+            "required": false,
+            "example": "85000"
+          },
+          "income_after_usd": {
+            "type": "string",
+            "description": "Income appeals: household income now/projected",
+            "required": false,
+            "example": "31000"
+          },
+          "school_says_no_appeals": {
+            "type": "string",
+            "description": "true if the school claims it does not do adjustments — flags the 20 USC 1087tt(a)(2)(A) blanket-denial prohibition",
+            "required": false
+          },
+          "charged_fee": {
+            "type": "string",
+            "description": "true if the school charged for the review — flags the 1087tt(a)(2)(B) no-fee rule",
+            "required": false
+          },
+          "unable_to_contact_parent": {
+            "type": "string",
+            "description": "Dependency-override gateway (1087vv(d)(9)): true if you cannot contact the parent(s)",
+            "required": false
+          },
+          "contact_poses_risk": {
+            "type": "string",
+            "description": "Dependency-override gateway: true if contact with parent(s) poses a risk to you",
+            "required": false
+          },
+          "foster_ward_orphan": {
+            "type": "string",
+            "description": "true if orphan/ward of court/foster care at 13+ — already independent (1087vv(d)(2))",
+            "required": false
+          },
+          "emancipated_guardianship": {
+            "type": "string",
+            "description": "true if emancipated or in court-ordered legal guardianship (1087vv(d)(3))",
+            "required": false
+          },
+          "veteran_active_duty": {
+            "type": "string",
+            "description": "true if veteran or active duty (1087vv(d)(4))",
+            "required": false
+          },
+          "grad_student": {
+            "type": "string",
+            "description": "true if graduate/professional student (1087vv(d)(5))",
+            "required": false
+          },
+          "married": {
+            "type": "string",
+            "description": "true if married and not separated (1087vv(d)(6))",
+            "required": false
+          },
+          "has_dependents": {
+            "type": "string",
+            "description": "true if you have legal dependents other than a spouse (1087vv(d)(7))",
+            "required": false
+          },
+          "school": {
+            "type": "string",
+            "description": "School name for the addressee block",
+            "required": false
+          },
+          "student_name": {
+            "type": "string",
+            "description": "Student name for the letter",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Letter language (default English)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "fix-check",
+        "path": "/api/loan/fix-check",
+        "price": "$0.50",
+        "description": "Student-loan fix screen — discharge/PSLF/servicer lane routing with deadline math (deterministic, $0.50)",
+        "params": {
+          "issue": {
+            "type": "string",
+            "description": "Issue key. One of: forged_signature, identity_theft, no_diploma_falsecert, disqualifying_condition, unauthorized_payment, school_closed, pslf_denied_employer, pslf_denied_payment_count, pslf_denied_incomplete, pslf_buyback, pslf_employer_illegal_purpose, qwr_ignored, payment_misapplied, forgiveness_interference, transfer_problems, late_fee_unreasonable, expedite_request, rap_dispute, borrower_defense",
+            "required": true,
+            "example": "school_closed"
+          },
+          "loan_type": {
+            "type": "string",
+            "description": "direct | ffel | perkins | private | unknown — federal discharge/PSLF lanes are Direct-loan regs (34 CFR part 685); private loans route to the CA servicer lane",
+            "required": false,
+            "example": "direct"
+          },
+          "state": {
+            "type": "string",
+            "description": "Borrower state. CA arms the AB 376 servicer lane (NY/IL parked)",
+            "required": false,
+            "example": "CA"
+          },
+          "closure_date": {
+            "type": "string",
+            "description": "Closed school: official closure date YYYY-MM-DD (ED publishes these)",
+            "required": false,
+            "example": "2025-11-14"
+          },
+          "withdrawal_date": {
+            "type": "string",
+            "description": "Closed school: your withdrawal date — engine computes the 180-day window (34 CFR 685.214(d))",
+            "required": false,
+            "example": "2025-08-01"
+          },
+          "still_enrolled": {
+            "type": "string",
+            "description": "true if you were still enrolled when the school closed",
+            "required": false
+          },
+          "completed_teachout": {
+            "type": "string",
+            "description": "true if you completed the program via a teach-out/another branch (defeats discharge)",
+            "required": false
+          },
+          "loan_year": {
+            "type": "string",
+            "description": "Year you first received loan proceeds (must be 1986+)",
+            "required": false
+          },
+          "denial_date": {
+            "type": "string",
+            "description": "PSLF: date on the denial notice — engine computes the 90-day reconsideration deadline (685.219(g)(1))",
+            "required": false,
+            "example": "2026-05-20"
+          },
+          "deferment_months": {
+            "type": "string",
+            "description": "PSLF buyback: months in deferment/forbearance while employed full-time at a qualifying employer",
+            "required": false
+          },
+          "request_sent_date": {
+            "type": "string",
+            "description": "CA servicer: date your qualified written request was sent — engine computes the 10/30-business-day clocks (Civ. Code 1788.102(t))",
+            "required": false,
+            "example": "2026-05-01"
+          },
+          "ack_received": {
+            "type": "string",
+            "description": "true|false — acknowledgment received within the 10-business-day window",
+            "required": false,
+            "example": "false"
+          },
+          "response_received": {
+            "type": "string",
+            "description": "true|false — substantive response received",
+            "required": false,
+            "example": "false"
+          },
+          "extension_notice": {
+            "type": "string",
+            "description": "true if the servicer noticed a 15-business-day extension before day 30",
+            "required": false
+          },
+          "violations_count": {
+            "type": "string",
+            "description": "CA servicer: distinct violations — $500/violation statutory floor math (1788.103(b))",
+            "required": false
+          },
+          "interference": {
+            "type": "string",
+            "description": "true if the servicer substantially interfered with forgiveness/discharge/plan rights — treble floor, min $1,500/violation (1788.103(c))",
+            "required": false
+          },
+          "actual_damages_usd": {
+            "type": "string",
+            "description": "CA servicer: documented actual damages (fees, interest, credit harm)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "fix-letter",
+        "path": "/api/loan/fix-letter",
+        "price": "$5.00",
+        "description": "Student-loan fix document — AB 376 demand / PSLF reconsideration / discharge statement ($5.00)",
+        "params": {
+          "issue": {
+            "type": "string",
+            "description": "Issue key. One of: forged_signature, identity_theft, no_diploma_falsecert, disqualifying_condition, unauthorized_payment, school_closed, pslf_denied_employer, pslf_denied_payment_count, pslf_denied_incomplete, pslf_buyback, pslf_employer_illegal_purpose, qwr_ignored, payment_misapplied, forgiveness_interference, transfer_problems, late_fee_unreasonable, expedite_request, rap_dispute, borrower_defense",
+            "required": true,
+            "example": "school_closed"
+          },
+          "loan_type": {
+            "type": "string",
+            "description": "direct | ffel | perkins | private | unknown — federal discharge/PSLF lanes are Direct-loan regs (34 CFR part 685); private loans route to the CA servicer lane",
+            "required": false,
+            "example": "direct"
+          },
+          "state": {
+            "type": "string",
+            "description": "Borrower state. CA arms the AB 376 servicer lane (NY/IL parked)",
+            "required": false,
+            "example": "CA"
+          },
+          "closure_date": {
+            "type": "string",
+            "description": "Closed school: official closure date YYYY-MM-DD (ED publishes these)",
+            "required": false,
+            "example": "2025-11-14"
+          },
+          "withdrawal_date": {
+            "type": "string",
+            "description": "Closed school: your withdrawal date — engine computes the 180-day window (34 CFR 685.214(d))",
+            "required": false,
+            "example": "2025-08-01"
+          },
+          "still_enrolled": {
+            "type": "string",
+            "description": "true if you were still enrolled when the school closed",
+            "required": false
+          },
+          "completed_teachout": {
+            "type": "string",
+            "description": "true if you completed the program via a teach-out/another branch (defeats discharge)",
+            "required": false
+          },
+          "loan_year": {
+            "type": "string",
+            "description": "Year you first received loan proceeds (must be 1986+)",
+            "required": false
+          },
+          "denial_date": {
+            "type": "string",
+            "description": "PSLF: date on the denial notice — engine computes the 90-day reconsideration deadline (685.219(g)(1))",
+            "required": false,
+            "example": "2026-05-20"
+          },
+          "deferment_months": {
+            "type": "string",
+            "description": "PSLF buyback: months in deferment/forbearance while employed full-time at a qualifying employer",
+            "required": false
+          },
+          "request_sent_date": {
+            "type": "string",
+            "description": "CA servicer: date your qualified written request was sent — engine computes the 10/30-business-day clocks (Civ. Code 1788.102(t))",
+            "required": false,
+            "example": "2026-05-01"
+          },
+          "ack_received": {
+            "type": "string",
+            "description": "true|false — acknowledgment received within the 10-business-day window",
+            "required": false,
+            "example": "false"
+          },
+          "response_received": {
+            "type": "string",
+            "description": "true|false — substantive response received",
+            "required": false,
+            "example": "false"
+          },
+          "extension_notice": {
+            "type": "string",
+            "description": "true if the servicer noticed a 15-business-day extension before day 30",
+            "required": false
+          },
+          "violations_count": {
+            "type": "string",
+            "description": "CA servicer: distinct violations — $500/violation statutory floor math (1788.103(b))",
+            "required": false
+          },
+          "interference": {
+            "type": "string",
+            "description": "true if the servicer substantially interfered with forgiveness/discharge/plan rights — treble floor, min $1,500/violation (1788.103(c))",
+            "required": false
+          },
+          "actual_damages_usd": {
+            "type": "string",
+            "description": "CA servicer: documented actual damages (fees, interest, credit harm)",
+            "required": false
+          },
+          "servicer_name": {
+            "type": "string",
+            "description": "Servicer name for the addressee (AB 376 demand)",
+            "required": false,
+            "example": "MOHELA"
+          },
+          "borrower_name": {
+            "type": "string",
+            "description": "Borrower name for the document",
+            "required": false
+          },
+          "school_name": {
+            "type": "string",
+            "description": "School name (discharge lanes)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Document language (default English)",
+            "required": false
+          }
+        }
+      }
+    ]
+  },
+  "glowpulse": {
+    "name": "GlowPulse",
+    "baseUrl": "https://glowpulse-nine.vercel.app",
+    "description": "Skincare and K-beauty intelligence: ingredient lookups, myth-vs-fact conflict checks, product decoding, pregnancy-safe and fungal-acne screening, dupe finding, routine building, and greenwashing claims checks. Grounded in EU CosIng, CIR/PubChem and Korean regulatory context.",
+    "globalCoverage": "Global (EU, Korea, Japan, US regulatory layers)",
+    "endpoints": [
+      {
+        "action": "ingredient-lookup",
+        "path": "/api/glow/ingredient-lookup",
+        "price": "$0.05",
+        "description": "Skincare ingredient checker",
+        "params": {
+          "inci_name": {
+            "type": "string",
+            "description": "INCI ingredient name, e.g. Niacinamide, Retinol, Sodium Hyaluronate",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "en | ko | ja | de | fr | es | pt",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "conflict-check",
+        "path": "/api/glow/conflict-check",
+        "price": "$0.10",
+        "description": "Routine ingredient-conflict checker",
+        "params": {
+          "ingredients": {
+            "type": "string",
+            "description": "Comma-separated ingredients/actives, e.g. retinol,vitamin c,niacinamide",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "product-decode",
+        "path": "/api/glow/product-decode",
+        "price": "$0.15",
+        "description": "Ingredient list decoder",
+        "params": {
+          "product_name": {
+            "type": "string",
+            "description": "product_name",
+            "required": false
+          },
+          "ingredients_pasted": {
+            "type": "string",
+            "description": "Full pasted INCI ingredient list text — recommended for best accuracy",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "pregnancy-safe",
+        "path": "/api/glow/pregnancy-safe",
+        "price": "$0.10",
+        "description": "Pregnancy/nursing skincare safety screen",
+        "params": {
+          "ingredients_or_product": {
+            "type": "string",
+            "description": "ingredients_or_product",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "fungal-acne-check",
+        "path": "/api/glow/fungal-acne-check",
+        "price": "$0.08",
+        "description": "Fungal-acne (Malassezia) safety checker",
+        "params": {
+          "ingredients": {
+            "type": "string",
+            "description": "Comma-separated INCI ingredients",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "dupe-finder",
+        "path": "/api/glow/dupe-finder",
+        "price": "$0.15",
+        "description": "K-beauty and skincare dupe finder",
+        "params": {
+          "product_name": {
+            "type": "string",
+            "description": "product_name",
+            "required": true
+          },
+          "region": {
+            "type": "string",
+            "description": "US | EU | KR | JP",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "routine-builder",
+        "path": "/api/glow/routine-builder",
+        "price": "$0.20",
+        "description": "Full skincare routine builder",
+        "params": {
+          "skin_type": {
+            "type": "string",
+            "description": "dry | oily | combination | normal | sensitive",
+            "required": true
+          },
+          "concerns": {
+            "type": "string",
+            "description": "Comma-separated, e.g. acne,hyperpigmentation,aging",
+            "required": true
+          },
+          "budget_tier": {
+            "type": "string",
+            "description": "drugstore | mid | prestige | mixed",
+            "required": false
+          },
+          "region": {
+            "type": "string",
+            "description": "For climate context",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "k-beauty-compare",
+        "path": "/api/glow/k-beauty-compare",
+        "price": "$0.12",
+        "description": "Korean vs Western actives comparison",
+        "params": {
+          "active_name": {
+            "type": "string",
+            "description": "e.g. retinol vs bakuchiol, AHA vs PDRN",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "claims-check",
+        "path": "/api/glow/claims-check",
+        "price": "$0.12",
+        "description": "Greenwashing / marketing-claim detector",
+        "params": {
+          "claims": {
+            "type": "string",
+            "description": "Comma-separated marketing claims",
+            "required": true
+          },
+          "product_name": {
+            "type": "string",
+            "description": "product_name",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "price-per-active",
+        "path": "/api/glow/price-per-active",
+        "price": "$0.08",
+        "description": "Price-per-active value analysis",
+        "params": {
+          "products": {
+            "type": "string",
+            "description": "Comma-separated product names, 1-4",
+            "required": true
+          },
+          "active_focus": {
+            "type": "string",
+            "description": "active_focus",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "sensitive-skin",
+        "path": "/api/glow/sensitive-skin",
+        "price": "$0.10",
+        "description": "Sensitive-skin irritant/allergen screen",
+        "params": {
+          "ingredients_or_product": {
+            "type": "string",
+            "description": "ingredients_or_product",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "sale-timing",
+        "path": "/api/glow/sale-timing",
+        "price": "$0.08",
+        "description": "Beauty retailer sale-timing brief",
+        "params": {
+          "retailer": {
+            "type": "string",
+            "description": "Sephora | Ulta | Olive Young | YesStyle | Stylevana | iHerb | all",
+            "required": true
+          },
+          "region": {
+            "type": "string",
+            "description": "region",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      }
+    ]
+  },
+  "scentpulse": {
+    "name": "ScentPulse",
+    "baseUrl": "https://scentpulse-xi.vercel.app",
+    "description": "Fragrance intelligence: note profiles, batch-code age decoding, dupe/clone matching, blind-buy risk scores, reformulation and allergen checks, attar/oud navigation, collection valuation and layering guidance. IFRA and EU allergen-regulation grounded.",
+    "globalCoverage": "Global (EU regs, Middle East attar market, Asia)",
+    "endpoints": [
+      {
+        "action": "note-profile",
+        "path": "/api/scent/note-profile",
+        "price": "$0.08",
+        "description": "Fragrance note-profile lookup",
+        "params": {
+          "fragrance": {
+            "type": "string",
+            "description": "Fragrance name",
+            "required": true
+          },
+          "brand": {
+            "type": "string",
+            "description": "brand",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "batch-check",
+        "path": "/api/scent/batch-check",
+        "price": "$0.10",
+        "description": "Batch/lot code freshness decoder",
+        "params": {
+          "brand": {
+            "type": "string",
+            "description": "brand",
+            "required": true
+          },
+          "code": {
+            "type": "string",
+            "description": "code",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "dupe-match",
+        "path": "/api/scent/dupe-match",
+        "price": "$0.15",
+        "description": "Dupe/clone finder",
+        "params": {
+          "fragrance": {
+            "type": "string",
+            "description": "fragrance",
+            "required": true
+          },
+          "brand": {
+            "type": "string",
+            "description": "brand",
+            "required": false
+          },
+          "budget": {
+            "type": "string",
+            "description": "budget",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "blind-buy-risk",
+        "path": "/api/scent/blind-buy-risk",
+        "price": "$0.12",
+        "description": "Blind-buy risk score",
+        "params": {
+          "fragrance": {
+            "type": "string",
+            "description": "fragrance",
+            "required": true
+          },
+          "brand": {
+            "type": "string",
+            "description": "brand",
+            "required": false
+          },
+          "price_paid_usd": {
+            "type": "number",
+            "description": "price_paid_usd",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "reformulation-check",
+        "path": "/api/scent/reformulation-check",
+        "price": "$0.12",
+        "description": "Reformulation checker",
+        "params": {
+          "fragrance": {
+            "type": "string",
+            "description": "fragrance",
+            "required": true
+          },
+          "brand": {
+            "type": "string",
+            "description": "brand",
+            "required": false
+          },
+          "batch_year_hint": {
+            "type": "integer",
+            "description": "batch_year_hint",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "allergen-check",
+        "path": "/api/scent/allergen-check",
+        "price": "$0.10",
+        "description": "EU allergen context check",
+        "params": {
+          "fragrance_or_ingredient": {
+            "type": "string",
+            "description": "fragrance_or_ingredient",
+            "required": true
+          },
+          "ingredient_list": {
+            "type": "string",
+            "description": "ingredient_list",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "occasion-match",
+        "path": "/api/scent/occasion-match",
+        "price": "$0.10",
+        "description": "Occasion/season/climate fragrance matcher",
+        "params": {
+          "occasion": {
+            "type": "string",
+            "description": "occasion",
+            "required": false
+          },
+          "season": {
+            "type": "string",
+            "description": "season",
+            "required": false
+          },
+          "climate": {
+            "type": "string",
+            "description": "climate",
+            "required": false
+          },
+          "age_range": {
+            "type": "string",
+            "description": "age_range",
+            "required": false
+          },
+          "budget_usd": {
+            "type": "number",
+            "description": "budget_usd",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "price-per-ml",
+        "path": "/api/scent/price-per-ml",
+        "price": "$0.08",
+        "description": "Price-per-ml value optimizer",
+        "params": {
+          "fragrance": {
+            "type": "string",
+            "description": "fragrance",
+            "required": true
+          },
+          "brand": {
+            "type": "string",
+            "description": "brand",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "attar-navigator",
+        "path": "/api/scent/attar-navigator",
+        "price": "$0.10",
+        "description": "Middle Eastern attar/oud navigator",
+        "params": {
+          "query": {
+            "type": "string",
+            "description": "query",
+            "required": true
+          },
+          "budget_usd": {
+            "type": "number",
+            "description": "budget_usd",
+            "required": false
+          },
+          "experience_level": {
+            "type": "string",
+            "description": "experience_level",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "discontinued-watch",
+        "path": "/api/scent/discontinued-watch",
+        "price": "$0.10",
+        "description": "Discontinuation watch",
+        "params": {
+          "fragrance": {
+            "type": "string",
+            "description": "fragrance",
+            "required": true
+          },
+          "brand": {
+            "type": "string",
+            "description": "brand",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "collection-value",
+        "path": "/api/scent/collection-value",
+        "price": "$0.15",
+        "description": "Collection valuation",
+        "params": {
+          "bottles": {
+            "type": "string",
+            "description": "URL-encoded JSON array of bottle objects",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "layering-guide",
+        "path": "/api/scent/layering-guide",
+        "price": "$0.10",
+        "description": "Fragrance layering guide",
+        "params": {
+          "fragrances": {
+            "type": "string",
+            "description": "Comma-separated fragrance names",
+            "required": true
+          },
+          "style_goal": {
+            "type": "string",
+            "description": "style_goal",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      }
+    ]
+  },
+  "tablepulse": {
+    "name": "TablePulse",
+    "baseUrl": "https://tablepulse.vercel.app",
+    "description": "Board-game and tabletop intelligence: group-profile recommendations, head-to-head comparisons, expansion checks, collection valuation, crowdfunding back-vs-wait analysis, party/solo/family finders, deal watching and award tracking (Spiel des Jahres).",
+    "globalCoverage": "Global (DE/UK/EU/US markets, language-dependence aware)",
+    "endpoints": [
+      {
+        "action": "recommend",
+        "path": "/api/table/recommend",
+        "price": "$0.15",
+        "description": "Board-game recommendations by group profile",
+        "params": {
+          "player_count": {
+            "type": "string",
+            "description": "e.g. 3-4, 2, 6+",
+            "required": true
+          },
+          "complexity_tolerance": {
+            "type": "string",
+            "description": "complexity_tolerance",
+            "required": false
+          },
+          "themes": {
+            "type": "string",
+            "description": "themes",
+            "required": false
+          },
+          "playtime_minutes": {
+            "type": "string",
+            "description": "playtime_minutes",
+            "required": false
+          },
+          "budget": {
+            "type": "string",
+            "description": "budget",
+            "required": false
+          },
+          "ages": {
+            "type": "string",
+            "description": "ages",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "compare",
+        "path": "/api/table/compare",
+        "price": "$0.10",
+        "description": "Head-to-head board-game comparison",
+        "params": {
+          "games": {
+            "type": "string",
+            "description": "Comma-separated titles, 2-4",
+            "required": true
+          },
+          "use_case": {
+            "type": "string",
+            "description": "use_case",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "expansion-check",
+        "path": "/api/table/expansion-check",
+        "price": "$0.08",
+        "description": "Expansion worth-it check",
+        "params": {
+          "base_game": {
+            "type": "string",
+            "description": "base_game",
+            "required": true
+          },
+          "expansions": {
+            "type": "string",
+            "description": "expansions",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "collection-value",
+        "path": "/api/table/collection-value",
+        "price": "$0.15",
+        "description": "Board-game collection valuation",
+        "params": {
+          "games": {
+            "type": "string",
+            "description": "Comma-separated titles, edition optional per item",
+            "required": true
+          },
+          "condition": {
+            "type": "string",
+            "description": "condition",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "crowdfunding-radar",
+        "path": "/api/table/crowdfunding-radar",
+        "price": "$0.12",
+        "description": "Crowdfunding back-now-vs-wait radar",
+        "params": {
+          "project": {
+            "type": "string",
+            "description": "project",
+            "required": true
+          },
+          "platform_hint": {
+            "type": "string",
+            "description": "platform_hint",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "party-finder",
+        "path": "/api/table/party-finder",
+        "price": "$0.10",
+        "description": "Party/social game finder",
+        "params": {
+          "group_size": {
+            "type": "string",
+            "description": "group_size",
+            "required": true
+          },
+          "vibe": {
+            "type": "string",
+            "description": "vibe",
+            "required": false
+          },
+          "drinking_ok": {
+            "type": "boolean",
+            "description": "drinking_ok",
+            "required": false
+          },
+          "family_mixed_ages": {
+            "type": "boolean",
+            "description": "family_mixed_ages",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "solo-picks",
+        "path": "/api/table/solo-picks",
+        "price": "$0.10",
+        "description": "Best solo-mode board games",
+        "params": {
+          "preference": {
+            "type": "string",
+            "description": "preference",
+            "required": true
+          },
+          "experience_level": {
+            "type": "string",
+            "description": "experience_level",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "family-fit",
+        "path": "/api/table/family-fit",
+        "price": "$0.10",
+        "description": "Family age-fit and gateway ladder",
+        "params": {
+          "youngest_age": {
+            "type": "string",
+            "description": "youngest_age",
+            "required": true
+          },
+          "oldest_age": {
+            "type": "string",
+            "description": "oldest_age",
+            "required": false
+          },
+          "player_count": {
+            "type": "string",
+            "description": "player_count",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "complexity-explainer",
+        "path": "/api/table/complexity-explainer",
+        "price": "$0.08",
+        "description": "Is this game right for my group",
+        "params": {
+          "game": {
+            "type": "string",
+            "description": "game",
+            "required": true
+          },
+          "group_experience_level": {
+            "type": "string",
+            "description": "group_experience_level",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "deal-watch",
+        "path": "/api/table/deal-watch",
+        "price": "$0.10",
+        "description": "Board-game pricing guidance",
+        "params": {
+          "game": {
+            "type": "string",
+            "description": "game",
+            "required": true
+          },
+          "region": {
+            "type": "string",
+            "description": "region",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "award-tracker",
+        "path": "/api/table/award-tracker",
+        "price": "$0.08",
+        "description": "Board-game award tracker",
+        "params": {
+          "award": {
+            "type": "string",
+            "description": "award",
+            "required": true
+          },
+          "year": {
+            "type": "string",
+            "description": "year",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
             "required": false
           }
         }
@@ -6204,6 +8195,165 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "en"
           }
         }
+      },
+      {
+        "action": "source-check",
+        "path": "/api/esg/source-check",
+        "price": "$0.20",
+        "description": "Ethical sourcing brand check",
+        "params": {
+          "brand": {
+            "type": "string",
+            "description": "Brand or company name (e.g. Patagonia, Shein, Nestle)",
+            "required": true
+          },
+          "category": {
+            "type": "string",
+            "description": "Product category, optional (e.g. apparel, electronics, food, beauty)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1)",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "coffee",
+        "path": "/api/esg/coffee",
+        "price": "$0.10",
+        "description": "Coffee ethical sourcing check",
+        "params": {
+          "roaster_or_brand": {
+            "type": "string",
+            "description": "Coffee roaster or brand name",
+            "required": true
+          },
+          "origin": {
+            "type": "string",
+            "description": "Coffee origin country/region, optional (e.g. Ethiopia, Colombia)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "cocoa",
+        "path": "/api/esg/cocoa",
+        "price": "$0.15",
+        "description": "Cocoa child labor and controversy check",
+        "params": {
+          "brand": {
+            "type": "string",
+            "description": "Chocolate or cocoa brand name",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "cruelty-free",
+        "path": "/api/esg/cruelty-free",
+        "price": "$0.05",
+        "description": "Cruelty-free cosmetics cross-check",
+        "params": {
+          "brand": {
+            "type": "string",
+            "description": "Beauty or cosmetics brand name",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "minerals",
+        "path": "/api/esg/minerals",
+        "price": "$0.10",
+        "description": "Conflict minerals smelter conformance check",
+        "params": {
+          "smelter_or_company": {
+            "type": "string",
+            "description": "Smelter, refiner, or company name",
+            "required": true
+          },
+          "metal": {
+            "type": "string",
+            "description": "Metal/mineral type, optional",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "commodity",
+        "path": "/api/esg/commodity",
+        "price": "$0.10",
+        "description": "Certified commodity check (seafood/palm-oil/tea/timber/cotton)",
+        "params": {
+          "product_or_brand": {
+            "type": "string",
+            "description": "Product or brand name",
+            "required": true
+          },
+          "commodity": {
+            "type": "string",
+            "description": "Commodity type",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "fashion",
+        "path": "/api/esg/fashion",
+        "price": "$0.15",
+        "description": "Fashion brand ethical sourcing check",
+        "params": {
+          "brand": {
+            "type": "string",
+            "description": "Fashion or apparel brand name (e.g. Shein, Zara, Patagonia, Levi's)",
+            "required": true
+          },
+          "aspect": {
+            "type": "string",
+            "description": "Which aspect to focus the check on",
+            "required": false,
+            "example": "overall"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (ISO 639-1)",
+            "required": false,
+            "example": "en"
+          }
+        }
       }
     ]
   },
@@ -6461,17 +8611,17 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "region": {
             "type": "string",
-            "description": "Named region: 'Black Sea', 'US Midwest', 'Brazil Mato Grosso', 'India Punjab', 'EU', 'Australia', 'Global'",
+            "description": "Named region: 'Black Sea', 'US Midwest', 'Brazil Mato Grosso', 'India Punjab', 'EU', 'Australia', 'Global'. Required unless lat+lon are both given.",
             "required": false
           },
           "lat": {
             "type": "number",
-            "description": "Latitude (alternative to region name)",
+            "description": "Latitude (alternative to region name). Required unless region is given.",
             "required": false
           },
           "lon": {
             "type": "number",
-            "description": "Longitude (alternative to region name)",
+            "description": "Longitude (alternative to region name). Required unless region is given.",
             "required": false
           },
           "lang": {
@@ -6549,17 +8699,17 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "region": {
             "type": "string",
-            "description": "Named region (e.g. 'Punjab India', 'Mekong Delta Vietnam', 'Ethiopian Highlands')",
+            "description": "Named region (e.g. 'Punjab India', 'Mekong Delta Vietnam', 'Ethiopian Highlands'). Required unless lat+lon are both given.",
             "required": false
           },
           "lat": {
             "type": "number",
-            "description": "Field latitude",
+            "description": "Field latitude. Required unless region is given.",
             "required": false
           },
           "lon": {
             "type": "number",
-            "description": "Field longitude",
+            "description": "Field longitude. Required unless region is given.",
             "required": false
           },
           "lang": {
@@ -6638,9 +8788,8 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "region": {
             "type": "string",
-            "description": "Region: 'US Corn Belt', 'Brazil', 'EU', 'India', 'Australia', 'Black Sea', 'Southeast Asia', etc.",
-            "required": false,
-            "example": "United States"
+            "description": "Region: 'US Corn Belt', 'Brazil', 'EU', 'India', 'Australia', 'Black Sea', 'Southeast Asia', etc. Required — input prices vary too much by market to default silently.",
+            "required": true
           },
           "hectares": {
             "type": "string",
@@ -6697,17 +8846,17 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "region": {
             "type": "string",
-            "description": "Focus region: 'Global', 'US', 'South America', 'Black Sea', 'EU', 'Asia', 'Sub-Saharan Africa', 'Australia'",
+            "description": "Focus region: 'Global', 'US', 'South America', 'Black Sea', 'EU', 'Asia', 'Sub-Saharan Africa', 'Australia'. Required unless lat+lon are both given.",
             "required": false
           },
           "lat": {
             "type": "number",
-            "description": "Lat (alternative to region name for field-level context)",
+            "description": "Lat (alternative to region name for field-level context). Required unless region is given.",
             "required": false
           },
           "lon": {
             "type": "number",
-            "description": "Lon",
+            "description": "Lon. Required unless region is given.",
             "required": false
           },
           "lang": {
@@ -6993,6 +9142,108 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "fund-holdings",
+        "path": "/api/filings/fund-holdings",
+        "price": "$0.25",
+        "description": "Fund holdings from SEC Form N-PORT",
+        "params": {
+          "ticker": {
+            "type": "string",
+            "description": "ticker",
+            "required": false
+          },
+          "cik": {
+            "type": "string",
+            "description": "cik",
+            "required": false
+          },
+          "fund": {
+            "type": "string",
+            "description": "fund",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "anomaly",
+        "path": "/api/filings/anomaly",
+        "price": "$0.25",
+        "description": "EDGAR filing-anomaly scan",
+        "params": {
+          "ticker": {
+            "type": "string",
+            "description": "ticker",
+            "required": false
+          },
+          "company": {
+            "type": "string",
+            "description": "company",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "transcript-search",
+        "path": "/api/filings/transcript-search",
+        "price": "$0.20",
+        "description": "Full-text SEC filing search with excerpts",
+        "params": {
+          "query": {
+            "type": "string",
+            "description": "query",
+            "required": true
+          },
+          "form_type": {
+            "type": "string",
+            "description": "form_type",
+            "required": false
+          },
+          "date_from": {
+            "type": "string",
+            "description": "date_from",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "muni-bond",
+        "path": "/api/filings/muni-bond",
+        "price": "$0.15",
+        "description": "Municipal bond disclosure search",
+        "params": {
+          "cusip": {
+            "type": "string",
+            "description": "cusip",
+            "required": false
+          },
+          "issuer": {
+            "type": "string",
+            "description": "issuer",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
       }
     ]
   },
@@ -7121,6 +9372,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "demographic",
             "required": false
           },
+          "country": {
+            "type": "string",
+            "description": "country",
+            "required": false
+          },
           "location": {
             "type": "string",
             "description": "location",
@@ -7142,6 +9398,11 @@ export const VERTICALS: Record<string, Vertical> = {
           "profile": {
             "type": "string",
             "description": "profile",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "country",
             "required": false
           },
           "state": {
@@ -7184,6 +9445,34 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "product",
             "required": true
+          }
+        }
+      },
+      {
+        "action": "ethical",
+        "path": "/api/find/ethical",
+        "price": "$0.10",
+        "description": "Ethical/sustainable product finder",
+        "params": {
+          "product_or_category": {
+            "type": "string",
+            "description": "product_or_category",
+            "required": true
+          },
+          "values": {
+            "type": "string",
+            "description": "values",
+            "required": false
+          },
+          "budget": {
+            "type": "string",
+            "description": "budget",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
           }
         }
       }
@@ -7319,7 +9608,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "goal": {
             "type": "string",
             "description": "Fitness goal (muscle-gain, fat-loss, endurance, recovery, general-health)",
-            "required": false
+            "required": true
           },
           "budget": {
             "type": "string",
@@ -7375,7 +9664,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "issue": {
             "type": "string",
             "description": "Sleep issue (e.g. trouble falling asleep, early waking, poor recovery despite sleep, jet-lag)",
-            "required": false
+            "required": true
           },
           "training_schedule": {
             "type": "string",
@@ -7400,9 +9689,9 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "Goal that has plateaued (muscle-gain, fat-loss, strength, endurance, body-recomposition)",
             "required": true
           },
-          "duration": {
+          "weeks_stuck": {
             "type": "string",
-            "description": "How long the plateau has lasted (e.g. 6 weeks, 3 months)",
+            "description": "How many weeks the plateau has lasted (e.g. 6)",
             "required": false
           },
           "current_routine": {
@@ -9115,6 +11404,62 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "org-intel",
+        "path": "/api/grant/org-intel",
+        "price": "$0.20",
+        "description": "Nonprofit financial intelligence (IRS Form 990)",
+        "params": {
+          "ein": {
+            "type": "string",
+            "description": "9-digit EIN. Usable alone (financials are EIN-indexed nationwide) or with state for BMF registration detail.",
+            "required": false
+          },
+          "org_name": {
+            "type": "string",
+            "description": "Organization legal name. Requires state.",
+            "required": false
+          },
+          "state": {
+            "type": "string",
+            "description": "2-letter US state code or full name — required with org_name; optional with ein (EIN queries fall back to a nationwide BMF search automatically).",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "funder-990",
+        "path": "/api/grant/funder-990",
+        "price": "$0.25",
+        "description": "Private foundation giving intelligence (IRS Form 990-PF)",
+        "params": {
+          "ein": {
+            "type": "string",
+            "description": "9-digit EIN. Usable alone (financials are EIN-indexed nationwide) or with state for BMF registration detail.",
+            "required": false
+          },
+          "org_name": {
+            "type": "string",
+            "description": "Foundation legal name. Requires state.",
+            "required": false
+          },
+          "state": {
+            "type": "string",
+            "description": "2-letter US state code or full name — required with org_name; optional with ein (EIN queries fall back to a nationwide BMF search automatically).",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
       }
     ]
   },
@@ -9132,8 +11477,8 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "state": {
             "type": "string",
-            "description": "2-letter US state code (TX, CA, NY, etc.)",
-            "required": true
+            "description": "2-letter US state code (TX, CA, NY, etc.; default: US)",
+            "required": false
           }
         }
       },
@@ -9145,8 +11490,8 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "region": {
             "type": "string",
-            "description": "ercot | caiso | pjm | miso | isone | nyiso | spp",
-            "required": true
+            "description": "ercot | caiso | pjm | miso | isone | nyiso | spp (default: ercot)",
+            "required": false
           }
         }
       },
@@ -9158,8 +11503,8 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "state": {
             "type": "string",
-            "description": "2-letter US state code",
-            "required": true
+            "description": "2-letter US state code (default: CA)",
+            "required": false
           }
         }
       },
@@ -9191,8 +11536,8 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "state": {
             "type": "string",
-            "description": "2-letter US state code",
-            "required": true
+            "description": "2-letter US state code (default: TX)",
+            "required": false
           },
           "miles": {
             "type": "integer",
@@ -9311,10 +11656,15 @@ export const VERTICALS: Record<string, Vertical> = {
         "price": "$0.08",
         "description": "Community solar enrollment by ZIP code",
         "params": {
+          "state": {
+            "type": "string",
+            "description": "2-letter US state code",
+            "required": true
+          },
           "zip": {
             "type": "string",
-            "description": "US ZIP code",
-            "required": true
+            "description": "US ZIP code (optional, refines local results)",
+            "required": false
           },
           "monthly_bill": {
             "type": "integer",
@@ -9877,9 +12227,19 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "Street address",
             "required": false
           },
+          "location": {
+            "type": "string",
+            "description": "Postal code or city (e.g. 90210, M5V 2T6, SW1A)",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country (e.g. US, UK, CA, DE, AU) — selects local currency and property portals",
+            "required": false
+          },
           "zip": {
             "type": "string",
-            "description": "ZIP code",
+            "description": "Legacy alias for location (ZIP/postal code)",
             "required": false
           },
           "lang": {
@@ -9895,9 +12255,9 @@ export const VERTICALS: Record<string, Vertical> = {
         "price": "$0.10",
         "description": "Neighborhood analysis",
         "params": {
-          "zip": {
+          "location": {
             "type": "string",
-            "description": "zip",
+            "description": "Postal code or area (e.g. 90210, M5V 2T6, SW1A)",
             "required": false
           },
           "city": {
@@ -9907,7 +12267,17 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "state": {
             "type": "string",
-            "description": "state",
+            "description": "State/province/region",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country (e.g. US, UK, CA, DE, AU)",
+            "required": false
+          },
+          "zip": {
+            "type": "string",
+            "description": "Legacy alias for location (ZIP/postal code)",
             "required": false
           },
           "lang": {
@@ -9930,7 +12300,22 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "home_value": {
             "type": "integer",
-            "description": "Current estimated home value in USD",
+            "description": "Current estimated home value, in local currency",
+            "required": false
+          },
+          "location": {
+            "type": "string",
+            "description": "Postal code or city (e.g. 90210, M5V 2T6, SW1A, Berlin)",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country (e.g. US, UK, CA, DE, AU) — sets currency and permit/planning-permission terminology",
+            "required": false
+          },
+          "zip": {
+            "type": "string",
+            "description": "Legacy alias for location (ZIP/postal code)",
             "required": false
           },
           "lang": {
@@ -9948,12 +12333,17 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "season": {
             "type": "string",
-            "description": "Defaults to current season",
+            "description": "Defaults to current season (hemisphere-corrected when country is given)",
             "required": false
           },
           "region": {
             "type": "string",
-            "description": "US region or state (e.g. Northeast, Pacific Northwest)",
+            "description": "Region or state/province (e.g. Northeast, Pacific Northwest, Bavaria, New South Wales)",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country (e.g. US, UK, CA, DE, AU) — corrects season/hemisphere and local terminology",
             "required": false
           },
           "lang": {
@@ -9969,9 +12359,9 @@ export const VERTICALS: Record<string, Vertical> = {
         "price": "$0.08",
         "description": "Rental market analysis",
         "params": {
-          "zip": {
+          "location": {
             "type": "string",
-            "description": "zip",
+            "description": "Postal code or city (e.g. 90210, M5V 2T6, SW1A)",
             "required": false
           },
           "city": {
@@ -9981,7 +12371,17 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "state": {
             "type": "string",
-            "description": "2-letter state code required for HUD FMR data",
+            "description": "State/province; 2-letter US state code required for HUD FMR data",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country (e.g. US, UK, CA, DE, AU) — HUD FMR only applies when country is US/unspecified",
+            "required": false
+          },
+          "zip": {
+            "type": "string",
+            "description": "Legacy alias for location (ZIP/postal code)",
             "required": false
           },
           "bedrooms": {
@@ -9991,7 +12391,7 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "county": {
             "type": "string",
-            "description": "County name hint for HUD FMR matching",
+            "description": "County name hint for HUD FMR matching (US only)",
             "required": false
           },
           "lang": {
@@ -10012,9 +12412,19 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "Trade (plumber, electrician, roofer, etc.)",
             "required": true
           },
+          "location": {
+            "type": "string",
+            "description": "Postal code or city (e.g. 90210, M5V 2T6, SW1A, Berlin)",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country/jurisdiction (e.g. US, UK, CA, DE, AU) — determines the correct licensing authority",
+            "required": false
+          },
           "zip": {
             "type": "string",
-            "description": "ZIP code",
+            "description": "Legacy alias for location (ZIP/postal code)",
             "required": false
           },
           "lang": {
@@ -10035,9 +12445,19 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "Home type (single-family, condo, etc.)",
             "required": false
           },
+          "location": {
+            "type": "string",
+            "description": "Postal code or city (e.g. 90210, M5V 2T6, SW1A, Berlin)",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country (e.g. US, UK, CA, DE, AU) — determines which incentive programs apply",
+            "required": false
+          },
           "zip": {
             "type": "string",
-            "description": "ZIP code",
+            "description": "Legacy alias for location (ZIP/postal code)",
             "required": false
           },
           "age": {
@@ -10047,7 +12467,7 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "sqft": {
             "type": "string",
-            "description": "Square footage",
+            "description": "Square footage (or square meters — state units)",
             "required": false
           },
           "lang": {
@@ -10065,8 +12485,13 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "region": {
             "type": "string",
-            "description": "Region",
+            "description": "Region or state/province (e.g. Northeast, Bavaria, New South Wales)",
             "required": true
+          },
+          "country": {
+            "type": "string",
+            "description": "Country (e.g. US, UK, CA, DE, AU) — corrects hemisphere/season and terminology",
+            "required": false
           },
           "home_age": {
             "type": "string",
@@ -10106,9 +12531,14 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "Region",
             "required": false
           },
+          "country": {
+            "type": "string",
+            "description": "Country (e.g. US, UK, CA, DE, AU) — NAR Cost vs Value is a US-specific benchmark; other countries get local guidance",
+            "required": false
+          },
           "home_value": {
             "type": "string",
-            "description": "Current home value USD",
+            "description": "Current home value, in local currency",
             "required": false
           },
           "lang": {
@@ -10136,7 +12566,12 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "budget": {
             "type": "string",
-            "description": "Budget USD",
+            "description": "Budget, in local currency",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country (e.g. US, UK, CA, DE, AU) — affects plug type/voltage, currency, and regional device availability",
             "required": false
           },
           "lang": {
@@ -10162,14 +12597,14 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "nationality": {
             "type": "string",
-            "description": "nationality",
-            "required": true,
+            "description": "nationality (default: Indian)",
+            "required": false,
             "example": "Indian"
           },
           "destination": {
             "type": "string",
-            "description": "destination",
-            "required": true,
+            "description": "destination (default: United States)",
+            "required": false,
             "example": "Canada"
           },
           "category": {
@@ -10193,14 +12628,14 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "nationality": {
             "type": "string",
-            "description": "nationality",
-            "required": true,
+            "description": "nationality (default: Filipino)",
+            "required": false,
             "example": "Filipino"
           },
           "destination": {
             "type": "string",
-            "description": "destination",
-            "required": true,
+            "description": "destination (default: Canada)",
+            "required": false,
             "example": "Canada"
           },
           "occupation": {
@@ -10228,8 +12663,8 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "income": {
             "type": "string",
-            "description": "Monthly income in USD",
-            "required": true,
+            "description": "Monthly income in USD (default: 3000)",
+            "required": false,
             "example": "3500"
           },
           "nationality": {
@@ -10263,8 +12698,8 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "type": {
             "type": "string",
-            "description": "type",
-            "required": true
+            "description": "type (default: investment)",
+            "required": false
           },
           "budget": {
             "type": "string",
@@ -10324,14 +12759,14 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "category": {
             "type": "string",
-            "description": "Preference category: EB-1|EB-2|EB-3|EB-4|EB-5|F-1|F-2A|F-2B|F-3|F-4",
-            "required": true,
+            "description": "Preference category: EB-1|EB-2|EB-3|EB-4|EB-5|F-1|F-2A|F-2B|F-3|F-4 (default: EB-2)",
+            "required": false,
             "example": "EB-2"
           },
           "chargeability": {
             "type": "string",
-            "description": "Country of chargeability (usually birth country)",
-            "required": true,
+            "description": "Country of chargeability, usually birth country (default: India)",
+            "required": false,
             "example": "India"
           },
           "priority_date": {
@@ -10354,14 +12789,14 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "nationality": {
             "type": "string",
-            "description": "nationality",
-            "required": true,
+            "description": "nationality (default: American)",
+            "required": false,
             "example": "American"
           },
           "budget": {
             "type": "string",
-            "description": "Monthly income/pension budget in USD",
-            "required": true,
+            "description": "Monthly income/pension budget in USD (default: 2500)",
+            "required": false,
             "example": "2500"
           },
           "priority": {
@@ -10384,14 +12819,14 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "nationality": {
             "type": "string",
-            "description": "nationality",
-            "required": true,
+            "description": "nationality (default: Brazilian)",
+            "required": false,
             "example": "Nigerian"
           },
           "destinations": {
             "type": "string",
-            "description": "Comma-separated destination countries (2–5)",
-            "required": true,
+            "description": "Comma-separated destination countries (2–5) (default: US,Canada,Portugal,Germany)",
+            "required": false,
             "example": "UK,Canada,Germany"
           },
           "occupation": {
@@ -10414,14 +12849,14 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "destination": {
             "type": "string",
-            "description": "destination",
-            "required": true,
+            "description": "destination (default: United States)",
+            "required": false,
             "example": "United States"
           },
           "visa_status": {
             "type": "string",
-            "description": "Visa type or immigration status (e.g. H-1B, F-1, Green Card, TN, Skilled Worker, ILR)",
-            "required": true,
+            "description": "Visa type or immigration status (e.g. H-1B, F-1, Green Card, TN, Skilled Worker, ILR) (default: work visa)",
+            "required": false,
             "example": "H-1B"
           },
           "lang": {
@@ -10439,14 +12874,14 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "visa_type": {
             "type": "string",
-            "description": "Visa or form type (e.g. I-485, EB-2, H-1B, F-1, Canada Express Entry, UK Skilled Worker)",
-            "required": true,
+            "description": "Visa or form type (e.g. I-485, EB-2, H-1B, F-1, Canada Express Entry, UK Skilled Worker) (default: H-1B)",
+            "required": false,
             "example": "I-485"
           },
           "destination": {
             "type": "string",
-            "description": "destination",
-            "required": true,
+            "description": "destination (default: United States)",
+            "required": false,
             "example": "United States"
           },
           "with_attorney": {
@@ -10549,7 +12984,7 @@ export const VERTICALS: Record<string, Vertical> = {
   "insurepulse": {
     "name": "InsurePulse",
     "baseUrl": "https://insurepulse.vercel.app",
-    "description": "AI-synthesized insurance intelligence. Auto coverage analysis, life insurance needs calculator, homeowners gap finder, annual coverage audit, and renters insurance guidance. All endpoints require x402",
+    "description": "AI-synthesized insurance intelligence. Auto coverage analysis, life insurance needs calculator, homeowners gap finder, annual coverage review, renters guidance — plus the Prompt-Pay Interest Engine: deterministic late-claim statutory interest math (TX 18%/prime+5, FL from notice date, NY no-fault 2%/mo, AZ 10%, GA 12%, CA 15%+penalty) with citation-locked demand letters. All endpoints require x402",
     "globalCoverage": "Global",
     "endpoints": [
       {
@@ -10906,6 +13341,185 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "health",
+        "path": "/api/insure/health",
+        "price": "$0.15",
+        "description": "Health insurance explained",
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "Country (e.g. US, UK, DE, IN, BR)",
+            "required": true
+          },
+          "situation": {
+            "type": "string",
+            "description": "employed/self-employed/student/retiree/expat/family",
+            "required": false
+          },
+          "age_range": {
+            "type": "string",
+            "description": "Age range (e.g. 25-34)",
+            "required": false
+          },
+          "priorities": {
+            "type": "string",
+            "description": "cost/coverage/dental/maternity/chronic",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "prompt-pay",
+        "path": "/api/insure/prompt-pay",
+        "price": "$0.10",
+        "description": "Late-claim interest check — statutory prompt-pay interest math (deterministic, no LLM)",
+        "params": {
+          "state": {
+            "type": "string",
+            "description": "US state code (TX|FL|NY|AZ|GA|CA computed; LA|CO flagged; NJ|WA honest-no)",
+            "required": true
+          },
+          "claim_type": {
+            "type": "string",
+            "description": "property | auto | health | disability | life",
+            "required": true
+          },
+          "claim_received_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD the insurer received the claim/notice/proof of loss",
+            "required": true
+          },
+          "claim_amount": {
+            "type": "string",
+            "description": "USD claim amount from your records",
+            "required": true
+          },
+          "paid_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD paid (omit if unpaid)",
+            "required": false
+          },
+          "amount_paid": {
+            "type": "string",
+            "description": "USD partial payment",
+            "required": false
+          },
+          "weather_related": {
+            "type": "string",
+            "description": "TX property: true for hail/wind/hurricane (ch. 542A lane) — REQUIRED for TX property",
+            "required": false
+          },
+          "third_party": {
+            "type": "string",
+            "description": "true if claiming against someone ELSE's insurer (honest-no)",
+            "required": false
+          },
+          "submitted_by": {
+            "type": "string",
+            "description": "insured_reimbursement | provider_assigned",
+            "required": false
+          },
+          "plan_funding": {
+            "type": "string",
+            "description": "health: fully_insured | self_funded | government | church | unknown (ERISA gate)",
+            "required": false
+          },
+          "hmo_plan": {
+            "type": "string",
+            "description": "CA: true for Knox-Keene/DMHC plans",
+            "required": false
+          },
+          "submission_method": {
+            "type": "string",
+            "description": "GA: electronic | paper (deadline fork)",
+            "required": false
+          },
+          "all_items_date": {
+            "type": "string",
+            "description": "TX: date all requested items were provided",
+            "required": false
+          },
+          "interest_included": {
+            "type": "string",
+            "description": "auto-pay lanes: did the payment include the interest",
+            "required": false
+          },
+          "date_of_loss": {
+            "type": "string",
+            "description": "FL: the 5-yr limitations clock runs from the date of loss",
+            "required": false
+          },
+          "denial_date": {
+            "type": "string",
+            "description": "NY-PIP: denial date (drives the 65-3.9(c) interest toll)",
+            "required": false
+          },
+          "acted_within_30_of_denial": {
+            "type": "string",
+            "description": "NY-PIP: was arbitration/suit filed within 30 days of denial",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "prompt-pay-letter",
+        "path": "/api/insure/prompt-pay-letter",
+        "price": "$2.00",
+        "description": "Citation-locked late-claim interest demand letter ($2)",
+        "params": {
+          "state": {
+            "type": "string",
+            "description": "US state code (TX|FL|NY|AZ|GA|CA letter-worthy lanes)",
+            "required": true
+          },
+          "claim_type": {
+            "type": "string",
+            "description": "property | auto | health | disability | life",
+            "required": true
+          },
+          "claim_received_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD the insurer received the claim",
+            "required": true
+          },
+          "claim_amount": {
+            "type": "string",
+            "description": "USD claim amount",
+            "required": true
+          },
+          "insurer_name": {
+            "type": "string",
+            "description": "Insurer name for the letter",
+            "required": false
+          },
+          "policyholder_name": {
+            "type": "string",
+            "description": "Your name (placeholder if omitted)",
+            "required": false
+          },
+          "policy_number": {
+            "type": "string",
+            "description": "Policy number (placeholder if omitted)",
+            "required": false
+          },
+          "claim_number": {
+            "type": "string",
+            "description": "Claim number (placeholder if omitted)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Letter language (default English)",
             "required": false
           }
         }
@@ -11335,6 +13949,24 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "dna",
+        "path": "/api/longevity/dna",
+        "price": "$0.20",
+        "description": "Interpret consumer-DNA gene variants for longevity — honest evidence, not hype",
+        "params": {
+          "variants": {
+            "type": "string",
+            "description": "Comma-separated gene/variant identifiers or rsIDs — e.g. APOE-e4,MTHFR-C677T,FOXO3 (up to 8 per request; not raw genome files)",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default: en)",
+            "required": false
+          }
+        }
       }
     ]
   },
@@ -11468,18 +14100,21 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "brand": {
             "type": "string",
-            "description": "brand",
-            "required": false
+            "description": "The brand to assess AI-answer visibility for — provide brand and/or topic",
+            "required": false,
+            "example": "Acme Plumbing"
           },
           "topic": {
             "type": "string",
-            "description": "topic",
-            "required": false
+            "description": "The topic or category to assess AI visibility within — provide brand and/or topic",
+            "required": false,
+            "example": "drain cleaning Austin TX"
           },
           "lang": {
             "type": "string",
-            "description": "lang",
-            "required": false
+            "description": "Language to respond in — defaults to English",
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -11491,23 +14126,27 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "topic": {
             "type": "string",
-            "description": "topic",
-            "required": true
+            "description": "The content topic or target query to brief",
+            "required": true,
+            "example": "best CRM for small business 2026"
           },
           "audience": {
             "type": "string",
-            "description": "audience",
-            "required": false
+            "description": "Who this content is written for — sharpens tone and structure",
+            "required": false,
+            "example": "small business owners comparing CRM tools"
           },
           "goal": {
             "type": "string",
-            "description": "goal",
-            "required": false
+            "description": "What the content should accomplish",
+            "required": false,
+            "example": "rank and drive trial signups"
           },
           "lang": {
             "type": "string",
-            "description": "lang",
-            "required": false
+            "description": "Language to respond in — defaults to English",
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -11519,28 +14158,33 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "business_type": {
             "type": "string",
-            "description": "business_type",
-            "required": true
+            "description": "The business or offer to plan a channel mix for",
+            "required": true,
+            "example": "local plumbing company"
           },
           "budget": {
             "type": "string",
-            "description": "budget",
-            "required": false
+            "description": "Monthly marketing budget, with currency and period",
+            "required": false,
+            "example": "$5,000/month"
           },
           "goals": {
             "type": "string",
-            "description": "goals",
-            "required": false
+            "description": "Primary marketing goal to optimize the mix around",
+            "required": false,
+            "example": "more qualified leads"
           },
           "stage": {
             "type": "string",
-            "description": "stage",
-            "required": false
+            "description": "Business stage — startup, growth, or scale",
+            "required": false,
+            "example": "growth"
           },
           "lang": {
             "type": "string",
-            "description": "lang",
-            "required": false
+            "description": "Language to respond in — defaults to English",
+            "required": false,
+            "example": "de"
           }
         }
       },
@@ -11552,23 +14196,27 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "industry": {
             "type": "string",
-            "description": "industry",
-            "required": true
+            "description": "The industry to benchmark ROI projections against",
+            "required": true,
+            "example": "home services"
           },
           "budget": {
             "type": "string",
-            "description": "budget",
-            "required": true
+            "description": "Marketing budget to forecast returns for, with currency and period",
+            "required": true,
+            "example": "$3,000/month"
           },
           "channels": {
             "type": "string",
-            "description": "channels",
-            "required": false
+            "description": "Comma-separated channels to forecast — defaults to a general digital-marketing mix",
+            "required": false,
+            "example": "google,meta,email"
           },
           "lang": {
             "type": "string",
-            "description": "lang",
-            "required": false
+            "description": "Language to respond in — defaults to English",
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -11580,18 +14228,21 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "competitor": {
             "type": "string",
-            "description": "competitor",
-            "required": true
+            "description": "The competitor brand or company to analyze",
+            "required": true,
+            "example": "HubSpot"
           },
           "industry": {
             "type": "string",
-            "description": "industry",
-            "required": true
+            "description": "The industry or category the competitor operates in",
+            "required": true,
+            "example": "CRM software"
           },
           "lang": {
             "type": "string",
-            "description": "lang",
-            "required": false
+            "description": "Language to respond in — defaults to English",
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -11603,28 +14254,33 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "platform": {
             "type": "string",
-            "description": "platform",
-            "required": true
+            "description": "Ad platform to write copy for",
+            "required": true,
+            "example": "Meta"
           },
           "product": {
             "type": "string",
-            "description": "product",
-            "required": true
+            "description": "The product or service being advertised",
+            "required": true,
+            "example": "online bookkeeping software for freelancers"
           },
           "audience": {
             "type": "string",
-            "description": "audience",
-            "required": false
+            "description": "Target audience for the ad — sharpens the hook and targeting guidance",
+            "required": false,
+            "example": "freelance graphic designers with under 5 employees"
           },
           "goal": {
             "type": "string",
-            "description": "goal",
-            "required": false
+            "description": "Campaign objective in plain language",
+            "required": false,
+            "example": "trial signups"
           },
           "lang": {
             "type": "string",
-            "description": "lang",
-            "required": false
+            "description": "Language to write the copy in — defaults to English",
+            "required": false,
+            "example": "es"
           }
         }
       },
@@ -11636,23 +14292,27 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "product": {
             "type": "string",
-            "description": "product",
-            "required": true
+            "description": "The product or service the sequence is selling or supporting",
+            "required": true,
+            "example": "online accounting software"
           },
           "goal": {
             "type": "string",
-            "description": "goal",
-            "required": true
+            "description": "What this sequence should accomplish",
+            "required": true,
+            "example": "convert trial to paid"
           },
           "sequence_type": {
             "type": "string",
-            "description": "sequence_type",
-            "required": false
+            "description": "Type of sequence to write — welcome, nurture, abandoned_cart, post_purchase, or re_engagement",
+            "required": false,
+            "example": "nurture"
           },
           "lang": {
             "type": "string",
-            "description": "lang",
-            "required": false
+            "description": "Language to respond in — defaults to English",
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -11664,23 +14324,27 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "platform": {
             "type": "string",
-            "description": "platform",
-            "required": true
+            "description": "Social platform to build the strategy for",
+            "required": true,
+            "example": "TikTok"
           },
           "industry": {
             "type": "string",
-            "description": "industry",
-            "required": true
+            "description": "The industry or niche the account operates in",
+            "required": true,
+            "example": "fitness supplements"
           },
           "goal": {
             "type": "string",
-            "description": "goal",
-            "required": false
+            "description": "What organic social should accomplish",
+            "required": false,
+            "example": "generate demo requests"
           },
           "lang": {
             "type": "string",
-            "description": "lang",
-            "required": false
+            "description": "Language to respond in — defaults to English",
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -11692,18 +14356,21 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "business": {
             "type": "string",
-            "description": "business",
-            "required": true
+            "description": "The type of business to build a local SEO plan for",
+            "required": true,
+            "example": "family dental practice"
           },
           "location": {
             "type": "string",
-            "description": "location",
-            "required": false
+            "description": "City and state/region the business serves — sharpens citation and competitor guidance",
+            "required": false,
+            "example": "Denver, CO"
           },
           "lang": {
             "type": "string",
-            "description": "lang",
-            "required": false
+            "description": "Language to respond in — defaults to English",
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -11711,22 +14378,51 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "seo-audit",
         "path": "/api/market/seo-audit",
         "price": "$0.10",
-        "description": "Technical SEO audit",
+        "description": "Technical SEO review",
         "params": {
           "website": {
             "type": "string",
-            "description": "website",
-            "required": true
+            "description": "The website domain to review",
+            "required": true,
+            "example": "acmeplumbing.com"
           },
           "industry": {
             "type": "string",
-            "description": "industry",
-            "required": true
+            "description": "The industry the website operates in — sharpens E-E-A-T and content guidance",
+            "required": true,
+            "example": "local plumbing"
           },
           "lang": {
             "type": "string",
-            "description": "lang",
-            "required": false
+            "description": "Language to respond in — defaults to English",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "seo-review",
+        "path": "/api/market/seo-review",
+        "price": "$0.10",
+        "description": "Technical SEO review",
+        "params": {
+          "website": {
+            "type": "string",
+            "description": "The website domain to review",
+            "required": true,
+            "example": "acmeplumbing.com"
+          },
+          "industry": {
+            "type": "string",
+            "description": "The industry the website operates in — sharpens E-E-A-T and content guidance",
+            "required": true,
+            "example": "local plumbing"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Language to respond in — defaults to English",
+            "required": false,
+            "example": "en"
           }
         }
       }
@@ -12235,6 +14931,62 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "postpartum",
+        "path": "/api/mind/postpartum",
+        "price": "$0.10",
+        "description": "Postpartum and perinatal mental health guidance",
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "User's country for localized crisis/helpline resources (e.g. US, UK, AU, CA, DE) — never assumed",
+            "required": false
+          },
+          "concern": {
+            "type": "string",
+            "description": "Postpartum concern: baby-blues-vs-ppd, ppa, intrusive-thoughts, partner-support, screening",
+            "required": true
+          },
+          "weeks-postpartum": {
+            "type": "string",
+            "description": "Weeks since birth (e.g. 2, 6, 12, 30)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "addiction",
+        "path": "/api/mind/addiction",
+        "price": "$0.10",
+        "description": "Addiction support and harm-reduction guidance",
+        "params": {
+          "substance-or-behavior": {
+            "type": "string",
+            "description": "Substance or behavior (e.g. alcohol, opioids, stimulants, gambling, gaming, nicotine, benzodiazepines)",
+            "required": true
+          },
+          "country": {
+            "type": "string",
+            "description": "User's country for localized helplines (e.g. US, UK, AU, CA, DE)",
+            "required": false
+          },
+          "stage": {
+            "type": "string",
+            "description": "Stage: curious, cutting-back, quitting, relapse, supporting-someone",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false
+          }
+        }
       }
     ]
   },
@@ -12568,7 +15320,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "rwa",
         "path": "/api/rwa",
         "price": "$0.15",
-        "description": "Real world asset intelligence — market data and institutional tracking",
+        "description": "Real world asset market overview — top-of-funnel scan across asset classes",
         "params": {
           "action": {
             "type": "string",
@@ -12836,6 +15588,105 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "base"
           }
         }
+      },
+      {
+        "action": "rwa-yield",
+        "path": "/api/rwa-yield",
+        "price": "$0.20",
+        "description": "Tokenized-treasury/MMF yield comparison — BUIDL, USDY, OUSG, USYC, USTB, BENJI",
+        "params": {
+          "action": {
+            "type": "string",
+            "description": "Analysis type",
+            "required": false,
+            "example": "compare"
+          },
+          "product": {
+            "type": "string",
+            "description": "Focus on one product",
+            "required": false
+          },
+          "jurisdiction": {
+            "type": "string",
+            "description": "Eligibility framing",
+            "required": false,
+            "example": "global"
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "rwa-risk",
+        "path": "/api/rwa-risk",
+        "price": "$0.25",
+        "description": "RWA issuer and redemption risk read for a named product",
+        "params": {
+          "product": {
+            "type": "string",
+            "description": "Product to analyze",
+            "required": false,
+            "example": "BUIDL"
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "gold-check",
+        "path": "/api/gold-check",
+        "price": "$0.15",
+        "description": "Tokenized gold comparison — PAXG vs XAUT",
+        "params": {
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "etf-flows",
+        "path": "/api/etf-flows",
+        "price": "$0.15",
+        "description": "Crypto ETF flow intelligence — US spot BTC/ETH/SOL, per-issuer breakdown",
+        "params": {
+          "asset": {
+            "type": "string",
+            "description": "Which ETF complex to analyze",
+            "required": false,
+            "example": "all"
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "clarity-watch",
+        "path": "/api/clarity-watch",
+        "price": "$0.10",
+        "description": "CLARITY Act tracker — live congress.gov status, CFTC/SEC split, passage odds",
+        "params": {
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false,
+            "example": "en"
+          }
+        }
       }
     ]
   },
@@ -12849,7 +15700,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "milestone",
         "path": "/api/parent/milestone",
         "price": "$0.10",
-        "description": "Developmental milestone guidance",
+        "description": "Developmental milestone guidance (global)",
         "params": {
           "age_months": {
             "type": "string",
@@ -12863,6 +15714,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false,
             "example": "speech-delay"
           },
+          "country": {
+            "type": "string",
+            "description": "Country or region for jurisdiction-aware guidance (e.g. US, UK, Canada, Australia, Germany). Defaults to a generic/US-fallback response if omitted.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "lang",
@@ -12875,7 +15731,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "safety",
         "path": "/api/parent/safety",
         "price": "$0.08",
-        "description": "Product safety recall check",
+        "description": "Product safety recall check (global)",
         "params": {
           "product_type": {
             "type": "string",
@@ -12889,6 +15745,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false,
             "example": "Graco"
           },
+          "country": {
+            "type": "string",
+            "description": "Country or region for jurisdiction-aware guidance (e.g. US, UK, Canada, Australia, Germany). Defaults to a generic/US-fallback response if omitted.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "lang",
@@ -12900,7 +15761,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "school",
         "path": "/api/parent/school",
         "price": "$0.10",
-        "description": "School selection guidance",
+        "description": "School selection guidance (global)",
         "params": {
           "zip": {
             "type": "string",
@@ -12920,6 +15781,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false,
             "example": "academics,arts"
           },
+          "country": {
+            "type": "string",
+            "description": "Country or region for jurisdiction-aware guidance (e.g. US, UK, Canada, Australia, Germany). Defaults to a generic/US-fallback response if omitted.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "lang",
@@ -12931,7 +15797,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "activity",
         "path": "/api/parent/activity",
         "price": "$0.08",
-        "description": "Activity and extracurricular finder",
+        "description": "Activity and extracurricular finder (global)",
         "params": {
           "age": {
             "type": "string",
@@ -12957,6 +15823,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false,
             "example": "78701"
           },
+          "country": {
+            "type": "string",
+            "description": "Country or region for jurisdiction-aware guidance (e.g. US, UK, Canada, Australia, Germany). Defaults to a generic/US-fallback response if omitted.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "lang",
@@ -12968,7 +15839,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "finance",
         "path": "/api/parent/finance",
         "price": "$0.12",
-        "description": "Family financial planning",
+        "description": "Family financial planning (global)",
         "params": {
           "children": {
             "type": "string",
@@ -12988,6 +15859,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false,
             "example": "120000"
           },
+          "country": {
+            "type": "string",
+            "description": "Country or region for jurisdiction-aware guidance (e.g. US, UK, Canada, Australia, Germany). Defaults to a generic/US-fallback response if omitted.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "lang",
@@ -12999,7 +15875,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "sleep",
         "path": "/api/parent/sleep",
         "price": "$0.10",
-        "description": "Pediatric sleep guidance",
+        "description": "Pediatric sleep guidance (global)",
         "params": {
           "age_months": {
             "type": "string",
@@ -13013,6 +15889,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false,
             "example": "night-waking"
           },
+          "country": {
+            "type": "string",
+            "description": "Country or region for jurisdiction-aware guidance (e.g. US, UK, Canada, Australia, Germany). Defaults to a generic/US-fallback response if omitted.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "lang",
@@ -13024,7 +15905,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "nutrition",
         "path": "/api/parent/nutrition",
         "price": "$0.10",
-        "description": "Pediatric nutrition guidance",
+        "description": "Pediatric nutrition guidance (global)",
         "params": {
           "age_months": {
             "type": "string",
@@ -13038,6 +15919,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false,
             "example": "picky-eater"
           },
+          "country": {
+            "type": "string",
+            "description": "Country or region for jurisdiction-aware guidance (e.g. US, UK, Canada, Australia, Germany). Defaults to a generic/US-fallback response if omitted.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "lang",
@@ -13049,7 +15935,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "discipline",
         "path": "/api/parent/discipline",
         "price": "$0.10",
-        "description": "Positive discipline guidance",
+        "description": "Positive discipline guidance (global)",
         "params": {
           "age": {
             "type": "string",
@@ -13063,6 +15949,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false,
             "example": "tantrums"
           },
+          "country": {
+            "type": "string",
+            "description": "Country or region for jurisdiction-aware guidance (e.g. US, UK, Canada, Australia, Germany). Defaults to a generic/US-fallback response if omitted.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "lang",
@@ -13074,7 +15965,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "childcare",
         "path": "/api/parent/childcare",
         "price": "$0.12",
-        "description": "Childcare options comparison",
+        "description": "Childcare options comparison (global)",
         "params": {
           "zip": {
             "type": "string",
@@ -13094,6 +15985,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false,
             "example": "2000"
           },
+          "country": {
+            "type": "string",
+            "description": "Country or region for jurisdiction-aware guidance (e.g. US, UK, Canada, Australia, Germany). Defaults to a generic/US-fallback response if omitted.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "lang",
@@ -13105,7 +16001,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "health",
         "path": "/api/parent/health",
         "price": "$0.10",
-        "description": "Pediatric symptom triage",
+        "description": "Pediatric symptom triage (global)",
         "params": {
           "age_months": {
             "type": "string",
@@ -13118,6 +16014,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "symptoms",
             "required": false,
             "example": "fever,rash"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country or region for jurisdiction-aware guidance (e.g. US, UK, Canada, Australia, Germany). Defaults to a generic/US-fallback response if omitted.",
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -13594,7 +16495,7 @@ export const VERTICALS: Record<string, Vertical> = {
           "age": {
             "type": "string",
             "description": "Pet age",
-            "required": false
+            "required": true
           },
           "conditions": {
             "type": "string",
@@ -13670,6 +16571,34 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "behavior",
+        "path": "/api/pet/behavior",
+        "price": "$0.10",
+        "description": "Pet behavior and training guide",
+        "params": {
+          "species": {
+            "type": "string",
+            "description": "Animal species",
+            "required": true
+          },
+          "issue": {
+            "type": "string",
+            "description": "Behavior issue (e.g. separation-anxiety, leash-reactivity, litter-box-avoidance, destructive-chewing, aggression)",
+            "required": true
+          },
+          "age": {
+            "type": "string",
+            "description": "Pet age (e.g. 2 years)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (e.g. es, de, fr)",
             "required": false
           }
         }
@@ -14046,21 +16975,31 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "mortgage",
         "path": "/api/prop/mortgage",
         "price": "$0.10",
-        "description": "Mortgage analysis — current rates, payment breakdown, max price, lender links",
+        "description": "Mortgage analysis — jurisdiction-aware rates, payment breakdown, max price, lender links",
         "params": {
           "income": {
             "type": "number",
-            "description": "Annual gross income",
+            "description": "Annual gross income, local currency",
             "required": true
           },
           "down": {
             "type": "number",
-            "description": "Down payment in USD. Defaults to 20%.",
+            "description": "Down payment. Defaults to 20%.",
             "required": false
           },
           "location": {
             "type": "string",
-            "description": "City, state, zip, or country for local context",
+            "description": "City, region, or postal code",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code, e.g. US, UK, CA, DE, AU, IN (optional; unspecified is treated honestly, not silently as US)",
+            "required": false
+          },
+          "zip": {
+            "type": "string",
+            "description": "Legacy alias for location; implies country=US when country is omitted",
             "required": false
           },
           "debt": {
@@ -14079,11 +17018,11 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "afford",
         "path": "/api/prop/afford",
         "price": "$0.10",
-        "description": "True affordability analysis — stress-free vs. bank-qualifying ceiling",
+        "description": "True affordability analysis — stress-free vs. lender-qualifying ceiling, jurisdiction-aware",
         "params": {
           "income": {
             "type": "number",
-            "description": "Annual gross income",
+            "description": "Annual gross income, local currency",
             "required": true
           },
           "down": {
@@ -14091,9 +17030,19 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "Available down payment",
             "required": false
           },
+          "location": {
+            "type": "string",
+            "description": "City, region, or postal code",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code, e.g. US, UK, CA, DE, AU, IN (optional)",
+            "required": false
+          },
           "zip": {
             "type": "string",
-            "description": "US zip or country for property tax lookup",
+            "description": "Legacy alias for location; implies country=US when country is omitted",
             "required": false
           },
           "debt": {
@@ -14121,7 +17070,12 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "location": {
             "type": "string",
-            "description": "City or country — drives local market data",
+            "description": "City, region, or postal code",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code, e.g. US, UK, CA, DE, AU, IN (optional)",
             "required": false
           },
           "savings": {
@@ -14145,7 +17099,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "refi",
         "path": "/api/prop/refi",
         "price": "$0.08",
-        "description": "Refinance opportunity analysis — break-even, monthly savings, cash-out potential",
+        "description": "Refinance/remortgage opportunity — break-even, monthly savings, cash-out potential",
         "params": {
           "rate": {
             "type": "number",
@@ -14167,6 +17121,16 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "Current home value (enables cash-out analysis)",
             "required": false
           },
+          "location": {
+            "type": "string",
+            "description": "City, region, or postal code",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code, e.g. US, UK, CA, DE, AU, IN (optional)",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "lang",
@@ -14178,12 +17142,22 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "market",
         "path": "/api/prop/market",
         "price": "$0.10",
-        "description": "Local market intelligence — buyer/seller conditions, price trends, inventory",
+        "description": "Local market intelligence — buyer/seller conditions, price trends, inventory, any country",
         "params": {
+          "location": {
+            "type": "string",
+            "description": "City, region, or postal code",
+            "required": true
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code, e.g. US, UK, CA, DE, AU, IN (optional)",
+            "required": false
+          },
           "zip": {
             "type": "string",
-            "description": "US zip code or city/country for international markets",
-            "required": true
+            "description": "Legacy alias for location; implies country=US when country is omitted",
+            "required": false
           },
           "lang": {
             "type": "string",
@@ -14196,13 +17170,18 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "invest",
         "path": "/api/prop/invest",
         "price": "$0.15",
-        "description": "Investment property ROI — cap rate, cash-on-cash, 5-year projection, investment grade",
+        "description": "Investment property ROI — cap rate, cash-on-cash, 5-year projection, investment grade, any country",
         "params": {
           "location": {
             "type": "string",
             "description": "location",
             "required": true,
             "example": "Austin, TX"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code, e.g. US, UK, CA, DE, AU, IN (optional)",
+            "required": false
           },
           "price": {
             "type": "string",
@@ -14231,12 +17210,17 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "valuate",
         "path": "/api/prop/valuate",
         "price": "$0.10",
-        "description": "Property valuation — AVM estimate with comparable sales and negotiation intelligence",
+        "description": "Property valuation — AVM estimate with comparable sales and negotiation intelligence, any country",
         "params": {
           "address": {
             "type": "string",
-            "description": "Full property address (e.g. 123+Main+St+Austin+TX)",
+            "description": "Full property address",
             "required": true
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code, e.g. US, UK, CA, DE, AU, IN (optional)",
+            "required": false
           },
           "sqft": {
             "type": "string",
@@ -14259,13 +17243,23 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "neighborhood",
         "path": "/api/prop/neighborhood",
         "price": "$0.10",
-        "description": "Neighborhood intelligence — schools, safety, walkability, investment outlook",
+        "description": "Neighborhood intelligence — schools, safety, walkability, investment outlook, any country",
         "params": {
           "location": {
             "type": "string",
             "description": "Neighborhood, city district, or full address",
             "required": true,
             "example": "Boerum Hill, Brooklyn, NY"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code, e.g. US, UK, CA, DE, AU, IN (optional)",
+            "required": false
+          },
+          "zip": {
+            "type": "string",
+            "description": "Legacy alias for location; implies country=US when country is omitted",
+            "required": false
           },
           "priority": {
             "type": "string",
@@ -14283,13 +17277,23 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "first-buyer",
         "path": "/api/prop/first-buyer",
         "price": "$0.10",
-        "description": "First-time homebuyer guide — all assistance programs, loan types, step-by-step process",
+        "description": "First-time homebuyer guide — jurisdiction-real schemes, loan types, step-by-step process",
         "params": {
           "location": {
             "type": "string",
-            "description": "US state/city or country for program research",
-            "required": true,
-            "example": "Colorado"
+            "description": "City, region, or postal code",
+            "required": false,
+            "example": "Denver, CO"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code, e.g. US, UK, CA, DE, AU, IN (optional)",
+            "required": false
+          },
+          "zip": {
+            "type": "string",
+            "description": "Legacy alias for location; implies country=US when country is omitted",
+            "required": false
           },
           "income": {
             "type": "string",
@@ -14317,13 +17321,23 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "landlord",
         "path": "/api/prop/landlord",
         "price": "$0.12",
-        "description": "Landlord toolkit — rent pricing, tenant screening, lease law, local regulations",
+        "description": "Landlord toolkit — rent pricing, tenant screening, lease law, tax flags, any country",
         "params": {
           "location": {
             "type": "string",
-            "description": "City and state/country — drives jurisdiction-specific legal guidance",
+            "description": "City and region/country",
             "required": true,
             "example": "Chicago, IL"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code, e.g. US, UK, CA, DE, AU, IN (optional)",
+            "required": false
+          },
+          "zip": {
+            "type": "string",
+            "description": "Legacy alias for location; implies country=US when country is omitted",
+            "required": false
           },
           "units": {
             "type": "string",
@@ -14343,6 +17357,121 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "rental-market",
+        "path": "/api/prop/rental-market",
+        "price": "$0.12",
+        "description": "Rental-market intelligence — asking rent, vacancy, rent-control flag, STR + budget/hostel read, any country",
+        "params": {
+          "location": {
+            "type": "string",
+            "description": "location",
+            "required": true,
+            "example": "Manchester"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code, e.g. US, UK, CA, DE, AU, IN (optional)",
+            "required": false
+          },
+          "bedrooms": {
+            "type": "string",
+            "description": "bedrooms",
+            "required": false
+          },
+          "purchase_price": {
+            "type": "string",
+            "description": "Enables deterministic gross-yield math (long-term and, when angle includes STR, short-term)",
+            "required": false
+          },
+          "angle": {
+            "type": "string",
+            "description": "renter | investor | str | budget (default: overview — includes all sections)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "council-tax",
+        "path": "/api/prop/council-tax",
+        "price": "$0.10",
+        "description": "UK Council-Tax Banding Challenge Check",
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction",
+            "required": true
+          },
+          "current_band": {
+            "type": "string",
+            "description": "Your band (A-H, +I Wales) from gov.uk/council-tax-bands",
+            "required": true
+          },
+          "neighbor_bands": {
+            "type": "string",
+            "description": "3-5 comparable neighbors' bands, comma-separated",
+            "required": false
+          },
+          "became_taxpayer_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD — within 6 months unlocks the formal statutory proposal",
+            "required": false
+          },
+          "band_change_date": {
+            "type": "string",
+            "description": "If the VOA changed the band recently",
+            "required": false
+          },
+          "physical_change": {
+            "type": "boolean",
+            "description": "Qualifying physical/use change (split/merge/demolition/renovation)",
+            "required": false
+          },
+          "risk_acknowledged": {
+            "type": "boolean",
+            "description": "Must be true for letters — bands can go UP (VOA verbatim warning)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "council-tax-letter",
+        "path": "/api/prop/council-tax-letter",
+        "price": "$2.00",
+        "description": "Council-Tax Challenge Document",
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction",
+            "required": true
+          },
+          "current_band": {
+            "type": "string",
+            "description": "Your band",
+            "required": true
+          },
+          "neighbor_bands": {
+            "type": "string",
+            "description": "Comparable bands csv",
+            "required": false
+          },
+          "risk_acknowledged": {
+            "type": "boolean",
+            "description": "Must be true",
+            "required": false
+          },
+          "property_address": {
+            "type": "string",
+            "description": "For the document",
             "required": false
           }
         }
@@ -15100,6 +18229,210 @@ export const VERTICALS: Record<string, Vertical> = {
           "sending_from": {
             "type": "string",
             "description": "Country sending from — tailors corridor-specific advice",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "stablecoin-rails",
+        "path": "/api/remit/stablecoin-rails",
+        "price": "$0.12",
+        "description": "Stablecoin remittance rail comparison",
+        "params": {
+          "from_country": {
+            "type": "string",
+            "description": "Sending country — e.g. USA, UAE, UK, Germany",
+            "required": true
+          },
+          "to_country": {
+            "type": "string",
+            "description": "Receiving country — e.g. Mexico, Philippines, India, Nigeria, Kenya",
+            "required": true
+          },
+          "amount": {
+            "type": "string",
+            "description": "Amount to send (default: 500)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "rights",
+        "path": "/api/remit/rights",
+        "price": "$0.10",
+        "description": "Remittance-transfer rights check (Reg E Subpart B) — deterministic, no LLM",
+        "params": {
+          "issue": {
+            "type": "string",
+            "description": "issue",
+            "required": true
+          },
+          "provider": {
+            "type": "string",
+            "description": "provider",
+            "required": false
+          },
+          "principal": {
+            "type": "string",
+            "description": "principal",
+            "required": false
+          },
+          "fees_paid": {
+            "type": "string",
+            "description": "fees_paid",
+            "required": false
+          },
+          "amount_paid": {
+            "type": "string",
+            "description": "amount_paid",
+            "required": false
+          },
+          "disclosed_total_to_recipient": {
+            "type": "string",
+            "description": "disclosed_total_to_recipient",
+            "required": false
+          },
+          "actually_received": {
+            "type": "string",
+            "description": "actually_received",
+            "required": false
+          },
+          "figures_estimated": {
+            "type": "string",
+            "description": "figures_estimated",
+            "required": false
+          },
+          "date_available": {
+            "type": "string",
+            "description": "date_available",
+            "required": false
+          },
+          "payment_auth_time": {
+            "type": "string",
+            "description": "payment_auth_time",
+            "required": false
+          },
+          "cancel_request_time": {
+            "type": "string",
+            "description": "cancel_request_time",
+            "required": false
+          },
+          "scheduled_advance": {
+            "type": "string",
+            "description": "scheduled_advance",
+            "required": false
+          },
+          "funds_picked_up": {
+            "type": "string",
+            "description": "funds_picked_up",
+            "required": false
+          },
+          "funded_with": {
+            "type": "string",
+            "description": "funded_with",
+            "required": false
+          },
+          "send_date": {
+            "type": "string",
+            "description": "send_date",
+            "required": false
+          },
+          "sender_state": {
+            "type": "string",
+            "description": "sender_state",
+            "required": false
+          },
+          "business_sender": {
+            "type": "string",
+            "description": "business_sender",
+            "required": false
+          },
+          "recipient_country": {
+            "type": "string",
+            "description": "recipient_country",
+            "required": false
+          },
+          "sender_in_us": {
+            "type": "string",
+            "description": "sender_in_us",
+            "required": false
+          },
+          "provider_warned_before_payment": {
+            "type": "string",
+            "description": "provider_warned_before_payment",
+            "required": false
+          },
+          "notice_date": {
+            "type": "string",
+            "description": "notice_date",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "rights-letter",
+        "path": "/api/remit/rights-letter",
+        "price": "$2.00",
+        "description": "Citation-locked remittance document — error notice / §1005.33(h) rebuttal / cancellation demand ($2)",
+        "params": {
+          "issue": {
+            "type": "string",
+            "description": "issue",
+            "required": true
+          },
+          "provider": {
+            "type": "string",
+            "description": "provider",
+            "required": false
+          },
+          "principal": {
+            "type": "string",
+            "description": "principal",
+            "required": false
+          },
+          "fees_paid": {
+            "type": "string",
+            "description": "fees_paid",
+            "required": false
+          },
+          "date_available": {
+            "type": "string",
+            "description": "date_available",
+            "required": false
+          },
+          "sender_name": {
+            "type": "string",
+            "description": "sender_name",
+            "required": false
+          },
+          "recipient_name": {
+            "type": "string",
+            "description": "recipient_name",
+            "required": false
+          },
+          "transfer_reference": {
+            "type": "string",
+            "description": "transfer_reference",
+            "required": false
+          },
+          "remedy_choice": {
+            "type": "string",
+            "description": "remedy_choice",
+            "required": false
+          },
+          "sender_state": {
+            "type": "string",
+            "description": "sender_state",
             "required": false
           },
           "lang": {
@@ -16000,6 +19333,44 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "refi",
+        "path": "/api/refi",
+        "price": "$0.15",
+        "description": "Student loan refinancing intelligence",
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "US | UK | CA | AU | DE | IN (default: US)",
+            "required": false
+          },
+          "balance": {
+            "type": "number",
+            "description": "Current loan balance",
+            "required": true
+          },
+          "current_rate": {
+            "type": "number",
+            "description": "Current interest rate (percent)",
+            "required": true
+          },
+          "credit_tier": {
+            "type": "string",
+            "description": "Credit tier (default: good)",
+            "required": false
+          },
+          "loan_type": {
+            "type": "string",
+            "description": "federal | private (default: federal)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false
+          }
+        }
       }
     ]
   },
@@ -16013,7 +19384,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "medicare",
         "path": "/api/senior/medicare",
         "price": "$0.15",
-        "description": "Medicare plan guidance",
+        "description": "Medicare plan guidance (or country-equivalent senior health coverage)",
         "params": {
           "zip": {
             "type": "string",
@@ -16023,6 +19394,11 @@ export const VERTICALS: Record<string, Vertical> = {
           "situation": {
             "type": "string",
             "description": "Enrollment scenario — e.g. 'turning 65', 'comparing plans', 'losing employer coverage at 67', 'enrolling due to disability', 'reviewing Part D'",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country of residence — defaults to US Medicare if omitted. Set for non-US countries (e.g. 'United Kingdom', 'Canada', 'Germany') to get that country's senior health coverage instead.",
             "required": false
           },
           "lang": {
@@ -16087,7 +19463,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "benefits",
         "path": "/api/senior/benefits",
         "price": "$0.10",
-        "description": "Benefits eligibility assessment (US)",
+        "description": "Benefits eligibility assessment (US by default; country-aware)",
         "params": {
           "state": {
             "type": "string",
@@ -16107,6 +19483,11 @@ export const VERTICALS: Record<string, Vertical> = {
           "veteran": {
             "type": "boolean",
             "description": "Set true to include VA Aid & Attendance and other veteran-specific benefits in the assessment",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country of residence — defaults to US programs if omitted. Set for non-US countries to get that country's equivalent senior benefit programs instead.",
             "required": false
           },
           "lang": {
@@ -16242,7 +19623,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "nh-compare",
         "path": "/api/senior/nh-compare",
         "price": "$0.15",
-        "description": "Nursing home quality comparison (CMS Care Compare data)",
+        "description": "Nursing home / care home quality comparison (CMS Care Compare by default; country-aware)",
         "params": {
           "facilities": {
             "type": "string",
@@ -16252,6 +19633,11 @@ export const VERTICALS: Record<string, Vertical> = {
           "zip": {
             "type": "string",
             "description": "ZIP code to find top-rated nursing homes in the area (used if no specific facilities named)",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country of residence — defaults to US CMS Care Compare data if omitted. Set for non-US countries to use that country's care-home quality regulator instead.",
             "required": false
           },
           "lang": {
@@ -16265,7 +19651,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "property-tax",
         "path": "/api/senior/property-tax",
         "price": "$0.08",
-        "description": "Senior property tax relief programs by state",
+        "description": "Senior property tax relief programs by state (US by default; country-aware)",
         "params": {
           "state": {
             "type": "string",
@@ -16292,6 +19678,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "Set true to include veteran-specific property tax exemptions (available in every state)",
             "required": false
           },
+          "country": {
+            "type": "string",
+            "description": "Country of residence — defaults to US state programs if omitted. Set for non-US countries to get that country's equivalent property/council tax relief instead.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "Response language — any language supported",
@@ -16303,7 +19694,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "rx-assist",
         "path": "/api/senior/rx-assist",
         "price": "$0.10",
-        "description": "Prescription assistance programs (Extra Help, state programs, pharma PAPs)",
+        "description": "Prescription assistance programs (Extra Help, state programs, pharma PAPs; country-aware)",
         "params": {
           "state": {
             "type": "string",
@@ -16325,6 +19716,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "Whether the senior is enrolled in Medicare Part D — affects Extra Help vs. manufacturer PAP eligibility",
             "required": false
           },
+          "country": {
+            "type": "string",
+            "description": "Country of residence — defaults to US programs if omitted. Set for non-US countries to get that country's equivalent prescription cost relief instead.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "Response language — any language supported",
@@ -16336,7 +19732,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "snap-utility",
         "path": "/api/senior/snap-utility",
         "price": "$0.10",
-        "description": "Senior SNAP food assistance and LIHEAP utility assistance",
+        "description": "Senior SNAP food assistance and LIHEAP utility assistance (US by default; country-aware)",
         "params": {
           "state": {
             "type": "string",
@@ -16363,6 +19759,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "Monthly out-of-pocket medical expenses — seniors can deduct excess medical costs to qualify for SNAP",
             "required": false
           },
+          "country": {
+            "type": "string",
+            "description": "Country of residence — defaults to US programs if omitted. Set for non-US countries to get that country's equivalent food/energy assistance instead.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "Response language — any language supported",
@@ -16374,7 +19775,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "veterans",
         "path": "/api/senior/veterans",
         "price": "$0.15",
-        "description": "VA Aid & Attendance and senior veteran benefits",
+        "description": "VA Aid & Attendance and senior veteran benefits (US by default; country-aware)",
         "params": {
           "veteran_age": {
             "type": "number",
@@ -16406,9 +19807,204 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "Set true if the applicant is a surviving spouse of a veteran — unlocks Survivors Pension and Aid & Attendance for surviving spouses",
             "required": false
           },
+          "country": {
+            "type": "string",
+            "description": "Country of residence — defaults to US VA benefits if omitted. Set for non-US countries to get that country's veterans affairs body and equivalent benefit instead.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "Response language — any language supported",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "pension-intl",
+        "path": "/api/senior/pension-intl",
+        "price": "$0.15",
+        "description": "International state/public pension intelligence",
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "Country whose public pension system to assess (e.g. 'United Kingdom', 'Canada', 'Australia', 'Germany', 'India', 'Japan' — any country supported, these six have the deepest coverage)",
+            "required": true
+          },
+          "topic": {
+            "type": "string",
+            "description": "Focus area. Defaults to a full overview covering all four.",
+            "required": false
+          },
+          "age": {
+            "type": "number",
+            "description": "Current age — used to assess early/standard/late claiming timing",
+            "required": false
+          },
+          "years_contributed": {
+            "type": "number",
+            "description": "Years of contributions or residency toward the pension so far, if known",
+            "required": false
+          },
+          "moved_abroad_to": {
+            "type": "string",
+            "description": "Country the person has moved or plans to move to, if different from the pension-paying country — triggers cross-border/totalization analysis",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language — any language supported",
+            "required": false
+          }
+        }
+      }
+    ]
+  },
+  "stablecoinpulse": {
+    "name": "StablecoinPulse",
+    "baseUrl": "https://stablecoinpulse.theaslangroupllc.com",
+    "description": "Real-time stablecoin market intelligence — GENIUS Act compliance reads, yield comparison, peg-stability monitoring, cross-chain flow tracking, payment-rail comparison, reserve-attestation freshness, and global regulatory status. All endpoints require x402 payment (USDC on Base mainnet) via the PAYMENT-SIGNATURE header.",
+    "globalCoverage": "Global",
+    "endpoints": [
+      {
+        "action": "issuer-check",
+        "path": "/api/issuer-check",
+        "price": "$0.25",
+        "description": "GENIUS Act issuer compliance check",
+        "params": {
+          "issuer": {
+            "type": "string",
+            "description": "Issuer name, e.g. Circle, Tether, Paxos, Ripple. One of issuer or stablecoin is required.",
+            "required": false
+          },
+          "stablecoin": {
+            "type": "string",
+            "description": "Stablecoin ticker, e.g. USDT, USDC, PYUSD. One of issuer or stablecoin is required.",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language, e.g. en, es, fr, de, ja, zh, ko, pt, ar. Default en.",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "yield-compare",
+        "path": "/api/yield-compare",
+        "price": "$0.25",
+        "description": "Stablecoin yield comparison",
+        "params": {
+          "lang": {
+            "type": "string",
+            "description": "Response language, e.g. en, es, fr, de, ja, zh, ko, pt, ar. Default en.",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "depeg-watch",
+        "path": "/api/depeg-watch",
+        "price": "$0.15",
+        "description": "Stablecoin peg-deviation watch",
+        "params": {
+          "symbol": {
+            "type": "string",
+            "description": "Stablecoin ticker, e.g. USDT, USDC, DAI, USDE, USD1.",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language, e.g. en, es, fr, de, ja, zh, ko, pt, ar. Default en.",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "flows",
+        "path": "/api/flows",
+        "price": "$0.15",
+        "description": "Cross-chain stablecoin flow tracking",
+        "params": {
+          "symbol": {
+            "type": "string",
+            "description": "Stablecoin ticker, e.g. USDT, USDC, DAI, USDE.",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language, e.g. en, es, fr, de, ja, zh, ko, pt, ar. Default en.",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "rails-compare",
+        "path": "/api/rails-compare",
+        "price": "$0.25",
+        "description": "Stablecoin payment-rail comparison",
+        "params": {
+          "rails": {
+            "type": "string",
+            "description": "Comma-separated subset of rail ids, e.g. plasma,arc,tron. Default: all 7 registered rails.",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language, e.g. en, es, fr, de, ja, zh, ko, pt, ar. Default en.",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "reserve-check",
+        "path": "/api/reserve-check",
+        "price": "$0.20",
+        "description": "Reserve-attestation freshness check",
+        "params": {
+          "issuer": {
+            "type": "string",
+            "description": "Issuer name, e.g. Tether, Circle, Paxos. One of issuer or stablecoin is required.",
+            "required": false
+          },
+          "stablecoin": {
+            "type": "string",
+            "description": "Stablecoin ticker, e.g. USDT, USDC. One of issuer or stablecoin is required.",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language, e.g. en, es, fr, de, ja, zh, ko, pt, ar. Default en.",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "reg-watch",
+        "path": "/api/reg-watch",
+        "price": "$0.15",
+        "description": "Global stablecoin regulatory watch",
+        "params": {
+          "jurisdiction": {
+            "type": "string",
+            "description": "Jurisdiction code or name, e.g. US, EU, UK, JP, SG, HK, AE. Any jurisdiction accepted.",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language, e.g. en, es, fr, de, ja, zh, ko, pt, ar. Default en.",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "snapshot",
+        "path": "/api/snapshot",
+        "price": "$0.10",
+        "description": "Stablecoin market snapshot",
+        "params": {
+          "lang": {
+            "type": "string",
+            "description": "Response language, e.g. en, es, fr, de, ja, zh, ko, pt, ar. Default en.",
             "required": false
           }
         }
@@ -16629,8 +20225,8 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "team": {
             "type": "string",
-            "description": "team",
-            "required": true
+            "description": "team (falls back to sport if omitted)",
+            "required": false
           }
         }
       }
@@ -16922,9 +20518,35 @@ export const VERTICALS: Record<string, Vertical> = {
   "taxpulse": {
     "name": "TaxPulse",
     "baseUrl": "https://taxpulse-phi.vercel.app",
-    "description": "Global tax intelligence API. AI-synthesized tax guidance for 195 countries: income tax rates, VAT/GST, corporate tax, capital gains, crypto tax treatment, expat tax obligations, digital nomad tax stru",
+    "description": "Global tax intelligence API + citation-verified US STATE tax engine (California live: R&TC/FTB/OTA corpus, machine-verified citations). AI-synthesized tax guidance for 195 countries: income tax rates, VAT/GST, corporate tax, capital gains, crypto tax treatment, expat tax obligations, digital nomad tax stru",
     "globalCoverage": "Global",
     "endpoints": [
+      {
+        "action": "state",
+        "path": "/api/tax/state",
+        "price": "$0.50",
+        "description": "US state income-tax answer — citation-verified (California)",
+        "params": {
+          "state": {
+            "type": "string",
+            "description": "State code — CA (more states as corpora are ingested)",
+            "required": true,
+            "example": "CA"
+          },
+          "question": {
+            "type": "string",
+            "description": "One concrete state-tax question",
+            "required": true,
+            "example": "Is my HSA contribution deductible on my California return?"
+          },
+          "tax_year": {
+            "type": "string",
+            "description": "Tax year — drives the IRC-conformity era and era-gated rules (e.g. 2024 vs 2025)",
+            "required": false,
+            "example": "2025"
+          }
+        }
+      },
       {
         "action": "country",
         "path": "/api/tax/country",
@@ -17166,6 +20788,134 @@ export const VERTICALS: Record<string, Vertical> = {
             "type": "string",
             "description": "lang",
             "required": false
+          }
+        }
+      },
+      {
+        "action": "wallet-review",
+        "path": "/api/crypto/wallet-review",
+        "price": "$12.00",
+        "description": "Citation-verified crypto wallet tax review",
+        "params": {
+          "addresses": {
+            "type": "string",
+            "description": "Comma-separated wallet addresses (EVM 0x… and/or Solana), max 5",
+            "required": true,
+            "example": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+          },
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction: US | UK | DE | IN | CA | AU | JP | BR | SG",
+            "required": true,
+            "example": "US"
+          },
+          "chains": {
+            "type": "string",
+            "description": "EVM chains to scan (CSV). Default: ethereum,base,arbitrum,optimism,polygon,gnosis",
+            "required": false
+          },
+          "tax_year": {
+            "type": "string",
+            "description": "Focus tax year (e.g. 2025). Default: all activity",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "wallet-sleuth",
+        "path": "/api/crypto/wallet-sleuth",
+        "price": "$1.50",
+        "description": "On-chain wallet investigation",
+        "params": {
+          "address": {
+            "type": "string",
+            "description": "EVM wallet address (0x…)",
+            "required": true,
+            "example": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+          },
+          "chain": {
+            "type": "string",
+            "description": "Chain to investigate: ethereum | base | arbitrum | optimism | polygon | gnosis. Default ethereum",
+            "required": false
+          },
+          "depth": {
+            "type": "string",
+            "description": "Funding-trace depth (1-5). Default 3",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "wallet-guard",
+        "path": "/api/crypto/wallet-guard",
+        "price": "$0.50",
+        "description": "Wallet drainer-protection scan",
+        "params": {
+          "address": {
+            "type": "string",
+            "description": "EVM wallet address (0x…)",
+            "required": true,
+            "example": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+          },
+          "chains": {
+            "type": "string",
+            "description": "CSV of chains. Default: all (ethereum,base,arbitrum,optimism,polygon)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "verification-stats",
+        "path": "/api/crypto/verification-stats",
+        "price": "FREE",
+        "description": "Citation-gate live track record (free)",
+        "params": {}
+      },
+      {
+        "action": "wallet-watch",
+        "path": "/api/crypto/wallet-watch",
+        "price": "$5.00",
+        "description": "Whale-watch — standing 30-day wallet monitor ($5)",
+        "params": {
+          "address": {
+            "type": "string",
+            "description": "EVM wallet address to watch (0x…)",
+            "required": true,
+            "example": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+          },
+          "threshold_usd": {
+            "type": "string",
+            "description": "Alert on transfers ≥ this USD value. Default 10000",
+            "required": false,
+            "example": "10000"
+          },
+          "webhook": {
+            "type": "string",
+            "description": "Optional public https webhook — alerts POSTed as JSON",
+            "required": false
+          },
+          "chains": {
+            "type": "string",
+            "description": "CSV of chains. Default: all (ethereum,base,arbitrum,optimism,polygon,gnosis)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "wallet-watch-status",
+        "path": "/api/crypto/wallet-watch-status",
+        "price": "FREE",
+        "description": "Whale-watch status + alerts (free)",
+        "params": {
+          "watch_id": {
+            "type": "string",
+            "description": "UUID from registration",
+            "required": true
+          },
+          "token": {
+            "type": "string",
+            "description": "read_token from registration",
+            "required": true
           }
         }
       }
@@ -17573,7 +21323,7 @@ export const VERTICALS: Record<string, Vertical> = {
   "transitpulse": {
     "name": "TransitPulse",
     "baseUrl": "https://transitpulse.vercel.app",
-    "description": "TransitPulse — global public transit intelligence: route reliability, delay prediction, multi-modal trip planning, city transit scores, and commute optimization for 500+ cities worldwide.",
+    "description": "TransitPulse — global public transit intelligence: route reliability, delay prediction, multi-modal trip planning, city transit scores, and commute optimization for 500+ cities worldwide. NEW: rail/coach/ferry/cruise compensation recovery engine — UK Delay Repay, EU Rail 2021/782, ferry 1177/2010, coach 181/2011, US FMC cruise refunds, Athens Convention baggage — deterministic eligibility ($0.10) + citation-locked claim letters ($2.00).",
     "globalCoverage": "Global",
     "endpoints": [
       {
@@ -17584,8 +21334,8 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "city": {
             "type": "string",
-            "description": "City name (e.g. London, NYC, Tokyo)",
-            "required": true
+            "description": "City name (e.g. London, NYC, Tokyo; default: London)",
+            "required": false
           },
           "line": {
             "type": "string",
@@ -17602,8 +21352,8 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "city": {
             "type": "string",
-            "description": "City name",
-            "required": true
+            "description": "City name (default: New York City)",
+            "required": false
           }
         }
       },
@@ -17848,13 +21598,244 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           }
         }
+      },
+      {
+        "action": "check",
+        "path": "/api/rights/check",
+        "price": "$0.10",
+        "description": "Rail/Coach/Ferry/Cruise Compensation Eligibility Check",
+        "params": {
+          "mode": {
+            "type": "string",
+            "description": "Transport mode",
+            "required": true
+          },
+          "country": {
+            "type": "string",
+            "description": "ISO country of the journey/scheme (GB, FR, DE, US, CA, IN, JP, ... or EU)",
+            "required": true
+          },
+          "disruption": {
+            "type": "string",
+            "description": "Disruption type (default delay)",
+            "required": false
+          },
+          "delay_minutes": {
+            "type": "number",
+            "description": "Arrival delay in minutes (rail/ferry); DEPARTURE delay for coach",
+            "required": false
+          },
+          "delay_days": {
+            "type": "number",
+            "description": "Cruise: voyage delay in calendar days (FMC 3-day rule)",
+            "required": false
+          },
+          "ticket_price": {
+            "type": "number",
+            "description": "Fare paid — percentage regimes compute the amount from this",
+            "required": false
+          },
+          "currency": {
+            "type": "string",
+            "description": "Ticket currency ISO code",
+            "required": false
+          },
+          "ticket_type": {
+            "type": "string",
+            "description": "UK Delay Repay percentages differ by ticket type",
+            "required": false
+          },
+          "scheme": {
+            "type": "string",
+            "description": "UK operator Delay Repay threshold (default DR30, conservative)",
+            "required": false
+          },
+          "scheduled_journey_hours": {
+            "type": "number",
+            "description": "Ferry: scheduled crossing duration — selects the Art. 19 band",
+            "required": false
+          },
+          "distance_km": {
+            "type": "number",
+            "description": "Coach: scheduled service distance (Reg 181/2011 applies from 250 km)",
+            "required": false
+          },
+          "choice_offered": {
+            "type": "boolean",
+            "description": "Coach: did the carrier offer the refund/re-routing choice — the 50% turns on this",
+            "required": false
+          },
+          "travelled": {
+            "type": "boolean",
+            "description": "India TDR + FMC cruise refunds require you did NOT travel",
+            "required": false
+          },
+          "cause": {
+            "type": "string",
+            "description": "Disruption cause (default unknown — exemption burden is the operator's)",
+            "required": false
+          },
+          "journey_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD — computes claim deadlines (UK 28 days, ferry 2 months, coach 3 months, JR 1 year)",
+            "required": false
+          },
+          "express_surcharge": {
+            "type": "number",
+            "description": "Japan JR: limited-express surcharge paid (the refundable component)",
+            "required": false
+          },
+          "corridor": {
+            "type": "boolean",
+            "description": "Canada VIA: journey on the Quebec City-Windsor Corridor",
+            "required": false
+          },
+          "disembark_date": {
+            "type": "string",
+            "description": "Ship baggage: disembarkation date (Athens Art. 15 notice window + Art. 16 bar)",
+            "required": false
+          },
+          "damage_apparent": {
+            "type": "boolean",
+            "description": "Ship baggage (cabin): was the damage apparent at disembarkation",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "letter",
+        "path": "/api/rights/letter",
+        "price": "$2.00",
+        "description": "Citation-Locked Transit Compensation Claim Letter",
+        "params": {
+          "mode": {
+            "type": "string",
+            "description": "Transport mode",
+            "required": true
+          },
+          "country": {
+            "type": "string",
+            "description": "ISO country of the journey/scheme (GB, FR, DE, US, CA, IN, JP, ... or EU)",
+            "required": true
+          },
+          "disruption": {
+            "type": "string",
+            "description": "Disruption type (default delay)",
+            "required": false
+          },
+          "delay_minutes": {
+            "type": "number",
+            "description": "Arrival delay in minutes (rail/ferry); DEPARTURE delay for coach",
+            "required": false
+          },
+          "delay_days": {
+            "type": "number",
+            "description": "Cruise: voyage delay in calendar days (FMC 3-day rule)",
+            "required": false
+          },
+          "ticket_price": {
+            "type": "number",
+            "description": "Fare paid — percentage regimes compute the amount from this",
+            "required": false
+          },
+          "currency": {
+            "type": "string",
+            "description": "Ticket currency ISO code",
+            "required": false
+          },
+          "ticket_type": {
+            "type": "string",
+            "description": "UK Delay Repay percentages differ by ticket type",
+            "required": false
+          },
+          "scheme": {
+            "type": "string",
+            "description": "UK operator Delay Repay threshold (default DR30, conservative)",
+            "required": false
+          },
+          "scheduled_journey_hours": {
+            "type": "number",
+            "description": "Ferry: scheduled crossing duration — selects the Art. 19 band",
+            "required": false
+          },
+          "distance_km": {
+            "type": "number",
+            "description": "Coach: scheduled service distance (Reg 181/2011 applies from 250 km)",
+            "required": false
+          },
+          "choice_offered": {
+            "type": "boolean",
+            "description": "Coach: did the carrier offer the refund/re-routing choice — the 50% turns on this",
+            "required": false
+          },
+          "travelled": {
+            "type": "boolean",
+            "description": "India TDR + FMC cruise refunds require you did NOT travel",
+            "required": false
+          },
+          "cause": {
+            "type": "string",
+            "description": "Disruption cause (default unknown — exemption burden is the operator's)",
+            "required": false
+          },
+          "journey_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD — computes claim deadlines (UK 28 days, ferry 2 months, coach 3 months, JR 1 year)",
+            "required": false
+          },
+          "express_surcharge": {
+            "type": "number",
+            "description": "Japan JR: limited-express surcharge paid (the refundable component)",
+            "required": false
+          },
+          "corridor": {
+            "type": "boolean",
+            "description": "Canada VIA: journey on the Quebec City-Windsor Corridor",
+            "required": false
+          },
+          "disembark_date": {
+            "type": "string",
+            "description": "Ship baggage: disembarkation date (Athens Art. 15 notice window + Art. 16 bar)",
+            "required": false
+          },
+          "damage_apparent": {
+            "type": "boolean",
+            "description": "Ship baggage (cabin): was the damage apparent at disembarkation",
+            "required": false
+          },
+          "operator": {
+            "type": "string",
+            "description": "Operator/carrier name for the letter",
+            "required": false
+          },
+          "service_number": {
+            "type": "string",
+            "description": "Train/sailing/coach identifier",
+            "required": false
+          },
+          "passenger_name": {
+            "type": "string",
+            "description": "Passenger name (placeholder if omitted)",
+            "required": false
+          },
+          "claim_value": {
+            "type": "string",
+            "description": "Ship baggage: documented damages with currency",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Letter language (default English)",
+            "required": false
+          }
+        }
       }
     ]
   },
   "travelpulse": {
     "name": "TravelPulse",
     "baseUrl": "https://travelpulse-nu.vercel.app",
-    "description": "Global travel intelligence API. AI-synthesized destination guides, visa requirements, currency exchange, health advisories, packing lists, phrasebooks, weather, and travel insurance. Integrates real-t",
+    "description": "Global travel intelligence API for AI agents: weather, hotel deals, theme-park wait times, translation, trip plans, visas, health, currency, insurance, points. Any destination + language. x402 USDC (Base + Solana); no accounts, no keys.",
     "globalCoverage": "Global",
     "endpoints": [
       {
@@ -17924,7 +21905,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "weather",
         "path": "/api/travel/weather",
-        "price": "$0.05",
+        "price": "$0.15",
         "description": "Travel weather forecast",
         "params": {
           "destination": {
@@ -17997,9 +21978,9 @@ export const VERTICALS: Record<string, Vertical> = {
         "price": "$0.08",
         "description": "Visa requirements by nationality and destination",
         "params": {
-          "nationality": {
+          "passport": {
             "type": "string",
-            "description": "Passport nationality (e.g. US, UK, India, Brazil, Nigeria)",
+            "description": "Passport nationality (e.g. US, UK, India, Brazil, Nigeria). `nationality` accepted as an alias.",
             "required": true
           },
           "destination": {
@@ -18216,6 +22197,274 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Response language",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "fare-intel",
+        "path": "/api/travel/fare-intel",
+        "price": "$0.12",
+        "description": "Flight fare intelligence — when to book, cheapest months",
+        "params": {
+          "route": {
+            "type": "string",
+            "description": "Route, e.g. 'LHR-JFK' or 'London to Tokyo'",
+            "required": true
+          },
+          "month_or_dates": {
+            "type": "string",
+            "description": "Target month or dates",
+            "required": false
+          },
+          "cabin": {
+            "type": "string",
+            "description": "economy | premium_economy | business | first",
+            "required": false
+          },
+          "flexibility": {
+            "type": "string",
+            "description": "exact | ±3days | month",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "points",
+        "path": "/api/travel/points",
+        "price": "$0.12",
+        "description": "Points & miles redemption optimizer",
+        "params": {
+          "goal": {
+            "type": "string",
+            "description": "Redemption goal, e.g. 'business class to Japan' or 'free hotel week in Europe'",
+            "required": true
+          },
+          "region": {
+            "type": "string",
+            "description": "Country/region the user holds cards/programs in",
+            "required": true
+          },
+          "programs": {
+            "type": "string",
+            "description": "Comma-separated list of programs/cards the user holds",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "trip-check",
+        "path": "/api/travel/trip-check",
+        "price": "$0.50",
+        "description": "One-call pre-booking trip clearance (visa + health + safety + weather + money)",
+        "params": {
+          "passport": {
+            "type": "string",
+            "description": "Passport nationality (e.g. US, UK, India, Brazil, Nigeria)",
+            "required": true
+          },
+          "destination": {
+            "type": "string",
+            "description": "Destination country or city (e.g. Japan, Paris, Kenya)",
+            "required": true
+          },
+          "dates": {
+            "type": "string",
+            "description": "Travel window, free-form (e.g. 2026-09-10 to 2026-09-20)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (any human language)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "disruption",
+        "path": "/api/travel/disruption",
+        "price": "$0.25",
+        "description": "Flight disruption risk for an airport and date",
+        "params": {
+          "airport": {
+            "type": "string",
+            "description": "Airport IATA code or city (e.g. JFK, Heathrow, Frankfurt)",
+            "required": true
+          },
+          "date": {
+            "type": "string",
+            "description": "Travel date YYYY-MM-DD (defaults to near-term outlook)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (any human language)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "check",
+        "path": "/api/rights/check",
+        "price": "$0.10",
+        "description": "Flight compensation eligibility — EU261 / UK261 / Canada APPR / Brazil ANAC 400 / Turkey SHY / India DGCA (deterministic)",
+        "params": {
+          "from": {
+            "type": "string",
+            "description": "Departure airport IATA code (e.g. FRA)",
+            "required": true
+          },
+          "to": {
+            "type": "string",
+            "description": "Final-destination airport IATA code (e.g. JFK)",
+            "required": true
+          },
+          "delay_hours": {
+            "type": "string",
+            "description": "Arrival delay at final destination in hours (e.g. 4.5)",
+            "required": true
+          },
+          "carrier_country": {
+            "type": "string",
+            "description": "Operating carrier home country ISO code, or EU (default EU)",
+            "required": false
+          },
+          "disruption": {
+            "type": "string",
+            "description": "delay | cancellation | denied_boarding | baggage_delay | baggage_damage | baggage_loss (default delay)",
+            "required": false
+          },
+          "reason": {
+            "type": "string",
+            "description": "Cause per the carrier (default unknown — burden of proof is the carrier's)",
+            "required": false
+          },
+          "notice_days": {
+            "type": "string",
+            "description": "Cancellations: days of advance notice",
+            "required": false
+          },
+          "carrier_size": {
+            "type": "string",
+            "description": "Canada APPR carrier size (default large)",
+            "required": false
+          },
+          "distance_km": {
+            "type": "string",
+            "description": "Great-circle distance override for airports outside the reference table",
+            "required": false
+          },
+          "block_time_hours": {
+            "type": "string",
+            "description": "India DGCA cancellations: scheduled block time in hours (estimated from distance if omitted, labeled [ESTIMATE])",
+            "required": false
+          },
+          "bag_received_date": {
+            "type": "string",
+            "description": "Baggage claims: date the bag was returned/received (YYYY-MM-DD) — computes the Art. 31 complaint deadline",
+            "required": false
+          },
+          "date": {
+            "type": "string",
+            "description": "Incident/flight date YYYY-MM-DD — baggage: selects the effective Montreal SDR cap",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "letter",
+        "path": "/api/rights/letter",
+        "price": "$2.00",
+        "description": "Citation-backed flight compensation claim letter (6 regimes, ready to send)",
+        "params": {
+          "from": {
+            "type": "string",
+            "description": "Departure airport IATA code (e.g. FRA)",
+            "required": true
+          },
+          "to": {
+            "type": "string",
+            "description": "Final-destination airport IATA code (e.g. JFK)",
+            "required": true
+          },
+          "delay_hours": {
+            "type": "string",
+            "description": "Arrival delay at final destination in hours (e.g. 4.5)",
+            "required": true
+          },
+          "carrier_country": {
+            "type": "string",
+            "description": "Operating carrier home country ISO code, or EU (default EU)",
+            "required": false
+          },
+          "disruption": {
+            "type": "string",
+            "description": "delay | cancellation | denied_boarding | baggage_delay | baggage_damage | baggage_loss (default delay)",
+            "required": false
+          },
+          "reason": {
+            "type": "string",
+            "description": "Cause per the carrier (default unknown — burden of proof is the carrier's)",
+            "required": false
+          },
+          "notice_days": {
+            "type": "string",
+            "description": "Cancellations: days of advance notice",
+            "required": false
+          },
+          "carrier_size": {
+            "type": "string",
+            "description": "Canada APPR carrier size (default large)",
+            "required": false
+          },
+          "distance_km": {
+            "type": "string",
+            "description": "Great-circle distance override for airports outside the reference table",
+            "required": false
+          },
+          "airline": {
+            "type": "string",
+            "description": "Airline name for the letter",
+            "required": false
+          },
+          "flight_number": {
+            "type": "string",
+            "description": "Flight number (e.g. LH400)",
+            "required": false
+          },
+          "flight_date": {
+            "type": "string",
+            "description": "Flight date YYYY-MM-DD",
+            "required": false
+          },
+          "passenger_name": {
+            "type": "string",
+            "description": "Passenger name (placeholder used if omitted)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Letter language (default English)",
+            "required": false
+          },
+          "bag_received_date": {
+            "type": "string",
+            "description": "Baggage claims: date the bag was returned/received (Art. 31 deadline math)",
+            "required": false
+          },
+          "claim_value": {
+            "type": "string",
+            "description": "Baggage claims: documented damages with currency (e.g. '480 USD') — demanded in the letter, capped by the Montreal limit",
             "required": false
           }
         }
@@ -18968,7 +23217,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "disability",
         "path": "/api/vet/disability",
         "price": "$0.15",
-        "description": "VA disability rating analysis",
+        "description": "Veteran disability rating analysis (US, UK, Canada, Australia, NZ, Germany)",
         "params": {
           "conditions": {
             "type": "string",
@@ -18978,6 +23227,11 @@ export const VERTICALS: Record<string, Vertical> = {
           "service_era": {
             "type": "string",
             "description": "Service era for presumptive condition assessment (e.g. 'Vietnam', 'Gulf War', 'OEF', 'OIF', 'Korea')",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country whose veteran disability system to assess: US, UK, Canada, Australia, New Zealand, or Germany (other countries supported on a best-effort basis). Defaults to US if omitted and cannot be inferred.",
             "required": false
           },
           "lang": {
@@ -18991,7 +23245,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "aid-attendance",
         "path": "/api/vet/aid-attendance",
         "price": "$0.15",
-        "description": "VA Aid & Attendance pension eligibility",
+        "description": "Veteran pension / Aid & Attendance-style eligibility (US, UK, Canada, Australia, NZ, Germany)",
         "params": {
           "age": {
             "type": "number",
@@ -19023,6 +23277,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "Set true if applicant is a surviving spouse of a veteran — unlocks Survivors Pension and different Aid & Attendance rates",
             "required": false
           },
+          "country": {
+            "type": "string",
+            "description": "Country whose veteran pension/care-allowance system to assess: US, UK, Canada, Australia, New Zealand, or Germany (other countries supported on a best-effort basis). Defaults to US if omitted and cannot be inferred.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "Response language — any language supported",
@@ -19034,7 +23293,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "tdiu",
         "path": "/api/vet/tdiu",
         "price": "$0.15",
-        "description": "TDIU (Total Disability Individual Unemployability) eligibility",
+        "description": "TDIU / unemployability eligibility (US, UK, Canada, Australia, NZ, Germany)",
         "params": {
           "rating": {
             "type": "string",
@@ -19051,6 +23310,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "Current annual income — TDIU requires below federal poverty threshold for marginal employment (~$15,000)",
             "required": false
           },
+          "country": {
+            "type": "string",
+            "description": "Country whose unemployability/full-compensation system to assess: US, UK, Canada, Australia, New Zealand, or Germany (other countries supported on a best-effort basis). Defaults to US if omitted and cannot be inferred.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "Response language — any language supported",
@@ -19062,7 +23326,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "claim-builder",
         "path": "/api/vet/claim-builder",
         "price": "$0.20",
-        "description": "VA disability claim evidence strategy",
+        "description": "Veteran disability claim evidence strategy (US, UK, Canada, Australia, NZ, Germany)",
         "params": {
           "conditions": {
             "type": "string",
@@ -19084,6 +23348,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "Description of any previous claim denials — affects strategy (HLR vs. Board appeal vs. supplemental)",
             "required": false
           },
+          "country": {
+            "type": "string",
+            "description": "Country whose claims process to build the evidence strategy for: US, UK, Canada, Australia, New Zealand, or Germany (other countries supported on a best-effort basis). Defaults to US if omitted and cannot be inferred.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "Response language — any language supported",
@@ -19095,26 +23364,36 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "caregiver",
         "path": "/api/vet/caregiver",
         "price": "$0.10",
-        "description": "PCAFC caregiver stipend and benefits",
+        "description": "Veteran family caregiver stipend and benefits (US, UK, Canada, Australia, NZ, Germany)",
         "params": {
-          "relationship": {
+          "service_era": {
             "type": "string",
-            "description": "Caregiver relationship to veteran (e.g. 'spouse', 'adult child', 'parent', 'sibling')",
+            "description": "Veteran's service era (e.g. 'post-9/11', 'Vietnam')",
             "required": false
           },
-          "veteran_needs": {
+          "condition": {
             "type": "string",
-            "description": "Description of veteran's care needs (e.g. 'severe TBI requires 24hr supervision, cannot be left alone')",
+            "description": "Veteran's condition(s) requiring care",
             "required": false
           },
-          "discharge_date": {
+          "caregiver_relationship": {
             "type": "string",
-            "description": "Approximate discharge date — PCAFC eligibility expanded in 2020 to all service eras",
+            "description": "Caregiver's relationship to veteran (e.g. 'spouse')",
+            "required": false
+          },
+          "state": {
+            "type": "string",
+            "description": "US state/region (helps infer country if omitted)",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country whose caregiver system to assess: US, UK, Canada, Australia, New Zealand, Germany. Defaults to US.",
             "required": false
           },
           "lang": {
             "type": "string",
-            "description": "Response language — any language supported",
+            "description": "Response language",
             "required": false
           }
         }
@@ -19123,7 +23402,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "education",
         "path": "/api/vet/education",
         "price": "$0.10",
-        "description": "GI Bill and education benefit comparison",
+        "description": "Veteran education benefit comparison (US GI Bill; UK, Canada, Australia, NZ, Germany equivalents)",
         "params": {
           "chapter": {
             "type": "string",
@@ -19145,6 +23424,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "Whether veteran has dependents — affects DEA transferability and some benefit calculations",
             "required": false
           },
+          "country": {
+            "type": "string",
+            "description": "Country whose education benefit system to assess: US, UK, Canada, Australia, New Zealand, or Germany (other countries supported on a best-effort basis). Defaults to US if omitted and cannot be inferred.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "Response language — any language supported",
@@ -19156,16 +23440,21 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "state-benefits",
         "path": "/api/vet/state-benefits",
         "price": "$0.10",
-        "description": "State-specific veteran benefits (all 50 states)",
+        "description": "State/regional veteran benefits (US states; UK, Canada, Australia, NZ, Germany regions)",
         "params": {
           "state": {
             "type": "string",
-            "description": "US state name or abbreviation (e.g. 'Texas', 'TX')",
+            "description": "US state, UK devolved nation/council, Canadian province, Australian state/territory, or other region name (e.g. 'Texas', 'Scotland', 'Ontario', 'Queensland')",
             "required": true
           },
           "disability_rating": {
             "type": "string",
             "description": "VA disability rating percentage — many state benefits require minimum rating (e.g. '70', '100', 'P&T')",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country the region belongs to: US, UK, Canada, Australia, New Zealand, or Germany (other countries supported on a best-effort basis). Inferred from a recognized region name if omitted; defaults to US otherwise.",
             "required": false
           },
           "lang": {
@@ -19179,7 +23468,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "home-loan",
         "path": "/api/vet/home-loan",
         "price": "$0.08",
-        "description": "VA home loan benefit analysis",
+        "description": "Veteran home-buying assistance analysis (US VA loan; Australia DHOAS; UK Forces Help to Buy)",
         "params": {
           "disability_rating": {
             "type": "string",
@@ -19201,6 +23490,11 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "State of purchase — for state housing assistance programs that stack with VA loan",
             "required": false
           },
+          "country": {
+            "type": "string",
+            "description": "Country whose home-buying assistance to assess: US, UK, Canada, Australia, New Zealand, or Germany (other countries supported on a best-effort basis). Note: the VA loan guaranty has no direct 1:1 equivalent outside the US. Defaults to US if omitted and cannot be inferred.",
+            "required": false
+          },
           "lang": {
             "type": "string",
             "description": "Response language — any language supported",
@@ -19212,7 +23506,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "discounts",
         "path": "/api/vet/discounts",
         "price": "$0.05",
-        "description": "Verified veteran discounts by category",
+        "description": "Verified veteran discounts by category (US, UK, Canada, Australia, NZ, Germany)",
         "params": {
           "category": {
             "type": "string",
@@ -19222,6 +23516,11 @@ export const VERTICALS: Record<string, Vertical> = {
           "disability_rating": {
             "type": "string",
             "description": "VA disability rating — some discounts (national parks pass, additional state benefits) require service-connected disability",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country whose veteran discount landscape to search: US, UK, Canada, Australia, New Zealand, or Germany (other countries supported on a best-effort basis). Defaults to US if omitted and cannot be inferred.",
             "required": false
           },
           "lang": {
@@ -19235,7 +23534,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "healthcare",
         "path": "/api/vet/healthcare",
         "price": "$0.08",
-        "description": "VA healthcare priority group and coverage analysis",
+        "description": "Veteran healthcare priority/coverage analysis (US, UK, Canada, Australia, NZ, Germany)",
         "params": {
           "priority_group": {
             "type": "string",
@@ -19255,6 +23554,11 @@ export const VERTICALS: Record<string, Vertical> = {
           "dependents": {
             "type": "boolean",
             "description": "Set true to include CHAMPVA coverage analysis for dependents",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "Country whose veteran healthcare system to assess: US, UK, Canada, Australia, New Zealand, or Germany (other countries supported on a best-effort basis). Defaults to US if omitted and cannot be inferred.",
             "required": false
           },
           "lang": {
@@ -19518,12 +23822,12 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "savings": {
             "type": "number",
-            "description": "savings",
+            "description": "Total savings/investments in USD",
             "required": false
           },
           "debt": {
             "type": "number",
-            "description": "debt",
+            "description": "Total non-mortgage debt in USD",
             "required": false
           },
           "expenses": {
@@ -19546,17 +23850,17 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "age": {
             "type": "integer",
-            "description": "age",
+            "description": "Your current age",
             "required": true
           },
           "income": {
             "type": "number",
-            "description": "income",
+            "description": "Annual income in USD",
             "required": true
           },
           "savings": {
             "type": "number",
-            "description": "savings",
+            "description": "Current retirement savings in USD",
             "required": false
           },
           "retire_at": {
@@ -19581,7 +23885,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "debt",
         "path": "/api/wealth/debt",
         "price": "$0.10",
-        "description": "Debt payoff strategy",
+        "description": "Avalanche vs snowball debt payoff strategy",
         "params": {
           "debts": {
             "type": "string",
@@ -19590,7 +23894,7 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "extra": {
             "type": "number",
-            "description": "extra",
+            "description": "Extra monthly payment available in USD (optional)",
             "required": false
           },
           "lang": {
@@ -19604,22 +23908,22 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "cards",
         "path": "/api/wealth/cards",
         "price": "$0.10",
-        "description": "Credit card optimization",
+        "description": "Best credit card for your spending profile",
         "params": {
           "spend_profile": {
             "type": "string",
-            "description": "spend_profile",
+            "description": "Required. Free text, e.g. travel, dining, groceries, gas, cashback.",
             "required": true
           },
           "monthly": {
             "type": "number",
-            "description": "monthly",
+            "description": "Monthly spend in USD (default: 3000)",
             "required": false,
             "example": "3000"
           },
           "credit_score": {
             "type": "string",
-            "description": "credit_score",
+            "description": "Approximate credit tier",
             "required": false
           },
           "lang": {
@@ -19633,16 +23937,16 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "mortgage",
         "path": "/api/wealth/mortgage",
         "price": "$0.10",
-        "description": "Mortgage affordability analysis",
+        "description": "How much house can I afford",
         "params": {
           "income": {
             "type": "number",
-            "description": "income",
+            "description": "Annual gross income in USD",
             "required": true
           },
           "down": {
             "type": "number",
-            "description": "down",
+            "description": "Down payment in USD",
             "required": true
           },
           "location": {
@@ -19653,7 +23957,7 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "debt": {
             "type": "number",
-            "description": "debt",
+            "description": "Existing monthly debt payments in USD",
             "required": false
           },
           "lang": {
@@ -19667,16 +23971,16 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "debt-negotiate",
         "path": "/api/wealth/debt-negotiate",
         "price": "$0.15",
-        "description": "DIY debt negotiation protocol",
+        "description": "Can I settle this debt for less",
         "params": {
           "creditor": {
             "type": "string",
-            "description": "creditor",
+            "description": "The collector or original creditor name",
             "required": true
           },
           "balance": {
             "type": "number",
-            "description": "balance",
+            "description": "Balance owed in USD",
             "required": false
           },
           "type": {
@@ -19700,41 +24004,41 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "advisor",
         "path": "/api/wealth/advisor",
         "price": "$0.10",
-        "description": "Financial advisor intelligence",
+        "description": "Financial advisor finder, comparison, and background check",
         "params": {
           "action": {
             "type": "string",
-            "description": "action",
+            "description": "Required. One of: find, compare, vet.",
             "required": true
           },
           "specialty": {
             "type": "string",
-            "description": "Required for action=find",
+            "description": "Required for action=find (e.g. retirement planning, tax, estate, investment)",
             "required": false
           },
           "advisors": {
             "type": "string",
-            "description": "Required for action=compare",
+            "description": "Required for action=compare (e.g. \"Advisor A 1% AUM, Advisor B flat fee\")",
             "required": false
           },
           "name": {
             "type": "string",
-            "description": "Required for action=vet",
+            "description": "Required for action=vet (advisor name)",
             "required": false
           },
           "location": {
             "type": "string",
-            "description": "location",
+            "description": "Optional; sharpens action=find directory results (e.g. Denver, CO)",
             "required": false
           },
           "situation": {
             "type": "string",
-            "description": "situation",
+            "description": "Optional free-text context about your situation",
             "required": false
           },
           "firm": {
             "type": "string",
-            "description": "For action=vet",
+            "description": "Optional firm name; used alongside name for action=vet",
             "required": false
           },
           "lang": {
@@ -19786,7 +24090,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "income": {
             "type": "number",
-            "description": "income",
+            "description": "Annual gross income in USD",
             "required": true
           },
           "filing_status": {
@@ -19820,12 +24124,12 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "income": {
             "type": "number",
-            "description": "income",
+            "description": "Annual gross income in USD",
             "required": true
           },
           "age": {
             "type": "integer",
-            "description": "age",
+            "description": "Your current age",
             "required": true
           },
           "filing_status": {
@@ -19836,7 +24140,7 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "employer_match": {
             "type": "string",
-            "description": "employer_match",
+            "description": "Whether your employer offers a 401k match (yes/no)",
             "required": false
           },
           "state": {
@@ -19859,7 +24163,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "income": {
             "type": "number",
-            "description": "income",
+            "description": "Annual income in USD",
             "required": true
           },
           "expenses": {
@@ -19875,7 +24179,7 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "dependents": {
             "type": "integer",
-            "description": "dependents",
+            "description": "Number of dependents",
             "required": false
           },
           "current_fund": {
@@ -19909,12 +24213,12 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "balance": {
             "type": "number",
-            "description": "balance",
+            "description": "Inherited account balance in USD",
             "required": false
           },
           "your_age": {
             "type": "integer",
-            "description": "your_age",
+            "description": "Your current age",
             "required": false
           },
           "original_owner_age": {
@@ -19925,6 +24229,253 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "trump-account",
+        "path": "/api/wealth/trump-account",
+        "price": "$0.15",
+        "description": "Trump Account (IRC §530A) eligibility, strategy, and rules",
+        "params": {
+          "action": {
+            "type": "string",
+            "description": "Which analysis to run. Defaults to rules.",
+            "required": false,
+            "example": "rules"
+          },
+          "birth_year": {
+            "type": "integer",
+            "description": "Required for action=eligibility unless birth_date is given. The child's birth year.",
+            "required": false
+          },
+          "birth_date": {
+            "type": "string",
+            "description": "Alternative to birth_year for action=eligibility (e.g. 2026-03-15)",
+            "required": false
+          },
+          "has_ssn": {
+            "type": "string",
+            "description": "For action=eligibility: does the child have a Social Security Number",
+            "required": false
+          },
+          "ssn_work_valid": {
+            "type": "string",
+            "description": "For action=eligibility: is that SSN valid for employment, issued before election",
+            "required": false
+          },
+          "us_citizen": {
+            "type": "string",
+            "description": "For action=eligibility: is the child a US citizen. Required for the $1,000 pilot only — NOT required for the account itself.",
+            "required": false
+          },
+          "prior_election": {
+            "type": "string",
+            "description": "For action=eligibility: has an account already been elected for this child",
+            "required": false
+          },
+          "goal": {
+            "type": "string",
+            "description": "For action=strategy: the savings goal for this child",
+            "required": false,
+            "example": "general"
+          },
+          "child_age": {
+            "type": "integer",
+            "description": "For action=strategy: the child's current age",
+            "required": false
+          },
+          "employer_program": {
+            "type": "string",
+            "description": "For action=strategy: does an employer offer a Trump Account matching program",
+            "required": false
+          },
+          "budget_yearly": {
+            "type": "number",
+            "description": "For action=strategy: how much can be contributed per year, in USD",
+            "required": false
+          },
+          "topic": {
+            "type": "string",
+            "description": "For action=rules (optional): focus the rules answer on this topic",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "bank-health",
+        "path": "/api/wealth/bank-health",
+        "price": "$0.25",
+        "description": "Is my bank safe? FDIC Call Report bank-health check",
+        "params": {
+          "bank": {
+            "type": "string",
+            "description": "Bank name or FDIC certificate (CERT) number",
+            "required": true
+          },
+          "state": {
+            "type": "string",
+            "description": "2-letter US state code, disambiguates a common bank name",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "unclaimed",
+        "path": "/api/wealth/unclaimed",
+        "price": "$0.50",
+        "description": "Find unclaimed money owed to you",
+        "params": {
+          "states": {
+            "type": "string",
+            "description": "Comma-separated US state codes you have lived/worked in (e.g. CA,TX,NY)",
+            "required": false
+          },
+          "countries": {
+            "type": "string",
+            "description": "Comma-separated non-US jurisdictions: CA (Canada), GB, CH, AU, AU-VIC, AU-NSW",
+            "required": false
+          },
+          "situations": {
+            "type": "string",
+            "description": "Life events unlocking federal/special sources: former_pension | failed_bank | failed_credit_union | fha_mortgage | savings_bonds | deceased_relative | old_employer | moved_states | former_business",
+            "required": false
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional — personalizes search instructions only; never transmitted or stored",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "card-benefit",
+        "path": "/api/wealth/card-benefit",
+        "price": "$0.10",
+        "description": "Credit-Card Benefit Coverage Check",
+        "params": {
+          "issuer": {
+            "type": "string",
+            "description": "Card issuer slug (chase, amex, capital-one, citi, hsbc, discover, amex-uk, rbc)",
+            "required": true
+          },
+          "card": {
+            "type": "string",
+            "description": "Card slug (sapphire-reserve, platinum, venture-x, ...)",
+            "required": true
+          },
+          "benefit": {
+            "type": "string",
+            "description": "Benefit to check",
+            "required": true
+          },
+          "purchase_date": {
+            "type": "string",
+            "description": "Item/ticket purchase date YYYY-MM-DD (eligibility windows + warranty math)",
+            "required": false
+          },
+          "incident_date": {
+            "type": "string",
+            "description": "Damage/theft/delay date YYYY-MM-DD — filing deadlines computed from this",
+            "required": false
+          },
+          "item_price": {
+            "type": "number",
+            "description": "Item price — recoverable estimate = min(price, cap) - deductible",
+            "required": false
+          },
+          "warranty_years": {
+            "type": "number",
+            "description": "Extended warranty: original manufacturer warranty length",
+            "required": false
+          },
+          "delay_hours": {
+            "type": "number",
+            "description": "Trip delay: hours delayed (triggers are 6h or 12h by card tier)",
+            "required": false
+          },
+          "phone_paid_on_card": {
+            "type": "boolean",
+            "description": "Cell phone: was the prior month's wireless bill paid on this card",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "card-benefit-pack",
+        "path": "/api/wealth/card-benefit-pack",
+        "price": "$2.00",
+        "description": "Card-Benefit Claim Pack",
+        "params": {
+          "issuer": {
+            "type": "string",
+            "description": "Card issuer slug (chase, amex, capital-one, citi, hsbc, discover, amex-uk, rbc)",
+            "required": true
+          },
+          "card": {
+            "type": "string",
+            "description": "Card slug (sapphire-reserve, platinum, venture-x, ...)",
+            "required": true
+          },
+          "benefit": {
+            "type": "string",
+            "description": "Benefit to check",
+            "required": true
+          },
+          "purchase_date": {
+            "type": "string",
+            "description": "Item/ticket purchase date YYYY-MM-DD (eligibility windows + warranty math)",
+            "required": false
+          },
+          "incident_date": {
+            "type": "string",
+            "description": "Damage/theft/delay date YYYY-MM-DD — filing deadlines computed from this",
+            "required": false
+          },
+          "item_price": {
+            "type": "number",
+            "description": "Item price — recoverable estimate = min(price, cap) - deductible",
+            "required": false
+          },
+          "warranty_years": {
+            "type": "number",
+            "description": "Extended warranty: original manufacturer warranty length",
+            "required": false
+          },
+          "delay_hours": {
+            "type": "number",
+            "description": "Trip delay: hours delayed (triggers are 6h or 12h by card tier)",
+            "required": false
+          },
+          "phone_paid_on_card": {
+            "type": "boolean",
+            "description": "Cell phone: was the prior month's wireless bill paid on this card",
+            "required": false
+          },
+          "item_description": {
+            "type": "string",
+            "description": "What the item/trip is (cover note)",
+            "required": false
+          },
+          "cardholder_name": {
+            "type": "string",
+            "description": "Name for the cover note (placeholder if omitted)",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Pack language (default English)",
             "required": false
           }
         }

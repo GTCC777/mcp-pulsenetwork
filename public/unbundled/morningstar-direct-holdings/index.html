@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Morningstar Direct — fund holdings sleeve: what you're actually paying for — cheap alternative analysis (2026)</title>
+<meta name="description" content="Morningstar Direct — fund holdings sleeve costs $17,500/yr per seat. Decomposition: the free public data underneath, what the subscription actually adds, rebuild recipe, licensing traps, and the pay-per-call alternative.">
+<link rel="canonical" href="https://pulse.theaslangroupllc.com/unbundled/morningstar-direct-holdings/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Morningstar Direct — fund holdings sleeve: what you're actually paying for","datePublished":"2026-07-06","author":{"@type":"Organization","name":"The Aslan Group LLC","url":"https://pulse.theaslangroupllc.com"},"publisher":{"@type":"Organization","name":"The Aslan Group LLC"},"mainEntityOfPage":"https://pulse.theaslangroupllc.com/unbundled/morningstar-direct-holdings/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is there a cheap alternative to Morningstar Direct — fund holdings sleeve?","acceptedAnswer":{"@type":"Answer","text":"Partially. Some of the product is free public data (SEC N-PORT filings (complete portfolio holdings)), but part of its value is genuinely proprietary. Holdings questions ('what does fund X actually hold?') per-call at $0.25 vs a $17.5k seat."}},{"@type":"Question","name":"What data does Morningstar Direct — fund holdings sleeve actually use?","acceptedAnswer":{"@type":"Answer","text":"Fund holdings themselves are free: every registered fund files N-PORT with the SEC monthly (public quarterly). Morningstar's proprietary value is its category taxonomy, star ratings, and analyst layer — that part is NOT arbitragable. Key sources: SEC N-PORT filings (complete portfolio holdings) — US public domain."}},{"@type":"Question","name":"Is it legal to rebuild Morningstar Direct — fund holdings sleeve from public data?","acceptedAnswer":{"@type":"Answer","text":"Facts and public-domain government data are not copyrightable, but there are real traps here: Never reproduce Morningstar categories/ratings — proprietary. Holdings facts are public domain This is research, not legal advice."}}]}</script>
+<style>
+  :root{color-scheme:light dark}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:820px;margin:0 auto;padding:24px 20px;line-height:1.6;color:#1a1a1a;background:#fff}
+  @media (prefers-color-scheme:dark){body{color:#e6e6e6;background:#111}a{color:#8ab4f8}.card{background:#1b1b1b;border-color:#333}}
+  h1{font-size:1.6rem;line-height:1.3}h2{font-size:1.15rem;margin-top:2rem}
+  a{color:#0b57d0}
+  .verdict{display:inline-block;padding:4px 12px;border-radius:6px;color:#fff;font-weight:600;font-size:.9rem}
+  .card{border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:10px 0;background:#fafafa}
+  table{border-collapse:collapse;width:100%;font-size:.92rem}td,th{border:1px solid #ccc;padding:6px 10px;text-align:left;vertical-align:top}
+  .cta{border:2px solid #0b57d0;border-radius:8px;padding:14px 16px;margin:20px 0}
+  .fine{font-size:.8rem;opacity:.75;margin-top:2.5rem}
+  ol li,ul li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<p><a href="/unbundled/">← All decompositions</a> · <a href="/">PulseNetwork</a></p>
+<h1>Morningstar Direct — fund holdings sleeve: what you're actually paying for</h1>
+<p><span class="verdict" style="background:#946200">Partially — some of it is free public data, some is genuinely proprietary</span></p>
+<p><strong>Morningstar Direct — fund holdings sleeve typically costs $17,500/yr per seat. Part of what it sells is free public data (SEC N-PORT filings (complete portfolio holdings)); part is genuinely proprietary. Fund holdings themselves are free: every registered fund files N-PORT with the SEC monthly (public quarterly). Morningstar's proprietary value is its category taxonomy, star ratings, and analyst layer — that part is NOT arbitragable.</strong></p>
+
+<h2>The free public data underneath</h2>
+<table><tr><th>Source</th><th>License</th><th>Access</th></tr>
+<tr><td>SEC N-PORT filings (complete portfolio holdings)</td><td>US public domain</td><td>EDGAR, free</td></tr>
+</table>
+
+<h2>Rebuild recipe</h2>
+<ol><li>Resolve fund → CIK/series via EDGAR company search</li><li>Parse latest N-PORT: positions, weights, concentration</li><li>Do NOT clone the ratings/taxonomy — that is genuinely theirs</li></ol>
+<p><strong>DIY difficulty:</strong> moderate — N-PORT XML is large but well-structured</p>
+
+<h2>The price math</h2>
+<p>Holdings questions ('what does fund X actually hold?') per-call at $0.25 vs a $17.5k seat.</p>
+
+<h2>Licensing and legal traps</h2><ul><li>Never reproduce Morningstar categories/ratings — proprietary. Holdings facts are public domain</li></ul>
+
+<div class="cta"><strong>Our coverage:</strong> FilingsPulse (fund-holdings endpoint in active build)</div>
+
+<div class="card"><strong>Decompose any data product programmatically:</strong> <code>GET https://pulse.theaslangroupllc.com/api/unbundle?product=Morningstar</code> — $1.00 per call via x402. 22 products decomposed; honest misses for everything else.</div>
+
+<p class="fine">Research as of 2026-07-06 by The Aslan Group LLC (info@theaslangroupllc.com). Product names are used nominatively to identify the products analyzed; all trademarks belong to their owners. Pricing is as publicly reported or contract-disclosed at research time and may change. This is research for build-vs-buy evaluation, not legal advice — verify licenses against the primary source before building.</p>
+</body>
+</html>

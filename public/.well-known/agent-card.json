@@ -1,7 +1,7 @@
 {
   "protocolVersion": "0.3.0",
   "name": "PulseNetwork",
-  "description": "Pay-per-query access to 67 specialized intelligence APIs over x402 (USDC on Base and Solana, no API keys, no subscription). Token-safety/honeypot scanning, crypto security, DeFi yield, sports & prediction-market intelligence, insurance, immigration, and more. Each call returns structured JSON for ~$0.015–$0.50.",
+  "description": "Pay-per-query access to 73 specialized intelligence verticals (800+ endpoints) over x402 (USDC on Base and Solana, no API keys, no subscription). Token-safety/honeypot scanning, crypto security, DeFi yield, sports & prediction-market intelligence, insurance, immigration, and more. Each call returns structured JSON for ~$0.015–$0.50.",
   "url": "https://pulse.theaslangroupllc.com",
   "preferredTransport": "HTTP+JSON",
   "version": "1.0.0",
@@ -44,8 +44,8 @@
     },
     {
       "id": "intelligence-network",
-      "name": "67-vertical intelligence network",
-      "description": "Beyond crypto and sports: insurance estimates, immigration/visa scoring, real-estate, legal, clinical, careers, travel and more — pay-per-query via x402. Full catalog with params and pricing at https://pulse.theaslangroupllc.com",
+      "name": "73-vertical intelligence network",
+      "description": "Beyond crypto and sports: RWA/tokenized-asset intel, bank-health checks, nonprofit/foundation intel, citation analytics, stablecoin intelligence, insurance estimates, immigration/visa scoring, real-estate, legal, clinical, careers, travel and more — pay-per-query via x402. Full catalog with params and pricing at https://pulse.theaslangroupllc.com",
       "tags": ["intelligence", "data-api", "x402", "agent-payments"]
     }
   ]

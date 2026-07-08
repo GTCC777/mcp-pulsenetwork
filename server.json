@@ -1,28 +1,17 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
-  "name": "io.github.GTCC777/mcp-pulsenetwork",
-  "description": "67 AI-powered intelligence verticals (660+ endpoints) in one x402-native MCP server — finance, crypto, on-chain, legal, healthcare, immigration, real estate, careers, travel, and more. Agents pay-per-query autonomously via USDC.",
-  "version": "1.1.0",
+  "name": "com.theaslangroupllc.pulse/pulsenetwork",
+  "description": "825 paid intelligence endpoints in one MCP server \u2014 agents pay per query via x402 USDC on Base.",
+  "version": "1.2.0",
   "repository": {
     "url": "https://github.com/GTCC777/mcp-pulsenetwork",
     "source": "github"
   },
-  "websiteUrl": "https://github.com/GTCC777/mcp-pulsenetwork",
-  "packages": [
+  "websiteUrl": "https://pulse.theaslangroupllc.com",
+  "remotes": [
     {
-      "registryType": "npm",
-      "registryBaseUrl": "https://registry.npmjs.org",
-      "identifier": "mcp-pulsenetwork",
-      "version": "1.1.0",
-      "transport": { "type": "stdio" },
-      "environmentVariables": [
-        {
-          "name": "AGENT_PRIVATE_KEY",
-          "description": "Private key of the agent's funded wallet (Base/USDC) used to autonomously pay x402 charges per query.",
-          "isRequired": true,
-          "isSecret": true
-        }
-      ]
+      "type": "streamable-http",
+      "url": "https://pulse.theaslangroupllc.com/api/mcp"
     }
   ]
 }

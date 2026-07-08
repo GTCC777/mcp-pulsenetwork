@@ -61,17 +61,20 @@ async function handlerImpl(req: VercelRequest, res: VercelResponse): Promise<voi
     why_you: tailored
       ? `Matches your input (${[...(query.interests ?? []), ...(query.skills ?? [])].join(', ')}); ` +
         `${model.tagline}`
-      : `A strong low-friction starting point. ${model.tagline} ` +
+      : `A strong low-friction AI ___-in-a-Box to start with. ${model.tagline} ` +
         `(Pass interests/skills/budget for a more tailored pick.)`,
     engine: e.engine,
     business_in_a_box: STARTER_KIT,
-    monetization: ['wholesale reseller (scoped key — near-$0/call, keep the spread)', 'affiliate rev-share (referral code)'],
+    monetization: [
+      'wholesale reseller — build your own AI ___-in-a-Box (scoped key, near-$0/call, keep the spread)',
+      'affiliate rev-share (referral code, no box required)',
+    ],
     suggested_retail: model.suggested_retail,
     first_steps: [
-      'Fork the starter kit',
+      'Fork the starter kit — this is how you pack your first AI ___-in-a-Box',
       `Edit catalog.json → point an offering at ${e.engine.name} (${e.engine.endpoints.join(', ')})`,
       'Get a self-serve wholesale key at pulse.theaslangroupllc.com/wholesale ($0.25 free trial, then 50% of retail)',
-      'Deploy, then list your agent (ACP / your own app)',
+      'Deploy, brand it as your own, then list your agent (ACP / your own app)',
     ],
     illustrative_economics: economics(model),
     playbook: e.playbook,

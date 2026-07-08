@@ -1,5 +1,6 @@
 // Shared tool registration for both transports (stdio entry: index.ts, HTTP entry: api/mcp.ts).
-// One source of truth for the 67 vertical tools + the `discover` meta-tool.
+// One source of truth for the per-vertical tools + the `discover` meta-tool.
+// Counts in tool copy are DERIVED from VERTICALS — never hardcode them (they drift).
 import { z } from 'zod';
 import { wrapFetchWithPayment, x402Client } from '@x402/fetch';
 import { ExactEvmScheme } from '@x402/evm';
@@ -71,9 +72,11 @@ export function registerTools(server: McpServer, getFetch402: () => Fetch402): v
     );
   }
 
+  const verticalCount = Object.keys(VERTICALS).length;
+  const endpointCount = Object.values(VERTICALS).reduce((n, v) => n + v.endpoints.length, 0);
   server.tool(
     'discover',
-    'Discover all available PulseNetwork verticals. Returns a categorized list of all 67 intelligence APIs (660+ endpoints) with descriptions, coverage, pricing, and available actions. Use this to find the right vertical for a task.',
+    `Discover all available PulseNetwork verticals. Returns a categorized list of all ${verticalCount} intelligence APIs (${endpointCount} endpoints) with descriptions, coverage, pricing, and available actions. Use this to find the right vertical for a task.`,
     { category: z.string().optional().describe('Filter by category: finance | health | law | travel | real-estate | crypto | career | data | global | all') },
     async ({ category }) => {
       const categories: Record<string, string[]> = {

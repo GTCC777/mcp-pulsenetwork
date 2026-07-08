@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S&amp;P Capital IQ Pro / Market Intelligence — US bank &amp; depository data: what you're actually paying for — cheap alternative analysis (2026)</title>
+<meta name="description" content="S&amp;P Capital IQ Pro / Market Intelligence — US bank &amp; depository data costs ~$100,000/yr enterprise seats (bank-data sleeve). Decomposition: the free public data underneath, what the subscription actually adds, rebuild recipe, licensing traps, and the pay-per-call alternative.">
+<link rel="canonical" href="https://pulse.theaslangroupllc.com/unbundled/sp-mi-bank-data/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"S&P Capital IQ Pro / Market Intelligence — US bank & depository data: what you're actually paying for","datePublished":"2026-07-06","author":{"@type":"Organization","name":"The Aslan Group LLC","url":"https://pulse.theaslangroupllc.com"},"publisher":{"@type":"Organization","name":"The Aslan Group LLC"},"mainEntityOfPage":"https://pulse.theaslangroupllc.com/unbundled/sp-mi-bank-data/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is there a cheap alternative to S&P Capital IQ Pro / Market Intelligence — US bank & depository data?","acceptedAnswer":{"@type":"Answer","text":"Yes. S&P Capital IQ Pro / Market Intelligence — US bank & depository data's underlying data is public: FDIC BankFind Suite API (financials, ratios, structure) (US public domain); FFIEC Call Reports (full detail) (US public domain). Incumbent ~$100k/yr. A per-bank health check at $0.25 is ~5 orders of magnitude cheaper for the single-question user."}},{"@type":"Question","name":"What data does S&P Capital IQ Pro / Market Intelligence — US bank & depository data actually use?","acceptedAnswer":{"@type":"Answer","text":"Cleaned ratios and peer analytics over regulatory filings every US bank must file publicly. Key sources: FDIC BankFind Suite API (financials, ratios, structure) — US public domain; FFIEC Call Reports (full detail) — US public domain."}},{"@type":"Question","name":"Is it legal to rebuild S&P Capital IQ Pro / Market Intelligence — US bank & depository data from public data?","acceptedAnswer":{"@type":"Answer","text":"Facts and public-domain government data are not copyrightable, but there are real traps here: None — federal regulatory data. Keep claims to reported figures and defined regulatory categories This is research, not legal advice."}}]}</script>
+<style>
+  :root{color-scheme:light dark}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:820px;margin:0 auto;padding:24px 20px;line-height:1.6;color:#1a1a1a;background:#fff}
+  @media (prefers-color-scheme:dark){body{color:#e6e6e6;background:#111}a{color:#8ab4f8}.card{background:#1b1b1b;border-color:#333}}
+  h1{font-size:1.6rem;line-height:1.3}h2{font-size:1.15rem;margin-top:2rem}
+  a{color:#0b57d0}
+  .verdict{display:inline-block;padding:4px 12px;border-radius:6px;color:#fff;font-weight:600;font-size:.9rem}
+  .card{border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:10px 0;background:#fafafa}
+  table{border-collapse:collapse;width:100%;font-size:.92rem}td,th{border:1px solid #ccc;padding:6px 10px;text-align:left;vertical-align:top}
+  .cta{border:2px solid #0b57d0;border-radius:8px;padding:14px 16px;margin:20px 0}
+  .fine{font-size:.8rem;opacity:.75;margin-top:2.5rem}
+  ol li,ul li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<p><a href="/unbundled/">← All decompositions</a> · <a href="/">PulseNetwork</a></p>
+<h1>S&amp;P Capital IQ Pro / Market Intelligence — US bank &amp; depository data: what you're actually paying for</h1>
+<p><span class="verdict" style="background:#0a7d33">Yes — rebuildable from free public data</span></p>
+<p><strong>S&amp;P Capital IQ Pro / Market Intelligence — US bank &amp; depository data typically costs ~$100,000/yr enterprise seats (bank-data sleeve). Its core dataset is not proprietary: it is built on FDIC BankFind Suite API (financials, ratios, structure); FFIEC Call Reports (full detail) — public sources you can access directly for free. What the subscription actually adds is cleaned ratios and peer analytics over regulatory filings every US bank must file publicly.</strong></p>
+
+<h2>The free public data underneath</h2>
+<table><tr><th>Source</th><th>License</th><th>Access</th></tr>
+<tr><td>FDIC BankFind Suite API (financials, ratios, structure)</td><td>US public domain</td><td>banks.data.fdic.gov, free</td></tr>
+<tr><td>FFIEC Call Reports (full detail)</td><td>US public domain</td><td>cdr.ffiec.gov bulk</td></tr>
+</table>
+
+<h2>Rebuild recipe</h2>
+<ol><li>Query FDIC BankFind for institution financials + ratios</li><li>Compute capital-adequacy reads against the actual PCA thresholds (12 CFR 324.403) — deterministic math, no estimates</li><li>Frame consumer answers around 'is my bank safe' signals: capital tier, NPL trend, deposit mix</li></ol>
+<p><strong>DIY difficulty:</strong> low — clean federal APIs</p>
+
+<h2>The price math</h2>
+<p>Incumbent ~$100k/yr. A per-bank health check at $0.25 is ~5 orders of magnitude cheaper for the single-question user.</p>
+
+<h2>Licensing and legal traps</h2><ul><li>None — federal regulatory data. Keep claims to reported figures and defined regulatory categories</li></ul>
+
+<div class="cta"><strong>The pay-per-call alternative, live today:</strong><ul><li>https://wealthpulse-phi.vercel.app/api/wealth/bank-health ($0.25) — live, PCA categories vs 12 CFR 324.403</li></ul><p>WealthPulse — no subscription, no seat license, USDC per call via <a href="https://www.x402.org">x402</a>. Agents can pay programmatically.</p></div>
+
+<div class="card"><strong>Decompose any data product programmatically:</strong> <code>GET https://pulse.theaslangroupllc.com/api/unbundle?product=S%26P</code> — $1.00 per call via x402. 22 products decomposed; honest misses for everything else.</div>
+
+<p class="fine">Research as of 2026-07-06 by The Aslan Group LLC (info@theaslangroupllc.com). Product names are used nominatively to identify the products analyzed; all trademarks belong to their owners. Pricing is as publicly reported or contract-disclosed at research time and may change. This is research for build-vs-buy evaluation, not legal advice — verify licenses against the primary source before building.</p>
+</body>
+</html>

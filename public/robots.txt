@@ -1,0 +1,9 @@
+# PulseNetwork — AI crawlers welcome. Machine-readable surfaces:
+#   /.well-known/agent.json   (agent discovery)
+#   /openapi.json             (API schema)
+#   /llms.txt                 (LLM-facing catalog)
+
+User-agent: *
+Allow: /
+
+Sitemap: https://pulse.theaslangroupllc.com/sitemap.xml

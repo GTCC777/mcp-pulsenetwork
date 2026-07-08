@@ -95,7 +95,7 @@
     {
       "id": "affiliate-partner",
       "title": "PulseNetwork Affiliate Partner",
-      "tagline": "Zero-build passive income: register a code at /api/affiliate/register, append ?ref=CODE to any Pulse endpoint link you share, and earn 25-30% of referred paid calls in USDC — automatically, monthly, on Base.",
+      "tagline": "Zero-build passive income — no box to assemble, just a link: register a code at /api/affiliate/register, append ?ref=CODE to any Pulse endpoint link you share, and earn 25-30% of referred paid calls in USDC — automatically, monthly, on Base.",
       "audience": ["content creators", "AI agent builders", "Discord/Telegram communities", "developer influencers"],
       "engine": { "vertical": "signalpulse", "endpoints": ["/api/affiliate/register", "/api/affiliate/stats"] },
       "suggested_retail": 0.5,
@@ -108,7 +108,7 @@
     {
       "id": "api-reseller",
       "title": "PulseNetwork Wholesale Reseller",
-      "tagline": "Low-build: get a self-serve wholesale key at /api/wholesale/register ($0.25 free trial), wrap any of PulseNetwork's 733 endpoints at your own price via x-internal-key, and keep the spread — wholesale is 50% of retail.",
+      "tagline": "Build your own AI ___-in-a-Box: get a self-serve wholesale key at /api/wholesale/register ($0.25 free trial), wrap any of PulseNetwork's 733 endpoints in your brand at your own price via x-internal-key, and keep the spread — wholesale is 50% of retail.",
       "audience": ["indie hackers", "agent builders", "SaaS founders", "ACP/marketplace sellers"],
       "engine": { "vertical": "signalpulse", "endpoints": ["/api/wholesale/register", "/api/wholesale/stats", "/api/wholesale/deposit"] },
       "suggested_retail": 1.0,

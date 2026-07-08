@@ -20,6 +20,13 @@ function stripInternalKeyHeader(headers: VercelRequest['headers']): VercelReques
   return clone;
 }
 
+// Param validation only pre-empts the gate for PAID requests (400 before settle, buyer
+// unharmed). Bare unpaid probes must still 402 — x402scan/Bazaar validate origins by probing.
+function getHeaderStr(h: Record<string, unknown>, k: string): string | undefined {
+  const v = h[k];
+  return Array.isArray(v) ? v[0] : (v as string | undefined);
+}
+
 async function handlerImpl(req: VercelRequest, res: VercelResponse): Promise<void> {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') { res.status(204).end(); return; }
@@ -35,33 +42,55 @@ async function handlerImpl(req: VercelRequest, res: VercelResponse): Promise<voi
 
   const rawKey = req.query.key;
   const key = String(Array.isArray(rawKey) ? rawKey[0] : rawKey ?? '').trim();
-  if (!KEY_RE.test(key)) { res.status(400).json({ error: 'invalid or missing key' }); return; }
-
   const rawTier = req.query.tier;
   const tier = Number(Array.isArray(rawTier) ? rawTier[0] : rawTier);
   const depositMicro = tierToMicro(tier);
-  if (!depositMicro) {
-    res.status(400).json({ error: `tier must be one of: ${DEPOSIT_TIERS_USD.join(', ')} (USD)` });
+  const paid = Boolean(getHeaderStr(req.headers, 'payment-signature'));
+
+  // Cheap format checks BEFORE the gate — only pre-empt PAID requests (400 before settle, buyer
+  // unharmed). Bare unpaid probes must still reach the gate and 402.
+  if (paid && !KEY_RE.test(key)) {
+    res.status(400).json({
+      error: 'invalid or missing key (expected pk_live_..., e.g. key=pk_live_abc123)',
+      optional: [],
+      examples: [`/api/wholesale/deposit?key=pk_live_...&tier=${DEPOSIT_TIERS_USD[0]}`],
+    });
+    return;
+  }
+  if (paid && !depositMicro) {
+    res.status(400).json({
+      error: `tier must be one of: ${DEPOSIT_TIERS_USD.join(', ')} (USD), e.g. tier=${DEPOSIT_TIERS_USD[0]}`,
+      optional: [],
+      examples: [`/api/wholesale/deposit?key=pk_live_...&tier=${DEPOSIT_TIERS_USD[0]}`],
+    });
     return;
   }
 
-  // Validate the key BEFORE ever issuing a 402 — never let someone pay to top up a dead key.
-  let record: { active?: boolean } | null = null;
-  try {
-    const [recRaw] = await pipe([['GET', `pn:wk:${key}`]]);
-    record = recRaw ? (JSON.parse(recRaw as string) as { active?: boolean }) : null;
-  } catch {
-    res.status(502).json({ error: 'registry temporarily unavailable, try again shortly' });
-    return;
+  // Validate the key BEFORE ever issuing a 402 to a PAID request — never let someone pay to top
+  // up a dead/typo'd key. Skipped for unpaid probes so bare probes still reach the gate and 402
+  // (x402scan/Bazaar validate origins by probing for bare 402s).
+  if (paid) {
+    let record: { active?: boolean } | null = null;
+    try {
+      const [recRaw] = await pipe([['GET', `pn:wk:${key}`]]);
+      record = recRaw ? (JSON.parse(recRaw as string) as { active?: boolean }) : null;
+    } catch {
+      res.status(502).json({ error: 'registry temporarily unavailable, try again shortly' });
+      return;
+    }
+    if (!record) { res.status(404).json({ error: 'unknown wholesale key — check it was copied correctly' }); return; }
+    if (record.active === false) { res.status(410).json({ error: 'this key has been revoked and can no longer accept deposits' }); return; }
   }
-  if (!record) { res.status(404).json({ error: 'unknown wholesale key — check it was copied correctly' }); return; }
-  if (record.active === false) { res.status(410).json({ error: 'this key has been revoked and can no longer accept deposits' }); return; }
 
   const safeHeaders = stripInternalKeyHeader(req.headers);
+  // Fallback amount only ever advertised to an unpaid/malformed request (real paid requests were
+  // already tier-validated above, so depositMicro is always defined by the time a PAID request
+  // reaches here) — keeps the 402 body's amount well-formed instead of "null" for bare probes.
+  const gateAmount = depositMicro ?? tierToMicro(DEPOSIT_TIERS_USD[0]);
   const gate = await handlePaymentGate(
     safeHeaders,
     req.url ?? '/api/wholesale/deposit',
-    String(depositMicro),
+    String(gateAmount),
     `Top up PulseNetwork wholesale key balance by $${tier}.00 USDC — credits automatically on settlement, usable immediately for wholesale-priced calls via x-internal-key.`,
     ['wholesale', 'reseller', 'deposit', 'top-up', 'prepaid-balance'],
     { queryParams: { key: 'pk_live_...', tier: String(tier) } },
@@ -69,6 +98,13 @@ async function handlerImpl(req: VercelRequest, res: VercelResponse): Promise<voi
   if (!gate.ok) {
     Object.entries(gate.headers).forEach(([k, v]) => res.setHeader(k, v));
     res.status(gate.status).json(gate.body);
+    return;
+  }
+
+  // Unreachable in practice (paid requests were param-validated above); narrows the type for TS.
+  if (!KEY_RE.test(key)) { res.status(400).json({ error: 'invalid or missing key' }); return; }
+  if (!depositMicro) {
+    res.status(400).json({ error: `tier must be one of: ${DEPOSIT_TIERS_USD.join(', ')} (USD)` });
     return;
   }
 

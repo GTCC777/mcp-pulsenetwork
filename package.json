@@ -1,7 +1,7 @@
 {
   "name": "mcp-pulsenetwork",
-  "version": "1.1.1",
-  "description": "PulseNetwork MCP Server — 67 AI-powered intelligence verticals (660+ endpoints), x402-native, pay-per-query via USDC on Base",
+  "version": "1.2.0",
+  "description": "PulseNetwork MCP Server \u2014 73 AI-powered intelligence verticals (825 endpoints), x402-native, pay-per-query via USDC on Base",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -61,5 +61,6 @@
     "@vercel/node": "^5.8.18",
     "tsx": "^4.19.0",
     "typescript": "^5.7.0"
-  }
+  },
+  "mcpName": "com.theaslangroupllc.pulse/pulsenetwork"
 }

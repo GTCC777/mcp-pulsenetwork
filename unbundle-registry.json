@@ -1,0 +1,460 @@
+{
+  "_comment": "The Unbundler registry — curated decompositions of gated data products. Every claim here was researched 2026-07-06 (subscription-arbitrage study, four research lanes). Deterministic by design: legal/licensing claims must never be LLM-generated. verdict values: arbitragable | partially_arbitragable | not_arbitragable | legal_review_required.",
+  "products": [
+    {
+      "id": "candid-foundation-directory",
+      "product": "Candid Foundation Directory (formerly Foundation Center / GuideStar)",
+      "aliases": ["candid", "foundation directory", "foundation directory online", "guidestar", "fdo"],
+      "category": "nonprofit-funder-intel",
+      "typical_price": "$2,000–$12,000/yr depending on tier",
+      "moat_type": "curation-of-public-facts",
+      "verdict": "arbitragable",
+      "what_you_actually_pay_for": "Parsing, entity-linking and search UX over IRS filings that are public domain. Candid's grant records, funder profiles and payout histories are overwhelmingly derived from Form 990/990-PF data the IRS publishes for free, plus self-reported profile enrichment.",
+      "free_upstreams": [
+        { "source": "IRS Form 990/990-PF e-file XML + SOI extracts", "license": "US public domain (17 USC §105)", "access": "irs.gov downloads; NCCS mirrors" },
+        { "source": "IRS Exempt Organizations Business Master File", "license": "US public domain", "access": "irs.gov/charities-non-profits (state-partitioned files)" }
+      ],
+      "rebuild_recipe": [
+        "Pull SOI extracts + BMF from IRS.gov/NCCS (the old AWS 990 bucket is dead since 2021 — do not use it)",
+        "Parse 990-PF Part I/X/XII/XIII for giving capacity, payout math, grant lists",
+        "Entity-resolve on EIN; join BMF for status/assets/NTEE classification",
+        "Serve per-lookup instead of per-seat"
+      ],
+      "price_math": "Incumbent: $2k–12k/yr per seat. Rebuilt: pennies of compute per foundation lookup; a $0.20–0.25 per-call price undercuts a seat by ~99% for occasional users.",
+      "legal_traps": [
+        "ProPublica Nonprofit Explorer API is CC BY-NC-ND — do NOT build a commercial product on it; go to the IRS/NCCS primary files",
+        "The SOI extract's qualifying-distributions column is unpopulated for ~93% of rows — payout-compliance claims must be conservative (signal, never determination)"
+      ],
+      "our_coverage": { "vertical": "GrantPulse", "endpoints": ["https://grantpulse.theaslangroupllc.com/api/grant/org-intel ($0.20)", "https://grantpulse.theaslangroupllc.com/api/grant/funder-990 ($0.25)"] },
+      "diy_difficulty": "moderate — the XML schemas are messy across vintages; field-population gaps require conservative handling"
+    },
+    {
+      "id": "instrumentl",
+      "product": "Instrumentl",
+      "aliases": ["instrumentl grant discovery"],
+      "category": "nonprofit-funder-intel",
+      "typical_price": "$3,600–$12,000/yr",
+      "moat_type": "curation-of-public-facts",
+      "verdict": "arbitragable",
+      "what_you_actually_pay_for": "Grant-matching workflow UX over the same public 990 family plus grants.gov listings (also free and public).",
+      "free_upstreams": [
+        { "source": "IRS 990/990-PF filings", "license": "US public domain", "access": "irs.gov / NCCS" },
+        { "source": "Grants.gov federal opportunities", "license": "US public domain", "access": "grants.gov API, free key" }
+      ],
+      "rebuild_recipe": ["Same 990 pipeline as the Candid decomposition", "Add grants.gov API for live federal opportunities", "Match on NTEE codes + past-grantee similarity"],
+      "price_math": "Incumbent ~$300–1,000/mo. Per-call funder lookups + opportunity matches at $0.20–0.50 serve the long tail the subscription locks out.",
+      "legal_traps": ["Same 990-family traps as Candid"],
+      "our_coverage": { "vertical": "GrantPulse", "endpoints": ["https://grantpulse.theaslangroupllc.com/api/grant/org-intel ($0.20)"] },
+      "diy_difficulty": "moderate"
+    },
+    {
+      "id": "web-of-science",
+      "product": "Web of Science (Clarivate)",
+      "aliases": ["wos", "clarivate", "web of science citation index", "incites"],
+      "category": "academic-citation-analytics",
+      "typical_price": "~$212,000/yr for a research university (FOIA-obtained contract pricing); smaller sites pay five figures",
+      "moat_type": "curation-of-public-facts",
+      "verdict": "arbitragable",
+      "what_you_actually_pay_for": "A curated citation graph, author disambiguation, and journal metrics — over scholarly metadata that now exists openly. Universities are publicly cancelling (2025–26 cancellation wave) in favor of open infrastructure.",
+      "free_upstreams": [
+        { "source": "OpenAlex (~250M works, full citation graph)", "license": "CC0", "access": "api.openalex.org, no key required" },
+        { "source": "Crossref metadata + retractions (incl. Retraction Watch data)", "license": "open/factual metadata", "access": "api.crossref.org" }
+      ],
+      "rebuild_recipe": [
+        "Query OpenAlex for works/authors/institutions/venues + citation counts",
+        "Cross-check DOIs against Crossref; flag retractions",
+        "Ship per-query confidence flags — OpenAlex author disambiguation is weaker than WoS's hand curation; honesty beats false precision"
+      ],
+      "price_math": "Incumbent: ~$212k/yr site license. Rebuilt: OpenAlex is free; per-call citation lookups at $0.05–0.25 make the marginal query ~4 orders of magnitude cheaper.",
+      "legal_traps": ["None on the data (CC0). The trap is quality, not license: disclose disambiguation limits per query"],
+      "our_coverage": { "vertical": "CitePulse", "endpoints": ["https://citepulse.theaslangroupllc.com/api/ref-check ($0.15)", "https://citepulse.theaslangroupllc.com/api/author ($0.10)", "https://citepulse.theaslangroupllc.com/api/literature-brief ($0.25)"] },
+      "diy_difficulty": "low-to-moderate — excellent open APIs; the work is in honest quality flags"
+    },
+    {
+      "id": "panjiva",
+      "product": "Panjiva (S&P Global)",
+      "aliases": ["panjiva trade data", "s&p panjiva"],
+      "category": "trade-intelligence",
+      "typical_price": "$1,000+/mo",
+      "moat_type": "curation-of-public-facts",
+      "verdict": "arbitragable",
+      "what_you_actually_pay_for": "Entity resolution and search over US import bills of lading that are public by statute — 19 CFR 103.31 makes vessel manifest data publicly available.",
+      "free_upstreams": [
+        { "source": "CBP AMS vessel manifest data", "license": "public by statute (19 CFR 103.31)", "access": "CBP FTP/DVD distribution — heavier ingestion than an API" }
+      ],
+      "rebuild_recipe": [
+        "Ingest CBP AMS manifest releases (bulk; plan real ETL)",
+        "Entity-resolve consignees/shippers (the true value-add — messy names)",
+        "Index by company, product description, ports; serve per-lookup",
+        "Proof of feasibility: ImportYeti serves this data free with a ~12-person team"
+      ],
+      "price_math": "Incumbent $12k+/yr. Per-shipment-history lookups at $0.25–1.00 serve diligence and sourcing use cases without the subscription.",
+      "legal_traps": [
+        "IMPORTS ONLY: AES export records are NOT public — do not promise export data",
+        "Shippers can request confidentiality — some records are legitimately masked"
+      ],
+      "our_coverage": { "vertical": "TradePulse (enhancement planned — bills-of-lading ingestion is a heavier build)", "endpoints": ["https://tradepulse.theaslangroupllc.com (tariff/compliance intel live today)"] },
+      "diy_difficulty": "high — bulk ingestion + entity resolution; the data is free but not turnkey"
+    },
+    {
+      "id": "importgenius",
+      "product": "ImportGenius",
+      "aliases": ["import genius"],
+      "category": "trade-intelligence",
+      "typical_price": "$125–$899/mo",
+      "moat_type": "curation-of-public-facts",
+      "verdict": "arbitragable",
+      "what_you_actually_pay_for": "Same CBP AMS public manifest data as Panjiva, cheaper UX tier.",
+      "free_upstreams": [{ "source": "CBP AMS vessel manifests", "license": "public by statute (19 CFR 103.31)", "access": "CBP bulk distribution" }],
+      "rebuild_recipe": ["See the Panjiva decomposition — identical upstream"],
+      "price_math": "Per-lookup pricing beats the $1,500–10,800/yr subscription for anyone below daily-power-user volume.",
+      "legal_traps": ["Same as Panjiva: imports only; confidentiality-masked records exist"],
+      "our_coverage": { "vertical": "TradePulse (enhancement planned)", "endpoints": [] },
+      "diy_difficulty": "high"
+    },
+    {
+      "id": "sp-mi-bank-data",
+      "product": "S&P Capital IQ Pro / Market Intelligence — US bank & depository data",
+      "aliases": ["s&p market intelligence banks", "capital iq banks", "snl financial", "bank regulatory data"],
+      "category": "bank-financials",
+      "typical_price": "~$100,000/yr enterprise seats (bank-data sleeve)",
+      "moat_type": "curation-of-public-facts",
+      "verdict": "arbitragable",
+      "what_you_actually_pay_for": "Cleaned ratios and peer analytics over regulatory filings every US bank must file publicly.",
+      "free_upstreams": [
+        { "source": "FDIC BankFind Suite API (financials, ratios, structure)", "license": "US public domain", "access": "banks.data.fdic.gov, free" },
+        { "source": "FFIEC Call Reports (full detail)", "license": "US public domain", "access": "cdr.ffiec.gov bulk" }
+      ],
+      "rebuild_recipe": [
+        "Query FDIC BankFind for institution financials + ratios",
+        "Compute capital-adequacy reads against the actual PCA thresholds (12 CFR 324.403) — deterministic math, no estimates",
+        "Frame consumer answers around 'is my bank safe' signals: capital tier, NPL trend, deposit mix"
+      ],
+      "price_math": "Incumbent ~$100k/yr. A per-bank health check at $0.25 is ~5 orders of magnitude cheaper for the single-question user.",
+      "legal_traps": ["None — federal regulatory data. Keep claims to reported figures and defined regulatory categories"],
+      "our_coverage": { "vertical": "WealthPulse", "endpoints": ["https://wealthpulse-phi.vercel.app/api/wealth/bank-health ($0.25) — live, PCA categories vs 12 CFR 324.403"] },
+      "diy_difficulty": "low — clean federal APIs"
+    },
+    {
+      "id": "bloomberg-muni",
+      "product": "Bloomberg Terminal — municipal bond sleeve",
+      "aliases": ["bloomberg munis", "bloomberg terminal municipal", "muni bond data"],
+      "category": "fixed-income",
+      "typical_price": "$32,000/yr per terminal seat",
+      "moat_type": "curation-of-public-facts (for the muni sleeve specifically)",
+      "verdict": "partially_arbitragable",
+      "what_you_actually_pay_for": "For munis specifically: convenience. MSRB's EMMA publishes real-time trade prices and continuing disclosures for free — the terminal's muni edge is workflow, not exclusive data.",
+      "free_upstreams": [
+        { "source": "MSRB EMMA (trades, official statements, disclosures)", "license": "free public access", "access": "emma.msrb.org — no official bulk API; programmatic access requires care" }
+      ],
+      "rebuild_recipe": [
+        "Pull recent trades + disclosure events per CUSIP/issuer from EMMA's public interfaces",
+        "Surface continuing-disclosure red flags (draw notices, rating changes, defaults)",
+        "Scope honestly if programmatic access proves fragile — a disclosure-event feed alone still beats a $32k seat for the occasional muni question"
+      ],
+      "price_math": "One terminal seat = $32k/yr. Per-CUSIP lookups at $0.25 serve advisors and agents who touch munis occasionally.",
+      "legal_traps": [
+        "HARD STOP: FINRA TRACE corporate-bond data is NOT free for commercial use — the muni arbitrage does NOT extend to corporates",
+        "The rest of the terminal (equities L2, chat, analytics) is licensed/proprietary — this decomposition covers ONLY the muni sleeve"
+      ],
+      "our_coverage": { "vertical": "FilingsPulse (muni-bond endpoint in active build)", "endpoints": [] },
+      "diy_difficulty": "moderate-to-high — EMMA has no official API; respect its terms"
+    },
+    {
+      "id": "morningstar-direct-holdings",
+      "product": "Morningstar Direct — fund holdings sleeve",
+      "aliases": ["morningstar direct", "fund holdings data", "morningstar holdings"],
+      "category": "fund-analytics",
+      "typical_price": "$17,500/yr per seat",
+      "moat_type": "mixed — holdings are public; the taxonomy/ratings are proprietary",
+      "verdict": "partially_arbitragable",
+      "what_you_actually_pay_for": "Fund holdings themselves are free: every registered fund files N-PORT with the SEC monthly (public quarterly). Morningstar's proprietary value is its category taxonomy, star ratings, and analyst layer — that part is NOT arbitragable.",
+      "free_upstreams": [
+        { "source": "SEC N-PORT filings (complete portfolio holdings)", "license": "US public domain", "access": "EDGAR, free" }
+      ],
+      "rebuild_recipe": [
+        "Resolve fund → CIK/series via EDGAR company search",
+        "Parse latest N-PORT: positions, weights, concentration",
+        "Do NOT clone the ratings/taxonomy — that is genuinely theirs"
+      ],
+      "price_math": "Holdings questions ('what does fund X actually hold?') per-call at $0.25 vs a $17.5k seat.",
+      "legal_traps": ["Never reproduce Morningstar categories/ratings — proprietary. Holdings facts are public domain"],
+      "our_coverage": { "vertical": "FilingsPulse (fund-holdings endpoint in active build)", "endpoints": [] },
+      "diy_difficulty": "moderate — N-PORT XML is large but well-structured"
+    },
+    {
+      "id": "alphasense",
+      "product": "AlphaSense",
+      "aliases": ["alpha sense", "alpha-sense"],
+      "category": "filings-search",
+      "typical_price": "avg ~$125,000/yr enterprise",
+      "moat_type": "mixed — filings search is public-data; broker research + expert calls are licensed",
+      "verdict": "partially_arbitragable",
+      "what_you_actually_pay_for": "The filings-search core rides on EDGAR full-text search, which the SEC provides free (efts.sec.gov). The licensed broker research and expert-call library are real proprietary content you cannot rebuild.",
+      "free_upstreams": [
+        { "source": "SEC EDGAR full-text search API", "license": "US public domain", "access": "efts.sec.gov/LATEST/search-index?q=..., free" }
+      ],
+      "rebuild_recipe": [
+        "Wrap EDGAR full-text search with phrase queries across form types",
+        "Add anomaly heuristics: NT filings, Item 4.01/4.02 8-Ks, going-concern language",
+        "Be honest that broker research/expert calls are out of scope"
+      ],
+      "price_math": "The 'who said X in a filing' workflow per-call at $0.20–0.25 vs $125k/yr.",
+      "legal_traps": ["SEC requests a descriptive User-Agent and ~10 req/s ceiling — comply"],
+      "our_coverage": { "vertical": "FilingsPulse", "endpoints": ["https://filingspulse.theaslangroupllc.com/api/filings/search (full-text, live)", "anomaly + transcript-search endpoints in active build"] },
+      "diy_difficulty": "low for search; moderate for good anomaly heuristics"
+    },
+    {
+      "id": "revelio-labs",
+      "product": "Revelio Labs workforce intelligence",
+      "aliases": ["revelio", "workforce data", "labor market intelligence"],
+      "category": "labor-analytics",
+      "typical_price": "~$85,000 (AWS Data Exchange listed price)",
+      "moat_type": "mixed — government labor data is free; scraped-profile panels are their (legally fraught) edge",
+      "verdict": "partially_arbitragable",
+      "what_you_actually_pay_for": "Two layers: (1) analytics over free government labor data — arbitragable; (2) a scraped professional-profile panel — NOT safely rebuildable (see traps).",
+      "free_upstreams": [
+        { "source": "BLS OEWS (occupational wages)", "license": "US public domain", "access": "bls.gov API" },
+        { "source": "O*NET (skills/task taxonomy)", "license": "free with attribution", "access": "onetcenter.org" },
+        { "source": "DOL LCA + PERM disclosure files (visa wages, employers)", "license": "US public domain", "access": "dol.gov quarterly files" }
+      ],
+      "rebuild_recipe": [
+        "Wage benchmarking from OEWS; skills mapping from O*NET",
+        "H-1B/PERM employer wage red-flag checks from DOL disclosure files",
+        "Do NOT scrape job postings or profiles"
+      ],
+      "price_math": "Government-layer wage/visa analytics per-call at $0.10–0.50 vs $85k bulk.",
+      "legal_traps": [
+        "hiQ v. LinkedIn ended in a $500k judgment and injunction — profile/posting scraping is not a safe foundation",
+        "O*NET requires attribution"
+      ],
+      "our_coverage": { "vertical": "TalentPulse / CareerPulse / ImmigrationPulse", "endpoints": ["https://talentpulse.theaslangroupllc.com (workforce analytics live)", "https://immigrationpulse.theaslangroupllc.com (visa intel live)"] },
+      "diy_difficulty": "low for the government layer"
+    },
+    {
+      "id": "govwin",
+      "product": "GovWin IQ (Deltek)",
+      "aliases": ["govwin", "deltek govwin", "government contracts intelligence"],
+      "category": "govcon-bd",
+      "typical_price": "avg ~$29,000/yr",
+      "moat_type": "curation-of-public-facts (plus analyst forecasts)",
+      "verdict": "arbitragable",
+      "what_you_actually_pay_for": "Aggregation of contract opportunities and awards that governments publish free, plus pre-RFP analyst forecasts (their genuine add).",
+      "free_upstreams": [
+        { "source": "SAM.gov opportunities API", "license": "US public domain", "access": "sam.gov, free key" },
+        { "source": "USASpending awards API", "license": "US public domain", "access": "api.usaspending.gov" },
+        { "source": "EU TED + AusTender", "license": "open (TED reuse-friendly; AusTender CC-BY)", "access": "official portals" }
+      ],
+      "rebuild_recipe": [
+        "Search SAM.gov + USASpending per NAICS/agency/keyword",
+        "Award-history context per incumbent vendor",
+        "Global: add TED/AusTender for non-US tenders",
+        "Note: FPDS ATOM feed is being decommissioned — build on SAM/USASpending, not FPDS"
+      ],
+      "price_math": "Per-search at $0.10–0.50 vs $29k/yr — the long tail of small contractors is priced out of GovWin entirely.",
+      "legal_traps": ["None on US federal data"],
+      "our_coverage": { "vertical": "GovSpendPulse", "endpoints": ["https://govspendpulse.theaslangroupllc.com (opportunities + award intel live)"] },
+      "diy_difficulty": "low"
+    },
+    {
+      "id": "redica",
+      "product": "Redica Systems (FDA quality/regulatory intelligence)",
+      "aliases": ["redica", "fda 483 database", "fdazilla"],
+      "category": "pharma-regulatory",
+      "typical_price": "$289 per single document; subscriptions in the tens of thousands",
+      "moat_type": "curation-of-public-facts",
+      "verdict": "arbitragable",
+      "what_you_actually_pay_for": "Indexed FDA Form 483s and warning letters — documents FDA publishes in FOIA reading rooms and databases for free.",
+      "free_upstreams": [
+        { "source": "FDA warning letters database + FOIA electronic reading room (483s)", "license": "US public domain", "access": "fda.gov, free" },
+        { "source": "openFDA enforcement/inspection APIs", "license": "US public domain", "access": "open.fda.gov" }
+      ],
+      "rebuild_recipe": ["Index warning letters + posted 483s by firm/site/violation theme", "Join openFDA inspection classifications", "Serve per-firm regulatory-history checks"],
+      "price_math": "$289/document vs a $0.25 per-firm scan on the same public record.",
+      "legal_traps": ["Not all 483s are proactively posted — some require a FOIA request; be honest about coverage gaps"],
+      "our_coverage": { "vertical": "ClinicalIntelPulse", "endpoints": ["https://clinicalintelpulse.theaslangroupllc.com (FDA intel live; 483 deep-index enhancement planned)"] },
+      "diy_difficulty": "moderate — PDF parsing + coverage honesty"
+    },
+    {
+      "id": "ceic-macromicro",
+      "product": "CEIC / Haver Analytics / MacroMicro",
+      "aliases": ["ceic", "haver", "macromicro", "macro data subscription"],
+      "category": "macro-data",
+      "typical_price": "MacroMicro $27–600/mo; CEIC/Haver institutional five-figures",
+      "moat_type": "curation-of-public-facts",
+      "verdict": "arbitragable",
+      "what_you_actually_pay_for": "Aggregation and charting of statistics that national agencies publish free: FRED, BLS, Eurostat, national central banks.",
+      "free_upstreams": [
+        { "source": "FRED (800k+ series)", "license": "free API", "access": "fred.stlouisfed.org" },
+        { "source": "BLS, BEA, Eurostat, ECB, national statistics offices", "license": "public/open", "access": "official APIs" }
+      ],
+      "rebuild_recipe": ["Map user questions to the right free series", "Serve computed reads (trends, regime context) per-call"],
+      "price_math": "Per-question macro reads at $0.05–0.25 vs $324–7,200/yr.",
+      "legal_traps": ["A few emerging-market series are genuinely gated at the source — coverage honesty required"],
+      "our_coverage": { "vertical": "MacroPulse / EconSignalPulse", "endpoints": ["https://macropulse-alpha.vercel.app (live)", "https://econsignalpulse.theaslangroupllc.com (live)"] },
+      "diy_difficulty": "low"
+    },
+    {
+      "id": "grid-data-vendors",
+      "product": "gridstatus.io paid tiers / Yes Energy",
+      "aliases": ["gridstatus", "yes energy", "power market data"],
+      "category": "energy-markets",
+      "typical_price": "hundreds/mo to five figures/yr",
+      "moat_type": "curation-of-public-facts",
+      "verdict": "arbitragable",
+      "what_you_actually_pay_for": "Normalized access to grid data the ISOs publish free: LMPs, load, fuel mix.",
+      "free_upstreams": [
+        { "source": "EIA API", "license": "US public domain", "access": "api.eia.gov, free key" },
+        { "source": "ERCOT / CAISO / ENTSO-E public data", "license": "public", "access": "official portals/APIs" }
+      ],
+      "rebuild_recipe": ["Per-call LMP/load lookups against ISO public feeds", "Normalize node/zone naming (the real work)"],
+      "price_math": "Per-lookup at $0.05–0.25 vs subscription tiers.",
+      "legal_traps": ["Some ISO real-time feeds have registration requirements — read each ISO's terms"],
+      "our_coverage": { "vertical": "GridPulse", "endpoints": ["https://gridpulse.theaslangroupllc.com (energy intel live; per-call LMP enhancement planned)"] },
+      "diy_difficulty": "moderate — many ISOs, inconsistent formats"
+    },
+    {
+      "id": "eudr-compliance-vendors",
+      "product": "EUDR deforestation-compliance platforms (various)",
+      "aliases": ["eudr compliance", "deforestation compliance", "eudr software"],
+      "category": "esg-compliance",
+      "typical_price": "$15,000–$500,000/yr",
+      "moat_type": "curation-of-public-facts",
+      "verdict": "arbitragable",
+      "what_you_actually_pay_for": "Workflow over free satellite data: the deforestation determination itself rides on open imagery.",
+      "free_upstreams": [
+        { "source": "Copernicus Sentinel imagery", "license": "CC-BY", "access": "Copernicus Data Space" },
+        { "source": "Global Forest Watch / Hansen forest-change data", "license": "open (CC-BY)", "access": "globalforestwatch.org" }
+      ],
+      "rebuild_recipe": ["Plot-level forest-cover-change check against the EUDR cutoff date (2020-12-31)", "Return evidence layers (imagery dates, change detection) suitable for a due-diligence statement"],
+      "price_math": "Per-plot checks at $0.50–2.00 vs $15k+ platform minimums — the deadline-driven long tail (small importers) is unserved.",
+      "legal_traps": ["Attribution required (CC-BY). Your check supports a due-diligence statement; it is not itself legal compliance advice"],
+      "our_coverage": { "vertical": "ESGPulse (plot-check enhancement planned)", "endpoints": ["https://esgpulse.theaslangroupllc.com (ESG intel live)"] },
+      "diy_difficulty": "high — geospatial pipeline, but entirely open-source-able"
+    },
+    {
+      "id": "recall-monitoring-vendors",
+      "product": "Commercial recall-monitoring services",
+      "aliases": ["recall monitoring", "product recall service", "recall alerts"],
+      "category": "product-safety",
+      "typical_price": "$10,000–$50,000/yr",
+      "moat_type": "curation-of-public-facts",
+      "verdict": "arbitragable",
+      "what_you_actually_pay_for": "Aggregation of recall feeds that safety agencies publish free, globally.",
+      "free_upstreams": [
+        { "source": "CPSC recalls API", "license": "US public domain", "access": "cpsc.gov" },
+        { "source": "openFDA food/drug/device enforcement", "license": "US public domain", "access": "open.fda.gov" },
+        { "source": "EU RASFF / Safety Gate", "license": "open", "access": "EU portals" }
+      ],
+      "rebuild_recipe": ["Join CPSC + openFDA + RASFF per product/brand/category", "Per-check or SKU-watch pricing"],
+      "price_math": "Per-check at $0.05–0.25 vs $10k+/yr.",
+      "legal_traps": ["None material"],
+      "our_coverage": { "vertical": "SafePulse", "endpoints": ["https://safepulse.theaslangroupllc.com (recall + safety checks live)"] },
+      "diy_difficulty": "low"
+    },
+    {
+      "id": "exclusion-screening-vendors",
+      "product": "Healthcare exclusion / sanction screening services",
+      "aliases": ["oig exclusion screening", "sanction screening", "leie screening"],
+      "category": "compliance-screening",
+      "typical_price": "$1,000s–$10,000s/yr per organization",
+      "moat_type": "curation-of-public-facts",
+      "verdict": "arbitragable",
+      "what_you_actually_pay_for": "Batch UX over three free federal lists every provider can query directly.",
+      "free_upstreams": [
+        { "source": "NPPES NPI registry", "license": "US public domain", "access": "npiregistry.cms.hhs.gov" },
+        { "source": "OIG LEIE exclusion list", "license": "US public domain", "access": "oig.hhs.gov" },
+        { "source": "SAM.gov exclusions", "license": "US public domain", "access": "sam.gov" }
+      ],
+      "rebuild_recipe": ["Resolve provider via NPI", "Check LEIE + SAM exclusions", "Return a combined per-provider verdict with source citations"],
+      "price_math": "Per-provider combo checks proven viable at $0.25–5.00 per call vs annual platform fees.",
+      "legal_traps": ["None — federal lists. Screening obligations/cadence are the customer's regulatory duty; you provide the check, not the compliance program"],
+      "our_coverage": { "vertical": "CompliancePulse / ClearCarePulse", "endpoints": ["https://compliancepulse.theaslangroupllc.com (screening live)"] },
+      "diy_difficulty": "low"
+    },
+    {
+      "id": "carfax",
+      "product": "Carfax vehicle history",
+      "aliases": ["carfax report", "vehicle history report"],
+      "category": "vehicle-history",
+      "typical_price": "$44.99/report retail",
+      "moat_type": "proprietary-data",
+      "verdict": "not_arbitragable",
+      "what_you_actually_pay_for": "Accident and service records sourced from exclusive commercial agreements with insurers, body shops, and dealers. That data does not exist in any public record you can rebuild from.",
+      "free_upstreams": [
+        { "source": "NHTSA VIN decode + recalls", "license": "US public domain", "access": "vpic.nhtsa.dot.gov — decodes the vehicle, does NOT give history" }
+      ],
+      "rebuild_recipe": ["Cannot be rebuilt from public data. NMVTIS (title brands/salvage) is the closest public-interest dataset but requires becoming an AAMVA-approved provider (~$1k gate + approval)"],
+      "price_math": "n/a — the moat is the data itself, not the curation",
+      "legal_traps": ["NMVTIS access is gated behind AAMVA approved-provider status — not self-serve"],
+      "our_coverage": { "vertical": "AutoPulse covers the public layer (recalls, TCO, negotiation) — not accident history", "endpoints": ["https://autopulse-navy.vercel.app"] },
+      "diy_difficulty": "n/a — this is the discriminating counter-example: when the moat is data that never touches a public record, there is no arbitrage"
+    },
+    {
+      "id": "crunchbase-pitchbook",
+      "product": "Crunchbase / PitchBook private-company data",
+      "aliases": ["crunchbase", "pitchbook", "private company valuations", "vc database"],
+      "category": "private-markets",
+      "typical_price": "Crunchbase Pro ~$99/mo; PitchBook ~$25,000+/yr per seat",
+      "moat_type": "proprietary-data",
+      "verdict": "not_arbitragable",
+      "what_you_actually_pay_for": "Valuations, round sizes, and cap-table intel sourced from voluntary disclosure networks (Crunchbase's ~4,000-firm Venture Program) and analyst calls. Private-market financials are not public records.",
+      "free_upstreams": [
+        { "source": "SEC Form D filings", "license": "US public domain", "access": "EDGAR — discloses that a raise happened and its size band, NOT valuation" }
+      ],
+      "rebuild_recipe": ["Only a thin Form D trigger feed is rebuildable ('company X just filed a raise'). Valuations/cap tables cannot be derived from public data — pre-IPO perp markets give implied marks for a handful of names only"],
+      "price_math": "n/a for the core product",
+      "legal_traps": ["Scraping their databases violates terms and their data is compiled, not public record"],
+      "our_coverage": { "vertical": "VenturePulse (Form D layer) + SignalPulse pre-ipo (perp-implied marks for traded names)", "endpoints": ["https://signalpulse.theaslangroupllc.com/api/signal/pre-ipo"] },
+      "diy_difficulty": "n/a — moat is non-public data"
+    },
+    {
+      "id": "platts-argus",
+      "product": "S&P Platts / Argus commodity price assessments",
+      "aliases": ["platts", "argus media", "commodity price assessments"],
+      "category": "commodities",
+      "typical_price": "five-to-six figures/yr",
+      "moat_type": "proprietary-data (editorial price assessments)",
+      "verdict": "not_arbitragable",
+      "what_you_actually_pay_for": "The assessments ARE the product: journalists/analysts canvass private OTC deals and publish an editorial price. There is no public record to rebuild it from, and the assessments are contractually embedded in physical-trade settlement worldwide.",
+      "free_upstreams": [{ "source": "Exchange futures settlements (CME etc.)", "license": "delayed data widely available", "access": "exchanges — a different product than physical assessments" }],
+      "rebuild_recipe": ["Cannot rebuild the assessment layer; futures-based proxies serve some use cases honestly labeled as such"],
+      "price_math": "n/a",
+      "legal_traps": ["Republishing assessments is licensed content infringement"],
+      "our_coverage": { "vertical": "MacroPulse commodity endpoints (exchange-based, honestly scoped)", "endpoints": ["https://macropulse-alpha.vercel.app/api/commodities"] },
+      "diy_difficulty": "n/a"
+    },
+    {
+      "id": "upcodes-building-codes",
+      "product": "UpCodes / building-code access platforms",
+      "aliases": ["upcodes", "building codes database", "icc codes"],
+      "category": "construction-compliance",
+      "typical_price": "$39–$1,000s/mo",
+      "moat_type": "contested — codes are law, but SDOs claim copyright",
+      "verdict": "legal_review_required",
+      "what_you_actually_pay_for": "Access to codes that are enacted into law (which courts have increasingly held cannot be copyrighted once incorporated by reference) — but the standards bodies litigate.",
+      "free_upstreams": [{ "source": "Codes incorporated by reference into public law", "license": "CONTESTED", "access": "varies by jurisdiction" }],
+      "rebuild_recipe": ["Do not build here without counsel: ASTM v. UpCodes is LIVE litigation (3rd Circuit, April 2026). The legal ground is actively moving"],
+      "price_math": "attractive but premature",
+      "legal_traps": ["Active litigation defines this category — legal review is mandatory before any build"],
+      "our_coverage": { "vertical": "none (deliberately skipped pending ASTM v. UpCodes)", "endpoints": [] },
+      "diy_difficulty": "n/a until the litigation resolves"
+    },
+    {
+      "id": "ortex",
+      "product": "Ortex (short interest analytics)",
+      "aliases": ["ortex short interest"],
+      "category": "equity-analytics",
+      "typical_price": "$39–$500+/mo",
+      "moat_type": "proprietary-data (real-time estimates from securities-lending feeds)",
+      "verdict": "not_arbitragable",
+      "what_you_actually_pay_for": "Real-time short-interest ESTIMATES built from paid securities-lending data feeds. The free public record (FINRA/exchange short interest) is twice-monthly and lagged — the real-time layer is genuinely proprietary.",
+      "free_upstreams": [{ "source": "FINRA/exchange short-interest reports", "license": "public", "access": "twice-monthly, lagged — a different (slower) product" }],
+      "rebuild_recipe": ["The lagged public layer is rebuildable and cheap; the real-time estimate layer is not. In cheap-retail categories like this, the agent-native angle (per-call, no seat) is the edge — not price"],
+      "price_math": "public-layer lookups at $0.05–0.10; do not promise real-time",
+      "legal_traps": ["None on the public layer"],
+      "our_coverage": { "vertical": "AlphaPulse / FilingsPulse (public short-interest layer)", "endpoints": [] },
+      "diy_difficulty": "low for the lagged layer; the real-time layer requires the same paid feeds"
+    }
+  ]
+}

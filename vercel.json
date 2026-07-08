@@ -1,11 +1,38 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
-    { "source": "/mcp", "destination": "/api/mcp" },
-    { "source": "/affiliates", "destination": "/affiliates.html" },
-    { "source": "/wholesale", "destination": "/wholesale.html" }
+    {
+      "source": "/mcp",
+      "destination": "/api/mcp"
+    },
+    {
+      "source": "/affiliates",
+      "destination": "/affiliates.html"
+    },
+    {
+      "source": "/wholesale",
+      "destination": "/wholesale.html"
+    },
+    {
+      "source": "/publishers",
+      "destination": "/publishers.html"
+    },
+    {
+      "source": "/affiliate-disclosure",
+      "destination": "/affiliate-disclosure.html"
+    },
+    {
+      "source": "/go/:merchant",
+      "destination": "/api/go?merchant=:merchant"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    }
   ],
   "functions": {
-    "api/mcp.ts": { "maxDuration": 60 }
+    "api/mcp.ts": {
+      "maxDuration": 60
+    }
   }
 }

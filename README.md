@@ -1,8 +1,8 @@
 # PulseNetwork MCP Server
 
-**68 AI-powered intelligence verticals. One integration. Pay-per-query via x402 on Base.**
+**73 AI-powered intelligence verticals — 825 endpoints. One integration. Pay-per-query via x402 on Base.**
 
-PulseNetwork is the most comprehensive x402-native intelligence network available. Add one block to your Claude Desktop config and your agent gains access to 68 domain-specific intelligence APIs — finance, legal, healthcare, immigration, real estate, crypto, careers, travel, sustainability, sports/prediction markets, and more — all paying autonomously via USDC on Base.
+PulseNetwork is the most comprehensive x402-native intelligence network available. Add one block to your Claude Desktop config and your agent gains access to 73 domain-specific intelligence APIs (825 endpoints) — finance, legal, healthcare, immigration, real estate, crypto, careers, travel, sustainability, sports/prediction markets, and more — all paying autonomously via USDC on Base.
 
 No API keys. No subscriptions. Agents pay per query, $0.015–$1.00 each.
 
@@ -48,7 +48,7 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (Mac) or 
 }
 ```
 
-Restart Claude Desktop. You now have 68 intelligence verticals available.
+Restart Claude Desktop. You now have 73 intelligence verticals available.
 
 ### 4. Add to Cursor / Windsurf / any MCP client
 

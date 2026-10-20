@@ -1,0 +1,87 @@
+{
+  "name": "Rail, coach, ferry, and cruise compensation service",
+  "slug": "rail-cruise-compensation",
+  "category": "Recovery & money-finding",
+  "summary": "The airline-compensation model applied to trains, coaches, ferries, and cruises, where almost nobody else is helping passengers claim.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/rail-cruise-compensation/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "transitpulse",
+      "name": "TransitPulse",
+      "base_url": "https://transitpulse.theaslangroupllc.com",
+      "openapi": "https://transitpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://transitpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/rights/check",
+          "price": "$0.05",
+          "description": "Rail/Coach/Ferry/Cruise Compensation Eligibility Check"
+        },
+        {
+          "path": "/api/rights/letter",
+          "price": "$2.00",
+          "description": "Citation-Locked Transit Compensation Claim Letter"
+        },
+        {
+          "path": "/api/transit/delays-history",
+          "price": "$0.08",
+          "description": "Historical Delay Patterns"
+        }
+      ]
+    },
+    {
+      "vertical": "mailpulse",
+      "name": "MailPulse",
+      "base_url": "https://mailpulse.theaslangroupllc.com",
+      "openapi": "https://mailpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://mailpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/verify-address",
+          "price": "$0.01",
+          "description": "Verify a mailing address (US + international)"
+        },
+        {
+          "path": "/api/letters",
+          "price": "$3.00",
+          "description": "THE paid action: prints and mails a real physical letter via Lob once payment settles. Price varies by service — standard $3.00, certified $12.00, certified_return_receipt $14.00, international $5.00 — the amount shown here is the representative/minimum price; the actual x402 charge always matches the caller's quote_id-verified order from POST /api/quote (free, no x402 gate). Requires a client_request_id (8-128 chars) for idempotency."
+        },
+        {
+          "path": "/api/letters/{id}",
+          "price": "$0.005",
+          "description": "Letter status / USPS tracking poll"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=rail-cruise-compensation — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"transitpulse,mailpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: rail-cruise-compensation\"."
+  },
+  "setup_steps": [
+    "Learn the shape of the four regimes by running ten test checks (commuter rail delay, international rail, ferry cancellation, cruise itinerary change).",
+    "Pick a niche to start: UK delay-repay commuters and EU international rail are the highest-volume lanes.",
+    "Put the rail service on the same site as your airline service if you run both. \"Delayed? Any mode, one place\" is a clean pitch.",
+    "Post one plain-language explainer where delayed passengers actually complain (commuter forums, cruise communities). Answer questions honestly and let the service sell itself."
+  ],
+  "licensing_notes": [
+    "Identical posture to the airline blueprint: flat-fee self-help document preparation, no contingency, no representation. The customer signs and sends. Verify local consumer-services rules first."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

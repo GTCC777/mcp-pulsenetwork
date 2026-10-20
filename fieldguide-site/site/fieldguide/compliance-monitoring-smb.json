@@ -1,0 +1,68 @@
+{
+  "name": "Compliance monitoring for small businesses",
+  "slug": "compliance-monitoring-smb",
+  "category": "B2B services",
+  "summary": "A monthly regulatory-watch service for small businesses: what changed, what applies to you, what to do about it. Information service, not legal advice.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/compliance-monitoring-smb/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "compliancepulse",
+      "name": "CompliancePulse",
+      "base_url": "https://compliancepulse.theaslangroupllc.com",
+      "openapi": "https://compliancepulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://compliancepulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/comply/news",
+          "price": "$0.08",
+          "description": "Regulatory intelligence and enforcement news"
+        },
+        {
+          "path": "/api/comply/privacy",
+          "price": "$0.15",
+          "description": "Data privacy law by jurisdiction"
+        },
+        {
+          "path": "/api/comply/employment",
+          "price": "$0.15",
+          "description": "Employment law and HR compliance"
+        },
+        {
+          "path": "/api/comply/sector",
+          "price": "$0.15",
+          "description": "Industry-specific regulatory compliance"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=compliance-monitoring-smb — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"compliancepulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: compliance-monitoring-smb\"."
+  },
+  "setup_steps": [
+    "Pick one industry you know (restaurants, e-commerce, home services) and build the monthly brief template for it.",
+    "Produce a real sample brief for a fictional client and show it to two small-business owners and one attorney. The attorney conversation matters twice: it sharpens your lines and often produces your first referral partner.",
+    "Price monthly, modestly, and sell the first three subscriptions in your own network.",
+    "End every brief with the attorney-question list. It’s your compliance posture and your value proof in one section."
+  ],
+  "licensing_notes": [
+    "The line to respect is unauthorized practice of law: you summarize what rules exist and flag what may apply; you don’t interpret how the law resolves a client’s specific situation, and every brief says whose job that is (their attorney’s). Kept there, regulatory-information services are a normal, lawful publishing business. HR-adjacent advice has equivalent lines; same discipline."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

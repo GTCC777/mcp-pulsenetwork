@@ -1,0 +1,82 @@
+{
+  "name": "College planning consultant",
+  "slug": "college-planning-consultant",
+  "category": "Education",
+  "summary": "Guide families through admissions strategy, essays, financial aid, and the tax side of paying for college, with engines covering the parts that are pure rules and math.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/college-planning-consultant/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "edupulse",
+      "name": "EduPulse",
+      "base_url": "https://edupulse.theaslangroupllc.com",
+      "openapi": "https://edupulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://edupulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/edu/essay",
+          "price": "$0.25",
+          "description": "College admissions essay review — admissions-coach feedback"
+        },
+        {
+          "path": "/api/aid/appeal-check",
+          "price": "$0.50",
+          "description": "Financial-aid appeal screen — lane routing with statutes (deterministic, $0.50)"
+        },
+        {
+          "path": "/api/aid/appeal-letter",
+          "price": "$5.00",
+          "description": "Financial-aid appeal letter — citation-backed, ready to send ($5.00)"
+        }
+      ]
+    },
+    {
+      "vertical": "taxpulse",
+      "name": "TaxPulse",
+      "base_url": "https://taxpulse.theaslangroupllc.com",
+      "openapi": "https://taxpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://taxpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/tax/529-check",
+          "price": "$0.50",
+          "description": "529 withdrawal & rollover checker (K-12/credentialing/Roth/nonqualified + CA traps)"
+        },
+        {
+          "path": "/api/tax/aotc-recovery",
+          "price": "$0.50",
+          "description": "Missed AOTC recovery — open-window 1040-X screen (up to $2,500/yr)"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=college-planning-consultant — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"edupulse,taxpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: college-planning-consultant\"."
+  },
+  "setup_steps": [
+    "Run the missed-credit check for three families you know with current or recent college students. A concrete \"you may have left $2,500 on the table\" finding markets the whole practice.",
+    "Package three tiers: essay-cycle only, full application season, and application-plus-money (appeals, 529, credits).",
+    "Write the no-guarantees line into your agreement and your site.",
+    "Book spring families now: juniors’ parents start searching in March, and aid appeals spike when offers land."
+  ],
+  "licensing_notes": [
+    "Independent educational consulting is unlicensed; the credibility bar is set by professional-association ethics (IECA, HECA), the useful one being: no guarantees of admission, ever. On the money side, stay in information territory: the engines report rules and math, and families make their own filings. FAFSA itself is free to file, and you must never imply otherwise; if a family wants someone to prepare tax amendments for the recovered credits, that’s their tax preparer’s job, working from your engine’s findings."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

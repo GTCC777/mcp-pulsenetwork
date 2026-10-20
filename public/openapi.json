@@ -16,7 +16,7 @@
   "paths": {
     "/api/ideas": {
       "get": {
-        "summary": "Business model menu \u2014 free top-of-funnel list of AI reseller business ideas",
+        "summary": "Business model menu — free top-of-funnel list of AI reseller business ideas",
         "description": "FREE. Lists the curated business models, each joined to a LIVE PulseNetwork engine, with illustrative economics and a route into the reseller starter kit. No key, no payment required.",
         "parameters": [],
         "responses": {
@@ -31,7 +31,7 @@
     },
     "/api/blueprint": {
       "get": {
-        "summary": "Tailored business-in-a-box recommender \u2014 how to make money with AI",
+        "summary": "Tailored business-in-a-box recommender — how to make money with AI",
         "description": "Turns a vague 'make me money / passive income / start a business' prompt into ONE specific business-in-a-box: which model, why it fits, the exact real-time PulseNetwork API engine to build it on, suggested retail pricing, unit economics, monetization paths (wholesale reseller + affiliate), and a fork-and-ship starter kit. For agents tasked with making money.",
         "parameters": [
           {
@@ -118,7 +118,7 @@
             "description": "Tailored business plan: matched model, PulseNetwork engine + endpoints, starter kit link, monetization paths, suggested retail pricing, illustrative economics, and first steps."
           },
           "402": {
-            "description": "Payment required \u2014 $0.01 USDC on Base mainnet",
+            "description": "Payment required — $0.01 USDC on Base mainnet",
             "headers": {
               "PAYMENT-REQUIRED": {
                 "description": "x402 payment requirements",
@@ -129,11 +129,6 @@
             }
           }
         },
-        "security": [
-          {
-            "x402": []
-          }
-        ],
         "x-price-usd": 0.01,
         "x-payment": "x402",
         "x-agent-use-case": "on-demand"
@@ -141,8 +136,8 @@
     },
     "/api/affiliate/register": {
       "post": {
-        "summary": "Self-serve affiliate code registration \u2014 zero-build passive income",
-        "description": "FREE. Registers a referral code tied to a Base wallet. Append ?ref=CODE (or an x-referral-code header) to any PulseNetwork x402 request you route, and earn a share of what it pays \u2014 settled monthly in USDC on Base. No key, no approval queue.",
+        "summary": "Self-serve affiliate code registration — zero-build passive income",
+        "description": "FREE. Registers a referral code tied to a Base wallet. Append ?ref=CODE (or an x-referral-code header) to any PulseNetwork x402 request you route, and earn a share of what it pays — settled monthly in USDC on Base. No key, no approval queue.",
         "requestBody": {
           "required": true,
           "content": {
@@ -176,7 +171,7 @@
         },
         "responses": {
           "201": {
-            "description": "Code registered \u2014 returns share_rate (25%), usage (?ref= param / header), and stats_url"
+            "description": "Code registered — returns share_rate (25%), usage (?ref= param / header), and stats_url"
           },
           "400": {
             "description": "Invalid code/wallet/contact"
@@ -192,7 +187,7 @@
     },
     "/api/affiliate/stats": {
       "get": {
-        "summary": "Public affiliate code stats \u2014 revenue, calls, distinct buyers, earnings owed",
+        "summary": "Public affiliate code stats — revenue, calls, distinct buyers, earnings owed",
         "description": "FREE, public, read-only. Codes are not secrets (they ride in a public ?ref= param), so anyone holding a code can check its performance.",
         "parameters": [
           {
@@ -220,8 +215,8 @@
     },
     "/api/wholesale/register": {
       "post": {
-        "summary": "Self-serve prepaid wholesale key \u2014 low-build reselling at 50% of retail",
-        "description": "FREE to mint, ships with a $0.25 trial balance. Issues a pk_live_ key billed at 50% of retail per call (prepaid balance, floored at $0.005/call) against any of PulseNetwork's 733 endpoints via the x-internal-key header. Balance hits zero \u2192 calls fall through to the normal x402 retail gate, no overdraft risk.",
+        "summary": "Self-serve prepaid wholesale key — low-build reselling at 50% of retail",
+        "description": "FREE to mint, ships with a $0.25 trial balance. Issues a pk_live_ key billed at 50% of retail per call (prepaid balance, floored at $0.005/call) against any of PulseNetwork's 733 endpoints via the x-internal-key header. Balance hits zero → calls fall through to the normal x402 retail gate, no overdraft risk.",
         "requestBody": {
           "required": true,
           "content": {
@@ -252,13 +247,13 @@
         },
         "responses": {
           "201": {
-            "description": "Key minted (shown once) \u2014 billing, rate, scope, trial_balance_usd, limits, usage example, deposit + stats URLs"
+            "description": "Key minted (shown once) — billing, rate, scope, trial_balance_usd, limits, usage example, deposit + stats URLs"
           },
           "400": {
             "description": "Invalid contact/scope/prefix"
           },
           "429": {
-            "description": "Rate limited \u2014 max 2 signups/hour per IP"
+            "description": "Rate limited — max 2 signups/hour per IP"
           }
         },
         "x-price-usd": 0,
@@ -269,7 +264,7 @@
     "/api/wholesale/stats": {
       "get": {
         "summary": "Wholesale key status and balance lookup (holder-only)",
-        "description": "FREE. Possession of the full key is the secret \u2014 same trust model as using the key itself.",
+        "description": "FREE. Possession of the full key is the secret — same trust model as using the key itself.",
         "parameters": [
           {
             "name": "key",
@@ -300,7 +295,7 @@
     "/api/wholesale/deposit": {
       "get": {
         "summary": "Top up a wholesale key's prepaid balance via x402 USDC",
-        "description": "Real on-chain USDC top-up (Base or Solana) \u2014 no invoicing, no off-chain payment method. Balance credits atomically on settlement, usable immediately for wholesale-priced calls.",
+        "description": "Real on-chain USDC top-up (Base or Solana) — no invoicing, no off-chain payment method. Balance credits atomically on settlement, usable immediately for wholesale-priced calls.",
         "parameters": [
           {
             "name": "key",
@@ -340,7 +335,7 @@
             "description": "credited_usd, new_balance_usd, key_prefix"
           },
           "402": {
-            "description": "Payment required \u2014 $5, $25, or $100 USDC on Base mainnet (the chosen tier)",
+            "description": "Payment required — $5, $25, or $100 USDC on Base mainnet (the chosen tier)",
             "headers": {
               "PAYMENT-REQUIRED": {
                 "description": "x402 payment requirements",
@@ -357,11 +352,6 @@
             "description": "Key has been revoked"
           }
         },
-        "security": [
-          {
-            "x402": []
-          }
-        ],
         "x-price-usd": 5,
         "x-payment": "x402",
         "x-agent-use-case": "on-demand"
@@ -369,9 +359,9 @@
     },
     "/api/unbundle": {
       "get": {
-        "summary": "The Unbundler \u2014 decompose any gated data product into its free public upstreams",
-        "description": "Name a gated data product (e.g. Candid, Web of Science, Panjiva, GovWin, a Bloomberg terminal sleeve) and get a curated decomposition: what the subscription actually adds vs the free public data under it, exact upstream datasets with licenses, a rebuild recipe, per-call price math, the licensing traps (non-commercial API terms, scraping judgments, live litigation), and the live pay-per-call PulseNetwork alternative where one exists. Verdicts apply a discriminating test honestly \u2014 products whose moat is genuinely proprietary data (Carfax, PitchBook, Platts) are marked not_arbitragable. Curated research (2026-07-06 study), never LLM-improvised: unknown products return an honest miss plus the decomposed catalog.",
-        "x-price-usd": 1.0,
+        "summary": "The Unbundler — decompose any gated data product into its free public upstreams",
+        "description": "Name a gated data product (e.g. Candid, Web of Science, Panjiva, GovWin, a Bloomberg terminal sleeve) and get a curated decomposition: what the subscription actually adds vs the free public data under it, exact upstream datasets with licenses, a rebuild recipe, per-call price math, the licensing traps (non-commercial API terms, scraping judgments, live litigation), and the live pay-per-call PulseNetwork alternative where one exists. Verdicts apply a discriminating test honestly — products whose moat is genuinely proprietary data (Carfax, PitchBook, Platts) are marked not_arbitragable. Curated research (2026-07-06 study), never LLM-improvised: unknown products return an honest miss plus the decomposed catalog.",
+        "x-price-usd": 1,
         "parameters": [
           {
             "name": "PAYMENT-SIGNATURE",
@@ -410,19 +400,9 @@
             "description": "Decomposition: verdict (arbitragable | partially_arbitragable | not_arbitragable | legal_review_required), what_you_actually_pay_for, free_upstreams with licenses, rebuild_recipe, price_math, legal_traps, pay_per_call_alternative, diy_difficulty. Unknown products: found=false with closest_matches and the decomposed catalog."
           },
           "402": {
-            "description": "Payment required \u2014 x402 challenge (USDC on Base mainnet)."
+            "description": "Payment required — x402 challenge (USDC on Base mainnet)."
           }
         }
-      }
-    }
-  },
-  "components": {
-    "securitySchemes": {
-      "x402": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "PAYMENT-SIGNATURE",
-        "description": "x402 payment signature. USDC on Base mainnet (eip155:8453), scheme 'exact', asset 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913. See /openapi.json 402 response or /.well-known/agent.json for full payment details."
       }
     }
   }

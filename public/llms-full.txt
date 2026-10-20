@@ -1,0 +1,3351 @@
+# PulseNetwork — full agent index
+
+> 77 intelligence verticals, 985 pay-per-call endpoints. Keyless x402 micropayments (USDC on Base + additional networks). No signup, no API keys: send a GET without payment to any endpoint to receive a 402 challenge with exact payment requirements, sign, retry.
+
+Short index: https://pulse.theaslangroupllc.com/llms.txt
+Machine catalog (JSON): https://pulse.theaslangroupllc.com/.well-known/pulse-catalog.json
+Hosted MCP server: https://pulse.theaslangroupllc.com/api/mcp (streamable HTTP) · npm: @pulsenetwork/mcp (local wallet) · @pulsenetwork/lp-copilot-mcp (LP analytics)
+Generated: 2026-10-20
+
+## AirdropPulse API (airdroppulse)
+
+Machine-readable airdrop/points-campaign and concentrated-liquidity (LP) analytics, sold per-call via x402 micropayments (USDC on Base plus additional networks) — no API keys, agents pay programmatic…
+Base URL: https://airdroppulse.theaslangroupllc.com
+
+### GET /api/points/pool-ev — $0.15
+Points-per-$1k-TVL-per-day ranking of every eligible GigaDex pool
+
+### GET /api/points/campaign-status — $0.05
+GigaDex points campaign clock, emission math, hypothetical value-per-point scenarios
+
+### GET /api/points/position-audit — $0.1
+Points earned, share, in-range status and projection for a position or account
+
+### GET /api/points/entry-guide — $0.1
+How to participate: contracts, eligible pools, mechanics, GIGA Protect + fake-token warnings
+
+### GET /api/lp/range-model — $0.25
+Realized-vol range scenario table for a GigaDex pool
+
+### GET /api/lp/il-forecast — $0.15
+Impermanent-loss vs fees scenario table across price moves for a pool + range
+
+### GET /api/lp/rebalance-check — $0.1
+Current range vs recentered range, side-by-side scenario comparison
+
+### GET /api/long/launch-check — $0.05
+Launch provenance verdict for a LONG.xyz / Doppler token on Robinhood Chain
+
+### GET /api/long/launch-feed — $0.1
+Live new-launches feed for LONG.xyz / Doppler launchpads on Robinhood Chain
+
+### GET /api/long/stock-backing — $0.15
+Stock-backing analytics for LONG.xyz / Doppler tokens on Robinhood Chain
+
+### GET /api/campaigns — $0.1
+Curated registry of verifiably live airdrop/points campaigns across chains
+
+## AlphaPulse API (alphapulse)
+
+The due-diligence layer for traders and allocators, worldwide — check before you fund. Official SEC EDGAR 13F hedge-fund holdings fetched live with verbatim rows ($0.50), prop-firm shortlists with pa…
+Base URL: https://alphapulse.theaslangroupllc.com
+
+### GET /api/alpha/discover — $0.15
+Cross-platform provider discovery
+
+### GET /api/alpha/signals — $0.1
+Signal provider discovery
+
+### GET /api/alpha/ea — $0.1
+Expert Advisor discovery
+
+### GET /api/alpha/copy — $0.1
+Copy trading discovery
+
+### GET /api/alpha/managed — $0.1
+Managed account discovery
+
+### GET /api/alpha/vaults — $0.08
+DeFi vault discovery
+
+### GET /api/alpha/vet — $0.15
+Provider due diligence
+
+### GET /api/alpha/broker — $0.1
+IB-approved broker recommendation
+
+### GET /api/alpha/asia — $0.08
+Asia-Pacific copy trading discovery
+
+### GET /api/alpha/alternative — $0.08
+Alternative and niche strategies
+
+### GET /api/alpha/compare — $0.1
+Side-by-side provider comparison
+
+### GET /api/alpha/fund-check — $0.5
+Hedge fund holdings check — official SEC 13F, live
+
+### GET /api/alpha/prop-firms — $0.15
+Prop-firm shortlist — payout-proof first, region-aware
+
+### GET /api/alpha/fund-check-lite — $0.25
+Hedge fund holdings check (lite/preview) — official SEC 13F, live, $0.25
+
+## ArbiPulse — Cross-Market Arbitrage Intelligence API (arbipulse)
+
+The arbitrage layer for every market — 18 endpoints finding the same thing at two prices. Beyond-finance lanes: prediction-market cross-venue spreads (Polymarket×Kalshi), GPU compute rental arbitrage…
+Base URL: https://arbipulse.theaslangroupllc.com
+
+### GET /api/scanner — $0.1
+Unified Arbitrage Scanner
+
+### GET /api/perps — $0.1
+Perpetual Futures Funding Rate Carry
+
+### GET /api/flash — $0.75
+Flash Loan Strategy Builder
+
+### GET /api/flash-scan — $0.25
+Flash Loan Pool Scan (lite preview)
+
+### GET /api/sports — $0.1
+Sports Surebet Scanner
+
+### GET /api/crypto — $0.07
+CEX Spot Price Arbitrage
+
+### GET /api/dex — $0.1
+DEX Price Arbitrage
+
+### GET /api/execute — $0.75
+Execution Package Builder
+
+### GET /api/calculator — $0.02
+Arbitrage Profit Calculator
+
+### GET /api/commodity — $0.1
+Commodity Regional Arbitrage
+
+### GET /api/pairs — $0.15
+Statistical Arbitrage (Pairs Trading)
+
+### GET /api/spread-tick — $0.02
+Cross-exchange spread tick for one pair
+
+### GET /api/predmarket-arb — $0.05
+Prediction market cross-venue arbitrage (Polymarket × Kalshi)
+
+### GET /api/compute-arb — $0.05
+GPU compute price arbitrage (marketplace vs hyperscaler)
+
+### GET /api/fx-premium — $0.02
+Stablecoin parallel-rate premium (capital-control FX signal)
+
+### GET /api/flip-check — $0.5
+Retail resale arbitrage check (comps + fees + verdict)
+
+### GET /api/inference-arb — $0.05
+AI inference price arbitrage (same model, every provider)
+
+## AutoPulse API (autopulse)
+
+Automotive intelligence API — 11 endpoints powered by NHTSA, EPA, and live market data. Safety recalls, reliability analysis, DIY repair guides, vehicle comparison, market value, EV break-even, deale…
+Base URL: https://autopulse.theaslangroupllc.com
+
+### GET /api/auto/vin-recall — $0.02
+US safety recalls for a VIN — decode + NHTSA campaigns, deterministic
+
+### GET /api/auto/recall — $0.05
+NHTSA safety recall lookup
+
+### GET /api/auto/problems — $0.1
+Known problems and reliability analysis
+
+### GET /api/auto/repair — $0.1
+DIY repair guide
+
+### GET /api/auto/compare — $0.1
+Vehicle comparison
+
+### GET /api/auto/value — $0.08
+Market value estimate
+
+### GET /api/auto/ev-breakeven — $0.1
+EV break-even analysis vs. gas vehicle
+
+### GET /api/auto/negotiate — $0.1
+Car buying negotiation guide
+
+### GET /api/auto/inspect — $0.08
+Pre-purchase inspection checklist
+
+### GET /api/auto/parts — $0.08
+Parts pricing and sourcing
+
+### GET /api/auto/tco — $0.15
+Total cost of ownership (5-year)
+
+### GET /api/auto/financing — $0.12
+Car financing / auto loan APR intelligence
+
+## BioPulse API (biopulse)
+
+Global biodiversity intelligence API. GBIF + IUCN + eBird + iNaturalist data synthesis. Species profiles, IUCN conservation status, sighting reports, birding hotspots, migration tracking, endangered …
+Base URL: https://biopulse.theaslangroupllc.com
+
+### GET /api/bio/species — $0.12
+Species profile
+
+### GET /api/bio/sightings — $0.08
+Recent wildlife sightings
+
+### GET /api/bio/birding — $0.1
+Birding intelligence
+
+### GET /api/bio/invasive — $0.08
+Invasive species alerts
+
+### GET /api/bio/endangered — $0.1
+Endangered species profile
+
+### GET /api/bio/hotspot — $0.1
+Biodiversity hotspot guide
+
+### GET /api/bio/identify — $0.12
+Species identification
+
+### GET /api/bio/migrate — $0.1
+Migration intelligence
+
+### GET /api/bio/marine — $0.1
+Marine biodiversity
+
+## BuildPulse API (buildpulse)
+
+BuildPulse — home construction and renovation intelligence: project cost estimates, contractor vetting, permit requirements, material pricing, ROI projections, and inspection checklists. Global cover…
+Base URL: https://buildpulse.theaslangroupllc.com
+
+### GET /api/build/code — $0.1
+/api/build/code
+
+### GET /api/build/compare — $0.1
+/api/build/compare
+
+### GET /api/build/contractor — $0.1
+/api/build/contractor
+
+### GET /api/build/estimate — $0.15
+/api/build/estimate
+
+### GET /api/build/inspect — $0.08
+/api/build/inspect
+
+### GET /api/build/materials — $0.1
+/api/build/materials
+
+### GET /api/build/permit — $0.08
+/api/build/permit
+
+### GET /api/build/roi — $0.1
+BuildPulse project ROI analysis — resale value, rental income, payback period, and alternatives
+
+### GET /api/build/schedule — $0.1
+/api/build/schedule
+
+### GET /api/build/subcontractor — $0.1
+/api/build/subcontractor
+
+## CareerPulse (careerpulse)
+
+Global career intelligence API serving the world's 3.5 billion workers. 10 endpoints: salary benchmarking (any role + any country, sourced from BLS, OECD, ILO, Glassdoor, Levels.fyi), industry outloo…
+Base URL: https://careerpulse.theaslangroupllc.com
+
+### GET /api/career/salary — $0.1
+Salary benchmarking — any role, any country, any experience level
+
+### GET /api/career/outlook — $0.08
+Industry job market outlook — growth, hiring trends, top employers by country
+
+### GET /api/career/skills-gap — $0.1
+Skills gap analysis — exact skills needed to reach your target role
+
+### GET /api/career/resume — $0.1
+ATS-optimized resume intelligence — keywords, format, and recruiter intel by role
+
+### POST /api/career/resume-critique — $0.25
+Real resume critique — submit actual resume text for personalized feedback
+
+### GET /api/career/negotiate — $0.1
+Salary negotiation playbook — counter-offer strategy and exact scripts
+
+### GET /api/career/transition — $0.1
+Career transition roadmap — transferable skills analysis and step-by-step pivot plan
+
+### GET /api/career/remote — $0.08
+Remote work intelligence — best remote roles, companies, and cross-border setup
+
+### GET /api/career/certify — $0.08
+Certification roadmap — highest-ROI certs in order, with study resources
+
+### GET /api/career/interview — $0.1
+Interview preparation — questions, frameworks, and company research intel
+
+### GET /api/career/layoff — $0.08
+Layoff support — severance review, legal rights, benefits continuation, next steps
+
+### GET /api/career/wage-rights — $0.05
+Wage-Recovery Check (overtime, min wage, final pay, UK deductions)
+
+### GET /api/career/letter-preview — $0.25
+Wage Demand Letter Preview (agent tier)
+
+### GET /api/career/wage-letter — $2
+Citation-Locked Wage Demand Letter
+
+## ChronicaPulse API (chronicapulse)
+
+Global genealogy and historical archive intelligence API. Full-text search across Chronicling America (1770–1963 US newspapers), Library of Congress, Trove (Australia), British Newspaper Archive, Eur…
+Base URL: https://chronicapulse.theaslangroupllc.com
+
+### GET /api/chronica/search — $0.05
+Archive search
+
+### GET /api/chronica/person — $0.12
+Person research
+
+### GET /api/chronica/obituary — $0.1
+Obituary research
+
+### GET /api/chronica/event — $0.08
+Historical event coverage
+
+### GET /api/chronica/place — $0.08
+Place history
+
+### GET /api/chronica/immigration — $0.12
+Immigration research
+
+### GET /api/chronica/military — $0.1
+Military service research
+
+### GET /api/chronica/business — $0.08
+Business history
+
+### GET /api/chronica/timeline — $0.15
+Chronological timeline
+
+## CitePulse API (citepulse)
+
+Academic citation analytics for AI research agents, grant offices, and PIs — bibliography verification, retraction detection, paper/author/institution/journal metrics, topic and funder impact scans, …
+Base URL: https://citepulse.theaslangroupllc.com
+
+### GET /api/ref-check — $0.02
+Bibliography verification (flagship)
+
+### POST /api/ref-check — $0.15
+Bibliography verification (flagship, structured input)
+
+### GET /api/paper — $0.02
+Single-paper lookup
+
+### GET /api/author — $0.02
+Author metrics
+
+### GET /api/institution — $0.02
+Institution research-output benchmark
+
+### GET /api/journal — $0.1
+Journal/venue intelligence
+
+### GET /api/topic-scan — $0.2
+Rising-topic research scan
+
+### GET /api/funder-impact — $0.2
+Funder research-impact brief
+
+### GET /api/literature-brief — $0.25
+Grounded literature synthesis
+
+## ClearCarePulse API (clearcarepulse)
+
+Healthcare price transparency and cost navigation API. AI-synthesized procedure price search, cash-pay alternatives, hospital quality scoring, out-of-pocket estimation, insurance negotiation scripts,…
+Base URL: https://clearcarepulse.theaslangroupllc.com
+
+### GET /api/care/search — $0.15
+Procedure price search
+
+### GET /api/care/hospital — $0.1
+Hospital price lookup
+
+### GET /api/care/episode — $0.15
+Total episode cost breakdown
+
+### GET /api/care/oop — $0.15
+Out-of-pocket cost calculator
+
+### GET /api/care/alternatives — $0.1
+Lower-cost care site alternatives
+
+### GET /api/care/negotiate — $0.1
+Medical bill negotiation guide
+
+### GET /api/care/dental — $0.1
+Dental cost intelligence
+
+### GET /api/care/cosmetic — $0.1
+Cosmetic procedure cost intelligence
+
+### GET /api/care/rights — $0.05
+Medical-Bill Rights Check (quiz-first)
+
+### GET /api/care/rights-letter — $5
+Citation-Locked Medical-Bill Letter
+
+### GET /api/care/rights-check — $0.25
+Medical-Bill Letter Preview (agent tier)
+
+## ClimatePulse API (climatepulse)
+
+Global climate and weather intelligence API. MET Norway real-time weather + AI synthesis. Severe weather assessment, air quality monitoring, wildfire smoke tracking, agricultural grow-day modeling, c…
+Base URL: https://climatepulse.theaslangroupllc.com
+
+### GET /api/climate/now — $0.05
+Current conditions
+
+### GET /api/climate/forecast — $0.08
+Multi-day forecast
+
+### GET /api/climate/activity — $0.1
+Activity weather assessment
+
+### GET /api/climate/severe — $0.08
+Severe weather and preparedness
+
+### GET /api/climate/compare — $0.1
+Location climate comparison
+
+### GET /api/climate/air — $0.05
+Real-time air quality + health risk assessment
+
+### GET /api/climate/smoke — $0.05
+Wildfire smoke tracking and respiratory risk assessment
+
+### GET /api/climate/grow — $0.08
+Growing-season intelligence and frost date analysis
+
+### GET /api/climate/event — $0.08
+Event weather suitability and planning assessment
+
+### GET /api/climate/event-brief — $0.5
+Premium event-weather brief: computed historical odds + live forecast + decision timeline
+
+### GET /api/climate/date-pick — $0.25
+Rank candidate event dates by real historical weather odds
+
+## ClinicalIntelPulse API (clinicalintelpulse)
+
+Pharmaceutical pipeline and clinical trial intelligence API. Synthesizes 400,000+ registered trials from ClinicalTrials.gov with FDA OpenFDA, PubMed, and real-time news. All endpoints require x402 pa…
+Base URL: https://clinicalintelpulse.theaslangroupllc.com
+
+### GET /api/clinical/trial-check — $0.02
+ClinicalTrials.gov lookup — single trial by NCT id or filtered search, deterministic
+
+### GET /api/clinical/pipeline-scan — $0.15
+Phase 2/3 pipeline scan
+
+### GET /api/clinical/approval-outlook — $0.25
+FDA/EMA approval probability
+
+### GET /api/clinical/sponsor-intel — $0.2
+Pharma/biotech pipeline intelligence
+
+### GET /api/clinical/disease-landscape — $0.35
+Full disease landscape report
+
+### GET /api/clinical/disease-landscape-lite — $0.25
+Disease landscape — $0.25 deterministic preview
+
+### GET /api/clinical/trial-brief — $0.1
+Clinical trial deep dive by NCT ID
+
+### GET /api/clinical/mechanism-map — $0.2
+Drug target and MOA landscape
+
+### GET /api/clinical/global-trials — $0.15
+Global clinical trial landscape
+
+### GET /api/clinical/failure-analysis — $0.2
+Clinical trial failure analysis
+
+### GET /api/clinical/patient-finder — $0.1
+Recruiting trial finder (plain language)
+
+### GET /api/clinical/deal-signal — $0.35
+Biotech M&A and licensing deal signals
+
+### GET /api/clinical/deal-signal-lite — $0.25
+Deal signal — $0.25 deterministic preview
+
+### GET /api/clinical/drug-check — $0.1
+What is this medication? (plain language)
+
+### GET /api/clinical/interaction-check — $0.15
+Can these medications be taken together?
+
+### GET /api/clinical/recall-check — $0.1
+Is my medication recalled?
+
+## CollectablesPulse API (collectablespulse)
+
+Global collectibles market intelligence API. AI-synthesized valuations for sports cards, coins, comics, vinyl records, Pokémon/MTG/TCGs, sneakers, watches, signed memorabilia, and trading cards. Real…
+Base URL: https://collectablespulse.theaslangroupllc.com
+
+### GET /api/collect/value — $0.1
+Current market value by grade/condition
+
+### GET /api/collect/grade — $0.08
+Grading service guide
+
+### GET /api/collect/authenticate — $0.1
+Authentication guide — spot fakes, trusted services
+
+### GET /api/collect/invest — $0.15
+Investment signal — buy/hold/sell with analysis
+
+### GET /api/collect/compare — $0.1
+Head-to-head investment comparison
+
+### GET /api/collect/sell — $0.1
+Where and how to sell for maximum value
+
+### GET /api/collect/storage — $0.08
+Preservation and storage guide
+
+### GET /api/collect/insurance — $0.08
+Collectibles insurance guide
+
+### GET /api/collect/population — $0.08
+Population report and grade scarcity
+
+### GET /api/collect/provenance — $0.1
+Provenance and ownership research
+
+### GET /api/collect/nft — $0.1
+NFT contract safety & floor scan (on-chain GoPlus + market context)
+
+## CompliancePulse API (compliancepulse)
+
+Global regulatory intelligence API. 14 endpoints. Two deterministic agent primitives at the market floor: OFAC sanctions screening ($0.02) and EU VAT/VIES validation ($0.01) — no LLM, official source…
+Base URL: https://compliancepulse.theaslangroupllc.com
+
+### GET /api/comply/privacy — $0.15
+Data privacy law by jurisdiction
+
+### GET /api/comply/kyc — $0.12
+KYC/AML requirements by jurisdiction
+
+### GET /api/comply/corporate — $0.15
+Corporate compliance and entity setup
+
+### GET /api/comply/employment — $0.15
+Employment law and HR compliance
+
+### GET /api/comply/sector — $0.15
+Industry-specific regulatory compliance
+
+### GET /api/comply/cyber — $0.12
+Cybersecurity compliance requirements
+
+### GET /api/comply/esg — $0.12
+ESG and sustainability reporting requirements
+
+### GET /api/comply/news — $0.08
+Regulatory intelligence and enforcement news
+
+### GET /api/comply/deadlines — $0.02
+Compliance deadline check — deterministic, deferral-aware
+
+### GET /api/comply/ai-act — $0.25
+EU AI Act applicability check — risk class, obligations, current deadline state
+
+### GET /api/comply/scan — $1.5
+Company regulatory applicability scan — which rules apply to this business
+
+### GET /api/comply/scan-lite — $0.25
+Company regulatory applicability preview — agent-budget tier
+
+### GET /api/screen/sanctions — $0.02
+OFAC sanctions screening — deterministic, alias-aware
+
+### GET /api/validate/vat — $0.01
+EU VAT number validation via VIES — deterministic
+
+### GET /api/validate/lei — $0.02
+Global legal-entity (LEI) lookup and company search via GLEIF — deterministic
+
+## CryptoPulse API (cryptopulse)
+
+Global cryptocurrency intelligence API. 10 endpoints: DeFi yield farming across Ethereum/Base/Arbitrum/Solana (DeFiLlama live TVL + APY), personalized strategy builder, crypto security framework (wit…
+Base URL: https://cryptopulse.theaslangroupllc.com
+
+### GET /api/strategy — $0.2
+Build a personalized DeFi strategy for goals and risk
+
+### GET /api/security — $0.1
+Scan token/address risk and harden self-custody setup
+
+### GET /api/threats — $0.1
+Report current crypto threats and active scam patterns
+
+### GET /api/exchange — $0.1
+Compare crypto exchanges on fees, custody, jurisdiction
+
+### GET /api/tax — $0.2
+Explain crypto tax treatment for a given jurisdiction
+
+### GET /api/onboard — $0.1
+Guide a first-time crypto buyer from zero to first hold
+
+### GET /api/spend — $0.1
+Find where to spend crypto and how to pay with it
+
+### GET /api/banking — $0.1
+Find crypto-friendly banks and fiat on/off ramps
+
+### GET /api/merchant — $0.1
+Set up crypto payment acceptance for a merchant
+
+### GET /api/research-brief — $0.5
+Deliver an institutional crypto brief: spot, derivs, flows
+
+### GET /api/research-snapshot — $0.25
+Deterministic data-only crypto snapshot (price/market-structure/sentiment) — $0.25 preview of research-brief
+
+### GET /api/options-greeks — $0.02
+Options pricing + greeks calculator (Black-Scholes / Black-76) — deterministic
+
+### GET /api/funding-check — $0.02
+Perp funding-rate check (Hyperliquid, cross-venue normalized) — deterministic
+
+### GET /api/funding-arb-scan — $0.05
+Cross-venue funding-arbitrage scan — deterministic
+
+### GET /api/volatility-check — $0.02
+Perp volatility check (realized vol, NATR, Bollinger) — deterministic
+
+### GET /api/funding-history — $0.05
+Perp funding-rate history — lookahead-safe, deterministic
+
+### GET /api/dydx-history — $0.02
+dYdX v4 chain-state history — block-stamped OI + funding index
+
+### GET /api/equity-marks — $0.03
+24/7 stock, commodity, FX and index marks (Hyperliquid HIP-3) — deterministic
+
+### GET /api/hip3-markets — $0.02
+Hyperliquid HIP-3 dex + market catalog, enumerated live — deterministic
+
+### GET /api/event-odds — $0.03
+Real-money event odds from Hyperliquid HIP-4 outcome markets — deterministic
+
+### GET /api/mark-quality — $0.03
+Trust score for Hyperliquid HIP-3 perp marks (oracle divergence × liquidity) — deterministic
+
+### GET /api/lending-rates — $0.03
+Hyperliquid native borrow-lend market rates — deterministic
+
+### GET /api/staking-intel — $0.03
+Hyperliquid HYPE staking + validator intelligence — deterministic
+
+### GET /api/whale-positions — $0.03
+Full perp positions for any Hyperliquid wallet — deterministic
+
+### GET /api/equity-positioning — $0.03
+Stock-perp positioning: funding + open interest crowding (Hyperliquid HIP-3) — deterministic
+
+### GET /api/trader-record — $0.05
+Verify any Hyperliquid wallet track record, deterministic
+
+### GET /api/top-traders — $0.05
+Rank Hyperliquid traders for copying, deterministic
+
+### GET /api/vault-screener — $0.03
+Screen Hyperliquid vaults on drawdown, deterministic
+
+### GET /api/builder-stats — $0.03
+Report builder-code revenue per Hyperliquid app
+
+### GET /api/monday-open-signal — $0.03
+Compare weekend stock marks with Friday close
+
+### GET /api/oi-caps — $0.02
+Check open-interest cap usage on Hyperliquid
+
+### GET /api/new-listings — $0.02
+List new and retired Hyperliquid markets
+
+### GET /api/sports-odds — $0.03
+Decode sports odds from Hyperliquid HIP-4 markets
+
+### GET /api/liquidation-watch — $0.05
+Map positions near liquidation on Hyperliquid
+
+### GET /api/hl-alerts — $0.25
+Register a 24h Hyperliquid alert with callback
+
+## CyberPulse API (cyberpulse)
+
+Global cybersecurity intelligence API — CVE briefs, vulnerability scanning, CISA KEV, OSINT, threat intelligence, ransomware tracking, breach checks, compliance gap analysis, dark web monitoring, and…
+Base URL: https://cyberpulse.theaslangroupllc.com
+
+### GET /api/cyber/cve-brief — $0.1
+CVE deep-dive — CVSS, exploitation status, patch urgency, remediation
+
+### GET /api/cyber/cve-check — $0.02
+CVE fact check — NVD + CISA KEV + OSV joined, deterministic
+
+### GET /api/cyber/vuln-scan — $0.12
+Vulnerability scan — all known CVEs for any software + version
+
+### GET /api/cyber/cisa-kev — $0.08
+CISA KEV — Known Exploited Vulnerabilities catalog search
+
+### GET /api/cyber/osint — $0.15
+OSINT — domain and IP intelligence for authorized defensive use
+
+### GET /api/cyber/threat-intel — $0.2
+Threat intelligence — global threat actors and campaigns by sector and region
+
+### GET /api/cyber/ransomware-intel — $0.2
+Ransomware intelligence — group profiles, victim patterns, TTPs, defensive playbook
+
+### GET /api/cyber/breach-check — $0.15
+Breach check — domain breach history and credential exposure intelligence
+
+### GET /api/cyber/compliance-gap — $0.25
+Compliance gap analysis — global security frameworks (SOC2, ISO27001, GDPR, NIS2, PDPA, POPIA, LGPD...)
+
+### GET /api/cyber/dark-web-monitor — $0.2
+Dark web monitor — brand and domain underground intelligence (ethical OSINT)
+
+### GET /api/cyber/attack-surface — $0.25
+Attack surface assessment — external risk analysis for authorized defensive use
+
+## DealPulse API (dealpulse)
+
+Deal verification and intelligence API. deal-check verifies which offers are REAL at any store, first-party sources only with source URLs and claimed-code verdicts; giftcard reports live discounted g…
+Base URL: https://dealpulse.theaslangroupllc.com
+
+### GET /api/deals/store — $0.05
+Store coupon codes and promotions
+
+### GET /api/deals/item — $0.08
+Best deal on a specific product
+
+### GET /api/deals/compare — $0.08
+Live price comparison across retailers
+
+### GET /api/deals/event — $0.1
+Sale event intelligence
+
+### GET /api/deals/subscriptions — $0.08
+Subscription review — cancel vs. keep analysis with cost savings
+
+### GET /api/deals/cards — $0.08
+Credit card cashback optimization for a purchase or category
+
+### GET /api/deals/stack — $0.1
+Deal stacking — combine sale + coupon + cashback for maximum savings
+
+### GET /api/deals/student — $0.05
+Student discounts on software, services, food, and travel
+
+### GET /api/deals/history — $0.08
+Price history and best-time-to-buy analysis for a product
+
+### GET /api/deals/subscription-rights — $0.05
+Subscription-trap rights check — state auto-renewal law duties, violations, and remedy math (deterministic, no LLM)
+
+### GET /api/deals/subscription-check — $0.25
+Deterministic $0.25 preview of the subscription demand letter
+
+### GET /api/deals/subscription-letter — $2
+Citation-locked subscription demand letter — refund / unconditional-gift / cancellation-obstruction ($2)
+
+### GET /api/deals/check — $0.5
+Verify which deals are real at a store right now
+
+### GET /api/deals/check-lite — $0.25
+Deterministic $0.25 subset of deal-check — merchant-feed offers only
+
+### GET /api/deals/giftcard — $0.25
+Report live discounted gift-card rates for a brand
+
+## DebtPulse API (debtpulse)
+
+Global debt elimination intelligence. All endpoints require x402 payment (USDC on Base mainnet) via the PAYMENT-SIGNATURE header. Supports US, UK, Australia, and Canada jurisdictions. Add ?lang= for …
+Base URL: https://debtpulse.theaslangroupllc.com
+
+### GET /api/debt/payoff — $0.1
+Payoff calculator
+
+### GET /api/debt/snapshot — $0.1
+Debt burden snapshot
+
+### GET /api/debt/negotiate — $0.15
+Creditor negotiation playbook
+
+### GET /api/debt/settle — $0.15
+Debt settlement analysis
+
+### GET /api/debt/collections — $0.08
+Debt collector rights
+
+### GET /api/debt/statute — $0.05
+Statute of limitations lookup
+
+### GET /api/debt/garnishment — $0.08
+Wage garnishment analysis
+
+### GET /api/debt/student — $0.12
+Student loan strategy
+
+### GET /api/debt/credit — $0.1
+Credit repair roadmap
+
+### GET /api/debt/build-credit — $0.1
+Credit building strategy
+
+### GET /api/debt/dispute — $0.08
+Credit dispute guide
+
+### GET /api/debt/insolvency — $0.2
+Insolvency analysis
+
+### GET /api/debt/medical — $0.1
+Medical bill negotiation
+
+### GET /api/debt/tax — $0.12
+Tax debt relief
+
+### GET /api/debt/bnpl — $0.08
+BNPL true cost analysis
+
+### GET /api/debt/payday — $0.1
+Payday loan escape
+
+### GET /api/debt/mortgage-relief — $0.12
+Mortgage relief options
+
+### GET /api/debt/consolidate — $0.1
+Debt consolidation analysis
+
+### GET /api/debt/priority — $0.1
+Multi-factor debt priority
+
+### GET /api/debt/rights — $0.05
+Consumer debt rights
+
+### GET /api/debt/freedom-roadmap — $0.15
+Debt freedom roadmap
+
+## EconSignalPulse API (econsignalpulse)
+
+Alternative economic intelligence API covering 190+ countries. Combines World Bank Open Data, IMF Datamapper forecasts, satellite nighttime lights research, and AIS shipping signals to produce instit…
+Base URL: https://econsignalpulse.theaslangroupllc.com
+
+### GET /api/econsignal/nightlights — $0.15
+Satellite nighttime lights vs official GDP
+
+### GET /api/econsignal/gdp-tracker — $0.1
+GDP tracker — history + IMF forecasts
+
+### GET /api/econsignal/inflation-signals — $0.08
+Multi-source inflation signals
+
+### GET /api/econsignal/country-brief — $0.25
+Full sovereign intelligence brief
+
+### GET /api/econsignal/divergence — $0.2
+Official stats vs alternative data divergence
+
+### GET /api/econsignal/recession-signals — $0.15
+Recession probability signals
+
+### GET /api/econsignal/frontier-intel — $0.15
+Frontier and emerging market intelligence
+
+### GET /api/econsignal/trade-flows — $0.15
+Global trade flow analysis
+
+### GET /api/econsignal/credit-stress — $0.15
+Sovereign credit and banking stress
+
+### GET /api/econsignal/sanctions-impact — $0.2
+Sanctions impact measurement
+
+## EduPulse API (edupulse)
+
+Global education intelligence API — 18 endpoints for students, test-takers, homeschool families, and lifelong learners worldwide. Study guide generation (any subject, any grade level, 190+ countries)…
+Base URL: https://edupulse.theaslangroupllc.com
+
+### GET /api/study/guide — $0.1
+Study guide generation — any subject, any grade, any country
+
+### GET /api/study/quiz — $0.1
+Practice quiz with adaptive difficulty and answer explanations
+
+### GET /api/study/explain — $0.05
+Concept explainer — any topic at any level from 5th grade to PhD
+
+### GET /api/study/schedule — $0.1
+Backwards-planned study schedule — from exam date to today, with daily tasks
+
+### GET /api/exam/prep — $1
+Exam-style practice questions — 200+ exams, rubric-matched difficulty
+
+### GET /api/exam/sample — $0.2
+Exam-suite sampler / preview — deterministic, no LLM
+
+### GET /api/exam/flashcards — $0.5
+Spaced-repetition flashcard set — import into Anki or Quizlet
+
+### GET /api/exam/explain — $0.5
+Exam format explainer — complete breakdown of any exam structure and strategy
+
+### GET /api/exam/mock — $1
+Full mock exam simulation — timed, scored, with performance report
+
+### GET /api/study/misconception — $0.1
+Misconception diagnosis — pinpoints the exact knowledge gap behind a wrong answer
+
+### GET /api/exam/grade — $1
+Rubric-based exam grading — written response scoring with detailed feedback
+
+### GET /api/edu/co-op-guide — $0.1
+Homeschool co-op finder — live web search for local groups and support communities
+
+### GET /api/edu/curriculum-match — $0.1
+Homeschool curriculum finder — personalized matches by grade, subject, and learning style
+
+### GET /api/edu/essay — $0.25
+College admissions essay review — admissions-coach feedback
+
+### GET /api/edu/homeschool-laws — $0.1
+Homeschool law lookup — legal requirements and compliance checklist by jurisdiction
+
+### GET /api/aid/appeal-check — $0.5
+Financial-aid appeal screen — lane routing with statutes (deterministic, $0.50)
+
+### GET /api/aid/appeal-letter — $5
+Financial-aid appeal letter — citation-backed, ready to send ($5.00)
+
+### GET /api/loan/fix-check — $0.5
+Student-loan fix screen — discharge/PSLF/servicer lane routing with deadline math (deterministic, $0.50)
+
+### GET /api/loan/fix-letter — $5
+Student-loan fix document — AB 376 demand / PSLF reconsideration / discharge statement ($5.00)
+
+### GET /api/loan/plan-check — $0.5
+SAVE wind-down plan comparator — RAP vs IBR vs Tiered Standard
+
+## ESGPulse API (esgpulse)
+
+AI-powered ESG and sustainability intelligence: CSRD compliance roadmaps, EU Taxonomy alignment, supply chain due diligence, emissions analysis, greenwashing risk, ESG disclosure guidance, plus a con…
+Base URL: https://esgpulse.theaslangroupllc.com
+
+### GET /api/esg/csrd — $0.25
+CSRD compliance roadmap
+
+### GET /api/esg/framework — $0.15
+ESG framework navigator
+
+### GET /api/esg/company — $0.15
+Company ESG intelligence
+
+### GET /api/esg/emissions — $0.15
+Carbon and emissions intelligence
+
+### GET /api/esg/sector — $0.15
+SASB sector ESG materiality
+
+### GET /api/esg/taxonomy — $0.2
+EU Taxonomy alignment check
+
+### GET /api/esg/supply-chain — $0.2
+Supply chain ESG due diligence
+
+### GET /api/esg/score — $0.1
+ESG score intelligence
+
+### GET /api/esg/greenwashing — $0.15
+Greenwashing risk detector
+
+### GET /api/esg/source-check — $0.2
+Ethical sourcing brand check
+
+### GET /api/esg/coffee — $0.1
+Coffee ethical sourcing check
+
+### GET /api/esg/cocoa — $0.15
+Cocoa child labor and controversy check
+
+### GET /api/esg/cruelty-free — $0.05
+Cruelty-free cosmetics cross-check
+
+### GET /api/esg/minerals — $0.1
+Conflict minerals smelter conformance check
+
+### GET /api/esg/fashion — $0.15
+Fashion brand ethical sourcing check
+
+### GET /api/esg/commodity — $0.1
+Certified commodity check (seafood/palm-oil/tea/timber/cotton)
+
+### GET /api/esg/disclosure — $0.2
+ESG disclosure builder
+
+## FanPulse API (fanpulse)
+
+Global fandom intelligence API. AI-synthesized fan guides, lore analysis, collectibles valuation, discography deep-dives, character analysis, easter egg discovery, quiz generation, and timeline recon…
+Base URL: https://fanpulse.theaslangroupllc.com
+
+### GET /api/fan/lore — $0.1
+Deep canon lore Q&A
+
+### GET /api/fan/character — $0.08
+Character or artist deep profile
+
+### GET /api/fan/quiz — $0.08
+AI-generated trivia set
+
+### GET /api/fan/easter-eggs — $0.15
+Easter egg and hidden meaning analysis
+
+### GET /api/fan/discography — $0.1
+Artist discography deep dive
+
+### GET /api/fan/sorting — $0.08
+Personality-based character/faction sorting
+
+### GET /api/fan/timeline — $0.1
+Canonical franchise timeline
+
+### GET /api/fan/collect — $0.1
+Collectibles and memorabilia market intelligence
+
+### GET /api/fan/compare — $0.1
+Decisive cross-franchise or cross-artist comparison
+
+## FieldPulse API (fieldpulse)
+
+Global precision agriculture intelligence API. Synthesizes satellite NDVI data, MET Norway weather forecasts (CC BY 4.0), NASA POWER soil and climate reanalysis, USDA WASDE, FAO, and EPPO into struct…
+Base URL: https://fieldpulse.theaslangroupllc.com
+
+### GET /api/yield-forecast — $0.15
+Yield and production forecast for any crop and region
+
+### GET /api/weather-risk — $0.08
+7-day crop-specific weather risk assessment
+
+### GET /api/soil-intel — $0.08
+Observed soil wetness and computed evapotranspiration intelligence
+
+### GET /api/pest-disease — $0.1
+Pest and disease risk assessment with outbreak alerts
+
+### GET /api/irrigation — $0.08
+ET0-based irrigation recommendation and water budget
+
+### GET /api/commodity-outlook — $0.1
+Agricultural commodity market outlook and price intelligence
+
+### GET /api/input-cost — $0.08
+Fertilizer, seed, and crop protection cost intelligence
+
+### GET /api/planting-window — $0.05
+Optimal planting window from air temperature, soil wetness and frost dates
+
+### GET /api/season-brief — $0.2
+Comprehensive seasonal agricultural intelligence brief
+
+## FilingsPulse API (filingspulse)
+
+Global SEC/EDGAR and international filings intelligence API. AI-synthesized plain-language summaries of 10-K, 10-Q, 8-K, S-1/IPO filings. Insider ownership tracking, red flag detection, institutional…
+Base URL: https://filingspulse.theaslangroupllc.com
+
+### GET /api/filings/quarterly — $0.02
+Eight quarters of reported fundamentals from SEC XBRL, deterministic
+
+### GET /api/filings/exchange — $0.1
+Exchange-specific filing intelligence — any listed company worldwide
+
+### GET /api/filings/summary — $0.15
+10-K / Annual Report plain-language summary
+
+### GET /api/filings/insider — $0.1
+Insider trading signal — Form 4 analysis
+
+### GET /api/filings/ownership — $0.1
+Institutional ownership and 13F analysis
+
+### GET /api/filings/ipo — $0.2
+IPO / S-1 prospectus deep dive
+
+### GET /api/filings/8k — $0.1
+Material event analysis (8-K and equivalents)
+
+### GET /api/filings/redflags — $0.15
+Forensic accounting red flag scan
+
+### GET /api/filings/compare — $0.15
+Side-by-side competitor comparison from filings
+
+### GET /api/filings/search — $0.08
+Full-text filing search across all public databases
+
+### GET /api/filings/fund-holdings — $0.25
+Fund holdings from SEC Form N-PORT
+
+### GET /api/filings/anomaly — $0.25
+EDGAR filing-anomaly scan
+
+### GET /api/filings/transcript-search — $0.2
+Full-text SEC filing search with excerpts
+
+### GET /api/filings/muni-bond — $0.15
+Municipal bond disclosure search
+
+### GET /api/filings/earnings — $0.25
+Earnings brief — deterministic quarterly series + next-report estimate + attributed consensus
+
+## FindPulse API (findpulse)
+
+Universal finder and discovery API — the research layer before the transaction, built for shopping and buyer agents. Pre-purchase buy/wait/avoid verdicts with official CPSC recall screens, gift findi…
+Base URL: https://findpulse.theaslangroupllc.com
+
+### GET /api/find/product — $0.1
+Best product for use case
+
+### GET /api/find/compare — $0.1
+Head-to-head product comparison
+
+### GET /api/find/alternative — $0.08
+Cheaper alternatives
+
+### GET /api/find/hidden — $0.08
+Hidden gem products
+
+### GET /api/find/used — $0.08
+Used/refurbished sourcing guide
+
+### GET /api/find/local — $0.1
+Local professional vetting
+
+### GET /api/find/grant — $0.1
+Grant and funding finder
+
+### GET /api/find/scholarship — $0.1
+Scholarship finder
+
+### GET /api/find/rental — $0.08
+Rent vs buy analysis
+
+### GET /api/find/recall — $0.05
+Product recall lookup
+
+### GET /api/find/ethical — $0.1
+Ethical/sustainable product finder
+
+### GET /api/find/gift — $0.1
+Gift finder by recipient and occasion
+
+### GET /api/find/buy-check — $0.5
+Pre-purchase buy/wait/avoid verdict (one call)
+
+### GET /api/find/buy-check-lite — $0.25
+Recall screen preview (lite, agent-tier)
+
+## FitPulse API (fitpulse)
+
+Global fitness intelligence API. Evidence-based workout programming, nutrition science, supplement efficacy analysis, injury recovery protocols, race training plans, sleep optimization, plateau-break…
+Base URL: https://fitpulse.theaslangroupllc.com
+
+### GET /api/fit/workout — $0.1
+Custom workout plan
+
+### GET /api/fit/exercise — $0.08
+Exercise form guide
+
+### GET /api/fit/nutrition — $0.1
+Macro and nutrition targets
+
+### GET /api/fit/supplement — $0.08
+Evidence-based supplement analysis
+
+### GET /api/fit/recover — $0.1
+Injury recovery protocol
+
+### GET /api/fit/supplements — $0.08
+Evidence-graded supplement efficacy tier list by goal
+
+### GET /api/fit/rehab — $0.1
+Sports medicine rehabilitation protocol
+
+### GET /api/fit/sleep — $0.08
+Athletic sleep optimization and CBT-I protocol
+
+### GET /api/fit/plateau — $0.1
+Training plateau analysis and breakthrough protocol
+
+### GET /api/fit/race — $0.1
+Race training plan built backwards from event date
+
+## FootballPulse API (footballpulse)
+
+Football/soccer intelligence for fans, fantasy managers, and betting analysts — Fantasy Premier League checks grounded in the official FPL API (prices, ownership, injury status, fixture difficulty, d…
+Base URL: https://footballpulse.theaslangroupllc.com
+
+### GET /api/match-preview — $0.15
+Match preview — team form, H2H, injuries, xG comparison, key battles, predicted score, and primary bet
+
+### GET /api/value-bets — $0.15
+Value bets — EV analysis across 1X2, BTTS, over/under 2.5, and Asian handicap for any matchday
+
+### GET /api/asian-handicap — $0.15
+Asian handicap — quarter/half-ball line selection, Pinnacle/Macau intelligence, sharp money indicators
+
+### GET /api/live-intel — $0.15
+Live in-play intelligence — momentum, xG trajectory, dangerous attacks, substitution impact, in-play bets
+
+### GET /api/accumulator — $0.15
+Accumulator builder — evidence-based multi-match parlay with EV analysis, banker pick, stake guide
+
+### GET /api/league-pulse — $0.1
+League intelligence — standings, top scorers, over/under rates, BTTS rates, betting angles
+
+### GET /api/player-intel — $0.1
+Player intelligence — goals, assists, xG, injury status, market value, FPL value, card risk
+
+### GET /api/corner-cards — $0.1
+Specialty markets — corner statistics, booking points, referee tendencies, over/under probability
+
+### GET /api/clean-sheet — $0.1
+Clean sheet probability — GK stats, defensive metrics, BTTS probability, under 2.5 market analysis
+
+### GET /api/transfer-watch — $0.1
+Transfer market intelligence — rumours with credibility ratings, squad impact, market valuations
+
+### GET /api/fpl-check — $0
+FPL player check or position value shortlist (official FPL API)
+
+## FranchisePulse API (franchisepulse)
+
+Global franchise intelligence API. AI-synthesized franchise discovery, FDD analysis, total cost modeling, SBA loan analysis, resale valuation, online/absentee franchise opportunities, and franchise b…
+Base URL: https://franchisepulse.theaslangroupllc.com
+
+### GET /api/franchise/fdd — $0.2
+Franchise Disclosure Document analysis
+
+### GET /api/franchise/discover — $0.15
+Franchise opportunity discovery
+
+### GET /api/franchise/compare — $0.15
+Side-by-side franchise comparison
+
+### GET /api/franchise/vet — $0.15
+Franchise due diligence
+
+### GET /api/franchise/total-cost — $0.1
+All-in investment and cost analysis
+
+### GET /api/franchise/resale — $0.1
+Existing franchise units for sale
+
+### GET /api/franchise/online — $0.1
+Online business acquisition discovery
+
+### GET /api/franchise/sba — $0.08
+SBA eligibility and franchise financing
+
+### GET /api/franchise/broker — $0.08
+Franchise broker and consultant guidance
+
+## GamePulse API (gamepulse)
+
+Gaming economy intelligence API — play, trade, and earn. Live in-game item (skins) price checks across Steam Market and Skinport with real cash-out math, Roblox niche viability checks with live playe…
+Base URL: https://gamepulse.theaslangroupllc.com
+
+### GET /api/gaming/deals — $0.05
+Game deals
+
+### GET /api/gaming/worth-it — $0.08
+Buy or wait verdict
+
+### GET /api/gaming/meta — $0.08
+Game meta analysis
+
+### GET /api/gaming/trending — $0.05
+Trending games
+
+### GET /api/gaming/setup — $0.1
+PC gaming setup
+
+### GET /api/cards/price — $0.1
+Card price analysis
+
+### GET /api/cards/invest — $0.15
+Set investment analysis
+
+### GET /api/cards/deal — $0.15
+eBay card deal finder
+
+### GET /api/esports/matches — $0.05
+Esports matches
+
+### GET /api/esports/team — $0.08
+Esports team profile
+
+### GET /api/esports/betting — $0.1
+Esports betting analysis
+
+### GET /api/esports/tournament — $0.1
+Tournament breakdown
+
+### GET /api/cards/portfolio — $0.1
+Trading card portfolio valuation
+
+### GET /api/gaming/achievements — $0.08
+Achievement hunting guide
+
+### GET /api/gaming/specs — $0.08
+PC compatibility check
+
+### GET /api/gaming/subscription — $0.08
+Gaming subscription value calculator
+
+### GET /api/gaming/time — $0.05
+Game completion time estimator
+
+### GET /api/items/skin-check — $0.05
+Live skin/item price check with cash-out math
+
+### GET /api/creator/roblox-check — $0.15
+Roblox niche viability check with live data
+
+### GET /api/creator/earn-map — $0.25
+Creative-skill earnings map for the games industry
+
+## GeopoliticalPulse API (geopoliticalpulse)
+
+Real-time geopolitical intelligence for investors, compliance teams, and AI agents. Political risk, conflict monitoring, sanctions, elections, trade tensions, and regional situational awareness for 1…
+Base URL: https://geopoliticalpulse.theaslangroupllc.com
+
+### GET /api/geopolitical/country-risk — $0.15
+Country Risk Assessment
+
+### GET /api/geopolitical/conflict-scan — $0.2
+Conflict Scan
+
+### GET /api/geopolitical/sanctions-intel — $0.15
+Sanctions Intelligence
+
+### GET /api/geopolitical/election-watch — $0.15
+Election Watch
+
+### GET /api/geopolitical/trade-tension — $0.2
+Trade Tension Analyzer
+
+### GET /api/geopolitical/regime-brief — $0.2
+Regime Brief
+
+### GET /api/geopolitical/event-impact — $0.25
+Geopolitical Event Impact
+
+### GET /api/geopolitical/instability-signal — $0.2
+Instability Early Warning Signal
+
+### GET /api/geopolitical/supply-chain-risk — $0.2
+Supply Chain Geopolitical Risk
+
+### GET /api/geopolitical/regional-brief — $0.15
+Regional Situational Brief
+
+## GiftPulse API (giftpulse)
+
+Send a REAL mobile airtime top-up or order a REAL digital gift card, worldwide, via Reloadly. This is an ACTION API, not a data lookup: paying causes airtime to be credited or a gift card to be issue…
+Base URL: https://giftpulse.theaslangroupllc.com
+
+### GET /api/topup/lookup — $0.01
+Auto-detect mobile operator + live amount range/discount
+
+### POST /api/topup/quote — $0
+Free signed price quote for an airtime top-up
+
+### POST /api/topup — $1.5
+Send a real mobile airtime top-up (THE paid action)
+
+### GET /api/topup/{id} — $0.005
+Airtime top-up delivery status / reconciliation
+
+### GET /api/giftcard/catalog — $0.01
+Search the gift card product catalog
+
+### POST /api/giftcard/quote — $0
+Free signed price quote for a gift card order
+
+### POST /api/giftcard — $1
+Order a real digital gift card (THE paid action)
+
+### GET /api/giftcard/{id} — $0.005
+Gift card order status / redemption code re-fetch
+
+## GlowPulse API (glowpulse)
+
+Real-time skincare and K-beauty ingredient intelligence. All endpoints require x402 payment (USDC on Base mainnet or Solana) via the PAYMENT-SIGNATURE header. Grounded in EU CosIng, CIR/PubChem, AAD …
+Base URL: https://glowpulse.theaslangroupllc.com
+
+### GET /api/glow/ingredient-lookup — $0.05
+Skincare ingredient checker
+
+### GET /api/glow/conflict-check — $0.1
+Routine ingredient-conflict checker
+
+### GET /api/glow/product-decode — $0.15
+Ingredient list decoder
+
+### GET /api/glow/pregnancy-safe — $0.1
+Pregnancy/nursing skincare safety screen
+
+### GET /api/glow/fungal-acne-check — $0.08
+Fungal-acne (Malassezia) safety checker
+
+### GET /api/glow/dupe-finder — $0.15
+K-beauty and skincare dupe finder
+
+### GET /api/glow/routine-builder — $0.2
+Full skincare routine builder
+
+### GET /api/glow/k-beauty-compare — $0.12
+Korean vs Western actives comparison
+
+### GET /api/glow/claims-check — $0.12
+Greenwashing / marketing-claim detector
+
+### GET /api/glow/price-per-active — $0.08
+Price-per-active value analysis
+
+### GET /api/glow/sensitive-skin — $0.1
+Sensitive-skin irritant/allergen screen
+
+### GET /api/glow/sale-timing — $0.08
+Beauty retailer sale-timing brief
+
+## GovSpendPulse API (govspendpulse)
+
+Global government procurement intelligence API. 9 endpoints covering US federal contracts (USASpending.gov), active solicitations (SAM.gov), EU tenders (TED), UK contracts, global development bank op…
+Base URL: https://govspendpulse.theaslangroupllc.com
+
+### GET /api/govspend/us-contracts — $0.08
+US federal contract awards
+
+### GET /api/govspend/us-opportunities — $0.08
+US active solicitations (SAM.gov)
+
+### GET /api/govspend/eu-tenders — $0.08
+EU procurement tenders (TED)
+
+### GET /api/govspend/uk-contracts — $0.08
+UK government contracts
+
+### GET /api/govspend/global-opportunities — $0.15
+Global procurement opportunities
+
+### GET /api/govspend/agency-intel — $0.15
+US agency spending intelligence
+
+### GET /api/govspend/competitor-awards — $0.15
+Competitor federal award analysis
+
+### GET /api/govspend/development-bank — $0.15
+Development bank procurement
+
+### GET /api/govspend/contract-brief — $0.2
+Full contract intelligence brief
+
+## GrantPulse API (grantpulse)
+
+The funding-discovery layer for organisations anywhere — grounded in official sources fetched live: Grants.gov, the EU Funding & Tenders Portal (SEDIA), gov.uk Find a Grant, USAspending, and IRS Form…
+Base URL: https://grantpulse.theaslangroupllc.com
+
+### GET /api/grant/match — $0.15
+Personalized grant matching
+
+### GET /api/grant/federal — $0.1
+Federal grant search
+
+### GET /api/grant/state — $0.1
+State grant programs
+
+### GET /api/grant/foundation — $0.12
+Foundation grant intelligence
+
+### GET /api/grant/eligibility — $0.1
+Grant eligibility analysis
+
+### GET /api/grant/apply — $0.15
+Grant application strategy
+
+### GET /api/grant/deadline — $0.08
+Grant deadline tracker
+
+### GET /api/grant/writer — $0.2
+Grant narrative drafting
+
+### GET /api/grant/eu — $0.25
+EU funding intelligence
+
+### GET /api/grant/global — $0.15
+Global development funding
+
+### GET /api/grant/org-intel — $0.2
+Nonprofit financial intelligence (IRS Form 990)
+
+### GET /api/grant/funder-990 — $0.25
+Private foundation giving intelligence (IRS Form 990-PF)
+
+### GET /api/grant/uk — $0.25
+Match UK grants from the official gov.uk Find a Grant service
+
+### GET /api/grant/loi — $2
+Draft a complete ready-to-send Letter of Inquiry
+
+### GET /api/grant/loi-readiness — $0.25
+Deterministic $0.25 readiness check for the LOI product
+
+## GridPulse API (gridpulse)
+
+Global energy grid intelligence API. NREL + EIA + Open-Meteo data synthesis. Home solar feasibility, electricity rate analysis, time-of-use optimization, EV charging cost modeling, battery storage RO…
+Base URL: https://gridpulse.theaslangroupllc.com
+
+### GET /api/energy/prices — $0.08
+Electricity prices by state
+
+### GET /api/energy/grid — $0.08
+Power grid status by region
+
+### GET /api/energy/renewable — $0.08
+Renewable energy profile by state
+
+### GET /api/energy/natural-gas — $0.08
+Henry Hub natural gas briefing
+
+### GET /api/energy/forecast — $0.1
+90-day energy forecast by state
+
+### GET /api/energy/ev-cost — $0.08
+EV charging cost vs gasoline
+
+### GET /api/energy/solar — $0.1
+Home solar feasibility analysis
+
+### GET /api/energy/appliance — $0.05
+Home appliance energy cost calculator
+
+### GET /api/energy/battery — $0.1
+Home battery storage analysis
+
+### GET /api/energy/carbon — $0.05
+Household electricity carbon footprint
+
+### GET /api/energy/community-solar — $0.08
+Community solar enrollment by ZIP code
+
+### GET /api/energy/tou — $0.08
+Time-of-use rate optimization
+
+### GET /api/energy/compute-window — $0
+Find the optimal 48h window to run a compute workload (carbon or cost)
+
+### GET /api/energy/carbon-intensity — $0.01
+Live grid carbon intensity now + forward curve (GB regions + 8 EU countries)
+
+## HarvestPulse API (harvestpulse)
+
+Global farm-to-table and agricultural intelligence API. USDA + ERS data synthesis. Local food finder (farmers markets, CSAs, on-farm markets), seasonal produce calendars, organic certification lookup…
+Base URL: https://harvestpulse.theaslangroupllc.com
+
+### GET /api/harvest/find — $0.05
+Local Farm & Market Finder
+
+### GET /api/harvest/season — $0.05
+Seasonal Produce Calendar
+
+### GET /api/harvest/labels — $0.08
+Food Label Decoder
+
+### GET /api/harvest/organic — $0.08
+Certified Organic Farm Finder
+
+### GET /api/harvest/dirty-dozen — $0.05
+Dirty Dozen & Clean Fifteen
+
+### GET /api/harvest/food-hub — $0.08
+Regional Food Hub Finder
+
+### GET /api/harvest/regenerative — $0.1
+Regenerative Agriculture Guide
+
+### GET /api/harvest/designations — $0.1
+Global Food Designations
+
+### GET /api/harvest/agritourism — $0.05
+Agritourism & U-Pick Finder
+
+### GET /api/harvest/csa — $0.1
+CSA Evaluation Guide
+
+### GET /api/harvest/cost — $0.1
+Local vs. Conventional Cost Analysis
+
+### GET /api/harvest/roadmap — $0.15
+Farm-to-Table Lifestyle Roadmap
+
+### GET /api/harvest/food-preservation — $0.1
+Food preservation guide
+
+### GET /api/harvest/foraging-intel — $0.1
+Foraging intelligence
+
+### GET /api/harvest/livestock-basics — $0.1
+Backyard livestock guide
+
+## HerbaPulse API (herbapulse)
+
+Global herbal medicine and botanical intelligence API. PubMed-grounded herb profiles, drug-herb interaction checker, traditional medicine system guides (Ayurveda, TCM, Amazonian, African), herbal rem…
+Base URL: https://herbapulse.theaslangroupllc.com
+
+### GET /api/herba/herb — $0.12
+Herb profile
+
+### GET /api/herba/remedy — $0.1
+Cross-cultural remedy lookup
+
+### GET /api/herba/ingredient — $0.1
+Supplement decoder
+
+### GET /api/herba/interaction — $0.1
+Herb-drug interaction checker
+
+### GET /api/herba/skin — $0.08
+Natural skincare ingredient
+
+### GET /api/herba/tradition — $0.08
+Healing tradition deep dive
+
+### GET /api/herba/practitioner — $0.08
+Practitioner guide
+
+### GET /api/herba/cannabis — $0.12
+Cannabis and cannabinoid intelligence
+
+### GET /api/herba/protocol — $0.15
+Home remedy protocol compiler
+
+### GET /api/herba/apothecary — $0.25
+Home apothecary kit builder
+
+## HomePulse API (homepulse)
+
+Global home intelligence API. AI-synthesized home maintenance checklists, improvement ROI analysis, neighborhood research, smart home integration, energy efficiency guidance, contractor vetting, home…
+Base URL: https://homepulse.theaslangroupllc.com
+
+### GET /api/home/value — $0.1
+Home value estimate
+
+### GET /api/home/neighborhood — $0.1
+Neighborhood analysis
+
+### GET /api/home/improve — $0.1
+Home improvement ROI analysis
+
+### GET /api/home/maintain — $0.08
+Seasonal maintenance checklist
+
+### GET /api/home/rent — $0.08
+Rental market analysis
+
+### GET /api/home/contractor — $0.1
+Contractor vetting guide
+
+### GET /api/home/energy — $0.1
+Home energy efficiency
+
+### GET /api/home/maintenance — $0.08
+Personalized home maintenance calendar
+
+### GET /api/home/roi — $0.1
+Home improvement resale ROI
+
+### GET /api/home/smart — $0.08
+Smart home ecosystem advisor
+
+## ImmigrationPulse (immigrationpulse)
+
+Global immigration intelligence API serving 281M+ migrants. 11 endpoints covering visa requirements, PR pathways, points calculators (Express Entry CRS, SkillSelect), digital nomad visas, citizenship…
+Base URL: https://immigrationpulse.theaslangroupllc.com
+
+### GET /api/visa — $0.15
+Visa requirements — any nationality + any destination
+
+### GET /api/pathway — $0.2
+Permanent residency roadmap — every pathway ranked for nationality + destination
+
+### GET /api/nomad — $0.15
+Digital nomad visa finder — 50+ countries ranked by income threshold + lifestyle
+
+### GET /api/citizenship — $0.15
+Citizenship by investment, ancestry, and naturalization intelligence
+
+### GET /api/status — $0.1
+USCIS case status decoder with processing time context
+
+### GET /api/bulletin — $0.1
+US Visa Bulletin decoder — priority dates, filing chances, wait estimates
+
+### GET /api/retirement — $0.1
+Global retirement visa intelligence — best countries for retirees
+
+### GET /api/compare — $0.15
+Side-by-side immigration comparison across multiple destination countries
+
+### GET /api/rights — $0.1
+Immigrant rights by country and visa type
+
+### GET /api/cost — $0.1
+Complete immigration cost breakdown — government fees + attorney + hidden costs
+
+### GET /api/points — $0.1
+Skilled-worker points calculator — Canada Express Entry CRS, Australia SkillSelect, UK PBS, Germany Chancenkarte, Austria Red-White-Red Card
+
+### GET /api/category-check — $0.05
+Express Entry 2026 category checker — eligibility across all 10 categories + observed cutoffs
+
+## InsurePulse API (insurepulse)
+
+AI-synthesized insurance intelligence. Auto coverage analysis, life insurance needs calculator, homeowners gap finder, annual coverage review, and renters insurance guidance. All endpoints require x4…
+Base URL: https://insurepulse.theaslangroupllc.com
+
+### GET /api/insure/auto — $0.1
+Auto insurance analysis
+
+### GET /api/insure/life — $0.1
+Life insurance needs calculator
+
+### GET /api/insure/home — $0.1
+Homeowners insurance gap analysis
+
+### GET /api/insure/review — $0.15
+Annual insurance coverage review
+
+### GET /api/insure/renters — $0.08
+Renters insurance guide
+
+### GET /api/insure/business — $0.1
+Business insurance guidance
+
+### GET /api/insure/claim — $0.08
+Insurance claims guidance
+
+### GET /api/insure/disability — $0.1
+Disability insurance analysis
+
+### GET /api/insure/life-event — $0.1
+Life-event insurance checklist
+
+### GET /api/insure/rate — $0.08
+Insurance rate optimizer
+
+### GET /api/insure/umbrella — $0.08
+Umbrella insurance analysis
+
+### GET /api/insure/prompt-pay — $0.05
+Late-claim interest check — statutory prompt-pay interest math (deterministic, no LLM)
+
+### GET /api/insure/prompt-pay-check — $0.25
+Agent-tier ($0.25) preview of the prompt-pay demand letter — statute/deadline/interest framework, deterministic, no LLM
+
+### GET /api/insure/prompt-pay-letter — $2
+Citation-locked late-claim interest demand letter ($2)
+
+## LegalPulse API (legalpulse)
+
+The clearance layer before you sign, send, or sue — 12 endpoints for legal agents and the people they work for. Pre-signature contract clearance with verbatim red-flag quotes ($0.50), trademark knock…
+Base URL: https://legalpulse.theaslangroupllc.com
+
+### GET /api/legal/letter — $2
+Advocacy letter writer
+
+### GET /api/legal/letter-triage — $0.25
+Letter-engine triage (agent-tier preview)
+
+### GET /api/legal/contract — $0.1
+Contract clause review
+
+### GET /api/legal/tenant — $0.1
+Tenant rights by state
+
+### GET /api/legal/employment — $0.1
+Employment law rights
+
+### GET /api/legal/business — $0.1
+Business formation comparison
+
+### GET /api/legal/estate — $0.1
+Estate planning checklist
+
+### GET /api/legal/consumer — $0.1
+Consumer rights — FDCPA, FCRA, FTC
+
+### GET /api/legal/small-claims — $0.08
+Small claims court guide
+
+### GET /api/legal/ip — $0.1
+Intellectual property guide
+
+### GET /api/legal/rights — $0.08
+Know your rights
+
+### GET /api/legal/sign-check — $0.5
+Pre-signature contract clearance
+
+### GET /api/legal/trademark-check — $0.5
+Trademark knock-out check w/ live USPTO verification
+
+### GET /api/legal/trademark-precheck — $0.25
+Trademark precheck (agent-tier preview)
+
+## LongevityPulse API (longevitypulse)
+
+Global longevity intelligence API — biomarker interpretation, supplement evidence, personalized protocols, clinical trials, Blue Zone research, WHO country longevity profiles, epigenetic clocks, diet…
+Base URL: https://longevitypulse.theaslangroupllc.com
+
+### GET /api/longevity/biomarker — $0.15
+Biomarker interpretation through longevity science lens
+
+### GET /api/longevity/supplement-intel — $0.2
+Evidence-graded longevity supplement intelligence
+
+### GET /api/longevity/protocol-builder — $0.25
+Personalized longevity protocol — exercise, nutrition, sleep, supplements
+
+### GET /api/longevity/clinical-trials — $0.1
+Search active longevity clinical trials globally from ClinicalTrials.gov
+
+### GET /api/longevity/blue-zone — $0.1
+Blue Zone intelligence — world longevity hotspots deep-dive
+
+### GET /api/longevity/country-longevity — $0.12
+WHO country longevity profile — life expectancy, HALE, healthcare, initiatives
+
+### GET /api/longevity/epigenetic-clock — $0.2
+Epigenetic aging clocks — biological age science, testing, and reversal
+
+### GET /api/longevity/diet-intel — $0.15
+Evidence-graded dietary analysis for longevity and healthspan
+
+### GET /api/longevity/longevity-drug — $0.2
+Pharmaceutical longevity intelligence — rapamycin, metformin, senolytics
+
+### GET /api/longevity/longevity-clinic — $0.12
+Global longevity clinic guide — destinations, treatments, red flags
+
+### GET /api/longevity/dna — $0.2
+Interpret consumer-DNA gene variants for longevity — honest evidence, not hype
+
+## MacroPulse API (macropulse)
+
+Real-time macro intelligence for forex and CFD traders. All endpoints require x402 payment (USDC on Base mainnet) via the PAYMENT-SIGNATURE header.
+Base URL: https://macropulse.theaslangroupllc.com
+
+### GET /api/session-brief — $0.1
+Forex session brief
+
+### GET /api/event-pulse — $0.2
+Economic event deep-dive
+
+### GET /api/crypto-pulse — $0.05
+Crypto market context
+
+### GET /api/commodities-pulse — $0.1
+Commodities brief
+
+### GET /api/calendar — $0.1
+Weekly economic calendar
+
+### GET /api/cot — $0.02
+CFTC Commitments of Traders positioning — 21 markets, deterministic
+
+### GET /api/eia-inventory — $0.1
+Weekly EIA petroleum inventory intelligence for energy and macro agents — crude, gasoline and distillate builds and draws versus expectations, with the oil-price and CAD/NOK implications.
+
+### GET /api/intermarket — $0.15
+Cross-asset intermarket synthesis for macro agents — bond yields, equities, commodities and FX read together to surface the dominant regime and the divergences that tend to lead price.
+
+### GET /api/rates-differential — $0.1
+Interest-rate differential and carry intelligence for FX agents — G10 policy rates, yield spreads and the carry-trade map that drives durable currency trends.
+
+### GET /api/regime — $0.1
+Macro regime classifier for multi-asset agents — labels the current environment (risk-on/off, reflation, stagflation, tightening) and its directional implications for FX, rates and equities.
+
+### GET /api/sentiment — $0.05
+Real-time directional sentiment for any forex pair or gold — retail crowd positioning, COT institutional alignment, and a clear contrarian bias call. Built for FX trading and advisor agents.
+
+### GET /api/fx/convert — $0.005
+Currency conversion at the official ECB reference rate
+
+### GET /api/market/is-open — $0.005
+Is the stock market open right now? Exchange status, trading hours and holiday calendar
+
+### GET /api/macro/us — $0
+Official US macro indicators read from Chainlink contracts (GDP, PCE, SOFR)
+
+### GET /api/macro/bls-series — $0.02
+US labor statistics by BLS series id — deterministic, computed YoY
+
+### GET /api/macro/us-revisions — $0
+The revision trail of a US macro series, from immutable on-chain round history
+
+## MailPulse API (mailpulse)
+
+Send a REAL physical letter — US First-Class, US Certified Mail (with optional electronic return receipt), or international — via Lob's Print & Mail network. This is an ACTION API, not a data lookup:…
+Base URL: https://mailpulse.theaslangroupllc.com
+
+### POST /api/verify-address — $0.01
+Verify a mailing address (US + international)
+
+### POST /api/quote — $0
+Free price quote for a letter
+
+### POST /api/letters — $3
+Send a physical letter (THE paid action)
+
+### GET /api/letters/{id} — $0.005
+Letter status / USPS tracking poll
+
+## MarketPulse API (marketpulse)
+
+The AI-visibility layer for businesses anywhere in the world — get found by the assistants doing the choosing. Live AI-visibility check with verbatim site evidence ($0.50: robots.txt AI-crawler rules…
+Base URL: https://marketpulse.theaslangroupllc.com
+
+### GET /api/market/llm-visibility — $0.15
+LLM visibility analysis
+
+### GET /api/market/content-brief — $0.15
+Dual-optimized content brief
+
+### GET /api/market/channel-mix — $0.1
+Marketing channel mix strategy
+
+### GET /api/market/roi-forecast — $0.08
+Marketing ROI forecast
+
+### GET /api/market/competitor-gap — $0.1
+Competitor gap analysis
+
+### GET /api/market/ad-copy — $0.08
+Ready-to-use ad copy variants
+
+### GET /api/market/email-sequence — $0.15
+Email nurture sequence
+
+### GET /api/market/social-strategy — $0.08
+Platform social media strategy
+
+### GET /api/market/local-seo — $0.08
+Local SEO optimization guide
+
+### GET /api/market/seo-review — $0.1
+Technical SEO review
+
+### GET /api/market/seo-audit — $0.1
+Technical SEO review
+
+### GET /api/market/ai-visibility-probe — $0.25
+AI-visibility probe (GEO/AEO) — $0.25 agent-tier preview
+
+### GET /api/market/ai-visibility-check — $0.5
+Live AI-visibility check (GEO/AEO) w/ verbatim site evidence
+
+### GET /api/market/video-ad-script — $0.1
+Shot-by-shot video ad script
+
+### GET /api/market/voiceover-script — $0.08
+TTS-ready voiceover script
+
+## MealPulse API (mealpulse)
+
+Global meal planning and culinary intelligence API. AI-synthesized meal plans, recipe generation, dietary restriction guidance, grocery optimization, pantry utilization, batch cooking, food budgeting…
+Base URL: https://mealpulse.theaslangroupllc.com
+
+### GET /api/meal/plan — $0.15
+Weekly meal plan
+
+### GET /api/meal/recipe — $0.08
+Recipe with technique tips
+
+### GET /api/meal/grocery — $0.1
+Grocery list by store section
+
+### GET /api/meal/pantry — $0.1
+Pantry-to-meal ideas
+
+### GET /api/meal/batch — $0.1
+Batch cooking guide
+
+### GET /api/meal/dietary — $0.08
+Dietary restriction guide
+
+### GET /api/meal/budget — $0.1
+Budget meal strategy
+
+### GET /api/meal/substitute — $0.05
+Ingredient substitutions
+
+### GET /api/meal/leftover — $0.08
+Leftover transformation
+
+### GET /api/meal/kitchen — $0.08
+Kitchen equipment advisor
+
+## MindPulse API (mindpulse)
+
+Global mental health intelligence API. Evidence-based guidance on therapy platform matching, mental health assessment, burnout, psychiatric medication context, coping techniques, sleep disorders (CBT…
+Base URL: https://mindpulse.theaslangroupllc.com
+
+### GET /api/mind/match — $0.1
+Therapy platform matching
+
+### GET /api/mind/assessment — $0.1
+Mental health self-assessment
+
+### GET /api/mind/burnout — $0.1
+Burnout assessment and recovery protocol
+
+### GET /api/mind/medication — $0.1
+Psychiatric medication context
+
+### GET /api/mind/technique — $0.08
+Evidence-based coping technique guide
+
+### GET /api/mind/sleep — $0.08
+Sleep disorder guidance (CBT-I protocol)
+
+### GET /api/mind/grief — $0.08
+Grief and loss support
+
+### GET /api/mind/relationship — $0.1
+Relationship and communication guidance
+
+### GET /api/mind/workplace — $0.08
+Workplace mental health guidance
+
+### GET /api/mind/postpartum — $0.1
+Postpartum and perinatal mental health guidance
+
+### GET /api/mind/addiction — $0.1
+Addiction support and harm-reduction guidance
+
+### GET /api/mind/crisis — $0
+Crisis resource routing — ALWAYS FREE
+
+## NutriPulse API (nutripulse)
+
+Global nutrition intelligence API. PubMed-grounded supplement analysis, macro/micronutrient planning, food database lookups, glucose/metabolic health guidance, lab result interpretation, longevity nu…
+Base URL: https://nutripulse.theaslangroupllc.com
+
+### GET /api/nutrition/research — $0.1
+Nutrition research synthesis
+
+### GET /api/nutrition/food — $0.08
+Food nutrition profile
+
+### GET /api/nutrition/supplement — $0.1
+Supplement analysis
+
+### GET /api/nutrition/plan — $0.15
+Personalized nutrition plan
+
+### GET /api/nutrition/compare — $0.08
+Food comparison
+
+### GET /api/nutrition/analyze — $0.08
+Meal analysis
+
+### GET /api/nutrition/stack — $0.12
+Supplement stack
+
+### GET /api/nutrition/glucose — $0.1
+CGM glucose pattern interpretation
+
+### GET /api/nutrition/interactions — $0.1
+Supplement interaction checker
+
+### GET /api/nutrition/labs — $0.15
+Blood work interpretation
+
+### GET /api/nutrition/longevity — $0.1
+Longevity protocol synthesis
+
+### GET /api/nutrition/prenatal — $0.1
+Prenatal nutrition by trimester
+
+### GET /api/nutrition/glp1 — $0.15
+GLP-1 nutrition companion
+
+### GET /api/nutrition/upf-check — $0.02
+Ultra-processed food check by barcode
+
+### GET /api/nutrition/supplement-check — $0.15
+Supplement brand safety verification
+
+## OnchainPulse API (onchainpulse)
+
+Intelligence API for the onchain financial transition. Decodes legislation, tracks RWA tokenization, models sector scenarios, guides onchain integration, tracks crypto ETF flows and the CLARITY Act. …
+Base URL: https://onchainpulse.theaslangroupllc.com
+
+### GET /api/legislation — $0.15
+Translate crypto bills to plain English with sector impact
+
+### GET /api/rwa — $0.15
+Survey the real-world-asset market across asset classes
+
+### GET /api/rwa-risk — $0.25
+Assess issuer and redemption risk for a named RWA product
+
+### GET /api/gold-check — $0.15
+Compare tokenized gold products: PAXG vs XAUT
+
+### GET /api/scenario — $0.2
+Model sector impact scenarios with if/then analysis
+
+### GET /api/transition — $0.1
+Guide practical onchain onboarding by organization type
+
+### GET /api/monitor — $0.1
+Monitor institutional onchain activity, weekly briefs
+
+### GET /api/compliance — $0.15
+Map regulatory compliance duties by jurisdiction
+
+### GET /api/tokenize — $0.15
+Explain how to tokenize any asset type, step by step
+
+### GET /api/etf-flows — $0.15
+Track US spot crypto ETF flows with per-issuer detail
+
+### GET /api/clarity-watch — $0.1
+Track CLARITY Act status, CFTC/SEC split, passage odds
+
+### GET /api/glossary — $0.05
+Decode any onchain finance or regulatory term plainly
+
+### GET /api/snapshot — $0.1
+Summarize the onchain transition in a weekly macro brief
+
+### GET /api/memecoin — $0.015
+Scan a Solana memecoin pre-trade, deterministic verdict
+
+### GET /api/asatoken — $0.015
+Scan an Algorand ASA pre-trade, deterministic verdict
+
+### GET /api/evmtoken — $0.015
+Scan an EVM token pre-trade, multi-chain, deterministic
+
+### GET /api/vault-apy — $0
+Live USDC yield panel on Base — onchain lending rates + realized Morpho vault APY, deterministic
+
+### GET /api/exit-depth — $0.02
+Estimate sell-side depth of a v3 pool at 1-25% price impact
+
+### GET /api/holder-map — $0.02
+Map holder concentration with LP/burn/contract labeling
+
+### GET /api/narrative-check — $0.15
+Check a project's public claims against observed chain data
+
+### GET /api/receipts — $0.35
+One-call composite token due-diligence report
+
+### GET /api/facet/honeypot — $0.005
+Check honeypot sellability flags, half a cent
+
+### GET /api/facet/liquidity — $0.005
+Check token DEX liquidity and momentum, half a cent
+
+### GET /api/rh-launches — $0
+Live Uniswap-launchpad launch feed on Robinhood Chain, one cent
+
+### GET /api/iso-receipt — $0
+ISO 20022 camt.054-style receipt for an on-chain settlement (signed, verifiable)
+
+### GET /api/anchor-status — $0
+FREE — Base batch-anchor proof for an ISO receipt bundle hash
+
+### GET /api/rwa-bnb — $0.15
+Rank every RWA protocol by its BNB Chain TVL slice
+
+### GET /api/yield-check — $0.05
+Reality-check a dividend/reflection token's promised yield against live volume
+
+### GET /api/token-safety — $0.015
+Token safety check for any token on 10 chains — is this token safe to buy? Deterministic CLEAR/CAUTION/AVOID verdict, chain auto-detected
+
+### GET /api/rh/swap-route — $0
+FREE Robinhood Chain swap route quote via Meow aggregator (fast search) + token-safety verdict; executable calldata when sender is given
+
+## ParentPulse API (parentpulse)
+
+ParentPulse — child development and parenting intelligence: developmental milestones, nutrition guidance, pediatric health, sleep science, school selection, discipline strategies, childcare cost, and…
+Base URL: https://parentpulse.theaslangroupllc.com
+
+### GET /api/parent/milestone — $0.1
+Developmental milestone guidance (global)
+
+### GET /api/parent/safety — $0.08
+Product safety recall check (global)
+
+### GET /api/parent/school — $0.1
+School selection guidance (global)
+
+### GET /api/parent/activity — $0.08
+Activity and extracurricular finder (global)
+
+### GET /api/parent/finance — $0.12
+Family financial planning (global)
+
+### GET /api/parent/sleep — $0.1
+Pediatric sleep guidance (global)
+
+### GET /api/parent/nutrition — $0.1
+Pediatric nutrition guidance (global)
+
+### GET /api/parent/discipline — $0.1
+Positive discipline guidance (global)
+
+### GET /api/parent/childcare — $0.12
+Childcare options comparison (global)
+
+## PatentPulse API (patentpulse)
+
+PatentPulse — global IP intelligence: USPTO/EPO/WIPO/JPO/CNIPA patent search, FTO analysis, SEP licensing, trademark clearance, prior art, and competitor patent landscape. Multilingual.
+Base URL: https://patentpulse.theaslangroupllc.com
+
+### GET /api/patent/global — $0.12
+Jurisdiction-specific patent search — EPO, CNIPA, KIPO, JPO, WIPO PCT, DPMA, UKIPO, CIPO, IP Australia, INPI
+
+### GET /api/patent/search — $0.08
+Global patent search (USPTO + global synthesis)
+
+### GET /api/patent/cliff — $0.15
+Pharma patent cliff analysis
+
+### GET /api/patent/fto — $0.2
+Freedom-to-operate analysis
+
+### GET /api/patent/assignee — $0.1
+Company patent portfolio intelligence
+
+### GET /api/patent/prior-art — $0.12
+Prior art search
+
+### GET /api/patent/status — $0.05
+Patent status lookup
+
+### GET /api/patent/trends — $0.1
+Patent filing trends
+
+### GET /api/patent/sep — $0.15
+Standard Essential Patent landscape
+
+### GET /api/patent/competitor — $0.15
+Competitor R&D intelligence
+
+### GET /api/patent/trademark — $0.06
+Trademark clearance search
+
+## PetPulse API (petpulse)
+
+Global pet health and care intelligence API. AI-synthesized veterinary symptom triage, breed selection guides, pet nutrition analysis, medication safety (drug interactions, toxin exposure), pet food …
+Base URL: https://petpulse.theaslangroupllc.com
+
+### GET /api/pet/symptoms — $0.1
+Symptom triage
+
+### GET /api/pet/research — $0.1
+Veterinary research synthesis
+
+### GET /api/pet/nutrition — $0.1
+Condition-based nutrition guidance
+
+### GET /api/pet/medication — $0.08
+Veterinary drug reference
+
+### GET /api/pet/breed — $0.08
+Breed health and care guide
+
+### GET /api/pet/behavior — $0.1
+Pet behavior and training guide
+
+### GET /api/pet/cost — $0.08
+Vet procedure cost estimator
+
+### GET /api/pet/insurance — $0.1
+Pet insurance comparison
+
+### GET /api/pet/senior — $0.1
+Senior pet care
+
+### GET /api/pet/toxin — $0.1
+Pet toxicity assessment
+
+### GET /api/pet/travel — $0.08
+Pet travel guide
+
+### GET /api/pet/recall-check — $0.1
+Pet food recall check
+
+## PolicyPulse API (policypulse)
+
+PolicyPulse — global legislative intelligence: US Congress, EU (EUR-Lex), UK Parliament, India, Brazil, Australia, and 50+ jurisdictions. Bill summaries, sector impact, passage probability, treaty an…
+Base URL: https://policypulse.theaslangroupllc.com
+
+### GET /api/register — $0.02
+Federal Register search — rules, proposed rules, notices, open comment periods
+
+### GET /api/legislation — $0.15
+Legislation — plain English translation of any bill globally
+
+### GET /api/impact — $0.15
+Impact — who is affected and what they must do
+
+### GET /api/scenario — $0.2
+Scenarios — if/then sector impact modeling
+
+### GET /api/monitor — $0.1
+Monitor — weekly/monthly legislative activity brief
+
+### GET /api/state — $0.1
+State — legislation across all 50 US states via Open States
+
+### GET /api/compliance — $0.15
+Compliance — what to do after a law passes
+
+### GET /api/regulation — $0.15
+Federal regulation — agency rules via Federal Register
+
+### GET /api/compare — $0.15
+Compare — cross-jurisdiction policy comparison
+
+### GET /api/calendar — $0.1
+Calendar — upcoming regulatory deadlines and effective dates
+
+### GET /api/translate — $0.08
+Translate — decode any legal or regulatory text into plain English
+
+### POST /api/translate — $0.08
+Translate (POST) — decode large legal text
+
+### GET /api/court — $0.15
+Court decision intelligence
+
+### GET /api/treaty — $0.1
+International treaty and trade-agreement intelligence
+
+## PropPulse API (proppulse)
+
+Global real estate intelligence API — 11 endpoints covering the full property lifecycle in any country. Mortgage/remortgage analysis, affordability, rent-vs-buy modeling, refinance opportunity, local…
+Base URL: https://proppulse.theaslangroupllc.com
+
+### GET /api/prop/mortgage — $0.1
+Mortgage analysis — jurisdiction-aware rates, payment breakdown, max price, lender links
+
+### GET /api/prop/afford — $0.1
+True affordability analysis — stress-free vs. lender-qualifying ceiling, jurisdiction-aware
+
+### GET /api/prop/rentbuy — $0.1
+Rent vs. buy decision model — break-even, 5-year wealth comparison, recommendation
+
+### GET /api/prop/refi — $0.08
+Refinance/remortgage opportunity — break-even, monthly savings, cash-out potential
+
+### GET /api/prop/market — $0.1
+Local market intelligence — buyer/seller conditions, price trends, inventory, any country
+
+### GET /api/prop/invest — $0.15
+Investment property ROI — cap rate, cash-on-cash, 5-year projection, investment grade, any country
+
+### GET /api/prop/valuate — $0.1
+Property valuation — AVM estimate with comparable sales and negotiation intelligence, any country
+
+### GET /api/prop/neighborhood — $0.1
+Neighborhood intelligence — schools, safety, walkability, investment outlook, any country
+
+### GET /api/prop/first-buyer — $0.1
+First-time homebuyer guide — jurisdiction-real schemes, loan types, step-by-step process
+
+### GET /api/prop/landlord — $0.12
+Landlord toolkit — rent pricing, tenant screening, lease law, tax flags, any country
+
+### GET /api/prop/rental-market — $0.12
+Rental-market intelligence — asking rent, vacancy, rent-control flag, STR + budget/hostel read, any country
+
+### GET /api/prop/council-tax — $0.05
+UK Council-Tax Banding Challenge Check
+
+### GET /api/prop/council-tax-check — $0.25
+Council-Tax Challenge Letter Preview
+
+### GET /api/prop/council-tax-letter — $2
+Council-Tax Challenge Document
+
+## ProspectPulse API (prospectpulse)
+
+Global mineral and resource exploration intelligence. USGS MRDS deposit inventory, geochemical anomaly analysis, satellite scene availability, jurisdiction entry-risk, social license risk, critical m…
+Base URL: https://prospectpulse.theaslangroupllc.com
+
+### GET /api/prospect/mineral-potential — $0.25
+Mineral prospectivity assessment
+
+### GET /api/prospect/deposit-intel — $0.2
+Mineral deposit intelligence
+
+### GET /api/prospect/critical-minerals-scan — $0.25
+Critical minerals country endowment scan
+
+### GET /api/prospect/jurisdiction-entry — $0.25
+Exploration jurisdiction entry-risk assessment
+
+### GET /api/prospect/satellite-availability — $0.1
+Free satellite scene availability + remote sensing guide
+
+### GET /api/prospect/geochemical-anomaly — $0.15
+USGS geochemical anomaly characterization
+
+### GET /api/prospect/social-license-risk — $0.2
+Social license risk assessment
+
+### GET /api/prospect/commodity-supply-intel — $0.2
+Commodity supply/demand intelligence
+
+### GET /api/prospect/oil-gas-basin — $0.25
+Oil & gas basin analysis
+
+### GET /api/prospect/exploration-brief — $0.35
+Comprehensive exploration target brief (premium)
+
+### GET /api/prospect/exploration-snapshot — $0.25
+Deterministic facts-only exploration snapshot (lite tier)
+
+## RacingPulse API (racingpulse)
+
+Global horse racing intelligence — live odds, going conditions, form analysis, arbitrage detection, speed ratings, and betting systems for 35 racecourses. All endpoints require x402 payment (USDC on …
+Base URL: https://racingpulse.theaslangroupllc.com
+
+### GET /api/scanner — $0.07
+Arbitrage scanner — scan all active racing sports for guaranteed-profit opportunities
+
+### GET /api/arbitrage — $0.05
+Live arbitrage — filtered guaranteed-profit opportunities for a specific racing jurisdiction
+
+### GET /api/card — $0.07
+Race card — complete meeting briefing with runners, odds, going, and news
+
+### GET /api/going — $0.02
+Going conditions — live ground conditions derived from 7-day precipitation data
+
+### GET /api/form — $0.07
+Form guide — deep horse form analysis with trainer stats and going preferences
+
+### GET /api/ratings — $0.07
+Speed ratings — official rating, RPR, Timeform, and going-adjusted performance ratings
+
+### GET /api/systems — $0.07
+Betting systems — statistically-backed angles, trainer/jockey combos, draw bias
+
+### GET /api/trends — $0.07
+Race trends — historical patterns, draw bias, trainer records, value and fade angles
+
+### GET /api/track — $0.07
+Track profile — complete racecourse intelligence with live going conditions
+
+### GET /api/greyhound-form — $0.07
+Greyhound form — recent runs, sectional times, trap record, kennel form, and verdict
+
+### GET /api/greyhound-trap — $0.07
+Greyhound trap bias — win rates per trap, rail vs wide advantage, pace profile, and betting angles
+
+### GET /api/greyhound-card — $0.07
+Greyhound race card — full field breakdown with trap suitability, value selection, and system plays
+
+### GET /api/calculator — $0.02
+Betting calculator — arbitrage stakes (Kelly), expected value, and profit calculations
+
+## RemittancePulse API (remittancepulse)
+
+Global remittance intelligence API covering the $700B+ annual global remittance market. 9 endpoints: corridor analysis (200+ corridors), provider comparison with true total cost (fee + FX markup), li…
+Base URL: https://remittancepulse.theaslangroupllc.com
+
+### GET /api/remit/corridor — $0.08
+Corridor intelligence
+
+### GET /api/remit/compare — $0.1
+Provider comparison
+
+### GET /api/remit/rate — $0.05
+FX rate and markup analysis
+
+### GET /api/remit/receive — $0.08
+Receive-country guide
+
+### GET /api/remit/mobile — $0.08
+Mobile money ecosystem
+
+### GET /api/remit/compliance — $0.1
+Compliance and KYC intelligence
+
+### GET /api/remit/news — $0.08
+Remittance industry news
+
+### GET /api/remit/diaspora — $0.1
+Diaspora community intelligence
+
+### GET /api/remit/stablecoin-rails — $0.12
+Stablecoin remittance rail comparison
+
+### GET /api/remit/rights — $0.05
+Remittance-transfer rights check (Reg E Subpart B) — deterministic, no LLM
+
+### GET /api/remit/rights-check — $0.25
+Agent-tier preview of the $2 rights-letter — applicability verdict, deadlines, upsell
+
+### GET /api/remit/rights-letter — $2
+Citation-locked remittance document — error notice / §1005.33(h) rebuttal / cancellation demand ($2)
+
+## RiskPulse API (riskpulse)
+
+Global risk intelligence API. AI-synthesized travel safety alerts, country risk profiles, sanctions screening, business risk analysis, supply chain disruption intelligence, nomad visa/tax guidance, e…
+Base URL: https://riskpulse.theaslangroupllc.com
+
+### GET /api/risk/country — $0.1
+Country risk profile
+
+### GET /api/risk/travel — $0.08
+Travel safety assessment
+
+### GET /api/risk/business — $0.1
+Business risk analysis
+
+### GET /api/risk/compare — $0.1
+Country risk comparison
+
+### GET /api/risk/expat — $0.1
+Expat living guide
+
+### GET /api/risk/alerts — $0.1
+Situational security alerts
+
+### GET /api/risk/quake-check — $0.01
+Earthquake activity check — deterministic USGS primitive
+
+### GET /api/risk/evac — $0.1
+Evacuation plan
+
+### GET /api/risk/nomad — $0.1
+Digital nomad score
+
+### GET /api/risk/sanctions — $0.15
+Sanctions exposure analysis
+
+### GET /api/risk/supply — $0.15
+Supply chain risk
+
+## SafePulse API (safepulse)
+
+SafePulse — product safety intelligence: CPSC, FDA, USDA FSIS, NHTSA recalls; EU RAPEX; home safety scores; child/vehicle safety ratings; food safety alerts worldwide.
+Base URL: https://safepulse.theaslangroupllc.com
+
+### GET /api/safe/recall — $0.08
+Active recall dashboard
+
+### GET /api/safe/product — $0.08
+Consumer product safety
+
+### GET /api/safe/vehicle — $0.1
+Vehicle safety
+
+### GET /api/safe/food — $0.08
+Food and drug recall
+
+### GET /api/safe/home — $0.1
+Home safety hazards
+
+### GET /api/safe/child — $0.1
+Child product safety
+
+### GET /api/safe/score — $0.12
+Brand safety score
+
+### GET /api/safe/eu — $0.08
+EU Safety Gate alerts
+
+### GET /api/safe/global — $0.1
+Global safety alerts
+
+## ScentPulse API (scentpulse)
+
+Fragrance intelligence for perfume collectors, dupe-hunters, and blind-buyers. All endpoints require x402 payment (USDC on Base mainnet, or Solana USDC-SPL) via the PAYMENT-SIGNATURE header.
+Base URL: https://scentpulse.theaslangroupllc.com
+
+### GET /api/scent/note-profile — $0.08
+Fragrance note-profile lookup
+
+### GET /api/scent/batch-check — $0.1
+Batch/lot code freshness decoder
+
+### GET /api/scent/dupe-match — $0.15
+Dupe/clone finder
+
+### GET /api/scent/blind-buy-risk — $0.12
+Blind-buy risk score
+
+### GET /api/scent/reformulation-check — $0.12
+Reformulation checker
+
+### GET /api/scent/allergen-check — $0.1
+EU allergen context check
+
+### GET /api/scent/occasion-match — $0.1
+Occasion/season/climate fragrance matcher
+
+### GET /api/scent/price-per-ml — $0.08
+Price-per-ml value optimizer
+
+### GET /api/scent/attar-navigator — $0.1
+Middle Eastern attar/oud navigator
+
+### GET /api/scent/discontinued-watch — $0.1
+Discontinuation watch
+
+### GET /api/scent/collection-value — $0.15
+Collection valuation
+
+### GET /api/scent/layering-guide — $0.1
+Fragrance layering guide
+
+## ScholarPulse API (scholarpulse)
+
+Global scholarship and student finance intelligence. 13 endpoints covering scholarship search (190+ countries), international scholarship matching, government programs, Erasmus+, US financial aid (Co…
+Base URL: https://scholarpulse.theaslangroupllc.com
+
+### GET /api/search — $0.15
+Scholarship search
+
+### GET /api/global — $0.15
+International scholarship matching
+
+### GET /api/government — $0.1
+Government scholarship programs
+
+### GET /api/erasmus — $0.08
+Erasmus+ program guide
+
+### GET /api/aid — $0.12
+US financial aid estimate
+
+### GET /api/fafsa — $0.1
+FAFSA strategy
+
+### GET /api/loans — $0.12
+Student loan repayment strategy
+
+### GET /api/refi — $0.15
+Student loan refinancing intelligence
+
+### GET /api/forgiveness — $0.1
+Loan forgiveness eligibility
+
+### GET /api/roi — $0.1
+Degree ROI analysis
+
+### GET /api/merit — $0.12
+Merit aid strategy
+
+### GET /api/deadline — $0.08
+Scholarship deadline tracker
+
+### GET /api/essay — $0.1
+Scholarship essay strategy
+
+## SeniorPulse API (seniorpulse)
+
+Global elder care intelligence API. AI-synthesized Medicare/pension guidance, care facility evaluation, medication safety, benefits discovery, and caregiver support for seniors and their families wor…
+Base URL: https://seniorpulse.theaslangroupllc.com
+
+### GET /api/senior/medicare — $0.15
+Medicare plan guidance (or country-equivalent senior health coverage)
+
+### GET /api/senior/facility — $0.15
+Care facility evaluation guide
+
+### GET /api/senior/meds — $0.1
+Medication safety check for elderly patients (polypharmacy)
+
+### GET /api/senior/benefits — $0.1
+Benefits eligibility assessment (US by default; country-aware)
+
+### GET /api/senior/caregiver — $0.1
+Family caregiver resource guide
+
+### GET /api/senior/grief — $0.1
+Post-loss estate and grief guide
+
+### GET /api/senior/legal — $0.1
+Elder law document guide (POA, advance directive, guardianship)
+
+### GET /api/senior/memory — $0.1
+Cognitive decline staging and dementia care trajectory
+
+### GET /api/senior/nh-compare — $0.15
+Nursing home / care home quality comparison (CMS Care Compare by default; country-aware)
+
+### GET /api/senior/property-tax — $0.08
+Senior property tax relief programs by state (US by default; country-aware)
+
+### GET /api/senior/rx-assist — $0.1
+Prescription assistance programs (Extra Help, state programs, pharma PAPs; country-aware)
+
+### GET /api/senior/snap-utility — $0.1
+Senior SNAP food assistance and LIHEAP utility assistance (US by default; country-aware)
+
+### GET /api/senior/veterans — $0.15
+VA Aid & Attendance and senior veteran benefits (US by default; country-aware)
+
+### GET /api/senior/pension-intl — $0.15
+International state/public pension intelligence
+
+## ShopperPulse API (shopperpulse)
+
+POST a shopping list (up to 3 items, free text or structured) and Birdie runs a full personal-shopper trip: 3 best-fit picks per item plus a stacked savings plan (loyalty %, coupons, discounted gift …
+Base URL: https://shopperpulse.theaslangroupllc.com
+
+### POST /api/shopper/trip — $0.25
+Full personal-shopper trip: 3 picks per item + stacked savings plan
+
+### GET /api/safety/recalls — $0.015
+Product safety & recall check — official government sources, deterministic
+
+### GET /api/safety/merchant — $0.02
+Know Your Merchant (KYM) trust score — deterministic, live public-infrastructure signals
+
+## SignalPulse (signalpulse)
+
+Two-product trading intelligence platform. Product 1 — Market Analysis: natural language Q&A across FX, crypto, equities, sports, and racing; powered by an 11-layer intelligence stack; requires an an…
+Base URL: https://signalpulse.theaslangroupllc.com
+
+### GET /api/scan/sample — $0
+FREE pick-of-the-day — a full-depth sample of SignalPulse's sports intelligence on one featured matchup (de-vigged sportsbook consensus + proprietary stats/weather analytics). No payment, no API key.
+
+### GET /api/scan/game — $1
+Deep single-match analysis for AI sports & research agents — a full multi-engine read of any game: de-vigged sportsbook consensus (Bovada/FanDuel/Pinnacle), sharp-line moves, proprietary xG/EPA/Statcast/map-pool analyti…
+
+### GET /api/scan/racing — $0.5
+Today's GB/IRE racing card scanned for AI betting & research agents — the single highest expected-value selection plus value picks across every race, horse or greyhound. Horses: RPR/Topspeed, draw bias, pace shape, goin…
+
+### GET /api/scan/h2h — $0.5
+Player head-to-head for AI betting & research agents — a targeted read of TWO named players against each other in any matchup sport (golf, tennis, MMA). Returns the betting matchup verdict (favoured side, EV, edge) AND …
+
+### GET /api/scan/compare — $1
+Compare & rank 2+ named players against each other for AI betting, fantasy & research agents — golf 3-balls, DFS player pools, season-long start/sit, 'best of these'. Returns a ranked list (each with a projection) plus …
+
+### GET /api/scan/fantasy — $1
+Direct fantasy advice for AI agents — start/sit, DFS lineup (salary cap, points-per-dollar), waiver pickups and trade analysis. FULLY OPEN: returns committed recommendations (who to start, accept/decline the trade), not…
+
+### GET /api/scan/player — $0.5
+Single-player stat-projected outlook for AI betting, fantasy & research agents — data-backed prop projections (the stat is projected from the underlying data even when no book posts a line), the fantasy projection (poin…
+
+### GET /api/scan/ask — $1
+Ask any sports or prediction-market question in plain language — the front door to SignalPulse's deep engines. Returns a data-grounded answer with an explicit DATA-vs-OPINION split (every claim cites its stat; judgment …
+
+### GET /api/scan/golf — $1
+Whole-field golf scan for AI betting, fantasy & research agents — reads the ENTIRE tournament field (PGA ShotLink strokes-gained + ESPN) and surfaces the single highest-EV play across every bet type (outright / each-way…
+
+### GET /api/scan/predmarket — $2
+Calibrated superforecaster scan of prediction markets for AI research & trading agents — a base-rate-anchored read across Polymarket, Manifold and PredictIt: cross-venue divergence, order-book and whale flow, and for sp…
+
+### GET /api/scan/market — $2
+Institutional cross-asset market scan for AI financial & trading agents — multi-layer read across FX majors, metals, and equity indices: regime, COT positioning, yield spreads, carry, real yields, VIX term structure, op…
+
+### GET /api/scan/forex — $0.5
+Institutional forex market scan for AI financial & trading agents — multi-layer read across the 28 majors and crosses: rate differentials, COT positioning, carry, policy divergence, yield spreads, and cross-asset macro …
+
+### GET /api/scan/event — $1
+Institutional economic-event scan for AI financial & trading agents — historical-reaction study for a scheduled macro release (NFP, CPI, FOMC and more): how the affected FX pairs have moved after similar surprises, the …
+
+### GET /api/scan/crypto — $2
+Institutional-grade crypto market scan for AI financial & trading agents — 40+ live intelligence layers (regime, breadth, on-chain cycle, derivatives positioning, funding extremes, liquidation context, ETF/stablecoin fl…
+
+### GET /api/scan/options — $0.5
+Institutional equity-options volatility scan for AI financial & trading agents — VRP (variance risk premium), IV term structure, GEX regime, max-pain and unusual options activity across liquid optionable names, synthesi…
+
+### GET /api/scan/futures — $0.5
+Institutional futures market scan for AI financial & trading agents — multi-layer read across the futures complex (equity index, rates, energy, metals, grains): COT positioning (disaggregated + financial), seasonality, …
+
+### GET /api/scan/crypto-lite — $0.05
+Crypto market tick — majors + sentiment + regime verdict
+
+## StablecoinPulse API (stablecoinpulse)
+
+Real-time stablecoin market intelligence — GENIUS Act compliance reads, yield comparison, peg-stability monitoring, cross-chain flow tracking, payment-rail comparison, reserve-attestation freshness, …
+Base URL: https://stablecoinpulse.theaslangroupllc.com
+
+### GET /api/issuer-check — $0.25
+GENIUS Act issuer compliance check
+
+### GET /api/yield-compare — $0.25
+Stablecoin yield comparison
+
+### GET /api/depeg-watch — $0.15
+Stablecoin peg-deviation watch
+
+### GET /api/rails-compare — $0.25
+Stablecoin payment-rail comparison
+
+### GET /api/reserve-check — $0.2
+Reserve-attestation freshness check
+
+### GET /api/reg-watch — $0.15
+Global stablecoin regulatory watch
+
+### GET /api/depeg-tick — $0.01
+Stablecoin peg tick — all majors, one call
+
+## StatEdge API (stateedge)
+
+Global sports analytics and intelligence API. AI-synthesized injury reports, ATS/spread analysis, matchup predictions, odds analysis, parlay optimization, referee tendency analysis, rest/travel advan…
+Base URL: https://stateedge.theaslangroupllc.com
+
+### GET /api/global — $0.1
+Global sports intelligence — F1, cricket, rugby, tennis, AFL, golf, boxing, MMA, cycling
+
+### GET /api/ats — $0.1
+Against-the-spread trends
+
+### GET /api/parlay — $0.1
+Parlay analysis and probability
+
+### GET /api/ref-analysis — $0.1
+Referee and official tendencies
+
+### GET /api/rest — $0.08
+Rest and schedule advantage analysis
+
+### GET /api/injury-impact — $0.08
+Single player injury impact analysis
+
+## TablePulse API (tablepulse)
+
+Board-game and tabletop intelligence for recommendations, comparisons, expansions, collection valuation, crowdfunding, party/solo/family picks, complexity, pricing, and awards. All endpoints require …
+Base URL: https://tablepulse.theaslangroupllc.com
+
+### GET /api/table/recommend — $0.15
+Board-game recommendations by group profile
+
+### GET /api/table/compare — $0.1
+Head-to-head board-game comparison
+
+### GET /api/table/expansion-check — $0.08
+Expansion worth-it check
+
+### GET /api/table/collection-value — $0.15
+Board-game collection valuation
+
+### GET /api/table/crowdfunding-radar — $0.12
+Crowdfunding back-now-vs-wait radar
+
+### GET /api/table/party-finder — $0.1
+Party/social game finder
+
+### GET /api/table/solo-picks — $0.1
+Best solo-mode board games
+
+### GET /api/table/family-fit — $0.1
+Family age-fit and gateway ladder
+
+### GET /api/table/complexity-explainer — $0.08
+Is this game right for my group
+
+### GET /api/table/deal-watch — $0.1
+Board-game pricing guidance
+
+### GET /api/table/award-tracker — $0.08
+Board-game award tracker
+
+## TalentPulse API (talentpulse)
+
+Global workforce intelligence API — salary benchmarks, remote compliance, EOR cost models, skills demand, work visas, talent market analysis, executive compensation, layoff tracking, skills gap analy…
+Base URL: https://talentpulse.theaslangroupllc.com
+
+### GET /api/talent/salary — $0.15
+Salary benchmarking — any role, any location globally
+
+### GET /api/talent/remote-compliance — $0.2
+Remote work compliance — jurisdiction-specific legal intelligence
+
+### GET /api/talent/employer-of-record — $0.2
+Employer of record cost model — full employer cost breakdown by country
+
+### GET /api/talent/skills-demand — $0.12
+Skills demand intelligence — real-time market signal for any skill or role globally
+
+### GET /api/talent/visa — $0.15
+Work visa intelligence — all pathways for any nationality/destination pair
+
+### GET /api/talent/talent-market — $0.15
+Talent market intelligence — supply/demand dynamics, hubs, and competitive landscape
+
+### GET /api/talent/compensation — $0.25
+Executive compensation benchmarking — total comp for senior and C-suite roles globally
+
+### GET /api/talent/layoffs — $0.1
+Layoff tracker — real-time workforce reduction intelligence
+
+### GET /api/talent/skills-gap — $0.15
+Skills gap intelligence — where employer demand outpaces supply, with reskilling pathways
+
+### GET /api/talent/cost-comparison — $0.2
+Multi-country hiring cost comparison — CFO-grade employer cost model across countries
+
+## TaxPulse API (taxpulse)
+
+Global tax intelligence API. AI-synthesized tax guidance for 195 countries: income tax rates, VAT/GST, corporate tax, capital gains, crypto tax treatment, expat tax obligations, digital nomad tax str…
+Base URL: https://taxpulse.theaslangroupllc.com
+
+### GET /api/tax/country — $0.1
+Country tax system overview
+
+### GET /api/tax/compare — $0.12
+Multi-country tax comparison
+
+### GET /api/tax/nomad — $0.12
+Digital nomad tax optimization
+
+### GET /api/tax/treaty — $0.12
+Tax treaty analysis
+
+### GET /api/tax/structure — $0.15
+Corporate tax structuring
+
+### GET /api/tax/crypto — $0.12
+Cryptocurrency tax by jurisdiction
+
+### GET /api/tax/expat — $0.12
+Expat tax obligations
+
+### GET /api/tax/vat — $0.1
+Global VAT/GST intelligence
+
+### GET /api/crypto/wallet-review — $12
+Citation-verified crypto wallet tax review
+
+### GET /api/crypto/wallet-sleuth — $1.5
+On-chain wallet investigation
+
+### GET /api/crypto/wallet-guard — $0.5
+Wallet drainer-protection scan
+
+### GET /api/crypto/verification-stats — $0
+Citation-gate live track record (free)
+
+### GET /api/crypto/wallet-watch — $5
+Whale-watch — standing 30-day wallet monitor ($5)
+
+### GET /api/crypto/wallet-watch-status — $0
+Whale-watch status + alerts (free)
+
+### GET /api/tax/state — $0.5
+US state income-tax answer — citation-verified (California + New York)
+
+### GET /api/tax/529-check — $0.5
+529 withdrawal & rollover checker (K-12/credentialing/Roth/nonqualified + CA traps)
+
+### GET /api/tax/aotc-recovery — $0.5
+Missed AOTC recovery — open-window 1040-X screen (up to $2,500/yr)
+
+### GET /api/crypto/wallet-snapshot — $0.25
+Wallet snapshot (lite tier)
+
+### GET /api/tax/529-check-lite — $0.25
+529 withdrawal & rollover checker (lite tier)
+
+## TradePulse API (tradepulse)
+
+Global trade intelligence API. AI-synthesized tariff rates, HS code classification, FTA duty analysis, landed cost calculation, trade compliance guidance, sanctions screening, market entry analysis, …
+Base URL: https://tradepulse.theaslangroupllc.com
+
+### GET /api/trade/classify — $0.15
+HS code classification
+
+### GET /api/trade/tariff — $0.12
+Tariff rates by HS code and country pair
+
+### GET /api/trade/landed — $0.15
+Full landed cost calculator
+
+### GET /api/trade/fta — $0.15
+Free Trade Agreement analyzer
+
+### GET /api/trade/sanctions — $0.12
+Sanctions and trade restrictions screening
+
+### GET /api/trade/market — $0.15
+Market entry intelligence
+
+### GET /api/trade/compliance — $0.15
+Export compliance — EAR/ITAR/dual-use
+
+### GET /api/trade/freight-rates — $0.1
+Live freight rate intelligence by lane
+
+### GET /api/trade/nearshore — $0.2
+Nearshoring and reshoring advisor
+
+### GET /api/trade/supplier-risk — $0.15
+Supplier country risk — UFLPA, ESG, and geopolitical
+
+### GET /api/trade/incoterms — $0.1
+Incoterms 2020 decoder
+
+### GET /api/trade/news — $0.08
+Trade policy intelligence
+
+## TransitPulse API (transitpulse)
+
+TransitPulse — global public transit intelligence: route reliability, delay prediction, multi-modal trip planning, city transit scores, and commute optimization for 500+ cities worldwide. NEW: Rail/C…
+Base URL: https://transitpulse.theaslangroupllc.com
+
+### GET /api/transit/status — $0.05
+Live Service Status
+
+### GET /api/transit/city — $0.08
+City Transit Intelligence Brief
+
+### GET /api/transit/route — $0.08
+Route Reliability Analysis
+
+### GET /api/transit/commute — $0.1
+Commute Quality Analysis
+
+### GET /api/transit/airport — $0.08
+Airport Transit Guide
+
+### GET /api/transit/agencies — $0.05
+Transit Agencies Lookup
+
+### GET /api/transit/delays — $0.05
+Current Transit Delays
+
+### GET /api/transit/delays-history — $0.08
+Historical Delay Patterns
+
+### GET /api/transit/trip — $0.05
+Transit Trip Planning
+
+### GET /api/transit/multimodal — $0.1
+Multi-Modal Journey Planning
+
+### GET /api/transit/compare — $0.12
+City-to-City Transit Comparison
+
+### GET /api/transit/carfree — $0.12
+Car-Free Livability Score
+
+### GET /api/transit/visitor — $0.08
+First-Timer Visitor Guide
+
+### GET /api/transit/coverage — $0.1
+Transit Coverage Analysis
+
+### GET /api/rights/check — $0.05
+Rail/Coach/Ferry/Cruise Compensation Eligibility Check
+
+### GET /api/rights/letter — $2
+Citation-Locked Transit Compensation Claim Letter
+
+## TravelPulse API (travelpulse)
+
+Global travel intelligence API for AI agents: weather, hotel deals, theme-park wait times, translation, trip plans, visas, health, currency, insurance, points. Any destination + language. x402 USDC. …
+Base URL: https://travelpulse.theaslangroupllc.com
+
+### GET /api/parks/waits — $0.05
+Live park wait times
+
+### GET /api/parks/hours — $0.05
+Park hours and schedule
+
+### GET /api/parks/crowds — $0.08
+Crowd prediction
+
+### GET /api/travel/weather — $0.15
+Travel weather forecast
+
+### GET /api/travel/deals — $0.08
+Travel deals
+
+### GET /api/travel/plan — $0.2
+Trip itinerary
+
+### GET /api/travel/visa — $0.08
+Visa requirements by nationality and destination
+
+### GET /api/travel/insurance — $0.08
+Travel insurance comparison and recommendation
+
+### GET /api/travel/pack — $0.1
+AI packing list by destination, climate, and activities
+
+### GET /api/travel/budget — $0.1
+Daily travel budget by destination and style
+
+### GET /api/travel/currency — $0.08
+Currency exchange rates and money tips for destination
+
+### GET /api/travel/phrasebook — $0.05
+Essential travel phrasebook by destination language
+
+### GET /api/travel/translate — $0.03
+Real-time travel translation (menus, signs, conversations)
+
+### GET /api/travel/fare-intel — $0.12
+Flight fare intelligence — when to book, cheapest months
+
+### GET /api/travel/points — $0.12
+Points & miles redemption optimizer
+
+### GET /api/travel/trip-check — $0.5
+One-call pre-booking trip clearance (visa + health + safety + weather + money)
+
+### GET /api/travel/disruption — $0.25
+Flight disruption risk for an airport and date
+
+### GET /api/rights/check — $0.05
+Flight compensation eligibility — EU261 / UK261 / Canada APPR / Brazil ANAC 400 / Turkey SHY / India DGCA (deterministic)
+
+### GET /api/rights/letter — $2
+Citation-backed flight compensation claim letter (6 regimes, ready to send)
+
+## TruthPulse API (truthpulse)
+
+Primary-source intelligence for FOIA releases, declassified archives, court records, forensic evidence, UAP disclosures, and conspiracy theory evidence briefs. Evidence-first. No spin. Global. All en…
+Base URL: https://truthpulse.theaslangroupllc.com
+
+### GET /api/truth/foia-search — $0.1
+FOIA release search
+
+### GET /api/truth/foia-draft — $0.15
+FOIA request letter generator
+
+### GET /api/truth/court-case — $0.15
+Court case intelligence
+
+### GET /api/truth/evidence-extract — $0.2
+Forensic evidence extraction
+
+### GET /api/truth/declassified — $0.1
+Declassified archive search
+
+### GET /api/truth/uap-records — $0.1
+Global UAP/UFO government records
+
+### GET /api/truth/conspiracy-brief — $0.2
+Conspiracy theory evidence brief
+
+### GET /api/truth/entity-network — $0.2
+Entity connection mapping
+
+### GET /api/truth/new-releases — $0.08
+Latest FOIA and court releases feed
+
+### GET /api/truth/media-vs-record — $0.2
+Media narrative vs. court record
+
+### GET /api/truth/international-foia — $0.15
+International FOI search and request drafting
+
+## VenturePulse API (venturepulse)
+
+Startup funding intelligence API. VC round data, investor matching, pitch deck scoring, term sheet decoding, cap table modeling, global accelerator directory, market sizing, legal formation, comparab…
+Base URL: https://venturepulse.theaslangroupllc.com
+
+### GET /api/startup/funding-search — $0.1
+VC funding round intelligence
+
+### GET /api/startup/investor-match — $0.15
+Investor matching engine
+
+### GET /api/startup/pitch-score — $0.2
+Pitch deck scoring
+
+### GET /api/startup/term-sheet — $0.2
+Term sheet decoder
+
+### GET /api/startup/cap-table — $0.15
+Cap table dilution modeler
+
+### GET /api/startup/accelerator — $0.1
+Global accelerator directory
+
+### GET /api/startup/market-size — $0.15
+TAM/SAM/SOM market size analysis
+
+### GET /api/startup/legal-formation — $0.15
+Startup legal formation guide
+
+### GET /api/startup/comparable — $0.1
+Comparable deal benchmarks
+
+### GET /api/startup/due-diligence — $0.15
+Investor due diligence prep
+
+## VetPulse API (vetpulse)
+
+Global veterans benefits intelligence API. AI-synthesized guidance on disability compensation, Aid & Attendance-style pensions, TDIU/unemployability, claim strategy, caregiver stipends, education ben…
+Base URL: https://api.vetpulse.theaslangroupllc.com
+
+### GET /api/vet/disability — $0.15
+Veteran disability rating analysis (US, UK, Canada, Australia, NZ, Germany)
+
+### GET /api/vet/aid-attendance — $0.15
+Veteran pension / Aid & Attendance-style eligibility (US, UK, Canada, Australia, NZ, Germany)
+
+### GET /api/vet/tdiu — $0.15
+TDIU / unemployability eligibility (US, UK, Canada, Australia, NZ, Germany)
+
+### GET /api/vet/claim-builder — $0.2
+Veteran disability claim evidence strategy (US, UK, Canada, Australia, NZ, Germany)
+
+### GET /api/vet/caregiver — $0.1
+Veteran family caregiver stipend and benefits (US, UK, Canada, Australia, NZ, Germany)
+
+### GET /api/vet/education — $0.1
+Veteran education benefit comparison (US GI Bill; UK, Canada, Australia, NZ, Germany equivalents)
+
+### GET /api/vet/state-benefits — $0.1
+State/regional veteran benefits (US states; UK, Canada, Australia, NZ, Germany regions)
+
+### GET /api/vet/home-loan — $0.08
+Veteran home-buying assistance analysis (US VA loan; Australia DHOAS; UK Forces Help to Buy)
+
+### GET /api/vet/discounts — $0.05
+Verified veteran discounts by category (US, UK, Canada, Australia, NZ, Germany)
+
+## WaterPulse API (waterpulse)
+
+Global water intelligence API. 9 endpoints covering US groundwater (USGS), streamflow, drought (US Drought Monitor), water quality (EPA WQP), aquifer sustainability, flood risk, global water stress, …
+Base URL: https://waterpulse.theaslangroupllc.com
+
+### GET /api/water/groundwater — $0.08
+Groundwater levels (USGS)
+
+### GET /api/water/streamflow — $0.05
+Streamflow — river discharge (USGS)
+
+### GET /api/water/gauge — $0.01
+River-gauge tick — deterministic USGS primitive
+
+### GET /api/water/drought — $0.08
+Drought status (US Drought Monitor)
+
+### GET /api/water/quality — $0.08
+Water quality (EPA WQP + USGS)
+
+### GET /api/water/aquifer — $0.15
+Aquifer sustainability analysis
+
+### GET /api/water/flood-risk — $0.15
+Flood risk intelligence
+
+### GET /api/water/global-stress — $0.15
+Global water stress by country/basin
+
+### GET /api/water/agriculture-use — $0.15
+Agricultural water use intelligence
+
+### GET /api/water/supply-brief — $0.5
+Municipal water supply brief
+
+### GET /api/water/supply-snapshot — $0.25
+Water supply numbers snapshot — deterministic preview
+
+## WealthPulse API (wealthpulse)
+
+Personal finance intelligence API. 14 endpoints grounded in live FRED rate data and official FDIC Call Report data — financial health, retirement, debt, credit cards, mortgage, Social Security, tax o…
+Base URL: https://wealthpulse.theaslangroupllc.com
+
+### GET /api/wealth/snapshot — $0.15
+Financial health snapshot
+
+### GET /api/wealth/retire — $0.15
+Retirement readiness projection
+
+### GET /api/wealth/debt — $0.1
+Avalanche vs snowball debt payoff strategy
+
+### GET /api/wealth/cards — $0.1
+Best credit card for your spending profile
+
+### GET /api/wealth/mortgage — $0.1
+How much house can I afford
+
+### GET /api/wealth/debt-negotiate — $0.15
+Can I settle this debt for less
+
+### GET /api/wealth/advisor — $0.1
+Financial advisor finder, comparison, and background check
+
+### GET /api/wealth/ssa — $0.15
+Social Security claiming strategy
+
+### GET /api/wealth/tax — $0.15
+Year-end tax optimization
+
+### GET /api/wealth/roth — $0.1
+Roth vs Traditional IRA/401k decision
+
+### GET /api/wealth/emergency — $0.1
+Emergency fund sizing
+
+### GET /api/wealth/inheritance — $0.1
+Inherited IRA and estate rules
+
+### GET /api/wealth/trump-account — $0.15
+Trump Account (IRC §530A) eligibility, strategy, and rules
+
+### GET /api/wealth/bank-check — $0.02
+FDIC bank-health check — deterministic Call Report primitive
+
+### GET /api/wealth/unclaimed — $0.5
+Find unclaimed money owed to you
+
+### GET /api/wealth/card-benefit — $0.05
+Credit-Card Benefit Coverage Check
+
+### GET /api/wealth/card-benefit-preview — $0.25
+Card-Benefit Coverage PREVIEW
+
+### GET /api/wealth/card-benefit-pack — $2
+Card-Benefit Claim Pack
+
+---
+Operated by The Aslan Group LLC. Analytics and observable facts, not financial/legal/medical advice. Terms per vertical at <base>/terms.

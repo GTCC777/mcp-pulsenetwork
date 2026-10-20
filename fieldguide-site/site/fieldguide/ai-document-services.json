@@ -1,0 +1,65 @@
+{
+  "name": "AI document services for small businesses",
+  "slug": "ai-document-services",
+  "category": "B2B services",
+  "summary": "Run the document back-office for local businesses that are drowning in paperwork: scanned archives made searchable, invoice piles turned into spreadsheets, contracts cleaned up and redacted, signatures collected, certified mail handled. Built on off-the-shelf AI PDF tools plus a pay-per-letter mailing engine.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/ai-document-services/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "mailpulse",
+      "name": "MailPulse",
+      "base_url": "https://mailpulse.theaslangroupllc.com",
+      "openapi": "https://mailpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://mailpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/verify-address",
+          "price": "$0.01",
+          "description": "Verify a mailing address (US + international)"
+        },
+        {
+          "path": "/api/letters",
+          "price": "$3.00",
+          "description": "THE paid action: prints and mails a real physical letter via Lob once payment settles. Price varies by service — standard $3.00, certified $12.00, certified_return_receipt $14.00, international $5.00 — the amount shown here is the representative/minimum price; the actual x402 charge always matches the caller's quote_id-verified order from POST /api/quote (free, no x402 gate). Requires a client_request_id (8-128 chars) for idempotency."
+        },
+        {
+          "path": "/api/letters/{id}",
+          "price": "$0.005",
+          "description": "Letter status / USPS tracking poll"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=ai-document-services — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"mailpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: ai-document-services\"."
+  },
+  "setup_steps": [
+    "Pick your suite (the comparison at thebizcheckup.com/adobe-alternatives is a ten-minute read), buy it, and run all four jobs on your own paperwork first: OCR a folder of scans, extract one statement pile to a spreadsheet, redact a document properly, set up one e-signature.",
+    "Define three flat-priced packages with names a busy owner understands: the archive rescue, the invoice pile, the signature setup. Services in this lane commonly price simple jobs at $50 to $150 and archive projects by the box; your tool cost is a rounding error, so price on the hours and the care.",
+    "Do one free before-and-after for a business you already know, and photograph the before (the box of paper) with permission. That image is your entire marketing.",
+    "Pitch where owners already complain about paperwork: the local chamber, bookkeeper referrals, one plain post in a local business group. \"I make your paperwork searchable, signable, and sent\" is the whole pitch.",
+    "Write your data-handling promise (what you keep, for how long, and that you delete after delivery) before your first paid job, and put it on the intake page."
+  ],
+  "licensing_notes": [
+    "Formatting, converting, extracting, and organizing documents is clerical work, and clerical work is not a licensed profession. The line to respect is content: you process documents, you do not author legal ones or advise on what they should say. If a client asks whether their contract is any good, that question belongs to a lawyer, and saying so is part of the service.",
+    "You will regularly hold other people’s sensitive paper: contracts, payroll runs, medical invoices. Act like it. Take files through a channel you control, keep them only as long as the job runs, delete them when it ends, and say all of that on your site. In most places there is no license for this business, but data-protection rules (GDPR and its cousins) apply the moment personal information is in the pile, and redaction jobs in particular deserve a second pass before delivery."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

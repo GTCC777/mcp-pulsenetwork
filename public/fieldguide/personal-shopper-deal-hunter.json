@@ -1,0 +1,87 @@
+{
+  "name": "Personal shopper and deal-hunting service",
+  "slug": "personal-shopper-deal-hunter",
+  "category": "Commerce & flipping",
+  "summary": "Find people the right product at the best achievable price, stacking sales, coupons, and cashback, and charge a flat finder fee.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/personal-shopper-deal-hunter/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "findpulse",
+      "name": "FindPulse",
+      "base_url": "https://findpulse.theaslangroupllc.com",
+      "openapi": "https://findpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://findpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/find/product",
+          "price": "$0.10",
+          "description": "Best product for use case"
+        },
+        {
+          "path": "/api/find/buy-check",
+          "price": "$0.50",
+          "description": "Pre-purchase buy/wait/avoid verdict (one call)"
+        },
+        {
+          "path": "/api/find/alternative",
+          "price": "$0.08",
+          "description": "Cheaper alternatives"
+        }
+      ]
+    },
+    {
+      "vertical": "dealpulse",
+      "name": "DealPulse",
+      "base_url": "https://dealpulse.theaslangroupllc.com",
+      "openapi": "https://dealpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://dealpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/deals/compare",
+          "price": "$0.08",
+          "description": "Live price comparison across retailers"
+        },
+        {
+          "path": "/api/deals/history",
+          "price": "$0.08",
+          "description": "Price history and best-time-to-buy analysis for a product"
+        },
+        {
+          "path": "/api/deals/stack",
+          "price": "$0.10",
+          "description": "Deal stacking — combine sale + coupon + cashback for maximum savings"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=personal-shopper-deal-hunter — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"findpulse,dealpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: personal-shopper-deal-hunter\"."
+  },
+  "setup_steps": [
+    "Do ten free requests for friends this week and keep score: hours saved, dollars saved, both written down.",
+    "Set three flat tiers by ticket size and publish them.",
+    "Pick a visible niche to start (parents’ gear, home office, gaming) so word-of-mouth has something to grab.",
+    "Post one worked example (request, research, the stack, the final price) as your storefront. One honest example outsells any ad."
+  ],
+  "licensing_notes": [
+    "None. If you also join affiliate programs for products you recommend, disclose it plainly on every recommendation (FTC endorsement rules); your credibility is the whole asset here."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

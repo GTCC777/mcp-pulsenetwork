@@ -1,8 +1,8 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
   "name": "com.theaslangroupllc.pulse/pulsenetwork",
-  "description": "825 paid intelligence endpoints in one MCP server \u2014 agents pay per query via x402 USDC on Base.",
-  "version": "1.2.0",
+  "description": "914 paid market-data & token-safety endpoints — keyless x402 USDC: Base, Solana, XRPL, +8 chains",
+  "version": "1.4.0",
   "repository": {
     "url": "https://github.com/GTCC777/mcp-pulsenetwork",
     "source": "github"

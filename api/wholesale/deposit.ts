@@ -11,6 +11,7 @@
 // tier amount, a net-positive exploit loop). Deposits must always go through real settlement.
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { handlePaymentGate } from '../../lib/x402.js';
+import { paidCacheArm } from '../../lib/paid-cache.js';
 import { pipe, isConfigured, KEY_RE, tierToMicro, DEPOSIT_TIERS_USD } from '../../lib/wholesale.js';
 
 function stripInternalKeyHeader(headers: VercelRequest['headers']): VercelRequest['headers'] {
@@ -111,7 +112,9 @@ async function handlerImpl(req: VercelRequest, res: VercelResponse): Promise<voi
   try {
     const [newBalRaw] = await pipe([['INCRBY', `pn:wk:bal:${key}`, depositMicro]]);
     const newBal = Number(newBalRaw ?? 0);
+    res.setHeader('Cache-Control', 'private, no-store');
     res.setHeader('PAYMENT-RESPONSE', gate.settlementHeader);
+    paidCacheArm(req, res);
     res.status(200).json({
       credited_usd: tier,
       new_balance_usd: Number((newBal / 1_000_000).toFixed(6)),

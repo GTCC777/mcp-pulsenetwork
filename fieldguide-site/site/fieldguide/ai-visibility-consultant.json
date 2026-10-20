@@ -1,0 +1,74 @@
+{
+  "name": "AI-visibility consulting for local businesses",
+  "slug": "ai-visibility-consultant",
+  "category": "B2B services",
+  "summary": "Scan a business’s website for the signals AI assistants actually read, hand them the evidence and the fix list. Engine cost is about $0.65 per client; SEO consultancies bill monthly retainers for less concrete work.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/ai-visibility-consultant/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "marketpulse",
+      "name": "MarketPulse",
+      "base_url": "https://marketpulse.theaslangroupllc.com",
+      "openapi": "https://marketpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://marketpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/market/ai-visibility-check",
+          "price": "$0.50",
+          "description": "Live AI-visibility check (GEO/AEO) w/ verbatim site evidence"
+        },
+        {
+          "path": "/api/market/llm-visibility",
+          "price": "$0.15",
+          "description": "LLM visibility analysis"
+        },
+        {
+          "path": "/api/market/local-seo",
+          "price": "$0.08",
+          "description": "Local SEO optimization guide"
+        },
+        {
+          "path": "/api/market/seo-review",
+          "price": "$0.10",
+          "description": "Technical SEO review"
+        },
+        {
+          "path": "/api/market/content-brief",
+          "price": "$0.15",
+          "description": "Dual-optimized content brief"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=ai-visibility-consultant — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"marketpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: ai-visibility-consultant\"."
+  },
+  "setup_steps": [
+    "Scan your own site first, fix what it flags, and keep the before-and-after. A consultant whose own site grades “strong” opens every conversation from the right side of the table.",
+    "Scan ten local businesses you’d want as clients. The ones blocking AI crawlers without knowing it are your warmest calls: you’re not selling, you’re showing them their own robots.txt.",
+    "Set a flat diagnostic fee and a separate implementation fee. The scan costs you fifty cents; established SEO consultancies bill monthly retainers for reporting less concrete than this.",
+    "Deliver the first three as paid pilots at half price in exchange for a re-scan testimonial once their grade moves.",
+    "Offer a quarterly re-scan subscription. Sites drift, platforms change crawler names, and the re-scan is recurring revenue with near-zero marginal work."
+  ],
+  "licensing_notes": [
+    "Website consulting is unregulated nearly everywhere. The honest-practice rules are commercial, not legal: never promise a ranking or a recommendation rate (no one can), sell the evidence and the fixes, and let re-scans do the proving. If you also run ads for clients, disclose any affiliate or platform relationships plainly."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

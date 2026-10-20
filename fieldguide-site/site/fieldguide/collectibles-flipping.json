@@ -1,0 +1,68 @@
+{
+  "name": "Collectibles flipping with pricing data",
+  "slug": "collectibles-flipping",
+  "category": "Commerce & flipping",
+  "summary": "Buy and sell cards, coins, comics, and memorabilia with live market-value, grading, and authentication intelligence instead of gut feel.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/collectibles-flipping/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "collectablespulse",
+      "name": "CollectablesPulse",
+      "base_url": "https://collectablespulse.theaslangroupllc.com",
+      "openapi": "https://collectablespulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://collectablespulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/collect/value",
+          "price": "$0.10",
+          "description": "Current market value by grade/condition"
+        },
+        {
+          "path": "/api/collect/grade",
+          "price": "$0.08",
+          "description": "Grading service guide"
+        },
+        {
+          "path": "/api/collect/authenticate",
+          "price": "$0.10",
+          "description": "Authentication guide — spot fakes, trusted services"
+        },
+        {
+          "path": "/api/collect/invest",
+          "price": "$0.15",
+          "description": "Investment signal — buy/hold/sell with analysis"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=collectibles-flipping — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"collectablespulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: collectibles-flipping\"."
+  },
+  "setup_steps": [
+    "Pick one category you already know and love. One.",
+    "Set a $100–$300 float and a rule: every buy gets a value check first, no exceptions, even at auction pace.",
+    "Do one estate-sale weekend and list everything within three days; velocity teaches faster than margin at the start.",
+    "Track every flip in a spreadsheet: buy price, fees, sale price, days held. The spreadsheet is your real teacher."
+  ],
+  "licensing_notes": [
+    "No license for buying and selling collectibles generally, with local exceptions worth checking: some jurisdictions regulate secondhand dealers or precious-metal buyers (registration, hold periods). Report your income; flipping profits are taxable income everywhere, and marketplaces report sales to tax authorities in many countries now. Never sell an item as graded or authenticated when it isn’t."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

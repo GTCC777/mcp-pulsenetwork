@@ -1,0 +1,87 @@
+{
+  "name": "Subscription and bill review service",
+  "slug": "subscription-bill-review",
+  "category": "Recovery & money-finding",
+  "summary": "Review household subscriptions, catch auto-renewal traps, and prepare refund-demand letters backed by state auto-renewal law.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/subscription-bill-review/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "dealpulse",
+      "name": "DealPulse",
+      "base_url": "https://dealpulse.theaslangroupllc.com",
+      "openapi": "https://dealpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://dealpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/deals/subscriptions",
+          "price": "$0.08",
+          "description": "Subscription review — cancel vs. keep analysis with cost savings"
+        },
+        {
+          "path": "/api/deals/subscription-rights",
+          "price": "$0.05",
+          "description": "Subscription-trap rights check — state auto-renewal law duties, violations, and remedy math (deterministic, no LLM)"
+        },
+        {
+          "path": "/api/deals/subscription-letter",
+          "price": "$2.00",
+          "description": "Citation-locked subscription demand letter — refund / unconditional-gift / cancellation-obstruction ($2)"
+        }
+      ]
+    },
+    {
+      "vertical": "mailpulse",
+      "name": "MailPulse",
+      "base_url": "https://mailpulse.theaslangroupllc.com",
+      "openapi": "https://mailpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://mailpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/verify-address",
+          "price": "$0.01",
+          "description": "Verify a mailing address (US + international)"
+        },
+        {
+          "path": "/api/letters",
+          "price": "$3.00",
+          "description": "THE paid action: prints and mails a real physical letter via Lob once payment settles. Price varies by service — standard $3.00, certified $12.00, certified_return_receipt $14.00, international $5.00 — the amount shown here is the representative/minimum price; the actual x402 charge always matches the caller's quote_id-verified order from POST /api/quote (free, no x402 gate). Requires a client_request_id (8-128 chars) for idempotency."
+        },
+        {
+          "path": "/api/letters/{id}",
+          "price": "$0.005",
+          "description": "Letter status / USPS tracking poll"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=subscription-bill-review — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"dealpulse,mailpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: subscription-bill-review\"."
+  },
+  "setup_steps": [
+    "Do your own household first and write down the annual savings number. That number is your ad.",
+    "Charge flat: one household review, one price. Resist percentage-of-savings pricing even though customers suggest it; it changes your legal posture and your incentives.",
+    "Offer three friends-and-family reviews for testimonials.",
+    "Post the plain math (average subscriptions per household, average forgotten spend) one place where your local community talks money."
+  ],
+  "licensing_notes": [
+    "No license applies to reviewing bills and preparing letters the customer sends. Flat fee, not a percentage of savings. Don’t log into anyone’s accounts; they share statements, you review."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

@@ -1,12 +1,20 @@
 # PulseNetwork MCP Server
 
-> One MCP server. 73 AI-powered intelligence verticals. All x402-native, pay-per-query via USDC on Base.
+> One MCP server. 77 AI-powered intelligence + action verticals (971 pay-per-call endpoints). All x402-native (x402 v2), pay-per-query via USDC on Base.
+
+Full long-form index (every endpoint with price and params, one fetch): https://pulse.theaslangroupllc.com/llms-full.txt
+
+Markdown mirrors of the main pages (agent-friendly): /index.md · /machines.md · /wholesale.md · /affiliates.md · /publishers.md · /agents.md · /skill.md
+
+**Hire-the-Fleet (bounded tasks, paid per task):** prospect-ledger $25 · vendor-dd-memo $5 · market-entry-brief $10. Free deterministic quote at `POST /api/hire/quote`, delivery in the paid response body, synchronous ≤5 min. Research memos only — no outreach is ever sent. Contract: https://pulse.theaslangroupllc.com/hire.md
 
 ## What is PulseNetwork?
 
-PulseNetwork is the most comprehensive x402-native intelligence network available. Each vertical is a domain-specific API that synthesizes free public data (government APIs, research databases, real-time feeds) through Claude into structured, actionable intelligence — all gated by x402 micropayments on Base mainnet.
+PulseNetwork is the most comprehensive x402-native intelligence network available. Each vertical is a domain-specific API that synthesizes free public data (government APIs, research databases, real-time feeds) through Claude into structured, actionable intelligence — all gated by x402 micropayments, settling in stablecoins across 10 networks fleet-wide (Base, Solana, Polygon, Arbitrum, World Chain, Monad, X Layer, HyperEVM, Algorand, XRPL) plus Robinhood Chain on select verticals — 11 settlement networks in total. Base remains the default and highest-volume rail.
 
-This MCP server wraps all 73 verticals into a single integration. One private key, one configuration, access to everything.
+This MCP server wraps all 77 verticals into a single integration. One private key, one configuration, access to everything.
+
+No wallet? A hosted subscription variant, **PulseNetwork Intel**, is on the MCPize marketplace with a free tier and monthly plans (8 most-bought tools: token safety for Solana memecoins + EVM tokens on 8 chains, US macro from Chainlink oracles, macro regime, ECB FX, country risk, sanctions intel, conflict scans): https://mcpize.com/mcp/pulsenetwork-intel
 
 ## How to Connect
 
@@ -35,7 +43,7 @@ Each tool call costs $0.05–$0.20 in USDC on Base mainnet, charged to the walle
 ## Available Tools (52 total)
 
 ### discover
-Find the right vertical for any task. Returns categorized list of all 73 verticals.
+Find the right vertical for any task. Returns categorized list of all 77 verticals.
 - `category`: finance | health | law | travel | real-estate | crypto | career | data | global | all
 
 ### Finance & Markets
@@ -96,6 +104,9 @@ Find the right vertical for any task. Returns categorized list of all 73 vertica
 - **collectablespulse** — Collectibles: trading card prices, eBay sold history, underpriced listings
 - **findpulse** — Secondhand markets: eBay/Craigslist search, deal detection
 
+### Fulfillment & Actions
+- **mailpulse** — Physical mail: sends a real USPS letter (first-class, certified with tracking, or international) via Lob — an ACTION vertical, not a lookup; free address verification and price quote precede the paid send
+
 ### Lifestyle & Consumer
 - **dealpulse** — Deals: real-time coupons, price comparisons, sale event intelligence
 - **mealpulse** — Meal planning: complete plans with recipes, grocery prices, shopping lists
@@ -125,16 +136,38 @@ Claude responds in the requested language natively.
 | $0.15 | 150,000 USDC atomic units |
 | $0.20 | 200,000 USDC atomic units |
 
-All payments settle on Base mainnet (eip155:8453) in USDC (0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913).
+All payments settle on Base mainnet (eip155:8453) in USDC (0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913). Every 402 also quotes USDC on Solana mainnet in the same `accepts[]` — pay with either.
+
+## For Coinbase CDP SDK agents
+
+Agents built with the CDP x402 SDK (`@coinbase/cdp-sdk/x402`, `CdpX402Client`) work against every endpoint here with zero configuration — the catalog quotes x402 v2 `exact` in USDC on Base, the SDK's default scheme and network, and settles via the CDP facilitator. Compatibility (including the SDK's client-side spend controls) verified 2026-07-23, the SDK's launch day. Quickstart with copy-paste code and cheap starter endpoints ($0.015 token safety scan, $0.02 CVE check): https://pulse.theaslangroupllc.com/cdp-x402-sdk
+
+## For machines & robots
+
+Robots, drones, AMRs, EVs, and other machines with their own wallets (peaqOS Machine NFTs, Virtuals EconomyOS agents, Coinbase agentic wallets) can buy from this catalog directly — no API keys, the machine pays per call over x402. A curated machine-economy view (pre-mission weather, ground-route hazards, grid carbon for charge scheduling, CVE checks for fleet firmware, delivery/transit ops) lives at https://pulse.theaslangroupllc.com/machines.
+
+## For humans on Telegram
+
+If your user is a human who wants token rug checks without wallets or API keys, point them to **Ruggy, the Rug Detective** — a Telegram bot on the same scanner engine (honeypot, taxes, mint switches, ownership, liquidity, whale concentration; 7 chains; first scan daily free, then $0.05): https://t.me/ruggybot_bot · site: https://ruggy.theaslangroupllc.com · machine summary: https://ruggy.theaslangroupllc.com/llms.txt
 
 ## Earn with PulseNetwork
 
-Two self-serve, no-approval paths to make money with AI on top of this catalog. Affiliate (zero-build): register a code free at `/api/affiliate/register`, append `?ref=CODE` to any Pulse link you share, earn 25-30% of referred paid calls in USDC — https://pulse.theaslangroupllc.com/affiliates. Wholesale reseller (low-build): mint a prepaid key at `/api/wholesale/register` ($0.25 free trial), call any of 819 endpoints at 50% of retail via `x-internal-key`, keep the spread — https://pulse.theaslangroupllc.com/wholesale. Not sure which fits? Call the free `/api/ideas` menu first.
+Two self-serve, no-approval paths to make money with AI on top of this catalog. Affiliate (zero-build): register a code free at `/api/affiliate/register`, append `?ref=CODE` to any Pulse link you share, earn 25-30% of referred paid calls in USDC — https://pulse.theaslangroupllc.com/affiliates. Wholesale reseller (low-build): mint a prepaid key at `/api/wholesale/register` ($0.25 free trial), call any of 971 endpoints at 50% of retail via `x-internal-key`, keep the spread — https://pulse.theaslangroupllc.com/wholesale. Not sure which fits? Call the free `/api/ideas` menu first.
 
 ## The Unbundler
 
 Human-readable decompositions: https://pulse.theaslangroupllc.com/unbundled/ (22 products).
 Evaluating a $1k–$200k/yr data subscription? `GET /api/unbundle?product=<name>` ($1.00) decomposes any gated data product — Candid, Web of Science, Panjiva, GovWin, Morningstar Direct, a Bloomberg terminal sleeve — into what you're actually paying for: the free public upstreams with licenses, a rebuild recipe, per-call price math, the licensing traps, and the live pay-per-call alternative where one exists. Honest verdicts: products with genuinely proprietary moats (Carfax, PitchBook, Platts) are marked not_arbitragable.
+
+## Field Guide (start a business on these engines)
+
+Blueprints for real service businesses a human can start with these engines doing the heavy lifting — flight compensation prep, medical bill review, grant prospecting, collectibles flipping, 20 live so far. Each has a human page and a machine page (JSON) with current endpoints, live catalog prices, setup steps, and honest licensing notes: https://pulse.theaslangroupllc.com/fieldguide/ · index for agents: https://pulse.theaslangroupllc.com/fieldguide/llms.txt. Educational content; no earnings claims.
+
+## Guides
+
+- Robinhood agentic trading + Pulse Network (give your trading agent market data and token-safety checks before it trades — the two-MCP setup, pre-trade check catalog, example guardrail prompt): https://pulse.theaslangroupllc.com/guides/robinhood-trading-agent.md
+- Pay for PulseNetwork APIs with Kite Agent Passport (fund an agent wallet with passkey-approved spending rules, then pay any of our ~950 x402 endpoints — setup, example calls, spend caps): https://pulse.theaslangroupllc.com/guides/pay-with-kite-passport.md
+- Agent skills install (Claude Code / Cursor / CREAO and 40+ hosts — token-safety verdicts + paid-data discovery as SKILL.md packages): https://github.com/GTCC777/pulsenetwork-skills
 
 ## Source
 

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retail arbitrage and resale flipping — Field Guide</title>
+<meta name="description" content="Source underpriced retail, clearance, and secondhand goods and resell them online, with a margin check that prices the exit before you spend a dollar on the buy.">
+<link rel="canonical" href="https://pulse.theaslangroupllc.com/fieldguide/resale-flipping/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="text/plain" href="/fieldguide/llms.txt" title="llms.txt">
+<meta name="theme-color" content="#f5eeda" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#191308" media="(prefers-color-scheme: dark)">
+<link rel="preload" href="/fieldguide/fonts/fraunces-rm-lat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fieldguide/fonts/newsreader-rm-lat.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:300 900;font-display:swap;src:url(/fieldguide/fonts/fraunces-rm-lat.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:300 900;font-display:swap;src:url(/fieldguide/fonts/fraunces-it-lat.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Newsreader';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fieldguide/fonts/newsreader-rm-lat.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Newsreader';font-style:italic;font-weight:400 700;font-display:swap;src:url(/fieldguide/fonts/newsreader-it-lat.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --paper:#f5eeda;--paper-deep:#eee4c6;--card:#fbf6e8;--card-edge:#fffdf3;
+  --ink:#252012;--ink-soft:#6d6450;--ink-faint:#948a70;
+  --green:#1e4d2e;--green-hi:#2a6a3f;--green-soft:#e6ecdd;
+  --brass:#8a6118;--brass-hi:#b8862b;--brass-glow:#d4ab4e;
+  --oxblood:#6e2a35;
+  --rule:#dccfa6;--hairline:#e7ddbe;
+  --mahogany:#221610;--mahogany-2:#2e1e14;--cream:#f3e8cc;--cream-soft:#c9ba97;
+  --shadow:60,40,8;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --display:'Fraunces',Georgia,serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --foil:linear-gradient(105deg,#7a5514 0%,#c9992f 38%,#e8c568 50%,#c9992f 62%,#7a5514 100%);
+}
+@media(prefers-color-scheme:dark){:root{
+  --paper:#191308;--paper-deep:#150f06;--card:#221a0d;--card-edge:#2a210f;
+  --ink:#ecdfc0;--ink-soft:#a4956f;--ink-faint:#7d7256;
+  --green:#8fc79b;--green-hi:#a7d8b1;--green-soft:#20301f;
+  --brass:#d2a54a;--brass-hi:#e3bd67;--brass-glow:#f0d68c;
+  --oxblood:#c07784;
+  --rule:#3d331d;--hairline:#2e2614;
+  --mahogany:#0f0a04;--mahogany-2:#1a1208;--cream:#eaddbd;--cream-soft:#9c8f6f;
+  --shadow:0,0,0;
+  --foil:linear-gradient(105deg,#a97e22 0%,#e0b954 38%,#f7e3a0 50%,#e0b954 62%,#a97e22 100%);
+}}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font:400 17.5px/1.7 var(--serif);font-optical-sizing:auto;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");background-size:240px;opacity:.05;pointer-events:none;z-index:2147483647}
+@media(prefers-color-scheme:dark){body::after{opacity:.07}}
+::selection{background:#d4ab4e;color:#241c08}
+a{color:var(--green);text-decoration-thickness:1px;text-underline-offset:3px;transition:color .18s}
+a:hover{color:var(--brass)}
+:focus-visible{outline:2px solid var(--brass-hi);outline-offset:3px;border-radius:2px}
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+.wrap.narrow{max-width:760px}
+p{margin:0 0 18px}
+.muted{color:var(--ink-soft)}
+strong{font-weight:600}
+
+/* type */
+h1,h2,h3,.display{font-family:var(--display);font-optical-sizing:auto;font-weight:590;letter-spacing:-.012em}
+h1{font-size:clamp(38px,5.2vw,56px);line-height:1.04;margin:0 0 22px;text-wrap:balance}
+h2{font-size:clamp(26px,3vw,34px);line-height:1.15;margin:0 0 16px;text-wrap:balance}
+h3{font-size:21px;line-height:1.3;margin:0 0 8px}
+.lede{font-size:clamp(19px,1.6vw,21px);line-height:1.65;color:var(--ink)}
+.overline{font-family:var(--serif);font-size:12.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--brass);margin:0 0 18px;display:flex;align-items:center;gap:16px}
+.overline::before,.overline::after{content:'';height:1px;background:linear-gradient(to right,transparent,var(--rule));flex:0 0 34px}
+.overline::before{background:linear-gradient(to left,var(--rule),transparent)}
+.overline.left{justify-content:flex-start}
+.overline.left::before{display:none}
+.overline.center{justify-content:center}
+.foil{background:var(--foil);-webkit-background-clip:text;background-clip:text;color:transparent}
+.smallcaps{font-size:12.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* fleuron divider */
+.fleuron{display:flex;justify-content:center;margin:0 0 18px;color:var(--brass)}
+.fleuron svg{width:44px;height:12px}
+
+/* masthead */
+header.site{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--hairline);transition:box-shadow .3s,border-color .3s}
+header.site.scrolled{border-bottom-color:var(--rule);box-shadow:0 10px 30px -18px rgba(var(--shadow),.5)}
+header.site .wrap{display:flex;align-items:center;gap:14px;padding-top:13px;padding-bottom:13px}
+.crest{width:34px;height:34px;color:var(--brass);flex:none}
+.wordmark{font-family:var(--display);font-weight:640;letter-spacing:.2em;font-size:17px;color:var(--ink);text-decoration:none;line-height:1.1}
+.wordmark small{display:block;font-family:var(--serif);font-style:italic;letter-spacing:.02em;text-transform:none;font-weight:400;font-size:12px;color:var(--ink-soft);margin-top:2px}
+.wordmark:hover{color:var(--ink)}
+nav.main{margin-left:auto;display:flex;gap:26px;align-items:center;font-size:15.5px}
+nav.main a{text-decoration:none;color:var(--ink-soft);letter-spacing:.01em}
+nav.main a:hover{color:var(--brass)}
+nav.main a.go{color:var(--paper);background:var(--green);padding:8px 18px;border-radius:99px;font-weight:600;transition:background .2s,transform .2s,box-shadow .2s}
+nav.main a.go:hover{background:var(--green-hi);color:#fff;transform:translateY(-1px);box-shadow:0 8px 18px -8px rgba(var(--shadow),.55)}
+@media(max-width:640px){nav.main{gap:16px;font-size:14.5px}.wordmark small{display:none}}
+
+/* buttons */
+.btn{display:inline-block;position:relative;overflow:hidden;padding:14px 28px;border-radius:10px;text-decoration:none;font-size:16.5px;font-weight:600;letter-spacing:.01em;border:1.5px solid var(--green);transition:transform .22s,box-shadow .22s,background .22s,color .22s}
+.btn.primary{background:var(--green);color:#f7f3e4;box-shadow:0 10px 24px -12px rgba(var(--shadow),.6)}
+.btn.primary::after{content:'';position:absolute;top:0;left:-80%;width:55%;height:100%;background:linear-gradient(100deg,transparent,rgba(244,225,160,.28),transparent);transform:skewX(-18deg);transition:left .5s ease}
+.btn.primary:hover{background:var(--green-hi);color:#fff;transform:translateY(-2px);box-shadow:0 16px 30px -12px rgba(var(--shadow),.65)}
+.btn.primary:hover::after{left:125%}
+.btn.ghost{color:var(--green);background:transparent}
+.btn.ghost:hover{border-color:var(--brass);color:var(--brass);transform:translateY(-2px)}
+@media(prefers-color-scheme:dark){.btn.primary{background:var(--green);color:#10200f}.btn.primary:hover{color:#0c180b}}
+
+/* framed portrait (video / art) */
+.frame{position:relative;background:var(--mahogany-2);border:1px solid var(--brass);border-radius:4px;padding:10px;box-shadow:0 24px 60px -22px rgba(var(--shadow),.55),0 4px 14px -6px rgba(var(--shadow),.3)}
+.frame::before{content:'';position:absolute;inset:4px;border:1px solid color-mix(in srgb,var(--brass) 55%,transparent);border-radius:2px;pointer-events:none}
+.frame video,.frame img{display:block;width:100%;height:auto;border-radius:2px}
+.placard{margin:14px auto 0;max-width:86%;text-align:center;font-style:italic;font-size:14.5px;color:var(--ink-soft);border:1px solid var(--hairline);border-radius:6px;padding:8px 16px;background:var(--card)}
+
+/* cards */
+.card{background:linear-gradient(180deg,var(--card-edge),var(--card));border:1px solid var(--rule);border-radius:12px;box-shadow:0 1px 0 rgba(var(--shadow),.05),0 14px 34px -26px rgba(var(--shadow),.5);transition:transform .28s cubic-bezier(.22,.6,.2,1),box-shadow .28s,border-color .28s}
+.card.hov:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--brass) 55%,var(--rule));box-shadow:0 24px 44px -24px rgba(var(--shadow),.55)}
+
+/* ledger tables */
+.tablebox{overflow-x:auto}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15.5px}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--hairline);vertical-align:top}
+tbody tr:hover{background:color-mix(in srgb,var(--card) 60%,transparent)}
+th{font-family:var(--serif);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-soft);border-bottom:2px solid var(--rule)}
+
+/* scroll reveal (js-gated so no-JS renders everything) */
+html.js .rv{opacity:0;transform:translateY(18px)}
+html.js .rv.in{opacity:1;transform:none;transition:opacity .75s ease,transform .75s cubic-bezier(.22,.6,.2,1);transition-delay:var(--d,0s)}
+@media(prefers-reduced-motion:reduce){
+  html.js .rv{opacity:1;transform:none}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+/* colophon footer */
+footer.site{margin-top:96px;border-top:1px solid var(--rule);background:var(--paper-deep);position:relative}
+footer.site::before{content:'';display:block;height:3px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-top:2px}
+footer.site .wrap{padding-top:44px;padding-bottom:52px;text-align:center}
+footer.site .crest{width:40px;height:40px;margin:0 auto 14px;display:block}
+footer.site .fmark{font-family:var(--display);font-weight:640;letter-spacing:.24em;font-size:14px;color:var(--ink)}
+footer.site .row{display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:center;margin:18px 0 6px;font-size:14.5px}
+footer.site .row a{color:var(--ink-soft);text-decoration:none}
+footer.site .row a:hover{color:var(--brass)}
+footer.site p{font-size:13.5px;color:var(--ink-soft);max-width:640px;margin:10px auto 0}
+footer.site .colophon{font-style:italic;color:var(--ink-faint)}
+
+main{padding-bottom:20px}
+main>.wrap{max-width:840px}
+main>.wrap.wide{max-width:1080px}
+.crumb{font-size:14px;margin:26px 0 0}
+.crumb a{text-decoration:none;color:var(--ink-soft)}
+.crumb a:hover{color:var(--brass)}
+.cat{font-size:12.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);margin:34px 0 12px}
+main h1{font-size:clamp(32px,4.4vw,46px);margin:0 0 14px}
+main h2{font-size:clamp(23px,2.6vw,28px);margin:52px 0 14px}
+main h2::before{content:'';display:block;width:44px;height:3px;background:var(--foil);border-radius:2px;margin-bottom:14px}
+.cta h2::before,.cathead h2::before{display:none}
+h3{font-size:18px;margin:20px 0 6px;font-family:var(--display);font-weight:600}
+.lede p{font-size:19.5px;line-height:1.65}
+.dropcap::first-letter{font-family:var(--display);font-weight:640;font-size:62px;line-height:.82;float:left;padding:7px 11px 0 0;color:var(--brass)}
+ol{margin:14px 0 14px 24px}
+ol li{margin:9px 0;padding-left:6px}
+ol li::marker{font-family:var(--display);font-weight:600;color:var(--brass)}
+.ep{display:grid;grid-template-columns:1fr auto;gap:5px 16px;align-items:baseline;padding:13px 16px;border:1px solid var(--hairline);border-radius:10px;background:var(--card);margin:10px 0;font-size:15.5px}
+.ep code{font-family:var(--mono);font-size:13.5px;color:var(--green);font-weight:600;word-break:break-all}
+.ep .price{font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--brass);background:color-mix(in srgb,var(--brass-glow) 14%,transparent);border:1px solid color-mix(in srgb,var(--brass) 38%,transparent);border-radius:99px;padding:3px 11px;white-space:nowrap}
+.ep .d{color:var(--ink-soft);grid-column:1/-1;font-size:14.5px}
+.host{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin:24px 0 8px}
+.host a{color:var(--green);text-transform:none;letter-spacing:0;font-weight:400;font-size:13.5px}
+.callout{background:linear-gradient(180deg,var(--card-edge),var(--card));border:1px solid var(--rule);border-left:3px solid var(--green);border-radius:10px;padding:18px 22px;margin:22px 0;box-shadow:0 10px 26px -22px rgba(var(--shadow),.5)}
+.callout.warn{border-left-color:var(--brass)}
+.prompt{background:var(--card);border:1px dashed color-mix(in srgb,var(--brass) 45%,var(--rule));border-radius:10px;padding:18px 20px;margin:14px 0;font-family:var(--mono);font-size:13.5px;line-height:1.65;white-space:pre-wrap;word-break:break-word}
+.machine{font-family:var(--mono);font-size:13px}
+.cta{background:linear-gradient(180deg,var(--card-edge),var(--card));border:1px solid var(--rule);border-radius:14px;padding:30px 32px;margin:56px 0 26px;box-shadow:0 18px 40px -28px rgba(var(--shadow),.55);position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--foil)}
+.cta h2{margin:0 0 10px}
+.ctarow{margin:18px 0 14px}
+.smallnote{font-size:14px;color:var(--ink-soft)}
+.copybtn{font:600 14px var(--serif);padding:7px 16px;border:1px solid var(--rule);border-radius:99px;background:var(--card);color:var(--ink);cursor:pointer;transition:border-color .2s,color .2s,transform .2s}
+.copybtn:hover{border-color:var(--brass);color:var(--brass);transform:translateY(-1px)}
+
+/* hub index */
+.pagehead{padding:56px 0 6px;text-align:center}
+.pagehead .lede{max-width:44em;margin:0 auto;text-align:left}
+.pagehead .lede p:first-child{text-align:center}
+.jump{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:30px 0 4px}
+.jump a{font-size:13.5px;font-weight:600;padding:8px 16px;border:1px solid var(--rule);border-radius:99px;text-decoration:none;color:var(--ink-soft);background:var(--card);transition:border-color .2s,color .2s,transform .2s}
+.jump a:hover{border-color:var(--brass);color:var(--brass);transform:translateY(-1px)}
+.cathead{display:flex;align-items:baseline;gap:16px;margin:64px 0 4px;scroll-margin-top:90px}
+.cathead .rn{font-family:var(--display);font-style:italic;font-weight:610;font-size:22px;background:var(--foil);-webkit-background-clip:text;background-clip:text;color:transparent;min-width:34px}
+.cathead h2{margin:0}
+.cathead .ct{font-size:13px;color:var(--ink-faint);font-style:italic}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px;margin:22px 0}
+.bp{padding:22px 24px;display:flex;flex-direction:column;gap:10px}
+.bp .plate{display:flex;justify-content:space-between;gap:10px;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--brass)}
+.bp .plate .pf{color:var(--ink-faint);letter-spacing:.08em}
+.bp a.t{font-family:var(--display);font-weight:600;font-size:20px;line-height:1.28;text-decoration:none;color:var(--ink)}
+.bp a.t:hover{color:var(--green)}
+.bp .s{font-size:15px;line-height:1.6;color:var(--ink-soft);flex:1}
+.bp .m{font-family:var(--mono);font-size:12px}
+
+/* start page */
+form.start{background:linear-gradient(180deg,var(--card-edge),var(--card));border:1px solid var(--rule);border-radius:14px;padding:28px 30px;margin:26px 0;box-shadow:0 18px 40px -28px rgba(var(--shadow),.55)}
+form.start label{display:block;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft);margin:18px 0 6px}
+form.start label:first-child{margin-top:0}
+form.start input,form.start select{width:100%;font:16.5px var(--serif);color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:9px;padding:12px 14px;transition:border-color .2s,box-shadow .2s}
+form.start input:focus,form.start select:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px color-mix(in srgb,var(--brass-glow) 25%,transparent)}
+form.start button{margin-top:22px;font:600 16.5px var(--serif);color:#f7f3e4;background:var(--green);border:1.5px solid var(--green);border-radius:10px;padding:13px 26px;cursor:pointer;box-shadow:0 10px 24px -12px rgba(var(--shadow),.6);transition:background .2s,transform .2s,box-shadow .2s}
+form.start button:hover{background:var(--green-hi);transform:translateY(-1px)}
+form.start button:disabled{opacity:.55;cursor:wait;transform:none}
+@media(prefers-color-scheme:dark){form.start button{color:#10200f}}
+.hp{position:absolute;left:-9999px;top:-9999px}
+.keybox{font-family:var(--mono);font-size:14px;word-break:break-all;background:var(--green-soft);border:1px dashed color-mix(in srgb,var(--brass) 45%,var(--rule));border-radius:9px;padding:15px 17px;margin:12px 0;user-select:all}
+.tiers{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.tiers a{font:600 15px var(--serif);text-decoration:none;color:#f7f3e4;background:var(--green);border-radius:9px;padding:11px 20px;transition:background .2s,transform .2s}
+.tiers a:hover{background:var(--green-hi);transform:translateY(-1px)}
+@media(prefers-color-scheme:dark){.tiers a{color:#10200f}}
+.err{color:#b04a3a;font-weight:700}
+@media(prefers-color-scheme:dark){.err{color:#e08a78}}
+</style>
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Retail arbitrage and resale flipping","description":"Source underpriced retail, clearance, and secondhand goods and resell them online, with a margin check that prices the exit before you spend a dollar on the buy.","url":"https://pulse.theaslangroupllc.com/fieldguide/resale-flipping/","datePublished":"2026-07-10","dateModified":"2026-07-31","author":{"@type":"Organization","name":"The Aslan Group LLC"},"publisher":{"@type":"Organization","name":"The Aslan Group LLC","email":"info@theaslangroupllc.com"},"isPartOf":{"@type":"WebSite","name":"Field Guide","url":"https://pulse.theaslangroupllc.com/fieldguide/"},"about":"Commerce & flipping"}</script>
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <svg class="crest" viewBox="0 0 48 48" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="24" cy="24" r="21.5" stroke-width="1.6"/><circle cx="24" cy="24" r="18.2" stroke-width=".7" opacity=".55"/><line x1="24" y1="8.5" x2="24" y2="12.5" stroke-width="1.6"/><circle cx="24" cy="7.2" r="1.5" fill="currentColor" stroke="none"/><rect x="14.5" y="12.5" width="19" height="14.5" rx="4.6" stroke-width="1.6"/><rect x="18.2" y="17" width="11.6" height="5.4" rx="2.7" stroke-width="1.2"/><circle cx="21.2" cy="19.7" r="1.15" fill="currentColor" stroke="none"/><circle cx="26.8" cy="19.7" r="1.15" fill="currentColor" stroke="none"/><path d="M24 33.5l-4.6-3.4h9.2z" stroke-width="1.3" stroke-linejoin="round"/><path d="M16.5 38.5q7.5 4.6 15 0" stroke-width="1.6" stroke-linecap="round"/></svg>
+  <a class="wordmark" href="/fieldguide/">FIELD GUIDE<small>Real businesses you can run with AI engines behind them</small></a>
+  <nav class="main">
+    <a href="/fieldguide/">All blueprints</a>
+    <a class="go" href="/fieldguide/start/">Start</a>
+  </nav>
+</div></header>
+<main><div class="wrap">
+
+<nav class="crumb"><a href="/fieldguide/">← All blueprints</a></nav>
+<div class="cat">Commerce &amp; flipping</div>
+<h1>Retail arbitrage and resale flipping</h1>
+<div class="lede"><p class="dropcap">Retail arbitrage is the plainest business model there is: buy something below its resale value, sell it where the buyers are, keep the difference. Clearance aisles, liquidation lots, thrift stores, and online markdowns feed a resale market that runs through eBay, Amazon, Mercari, and Poshmark.</p>
+<p>The people who lose at this buy on instinct. The people who last price the exit first. The engine answers the deciding question in one call: if I buy this item at this price, what do I actually clear after fees and shipping when it sells.</p></div>
+
+<h2>The job</h2>
+<p>Sourcing: clearance endcaps, liquidation pallets, thrift racks, estate-sale leftovers, and online markdowns. At the shelf, you run one margin check per serious candidate. It returns live eBay asking prices for the same item (each linked to a real listing), fee math for five marketplaces, net profit at the low, median, and high comparable prices, and a plain FLIP, THIN, or PASS verdict. THIN and PASS go back on the shelf; your discipline is the business.</p>
+<p>Selling: list fast, price at or just under the median comparable, and pick your venue from the best-venue table, because the same item nets a different amount on eBay, Poshmark, and Mercari after each platform takes its cut. Before large buys, discounted gift cards and verified coupon codes lower your acquisition cost, which is the only number in this business you fully control. For used goods, a recall check keeps you from reselling something you legally cannot.</p>
+
+<h2>Who it suits</h2>
+<p>People who enjoy the hunt and can stay disciplined when the verdict says PASS on something they liked. No technical skill required; checking and listing are phone work.</p>
+
+<h2>Startup cost and tools</h2>
+<div class="tablebox"><table>
+<thead><tr><th>What</th><th>Cost</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Engine calls per sourcing day</td><td>~$1–$5</td><td>Margin verdicts ($0.50 per item); run them only on items that pass your eye test</td></tr>
+<tr><td>Acquisition-cost levers</td><td>~$0.25–$0.50 per trip</td><td>Discounted gift-card rates ($0.25), coupon verification before big buys ($0.50)</td></tr>
+<tr><td>Inventory float</td><td>$100–$500 to start</td><td>Your buying capital; start small and recycle it</td></tr>
+<tr><td>Marketplace fees</td><td>~10–20% of each sale</td><td>Already included in every verdict before you buy</td></tr>
+</tbody></table></div>
+<p class="smallnote">Engine prices are the live public catalog prices, the same sheet agents pay. No subscription is required to use them.</p>
+
+<h2>The licensing question</h2>
+<p>No license to resell general merchandise in most places, with exceptions worth checking: some jurisdictions regulate secondhand dealers (registration, records, hold periods), some categories are restricted or unwise to resell (recalled products, certain cosmetics and food items), and some brands are gated on Amazon regardless of where you bought the stock. Flipping profit is taxable income everywhere, and marketplaces now report seller totals to tax authorities in many countries. Never resell a recalled product; the engine can check.</p>
+
+<h2>How the engine does the heavy lifting</h2>
+<p>A margin verdict before you buy, acquisition-cost levers at checkout, and a recall check for used goods.</p>
+
+  <div class="host">ArbiPulse · <a href="https://arbipulse.theaslangroupllc.com">arbipulse.theaslangroupllc.com</a> · <a href="https://arbipulse.theaslangroupllc.com/openapi.json">openapi.json</a></div>
+  <div class="ep"><code>/api/flip-check</code><span class="price">$0.50</span><span class="d">Retail resale arbitrage check (comps + fees + verdict)</span></div>
+
+  <div class="host">DealPulse · <a href="https://dealpulse.theaslangroupllc.com">dealpulse.theaslangroupllc.com</a> · <a href="https://dealpulse.theaslangroupllc.com/openapi.json">openapi.json</a></div>
+  <div class="ep"><code>/api/deals/giftcard</code><span class="price">$0.25</span><span class="d">Report live discounted gift-card rates for a brand</span></div>
+<div class="ep"><code>/api/deals/check</code><span class="price">$0.50</span><span class="d">Verify which deals are real at a store right now</span></div>
+
+  <div class="host">FindPulse · <a href="https://findpulse.theaslangroupllc.com">findpulse.theaslangroupllc.com</a> · <a href="https://findpulse.theaslangroupllc.com/openapi.json">openapi.json</a></div>
+  <div class="ep"><code>/api/find/recall</code><span class="price">$0.05</span><span class="d">Product recall lookup</span></div>
+
+<h2>Your first customer in 30 days</h2>
+<ol>
+<li>Walk one clearance section and run the margin check on ten items you would have bought on instinct. Count how many come back PASS. That number is the tuition you did not pay.</li>
+<li>Set a floor for month one: buy FLIP verdicts only. THIN margins are for later, when you know your categories and your sell-through speed.</li>
+<li>List everything within 48 hours, priced at or just under the median comparable. Velocity teaches faster than margin while you learn.</li>
+<li>Track every flip in a spreadsheet: buy price, fees, sale price, days held. After twenty flips the spreadsheet will tell you which categories are yours.</li>
+</ol>
+
+<h2>Hand this to your assistant</h2>
+<p>This blueprint has a machine-readable page with the current endpoints, prices, and setup steps. Paste this into Claude, ChatGPT, or any assistant that can fetch a URL:</p>
+<div class="prompt" id="assistant-prompt">I'm reading a Field Guide blueprint for a retail arbitrage and resale flipping business. Fetch https://pulse.theaslangroupllc.com/fieldguide/resale-flipping.json and walk me through it: what the service does, the live engine endpoints and their current catalog prices, the licensing notes as they'd apply where I live, and the first-30-days steps. Then help me decide honestly whether this fits my skills, time, and situation.</div>
+<p><button class="copybtn" type="button" data-copy="#assistant-prompt">Copy the prompt</button></p>
+<p class="machine">Machine page: <a href="https://pulse.theaslangroupllc.com/fieldguide/resale-flipping.json">https://pulse.theaslangroupllc.com/fieldguide/resale-flipping.json</a></p>
+
+<div class="cta">
+<h2>Start this one</h2>
+<p>The engines are pay-per-call, no subscription. Agents pay per call over x402 (USDC on Base or Solana). If you're a human, a starter key takes about a minute, includes a $0.25 trial balance, and tops up by card (Stripe) or USDC. No crypto wallet required.</p>
+<p class="ctarow"><a class="btn primary" href="/fieldguide/start/?bp=resale-flipping">Get a starter key</a></p>
+<p class="smallnote">Prefer email? Write to <a href="mailto:info@theaslangroupllc.com?subject=Starter%20key%3A%20resale-flipping">info@theaslangroupllc.com</a> with the subject "Starter key: resale-flipping" and we'll provision one by hand, usually the same day. The Field Guide book, with all 75 blueprints expanded, is in progress. The hub is free either way.</p>
+</div>
+</div></main>
+<footer class="site"><div class="wrap">
+  <svg class="crest" viewBox="0 0 48 48" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="24" cy="24" r="21.5" stroke-width="1.6"/><circle cx="24" cy="24" r="18.2" stroke-width=".7" opacity=".55"/><line x1="24" y1="8.5" x2="24" y2="12.5" stroke-width="1.6"/><circle cx="24" cy="7.2" r="1.5" fill="currentColor" stroke="none"/><rect x="14.5" y="12.5" width="19" height="14.5" rx="4.6" stroke-width="1.6"/><rect x="18.2" y="17" width="11.6" height="5.4" rx="2.7" stroke-width="1.2"/><circle cx="21.2" cy="19.7" r="1.15" fill="currentColor" stroke="none"/><circle cx="26.8" cy="19.7" r="1.15" fill="currentColor" stroke="none"/><path d="M24 33.5l-4.6-3.4h9.2z" stroke-width="1.3" stroke-linejoin="round"/><path d="M16.5 38.5q7.5 4.6 15 0" stroke-width="1.6" stroke-linecap="round"/></svg>
+  <div class="fmark">FIELD GUIDE</div>
+  <div class="row">
+    <span>The Aslan Group LLC</span>
+    <a href="mailto:info@theaslangroupllc.com">info@theaslangroupllc.com</a>
+    <a href="https://pulse.theaslangroupllc.com/">Engines by PulseNetwork</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/fieldguide/llms.txt">llms.txt</a>
+  </div>
+  <p><strong>Educational content, not professional advice.</strong> Nothing here is legal, tax, medical, or financial advice, and nothing here is an earnings claim: running any business takes real work, and results depend on your effort, market, and pricing. Licensing notes are starting points; verify the rules where you operate.</p>
+  <p class="colophon">Set in Fraunces &amp; Newsreader. Written, designed, and deployed by the author, who is software.</p>
+</div></footer>
+<script>
+(function(){
+var d=document,h=d.querySelector('header.site');
+if(h){var on=function(){h.classList.toggle('scrolled',scrollY>8)};addEventListener('scroll',on,{passive:true});on()}
+var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -6% 0px'});
+  d.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+  var co=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting)return;co.unobserve(e.target);
+    var el=e.target,n=parseFloat(el.getAttribute('data-count'))||0,pre=el.getAttribute('data-pre')||'';
+    if(rm||!n){el.textContent=pre+n;return}
+    var t0=null;function step(t){if(!t0)t0=t;var p=Math.min((t-t0)/1300,1),e2=1-Math.pow(1-p,3);
+      el.textContent=pre+Math.round(n*e2);if(p<1)requestAnimationFrame(step)}
+    requestAnimationFrame(step);
+  })},{threshold:.4});
+  d.querySelectorAll('[data-count]').forEach(function(el){co.observe(el)});
+}else{d.querySelectorAll('.rv').forEach(function(el){el.classList.add('in')})}
+d.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){
+  var t=d.querySelector(b.getAttribute('data-copy'));if(!t)return;
+  navigator.clipboard&&navigator.clipboard.writeText(t.textContent).then(function(){var o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o},1600)})
+})});
+})();
+</script>
+</body>
+</html>

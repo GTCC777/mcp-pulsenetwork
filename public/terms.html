@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API Terms of Use — PulseNetwork</title>
+<meta name="robots" content="index,follow">
+<style>
+  :root { --ink:#1a1a1a; --mut:#666; --line:#e2ddd4; --bg:#faf9f7; }
+  * { box-sizing:border-box; }
+  body { font-family:-apple-system,'Helvetica Neue',Arial,sans-serif; color:var(--ink);
+    max-width:760px; margin:0 auto; padding:40px 22px 80px; line-height:1.6; font-size:16px; background:#fff; }
+  h1 { font-size:26px; letter-spacing:-0.4px; margin:0 0 4px; }
+  .sub { color:var(--mut); font-size:14px; margin-bottom:32px; }
+  h2 { font-size:17px; margin:34px 0 8px; padding-top:18px; border-top:1px solid var(--line); }
+  h2:first-of-type { border-top:none; padding-top:0; }
+  p, li { font-size:15px; }
+  code { background:var(--bg); padding:1px 5px; border-radius:3px; font-size:13px; }
+  a { color:#1a5c9e; }
+  .box { background:var(--bg); border-left:3px solid var(--ink); padding:12px 16px; margin:14px 0; border-radius:0 4px 4px 0; }
+  .foot { margin-top:44px; padding-top:16px; border-top:1px solid var(--line); color:var(--mut); font-size:13px; }
+  @media (prefers-color-scheme: dark) {
+    body { background:#161514; color:#e8e4dd; } h1{color:#fff;}
+    :root { --line:#333; --bg:#201f1d; --mut:#9a948a; } code{color:#e8e4dd;} a{color:#6db3f2;}
+  }
+</style>
+</head>
+<body>
+<h1>API Terms of Use</h1>
+<div class="sub">PulseNetwork APIs, operated by The Aslan Group LLC · Last updated 13 July 2026</div>
+
+<div class="box">
+<strong>By calling a paid PulseNetwork API endpoint, you accept these terms.</strong> Payment for, or programmatic use of, any endpoint constitutes acceptance. If you do not accept, do not call the endpoints. These are self-serve, click-wrap terms — there is no separate signed agreement.
+</div>
+
+<h2>1. What we provide</h2>
+<p>PulseNetwork operates a network of machine-facing (agent-to-agent) API endpoints that return <strong>derived intelligence</strong> — computed answers, structured summaries and analyses assembled from public, licensed and on-chain data sources. Endpoints are priced per call and settle over the x402 protocol in USDC. Service is provided <strong>on an as-is, as-available basis, for informational purposes only</strong>, with no warranty of accuracy, fitness, or continuity, and with no support obligation. Nothing returned is financial, legal, medical, tax or professional advice.</p>
+
+<h2>2. Your licence, and its limits</h2>
+<p>Subject to these terms, you receive a non-exclusive, non-transferable, revocable licence to use the responses you pay for within your own applications and workflows.</p>
+<p><strong>You may not resell, redistribute, syndicate, or republish the raw data or responses as a standalone data product</strong>, nor in any manner that would breach the terms of the upstream sources the response is derived from. Several of our sources permit us to build derived products on their data but prohibit its bulk redistribution; that restriction flows down to you. You may use the <em>derived output</em> within your product; you may not re-expose our responses (or an upstream provider's data reachable through them) as a competing data feed.</p>
+
+<h2>3. Attribution &amp; free-at-source notice</h2>
+<p>Where a response names a data provider, that provider is the source of certain underlying data and is <strong>not affiliated with, and does not endorse, The Aslan Group LLC or PulseNetwork</strong>. Where an upstream licence requires provider attribution (for example, "Powered by CoinGecko", or citation of GDELT), that attribution is carried in the relevant response's <code>attribution</code> field and must be preserved if you display the data.</p>
+<p><strong>Much of the underlying data is available free of charge from its original public source</strong> — including, where applicable, the European Central Bank, the Bank of Canada, US federal agencies (SEC, BEA, CFTC, OFAC, FDA), and public blockchains. You are not required to purchase from us to obtain that source data; what you pay for is the retrieval, computation, assembly, verification and delivery we perform over it.</p>
+
+<h2>4. Acceptable use</h2>
+<ul>
+<li>Do not use the endpoints for unlawful purposes, or to build anything that infringes a third party's rights.</li>
+<li>Do not misrepresent a response as official data of, or as endorsed by, any named data provider or public body.</li>
+<li>Do not attempt to circumvent payment, rate limits, or per-key scoping.</li>
+</ul>
+
+<h2>5. Payment &amp; refunds</h2>
+<p>Calls are prepaid per request over x402. Because responses are delivered immediately on payment, <strong>calls are non-refundable</strong> except where an endpoint charged you but failed to deliver a valid response due to our error; such cases are handled in good faith on notice to the address below.</p>
+
+<h2>6. Liability</h2>
+<p>To the maximum extent permitted by law, The Aslan Group LLC is not liable for any indirect, incidental, consequential or special damages, or for any decision made in reliance on a response. Total aggregate liability for any claim will not exceed the amount you paid for the specific call giving rise to the claim.</p>
+
+<h2>7. Changes &amp; contact</h2>
+<p>These terms may be updated; the version in force is the one published here at the time of your call. Legal and abuse notices only: <a href="mailto:info@theaslangroupllc.com">info@theaslangroupllc.com</a>. Governing law: the state of formation of The Aslan Group LLC. There is no help desk; service is self-serve and as-is.</p>
+
+<div class="foot">
+The Aslan Group LLC · PulseNetwork · Machine-readable terms pointer is carried as <code>terms</code> in every paid response.
+</div>
+</body>
+</html>

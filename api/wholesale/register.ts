@@ -138,6 +138,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
         url: `${HUB}/api/wholesale/deposit?key=${key}&tier=5`,
         tiers_usd: [5, 25, 100],
         note: 'A GET request to the deposit URL returns a 402 for the chosen tier; pay it in USDC (Base or Solana) and your balance credits automatically on settlement.',
+        card_checkout_url: `${HUB}/api/wholesale/checkout?key=${key}&tier=5`,
+        card_note: 'No crypto wallet? Open the card_checkout_url in a browser (change tier= to 5, 25, or 100) — it redirects to a Stripe payment page and your balance credits on completion.',
       },
       stats_url: `${HUB}/api/wholesale/stats?key=${key}`,
     });

@@ -1,5 +1,5 @@
 // AUTO-GENERATED from live openapi.json across all PulseNetwork verticals.
-// 73 verticals, 851 endpoints. Regenerate with tools/gen-verticals.mjs
+// 76 verticals, 981 endpoints. Regenerate with tools/gen-verticals.mjs
 
 export interface VerticalEndpoint {
   action: string;
@@ -60,7 +60,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "predmarket",
         "path": "/api/scan/predmarket",
         "price": "$2.00",
-        "description": "Calibrated superforecaster scan of prediction markets for AI research & trading agents — a base-rate-anchored read across Polymarket, Kalshi, Manifold and PredictIt: cross-venue divergence, order-book and whale flow, and for sports the de-vigged sportsbook consensus plus proprietary team-strength and weather engines. Returns mispriced markets with probabilities, edge and full commentary, props included.",
+        "description": "Calibrated superforecaster scan of prediction markets for AI research & trading agents — a base-rate-anchored read across Polymarket, Manifold and PredictIt: cross-venue divergence, order-book and whale flow, and for sports the de-vigged sportsbook consensus plus proprietary team-strength and weather engines. Returns mispriced markets with probabilities, edge and full commentary, props included.",
         "params": {
           "category": {
             "type": "string",
@@ -348,13 +348,20 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "intraday"
           }
         }
+      },
+      {
+        "action": "crypto-lite",
+        "path": "/api/scan/crypto-lite",
+        "price": "$0.05",
+        "description": "Crypto market tick — majors + sentiment + regime verdict",
+        "params": {}
       }
     ]
   },
   "alphapulse": {
     "name": "AlphaPulse",
-    "baseUrl": "https://alphapulse-omega.vercel.app",
-    "description": "Global alternative trading intelligence API. AI-synthesized signal provider rankings, managed account analysis, copy trading discovery, expert advisor (EA/robot) vetting, multi-asset arbitrage, crypto",
+    "baseUrl": "https://alphapulse.theaslangroupllc.com",
+    "description": "The due-diligence layer for traders and allocators, worldwide — check before you fund. Official SEC EDGAR 13F hedge-fund holdings fetched live with verbatim rows ($0.50), prop-firm shortlists with payout-proof checks ($0.15), broker recommendations, EA/signal-provider/copy-trading discovery and vetting, managed accounts, DeFi vaults — forex, CFDs, futures, stocks, crypto. 13 endpoints.",
     "globalCoverage": "Global",
     "endpoints": [
       {
@@ -686,13 +693,93 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "fund-check",
+        "path": "/api/alpha/fund-check",
+        "price": "$0.50",
+        "description": "Hedge fund holdings check — official SEC 13F, live",
+        "params": {
+          "fund": {
+            "type": "string",
+            "description": "manager/fund name to look up in EDGAR",
+            "required": true,
+            "example": "bridgewater"
+          },
+          "cik": {
+            "type": "string",
+            "description": "optional — SEC CIK if known",
+            "required": false
+          },
+          "top": {
+            "type": "string",
+            "description": "holdings rows to return, 5-25 (default 15)",
+            "required": false,
+            "example": "15"
+          }
+        }
+      },
+      {
+        "action": "prop-firms",
+        "path": "/api/alpha/prop-firms",
+        "price": "$0.15",
+        "description": "Prop-firm shortlist — payout-proof first, region-aware",
+        "params": {
+          "market": {
+            "type": "string",
+            "description": "forex | cfd | futures | stocks | crypto",
+            "required": false,
+            "example": "forex"
+          },
+          "region": {
+            "type": "string",
+            "description": "where the trader lives — availability differs sharply",
+            "required": false,
+            "example": "UK"
+          },
+          "style": {
+            "type": "string",
+            "description": "style constraints — news trading, EAs, weekend holds",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "en | de | fr | es | zh | ar | ja | ko | ru",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "fund-check-lite",
+        "path": "/api/alpha/fund-check-lite",
+        "price": "$0.25",
+        "description": "Hedge fund holdings check (lite/preview) — official SEC 13F, live, $0.25",
+        "params": {
+          "fund": {
+            "type": "string",
+            "description": "manager/fund name to look up in EDGAR",
+            "required": true,
+            "example": "bridgewater"
+          },
+          "cik": {
+            "type": "string",
+            "description": "optional — SEC CIK if known",
+            "required": false
+          },
+          "top": {
+            "type": "string",
+            "description": "holdings rows to return, 3-10 (default 5)",
+            "required": false,
+            "example": "5"
+          }
+        }
       }
     ]
   },
   "arbipulse": {
     "name": "ArbiPulse",
-    "baseUrl": "https://arbipulse.vercel.app",
-    "description": "12 endpoints scanning arbitrage opportunities across DeFi yield spreads, DEX price differentials, perpetual funding rates, sports surebets, ETF/NAV gaps, and commodity regional pricing. Execution-tier",
+    "baseUrl": "https://arbipulse.theaslangroupllc.com",
+    "description": "The arbitrage layer for every market — 18 endpoints finding the same thing at two prices: prediction-market cross-venue spreads (Polymarket×Kalshi), GPU compute rental gaps, AI inference token pricing, stablecoin parallel-rate premiums, retail resale margins, plus DeFi yields, DEX/CEX differentials, funding rates, sports surebets, ETF/NAV gaps, commodities.",
     "globalCoverage": "Global",
     "endpoints": [
       {
@@ -717,37 +804,6 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "chain",
             "required": false,
             "example": "all"
-          }
-        }
-      },
-      {
-        "action": "defi",
-        "path": "/api/defi",
-        "price": "$0.10",
-        "description": "DeFi Yield Arbitrage",
-        "params": {
-          "asset": {
-            "type": "string",
-            "description": "asset",
-            "required": false,
-            "example": "all"
-          },
-          "chain": {
-            "type": "string",
-            "description": "chain",
-            "required": false,
-            "example": "all"
-          },
-          "min_spread_bps": {
-            "type": "integer",
-            "description": "min_spread_bps",
-            "required": false
-          },
-          "stablecoin_only": {
-            "type": "boolean",
-            "description": "stablecoin_only",
-            "required": false,
-            "example": "false"
           }
         }
       },
@@ -944,7 +1000,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "calculator",
         "path": "/api/calculator",
-        "price": "$0.05",
+        "price": "$0.02",
         "description": "Arbitrage Profit Calculator",
         "params": {
           "trade_size_usd": {
@@ -1014,32 +1070,6 @@ export const VERTICALS: Record<string, Vertical> = {
         }
       },
       {
-        "action": "etf",
-        "path": "/api/etf",
-        "price": "$0.10",
-        "description": "ETF/NAV Premium-Discount Tracker",
-        "params": {
-          "ticker": {
-            "type": "string",
-            "description": "ticker",
-            "required": false,
-            "example": "IBIT"
-          },
-          "region": {
-            "type": "string",
-            "description": "region",
-            "required": false,
-            "example": "us"
-          },
-          "type": {
-            "type": "string",
-            "description": "type",
-            "required": false,
-            "example": "any"
-          }
-        }
-      },
-      {
         "action": "commodity",
         "path": "/api/commodity",
         "price": "$0.10",
@@ -1093,15 +1123,162 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "30"
           }
         }
+      },
+      {
+        "action": "spread-tick",
+        "path": "/api/spread-tick",
+        "price": "$0.02",
+        "description": "Cross-exchange spread tick for one pair",
+        "params": {
+          "pair": {
+            "type": "string",
+            "description": "Trading pair, e.g. BTC/USDT (default) | ETH/USDT | SOL/USDT",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "predmarket-arb",
+        "path": "/api/predmarket-arb",
+        "price": "$0.05",
+        "description": "Prediction market cross-venue arbitrage (Polymarket × Kalshi)",
+        "params": {
+          "query": {
+            "type": "string",
+            "description": "Optional topic filter, e.g. fed | world cup | bitcoin",
+            "required": false
+          },
+          "scan": {
+            "type": "integer",
+            "description": "Top Polymarket contracts to match (default 8, max 12)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "compute-arb",
+        "path": "/api/compute-arb",
+        "price": "$0.05",
+        "description": "GPU compute price arbitrage (marketplace vs hyperscaler)",
+        "params": {
+          "gpu": {
+            "type": "string",
+            "description": "H100 (default) | H200 | B200 | A100 | L40S | RTX4090 | RTX5090",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "fx-premium",
+        "path": "/api/fx-premium",
+        "price": "$0.02",
+        "description": "Stablecoin parallel-rate premium (capital-control FX signal)",
+        "params": {
+          "fiat": {
+            "type": "string",
+            "description": "ARS (default) | VES | BRL | COP | PEN | MXN | CLP | BOB",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "flip-check",
+        "path": "/api/flip-check",
+        "price": "$0.50",
+        "description": "Retail resale arbitrage check (comps + fees + verdict)",
+        "params": {
+          "item": {
+            "type": "string",
+            "description": "Product, specific (brand + model number)",
+            "required": true
+          },
+          "buy_price": {
+            "type": "number",
+            "description": "Acquisition cost in USD",
+            "required": true
+          },
+          "marketplace": {
+            "type": "string",
+            "description": "ebay (default) | amazon | stockx | poshmark | mercari",
+            "required": false
+          },
+          "ship_cost": {
+            "type": "number",
+            "description": "Outbound shipping estimate in USD (default 8)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "inference-arb",
+        "path": "/api/inference-arb",
+        "price": "$0.05",
+        "description": "AI inference price arbitrage (same model, every provider)",
+        "params": {
+          "model": {
+            "type": "string",
+            "description": "OpenRouter slug or fuzzy name (default meta-llama/llama-3.3-70b-instruct)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "flash-scan",
+        "path": "/api/flash-scan",
+        "price": "$0.25",
+        "description": "Flash Loan Pool Scan (lite preview)",
+        "params": {
+          "protocol": {
+            "type": "string",
+            "description": "protocol",
+            "required": false,
+            "example": "aave"
+          },
+          "asset": {
+            "type": "string",
+            "description": "asset",
+            "required": false,
+            "example": "USDC"
+          },
+          "amount": {
+            "type": "number",
+            "description": "amount",
+            "required": false
+          },
+          "chain": {
+            "type": "string",
+            "description": "chain",
+            "required": false,
+            "example": "base"
+          },
+          "receiver": {
+            "type": "string",
+            "description": "receiver",
+            "required": false
+          }
+        }
       }
     ]
   },
   "autopulse": {
     "name": "AutoPulse",
-    "baseUrl": "https://autopulse-navy.vercel.app",
+    "baseUrl": "https://autopulse.theaslangroupllc.com",
     "description": "Automotive intelligence API — 10 endpoints powered by NHTSA, EPA, and live market data. Safety recalls, reliability analysis, DIY repair guides, vehicle comparison, market value, EV break-even, dealer",
     "globalCoverage": "Global",
     "endpoints": [
+      {
+        "action": "vin-recall",
+        "path": "/api/auto/vin-recall",
+        "price": "$0.02",
+        "description": "US safety recalls for a VIN — decode + NHTSA campaigns, deterministic",
+        "params": {
+          "vin": {
+            "type": "string",
+            "description": "17-character VIN",
+            "required": true
+          }
+        }
+      },
       {
         "action": "recall",
         "path": "/api/auto/recall",
@@ -1484,7 +1661,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "biopulse": {
     "name": "BioPulse",
-    "baseUrl": "https://biopulse-nine.vercel.app",
+    "baseUrl": "https://biopulse.theaslangroupllc.com",
     "description": "Global biodiversity intelligence API. GBIF + IUCN + eBird + iNaturalist data synthesis. Species profiles, IUCN conservation status, sighting reports, birding hotspots, migration tracking, endangered s",
     "globalCoverage": "Global",
     "endpoints": [
@@ -1724,7 +1901,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "buildpulse": {
     "name": "BuildPulse",
-    "baseUrl": "https://buildpulse-alpha.vercel.app",
+    "baseUrl": "https://buildpulse.theaslangroupllc.com",
     "description": "BuildPulse — home construction and renovation intelligence: project cost estimates, contractor vetting, permit requirements, material pricing, ROI projections, and inspection checklists. US-focused wi",
     "globalCoverage": "Global",
     "endpoints": [
@@ -2002,7 +2179,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "careerpulse": {
     "name": "CareerPulse",
-    "baseUrl": "https://careerpulse-steel.vercel.app",
+    "baseUrl": "https://careerpulse.theaslangroupllc.com",
     "description": "Global career intelligence API serving the world's 3.5 billion workers. 10 endpoints: salary benchmarking (any role + any country, sourced from BLS, OECD, ILO, Glassdoor, Levels.fyi), industry outlook",
     "globalCoverage": "Global",
     "endpoints": [
@@ -2335,7 +2512,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "wage-rights",
         "path": "/api/career/wage-rights",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Wage-Recovery Check (overtime, min wage, final pay, UK deductions)",
         "params": {
           "check": {
@@ -2457,12 +2634,50 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "letter-preview",
+        "path": "/api/career/letter-preview",
+        "price": "$0.25",
+        "description": "Wage Demand Letter Preview (agent tier)",
+        "params": {
+          "check": {
+            "type": "string",
+            "description": "Which check",
+            "required": true
+          },
+          "jurisdiction": {
+            "type": "string",
+            "description": "overtime/min_wage: US state, US, or CA-ON",
+            "required": false
+          },
+          "hourly_rate": {
+            "type": "number",
+            "description": "overtime: hourly rate",
+            "required": false
+          },
+          "weekly_hours": {
+            "type": "number",
+            "description": "overtime: hours/week",
+            "required": false
+          },
+          "state": {
+            "type": "string",
+            "description": "final_pay: CA/NY/TX/FL/IL/WA/MA/CO",
+            "required": false
+          },
+          "deduction_date": {
+            "type": "string",
+            "description": "uk_deduction: date of (last) deduction YYYY-MM-DD",
+            "required": false
+          }
+        }
       }
     ]
   },
   "chronicapulse": {
     "name": "ChronicaPulse",
-    "baseUrl": "https://chronicapulse.vercel.app",
+    "baseUrl": "https://chronicapulse.theaslangroupllc.com",
     "description": "Global genealogy and historical archive intelligence API. Full-text search across Chronicling America (1770–1963 US newspapers), Library of Congress, Trove (Australia), British Newspaper Archive, Euro",
     "globalCoverage": "Global",
     "endpoints": [
@@ -2749,7 +2964,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "ref-check",
         "path": "/api/ref-check",
-        "price": "$0.15",
+        "price": "$0.02",
         "description": "Bibliography verification (flagship)",
         "params": {
           "citations": {
@@ -2762,7 +2977,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "paper",
         "path": "/api/paper",
-        "price": "$0.05",
+        "price": "$0.02",
         "description": "Single-paper lookup",
         "params": {
           "doi": {
@@ -2780,7 +2995,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "author",
         "path": "/api/author",
-        "price": "$0.10",
+        "price": "$0.02",
         "description": "Author metrics",
         "params": {
           "name": {
@@ -2798,7 +3013,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "institution",
         "path": "/api/institution",
-        "price": "$0.15",
+        "price": "$0.02",
         "description": "Institution research-output benchmark",
         "params": {
           "name": {
@@ -2899,7 +3114,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "clearcarepulse": {
     "name": "ClearCarePulse",
-    "baseUrl": "https://clear-care-pulse.vercel.app",
+    "baseUrl": "https://clearcarepulse.theaslangroupllc.com",
     "description": "Healthcare price transparency and cost navigation API. AI-synthesized procedure price search, cash-pay alternatives, hospital quality scoring, out-of-pocket estimation, insurance negotiation scripts, ",
     "globalCoverage": "Global",
     "endpoints": [
@@ -3171,7 +3386,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "rights",
         "path": "/api/care/rights",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Medical-Bill Rights Check (quiz-first)",
         "params": {
           "check": {
@@ -3288,13 +3503,56 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "rights-check",
+        "path": "/api/care/rights-check",
+        "price": "$0.25",
+        "description": "Medical-Bill Letter Preview (agent tier)",
+        "params": {
+          "check": {
+            "type": "string",
+            "description": "Which check to preview",
+            "required": true
+          },
+          "scenario": {
+            "type": "string",
+            "description": "surprise: what happened",
+            "required": false
+          },
+          "plan_type": {
+            "type": "string",
+            "description": "surprise: plan funding",
+            "required": false
+          },
+          "denial_date": {
+            "type": "string",
+            "description": "appeal: denial date YYYY-MM-DD",
+            "required": false
+          },
+          "gfe_amount": {
+            "type": "number",
+            "description": "gfe: the good-faith estimate total",
+            "required": false
+          },
+          "billed_amount": {
+            "type": "number",
+            "description": "gfe: what they actually billed",
+            "required": false
+          },
+          "first_statement_date": {
+            "type": "string",
+            "description": "assistance: first post-discharge billing statement date",
+            "required": false
+          }
+        }
       }
     ]
   },
   "climatepulse": {
     "name": "ClimatePulse",
-    "baseUrl": "https://climatepulse-six.vercel.app",
-    "description": "Global climate and weather intelligence API. Open-Meteo real-time weather + AI synthesis. Severe weather assessment, air quality monitoring, wildfire smoke tracking, agricultural grow-day modeling, cl",
+    "baseUrl": "https://climatepulse.theaslangroupllc.com",
+    "description": "Global climate and weather intelligence API. Open-Meteo real-time weather + AI synthesis. Severe weather, air quality, wildfire smoke, growing-season intel — plus event-weather planning: rain/heat odds computed from 10 years of ERA5 archive data, candidate-date ranking, and premium event briefs with decision timelines.",
     "globalCoverage": "Global",
     "endpoints": [
       {
@@ -3513,15 +3771,129 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "date-pick",
+        "path": "/api/climate/date-pick",
+        "price": "$0.25",
+        "description": "Rank candidate event dates by real historical weather odds",
+        "params": {
+          "location": {
+            "type": "string",
+            "description": "City, address, or lat,lon of the event venue",
+            "required": true,
+            "example": "Austin, TX"
+          },
+          "dates": {
+            "type": "string",
+            "description": "2-6 comma-separated candidate dates (YYYY-MM-DD)",
+            "required": true,
+            "example": "2027-04-10,2027-05-15,2027-10-09"
+          },
+          "event_type": {
+            "type": "string",
+            "description": "Event type — tailors the notes (wedding, marathon, outdoor-festival, …)",
+            "required": false,
+            "example": "wedding"
+          },
+          "units": {
+            "type": "string",
+            "description": "imperial (default) or metric",
+            "required": false,
+            "example": "metric"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language code (e.g. es, fr, de); defaults to English",
+            "required": false,
+            "example": "es"
+          }
+        }
+      },
+      {
+        "action": "event-brief",
+        "path": "/api/climate/event-brief",
+        "price": "$0.50",
+        "description": "Premium event-weather brief: computed historical odds + live forecast + decision timeline",
+        "params": {
+          "location": {
+            "type": "string",
+            "description": "City, address, or lat,lon of the event venue",
+            "required": true,
+            "example": "Napa, CA"
+          },
+          "date": {
+            "type": "string",
+            "description": "Event date (YYYY-MM-DD)",
+            "required": true,
+            "example": "2026-09-15"
+          },
+          "event_type": {
+            "type": "string",
+            "description": "Event type — tailors the plan (wedding, marathon, outdoor-festival, camping, …)",
+            "required": false,
+            "example": "wedding"
+          },
+          "units": {
+            "type": "string",
+            "description": "imperial (default) or metric",
+            "required": false,
+            "example": "metric"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language code (e.g. es, fr, de); defaults to English",
+            "required": false,
+            "example": "es"
+          }
+        }
       }
     ]
   },
   "clinicalintelpulse": {
     "name": "ClinicalIntelPulse",
-    "baseUrl": "https://clinicalintelpulse.vercel.app",
+    "baseUrl": "https://clinicalintelpulse.theaslangroupllc.com",
     "description": "Pharmaceutical pipeline and clinical trial intelligence API. Synthesizes 400,000+ registered trials from ClinicalTrials.gov with FDA OpenFDA, PubMed, and real-time news. All endpoints require x402 pay",
     "globalCoverage": "Global",
     "endpoints": [
+      {
+        "action": "trial-check",
+        "path": "/api/clinical/trial-check",
+        "price": "$0.02",
+        "description": "ClinicalTrials.gov lookup — single trial by NCT id or filtered search, deterministic",
+        "params": {
+          "nct": {
+            "type": "string",
+            "description": "Single trial by NCT id, e.g. NCT02142738",
+            "required": false
+          },
+          "condition": {
+            "type": "string",
+            "description": "Search by condition",
+            "required": false
+          },
+          "sponsor": {
+            "type": "string",
+            "description": "Search by sponsor",
+            "required": false
+          },
+          "phase": {
+            "type": "string",
+            "description": "1|2|3|4",
+            "required": false
+          },
+          "status": {
+            "type": "string",
+            "description": "RECRUITING | COMPLETED | ...",
+            "required": false
+          },
+          "limit": {
+            "type": "string",
+            "description": "1-25, default 10",
+            "required": false
+          }
+        }
+      },
       {
         "action": "pipeline-scan",
         "path": "/api/clinical/pipeline-scan",
@@ -3781,12 +4153,101 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "en"
           }
         }
+      },
+      {
+        "action": "drug-check",
+        "path": "/api/clinical/drug-check",
+        "price": "$0.10",
+        "description": "What is this medication? (plain language)",
+        "params": {
+          "drug": {
+            "type": "string",
+            "description": "Brand or generic medication name — e.g. 'Ozempic' | 'metformin' | 'ibuprofen'",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "interaction-check",
+        "path": "/api/clinical/interaction-check",
+        "price": "$0.15",
+        "description": "Can these medications be taken together?",
+        "params": {
+          "drugs": {
+            "type": "string",
+            "description": "Two to eight medication names, comma-separated — e.g. 'warfarin,ibuprofen'",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "recall-check",
+        "path": "/api/clinical/recall-check",
+        "price": "$0.10",
+        "description": "Is my medication recalled?",
+        "params": {
+          "drug": {
+            "type": "string",
+            "description": "Brand or generic medication name — e.g. 'metformin' | 'valsartan'",
+            "required": true
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "disease-landscape-lite",
+        "path": "/api/clinical/disease-landscape-lite",
+        "price": "$0.25",
+        "description": "Disease landscape — $0.25 deterministic preview",
+        "params": {
+          "condition": {
+            "type": "string",
+            "description": "Disease or condition — e.g. 'Non-Small Cell Lung Cancer' | 'Alzheimer Disease' | 'Type 2 Diabetes'",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "deal-signal-lite",
+        "path": "/api/clinical/deal-signal-lite",
+        "price": "$0.25",
+        "description": "Deal signal — $0.25 deterministic preview",
+        "params": {
+          "condition": {
+            "type": "string",
+            "description": "Disease or condition — e.g. 'Non-Small Cell Lung Cancer' | 'Alzheimer Disease' | 'Type 2 Diabetes'",
+            "required": false
+          },
+          "stage": {
+            "type": "string",
+            "description": "stage",
+            "required": false,
+            "example": "both"
+          }
+        }
       }
     ]
   },
   "collectablespulse": {
     "name": "CollectablesPulse",
-    "baseUrl": "https://collectablespulse.vercel.app",
+    "baseUrl": "https://collectablespulse.theaslangroupllc.com",
     "description": "Global collectibles market intelligence API. AI-synthesized valuations for sports cards, coins, comics, vinyl records, Pokémon/MTG/TCGs, sneakers, watches, signed memorabilia, and trading cards. Real-",
     "globalCoverage": "Global",
     "endpoints": [
@@ -4017,8 +4478,8 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "compliancepulse": {
     "name": "CompliancePulse",
-    "baseUrl": "https://compliancepulse-eight.vercel.app",
-    "description": "Global regulatory intelligence API. 8 endpoints: data privacy law (145+ jurisdictions; privacy endpoint includes Cookiebot/OneTrust/Usercentrics consent tool links), KYC/AML requirements, corporate co",
+    "baseUrl": "https://compliancepulse.theaslangroupllc.com",
+    "description": "The regulatory applicability layer. 14 endpoints: global LEI entity verification (GLEIF, $0.02), OFAC sanctions screening ($0.02), EU VAT validation ($0.01), deterministic deadline check (deferral-aware, tracks EU AI Act Official Journal status, $0.02), EU AI Act risk classification ($0.25), company applicability scan — which regimes bind this business, ranked ($1.50), plus data privacy law (145+ jurisdictions), KYC/AML, corporate, employment, sector, cyber (NIS2/DORA), ESG (CSRD/ISSB) briefs and regulatory news",
     "globalCoverage": "Global",
     "endpoints": [
       {
@@ -4219,40 +4680,216 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "deadlines",
+        "path": "/api/comply/deadlines",
+        "price": "$0.02",
+        "description": "Compliance deadline check — deterministic, deferral-aware",
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction filter — e.g. EU, US, UK, Germany, Texas. Omit for all",
+            "required": false
+          },
+          "category": {
+            "type": "string",
+            "description": "ai | privacy | esg | cyber | financial | supply-chain | product | corporate | consumer",
+            "required": false,
+            "example": "ai"
+          },
+          "within_days": {
+            "type": "number",
+            "description": "Only regimes with an upcoming date within N days",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "ai-act",
+        "path": "/api/comply/ai-act",
+        "price": "$0.25",
+        "description": "EU AI Act applicability check — risk class, obligations, current deadline state",
+        "params": {
+          "use_case": {
+            "type": "string",
+            "description": "What the AI system does, in plain language",
+            "required": true,
+            "example": "resume screening for hiring"
+          },
+          "role": {
+            "type": "string",
+            "description": "provider | deployer | importer | distributor (default deployer)",
+            "required": false,
+            "example": "deployer"
+          },
+          "gpai": {
+            "type": "string",
+            "description": "true if you build or fine-tune a general-purpose model",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "scan",
+        "path": "/api/comply/scan",
+        "price": "$1.50",
+        "description": "Company regulatory applicability scan — which rules apply to this business",
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "Primary country of establishment",
+            "required": true,
+            "example": "US"
+          },
+          "sector": {
+            "type": "string",
+            "description": "Sector — e.g. saas, fintech, e-commerce, healthcare",
+            "required": false
+          },
+          "size": {
+            "type": "string",
+            "description": "micro | small | medium | large | listed",
+            "required": false
+          },
+          "activities": {
+            "type": "string",
+            "description": "CSV of: ai, personal-data, eu-sales, eu-operations, financial-services, crypto, listed, eu-imports, online-platform, us-operations, uk-operations, card-payments, products-eu, commodities",
+            "required": true,
+            "example": "ai,personal-data,eu-sales,card-payments"
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "lei",
+        "path": "/api/validate/lei",
+        "price": "$0.02",
+        "description": "Global legal-entity (LEI) lookup and company search via GLEIF — deterministic",
+        "params": {
+          "lei": {
+            "type": "string",
+            "description": "20-character LEI to look up. Checksum-verified (ISO 7064 mod-97-10) before any registry call — a malformed LEI never burns the lookup.",
+            "required": false,
+            "example": "HWUPKR0MPOU8FGXBT394"
+          },
+          "name": {
+            "type": "string",
+            "description": "Legal entity name to search. Used when lei is not provided; falls back to fuzzy matching for typos and transliterations. Provide lei OR name.",
+            "required": false,
+            "example": "Volkswagen"
+          },
+          "country": {
+            "type": "string",
+            "description": "ISO-2 country of the entity's legal address, to narrow a name search.",
+            "required": false,
+            "example": "DE"
+          }
+        }
+      },
+      {
+        "action": "sanctions",
+        "path": "/api/screen/sanctions",
+        "price": "$0.02",
+        "description": "OFAC sanctions screening — deterministic, alias-aware",
+        "params": {
+          "name": {
+            "type": "string",
+            "description": "Person or entity name to screen",
+            "required": true,
+            "example": "Bank Melli Iran"
+          },
+          "type": {
+            "type": "string",
+            "description": "Narrow by entity type",
+            "required": false
+          },
+          "threshold": {
+            "type": "number",
+            "description": "Match score cutoff 0-100. Default 85. Lower = more (noisier) hits.",
+            "required": false,
+            "example": "85"
+          },
+          "country": {
+            "type": "string",
+            "description": "ISO-2 code — narrows to parties linked to that country by address, nationality, sanctions program or name. Each hit reports which.",
+            "required": false,
+            "example": "RU"
+          }
+        }
+      },
+      {
+        "action": "vat",
+        "path": "/api/validate/vat",
+        "price": "$0.01",
+        "description": "EU VAT number validation via VIES — deterministic",
+        "params": {
+          "vat": {
+            "type": "string",
+            "description": "Full EU VAT id, with or without the country prefix",
+            "required": true,
+            "example": "IE6388047V"
+          },
+          "country": {
+            "type": "string",
+            "description": "ISO-2 EU member state (EL for Greece, XI for Northern Ireland). Required only if vat has no country prefix.",
+            "required": false,
+            "example": "DE"
+          }
+        }
+      },
+      {
+        "action": "scan-lite",
+        "path": "/api/comply/scan-lite",
+        "price": "$0.25",
+        "description": "Company regulatory applicability preview — agent-budget tier",
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "Primary country of establishment",
+            "required": true,
+            "example": "US"
+          },
+          "sector": {
+            "type": "string",
+            "description": "Sector — e.g. saas, fintech, e-commerce, healthcare",
+            "required": false
+          },
+          "size": {
+            "type": "string",
+            "description": "micro | small | medium | large | listed",
+            "required": false
+          },
+          "activities": {
+            "type": "string",
+            "description": "CSV of: ai, personal-data, eu-sales, eu-operations, financial-services, crypto, listed, eu-imports, online-platform, us-operations, uk-operations, card-payments, products-eu, commodities",
+            "required": true,
+            "example": "ai,personal-data,eu-sales,card-payments"
+          }
+        }
       }
     ]
   },
   "cryptopulse": {
     "name": "CryptoPulse",
-    "baseUrl": "https://cryptopulse-xi-five.vercel.app",
+    "baseUrl": "https://cryptopulse.theaslangroupllc.com",
     "description": "Global cryptocurrency intelligence API. 10 endpoints: DeFi yield farming across Ethereum/Base/Arbitrum/Solana (DeFiLlama live TVL + APY), personalized strategy builder, crypto security framework (with",
     "globalCoverage": "Global",
     "endpoints": [
       {
-        "action": "yield",
-        "path": "/api/yield",
-        "price": "$0.10",
-        "description": "DeFi yield intelligence",
-        "params": {
-          "chain": {
-            "type": "string",
-            "description": "Filter by chain: ethereum, base, arbitrum, berachain, solana, or all",
-            "required": false,
-            "example": "all"
-          },
-          "risk": {
-            "type": "string",
-            "description": "Risk profile filter",
-            "required": false,
-            "example": "moderate"
-          }
-        }
-      },
-      {
         "action": "strategy",
         "path": "/api/strategy",
         "price": "$0.20",
-        "description": "Personalized DeFi strategy builder",
+        "description": "Build a personalized DeFi strategy for goals and risk",
         "params": {
           "capital": {
             "type": "number",
@@ -4262,19 +4899,19 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "risk": {
             "type": "string",
-            "description": "risk",
+            "description": "risk parameter",
             "required": false,
             "example": "moderate"
           },
           "chain": {
             "type": "string",
-            "description": "chain",
+            "description": "chain parameter",
             "required": false,
             "example": "all"
           },
           "goal": {
             "type": "string",
-            "description": "goal",
+            "description": "goal parameter",
             "required": false,
             "example": "yield"
           },
@@ -4290,11 +4927,11 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "security",
         "path": "/api/security",
         "price": "$0.10",
-        "description": "Crypto security framework",
+        "description": "Scan token/address risk and harden self-custody setup",
         "params": {
           "value_tier": {
             "type": "string",
-            "description": "value_tier",
+            "description": "Approximate holdings value tier used to calibrate custody recommendations",
             "required": false,
             "example": "medium"
           },
@@ -4303,6 +4940,22 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "Current custody setup description",
             "required": false,
             "example": "exchange custody"
+          },
+          "token": {
+            "type": "string",
+            "description": "Optional token contract address to risk-scan via GoPlus (honeypot, buy/sell tax, mint/rug traps)",
+            "required": false
+          },
+          "address": {
+            "type": "string",
+            "description": "Optional wallet address to screen via GoPlus (sanctions, phishing, mixer, malicious activity)",
+            "required": false
+          },
+          "chain": {
+            "type": "string",
+            "description": "EVM chain for the token/address scan (default ethereum)",
+            "required": false,
+            "example": "ethereum"
           }
         }
       },
@@ -4310,7 +4963,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "threats",
         "path": "/api/threats",
         "price": "$0.10",
-        "description": "Crypto threat intelligence",
+        "description": "Report current crypto threats and active scam patterns",
         "params": {
           "category": {
             "type": "string",
@@ -4324,23 +4977,23 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "exchange",
         "path": "/api/exchange",
         "price": "$0.10",
-        "description": "Exchange comparison",
+        "description": "Compare crypto exchanges on fees, custody, jurisdiction",
         "params": {
           "country": {
             "type": "string",
-            "description": "country",
+            "description": "country parameter",
             "required": false,
             "example": "US"
           },
           "priority": {
             "type": "string",
-            "description": "priority",
+            "description": "priority parameter",
             "required": false,
             "example": "security"
           },
           "experience": {
             "type": "string",
-            "description": "experience",
+            "description": "experience parameter",
             "required": false,
             "example": "beginner"
           }
@@ -4350,11 +5003,11 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "tax",
         "path": "/api/tax",
         "price": "$0.20",
-        "description": "Crypto tax guidance",
+        "description": "Explain crypto tax treatment for a given jurisdiction",
         "params": {
           "country": {
             "type": "string",
-            "description": "country",
+            "description": "country parameter",
             "required": false,
             "example": "US"
           },
@@ -4375,23 +5028,23 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "onboard",
         "path": "/api/onboard",
         "price": "$0.10",
-        "description": "First-time buyer onboarding guide",
+        "description": "Guide a first-time crypto buyer from zero to first hold",
         "params": {
           "country": {
             "type": "string",
-            "description": "country",
+            "description": "country parameter",
             "required": false,
             "example": "US"
           },
           "goal": {
             "type": "string",
-            "description": "goal",
+            "description": "goal parameter",
             "required": false,
             "example": "invest"
           },
           "experience": {
             "type": "string",
-            "description": "experience",
+            "description": "experience parameter",
             "required": false,
             "example": "complete_beginner"
           }
@@ -4401,17 +5054,17 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "spend",
         "path": "/api/spend",
         "price": "$0.10",
-        "description": "Crypto spending guide",
+        "description": "Find where to spend crypto and how to pay with it",
         "params": {
           "country": {
             "type": "string",
-            "description": "country",
+            "description": "country parameter",
             "required": false,
             "example": "US"
           },
           "use_case": {
             "type": "string",
-            "description": "use_case",
+            "description": "use_case parameter",
             "required": false,
             "example": "daily spending"
           }
@@ -4421,17 +5074,17 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "banking",
         "path": "/api/banking",
         "price": "$0.10",
-        "description": "Crypto-friendly banking guide",
+        "description": "Find crypto-friendly banks and fiat on/off ramps",
         "params": {
           "country": {
             "type": "string",
-            "description": "country",
+            "description": "country parameter",
             "required": false,
             "example": "US"
           },
           "profile": {
             "type": "string",
-            "description": "profile",
+            "description": "profile parameter",
             "required": false,
             "example": "personal"
           }
@@ -4441,25 +5094,196 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "merchant",
         "path": "/api/merchant",
         "price": "$0.10",
-        "description": "Merchant crypto payment setup",
+        "description": "Set up crypto payment acceptance for a merchant",
         "params": {
           "business_type": {
             "type": "string",
-            "description": "business_type",
+            "description": "business_type parameter",
             "required": false,
             "example": "ecommerce"
           },
           "country": {
             "type": "string",
-            "description": "country",
+            "description": "country parameter",
             "required": false,
             "example": "US"
           },
           "integration": {
             "type": "string",
-            "description": "integration",
+            "description": "integration parameter",
             "required": false,
             "example": "ecommerce"
+          }
+        }
+      },
+      {
+        "action": "options-greeks",
+        "path": "/api/options-greeks",
+        "price": "$0.02",
+        "description": "Options pricing + greeks calculator (Black-Scholes / Black-76) — deterministic",
+        "params": {
+          "type": {
+            "type": "string",
+            "description": "Option type",
+            "required": true
+          },
+          "spot": {
+            "type": "number",
+            "description": "Spot price — Black-Scholes mode (provide spot OR forward)",
+            "required": false
+          },
+          "forward": {
+            "type": "number",
+            "description": "Forward/futures price — Black-76 mode",
+            "required": false
+          },
+          "strike": {
+            "type": "number",
+            "description": "Strike price",
+            "required": true
+          },
+          "expiry": {
+            "type": "string",
+            "description": "ISO expiry date (08:00 UTC assumed) — or pass t",
+            "required": false
+          },
+          "t": {
+            "type": "number",
+            "description": "Years to expiry (alternative to expiry)",
+            "required": false
+          },
+          "iv": {
+            "type": "number",
+            "description": "Annualized vol, decimal or percent (0.62 or 62) — provide iv OR price",
+            "required": false
+          },
+          "price": {
+            "type": "number",
+            "description": "Option price to solve implied vol from",
+            "required": false
+          },
+          "r": {
+            "type": "number",
+            "description": "Annualized risk-free rate (decimal)",
+            "required": false,
+            "example": "0"
+          },
+          "q": {
+            "type": "number",
+            "description": "Annualized dividend/borrow yield (Black-Scholes only)",
+            "required": false,
+            "example": "0"
+          }
+        }
+      },
+      {
+        "action": "funding-check",
+        "path": "/api/funding-check",
+        "price": "$0.02",
+        "description": "Perp funding-rate check (Hyperliquid, cross-venue normalized) — deterministic",
+        "params": {
+          "coin": {
+            "type": "string",
+            "description": "Perp symbol (BTC, ETH, SOL...) — omit for top markets by open interest",
+            "required": false,
+            "example": "ETH"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "When coin omitted: number of markets (max 50)",
+            "required": false,
+            "example": "10"
+          }
+        }
+      },
+      {
+        "action": "funding-arb-scan",
+        "path": "/api/funding-arb-scan",
+        "price": "$0.05",
+        "description": "Cross-venue funding-arbitrage scan — deterministic",
+        "params": {
+          "limit": {
+            "type": "integer",
+            "description": "Max opportunities (max 50)",
+            "required": false,
+            "example": "15"
+          },
+          "min_oi_usd": {
+            "type": "number",
+            "description": "Minimum Hyperliquid open interest (USD) to include a coin",
+            "required": false,
+            "example": "5000000"
+          }
+        }
+      },
+      {
+        "action": "volatility-check",
+        "path": "/api/volatility-check",
+        "price": "$0.02",
+        "description": "Perp volatility check (realized vol, NATR, Bollinger) — deterministic",
+        "params": {
+          "coin": {
+            "type": "string",
+            "description": "Hyperliquid perp symbol (BTC, ETH, SOL...)",
+            "required": true,
+            "example": "ETH"
+          },
+          "interval": {
+            "type": "string",
+            "description": "Candle interval",
+            "required": false,
+            "example": "1h"
+          },
+          "lookback": {
+            "type": "integer",
+            "description": "Candles in the window (50-500)",
+            "required": false,
+            "example": "200"
+          }
+        }
+      },
+      {
+        "action": "funding-history",
+        "path": "/api/funding-history",
+        "price": "$0.05",
+        "description": "Perp funding-rate history — lookahead-safe, deterministic",
+        "params": {
+          "coin": {
+            "type": "string",
+            "description": "Hyperliquid perp symbol (BTC, ETH, SOL...)",
+            "required": true,
+            "example": "ETH"
+          },
+          "days": {
+            "type": "number",
+            "description": "Window length in days (max 90 per call)",
+            "required": false,
+            "example": "7"
+          },
+          "end": {
+            "type": "string",
+            "description": "ISO date anchoring the window end (default now)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "dydx-history",
+        "path": "/api/dydx-history",
+        "price": "$0.02",
+        "description": "dYdX v4 chain-state history — block-stamped OI + funding index",
+        "params": {
+          "ticker": {
+            "type": "string",
+            "description": "dYdX market ticker, e.g. BTC-USD",
+            "required": true,
+            "example": "BTC-USD"
+          },
+          "days": {
+            "type": "number",
+            "description": "Window in days (max 62)",
+            "required": false,
+            "example": "7"
           }
         }
       },
@@ -4467,7 +5291,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "research-brief",
         "path": "/api/research-brief",
         "price": "$0.50",
-        "description": "Institutional-grade crypto market research brief — decision-ready synthesis of spot, derivatives (funding/options skew/DVOL), on-chain flows, regional premiums, and macro-event odds. Built for AI financial-advisor agents.",
+        "description": "Deliver an institutional crypto brief: spot, derivs, flows",
         "params": {
           "assets": {
             "type": "string",
@@ -4493,15 +5317,596 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "equity-marks",
+        "path": "/api/equity-marks",
+        "price": "$0.03",
+        "description": "24/7 stock, commodity, FX and index marks (Hyperliquid HIP-3) — deterministic",
+        "params": {
+          "symbol": {
+            "type": "string",
+            "description": "one symbol (TSLA, GOLD, JPY, US500, SPCX) — omit for top markets by open interest",
+            "required": false,
+            "example": "TSLA"
+          },
+          "group": {
+            "type": "string",
+            "description": "asset-class filter",
+            "required": false
+          },
+          "limit": {
+            "type": "integer",
+            "description": "when symbol omitted: number of markets (max 100)",
+            "required": false,
+            "example": "15"
+          }
+        }
+      },
+      {
+        "action": "hip3-markets",
+        "path": "/api/hip3-markets",
+        "price": "$0.02",
+        "description": "Hyperliquid HIP-3 dex + market catalog, enumerated live — deterministic",
+        "params": {
+          "top": {
+            "type": "integer",
+            "description": "top markets per dex by open interest (max 25)",
+            "required": false,
+            "example": "5"
+          }
+        }
+      },
+      {
+        "action": "event-odds",
+        "path": "/api/event-odds",
+        "price": "$0.03",
+        "description": "Real-money event odds from Hyperliquid HIP-4 outcome markets — deterministic",
+        "params": {
+          "q": {
+            "type": "string",
+            "description": "substring filter on question name",
+            "required": false,
+            "example": "fed"
+          }
+        }
+      },
+      {
+        "action": "mark-quality",
+        "path": "/api/mark-quality",
+        "price": "$0.03",
+        "description": "Trust score for Hyperliquid HIP-3 perp marks (oracle divergence × liquidity) — deterministic",
+        "params": {
+          "symbol": {
+            "type": "string",
+            "description": "one symbol (TSLA, SKHX, BTC) — omit to scan the riskiest markets",
+            "required": false,
+            "example": "TSLA"
+          },
+          "min_oi_usd": {
+            "type": "number",
+            "description": "when scanning: ignore markets below this open interest",
+            "required": false
+          },
+          "limit": {
+            "type": "integer",
+            "description": "when scanning: number of riskiest markets (max 100)",
+            "required": false,
+            "example": "15"
+          }
+        }
+      },
+      {
+        "action": "lending-rates",
+        "path": "/api/lending-rates",
+        "price": "$0.03",
+        "description": "Hyperliquid native borrow-lend market rates — deterministic",
+        "params": {
+          "token": {
+            "type": "string",
+            "description": "reserve symbol (USDC, HYPE, UBTC) — omit for all",
+            "required": false,
+            "example": "USDC"
+          }
+        }
+      },
+      {
+        "action": "staking-intel",
+        "path": "/api/staking-intel",
+        "price": "$0.03",
+        "description": "Hyperliquid HYPE staking + validator intelligence — deterministic",
+        "params": {
+          "limit": {
+            "type": "integer",
+            "description": "validators to return, ranked by stake (max 100)",
+            "required": false,
+            "example": "20"
+          },
+          "active_only": {
+            "type": "string",
+            "description": "true to exclude inactive validators",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "whale-positions",
+        "path": "/api/whale-positions",
+        "price": "$0.03",
+        "description": "Full perp positions for any Hyperliquid wallet — deterministic",
+        "params": {
+          "address": {
+            "type": "string",
+            "description": "wallet to inspect (0x...)",
+            "required": true,
+            "example": "0xdfc24b077bc1425ad1dea75bcb6f8158e10df303"
+          }
+        }
+      },
+      {
+        "action": "equity-positioning",
+        "path": "/api/equity-positioning",
+        "price": "$0.03",
+        "description": "Stock-perp positioning: funding + open interest crowding (Hyperliquid HIP-3) — deterministic",
+        "params": {
+          "symbol": {
+            "type": "string",
+            "description": "One symbol (TSLA, NVDA, GOLD, US500) — omit for the crowding leaderboard",
+            "required": false,
+            "example": "TSLA"
+          },
+          "group": {
+            "type": "string",
+            "description": "Asset-class filter",
+            "required": false
+          },
+          "sort": {
+            "type": "string",
+            "description": "Leaderboard order (default crowding = |annualized funding|)",
+            "required": false
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Markets when symbol omitted (default 20)",
+            "required": false
+          },
+          "min_oi_usd": {
+            "type": "number",
+            "description": "Open-interest floor in USD for the leaderboard (default 5000000 — thin books print absurd funding; 0 shows all)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "research-snapshot",
+        "path": "/api/research-snapshot",
+        "price": "$0.25",
+        "description": "Deterministic data-only crypto snapshot (price/market-structure/sentiment) — $0.25 preview of research-brief",
+        "params": {}
+      },
+      {
+        "action": "trader-record",
+        "path": "/api/trader-record",
+        "price": "$0.05",
+        "description": "Verify any Hyperliquid wallet track record, deterministic",
+        "params": {
+          "address": {
+            "type": "string",
+            "description": "the wallet to evaluate (0x...)",
+            "required": true,
+            "example": "0x85ecf584f25db6f146718b86d493e33c5af72052"
+          },
+          "window": {
+            "type": "string",
+            "description": "equity-curve window: day | week | month | allTime (default allTime)",
+            "required": false,
+            "example": "month"
+          }
+        }
+      },
+      {
+        "action": "top-traders",
+        "path": "/api/top-traders",
+        "price": "$0.05",
+        "description": "Rank Hyperliquid traders for copying, deterministic",
+        "params": {
+          "window": {
+            "type": "string",
+            "description": "day | week | month | allTime (default month)",
+            "required": false,
+            "example": "month"
+          },
+          "sort": {
+            "type": "string",
+            "description": "conservative_return | return_on_equity | roi | pnl | consistency | return_over_drawdown (default conservative_return)",
+            "required": false,
+            "example": "conservative_return"
+          },
+          "min_account_value": {
+            "type": "number",
+            "description": "minimum account value in USD (default 10000)",
+            "required": false,
+            "example": "100000"
+          },
+          "min_volume": {
+            "type": "number",
+            "description": "minimum window volume in USD (default 0)",
+            "required": false,
+            "example": "1000000"
+          },
+          "min_roi_pct": {
+            "type": "number",
+            "description": "minimum venue ROI in percent (optional)",
+            "required": false,
+            "example": "10"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "rows (default 25, max 100)",
+            "required": false,
+            "example": "25"
+          },
+          "exclude_vaults": {
+            "type": "boolean",
+            "description": "drop vault accounts (default true)",
+            "required": false,
+            "example": "true"
+          },
+          "with_drawdown": {
+            "type": "boolean",
+            "description": "compute max drawdown for the top 20 (slower)",
+            "required": false,
+            "example": "true"
+          }
+        }
+      },
+      {
+        "action": "vault-screener",
+        "path": "/api/vault-screener",
+        "price": "$0.03",
+        "description": "Screen Hyperliquid vaults on drawdown, deterministic",
+        "params": {
+          "vault": {
+            "type": "string",
+            "description": "one vault address for the detail view",
+            "required": false,
+            "example": "0xdfc24b077bc1425ad1dea75bcb6f8158e10df303"
+          },
+          "sort": {
+            "type": "string",
+            "description": "tvl | apr | age | drawdown | month_pnl (default tvl)",
+            "required": false,
+            "example": "tvl"
+          },
+          "min_tvl": {
+            "type": "number",
+            "description": "minimum vault size in USD (default 10000)",
+            "required": false,
+            "example": "100000"
+          },
+          "max_drawdown_pct": {
+            "type": "number",
+            "description": "drop vaults whose sampled month drawdown exceeds this % of TVL",
+            "required": false,
+            "example": "5"
+          },
+          "min_age_days": {
+            "type": "integer",
+            "description": "minimum vault age in days (default 0)",
+            "required": false,
+            "example": "90"
+          },
+          "include_closed": {
+            "type": "boolean",
+            "description": "include closed vaults (default false)",
+            "required": false,
+            "example": "false"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "rows (default 25, max 100)",
+            "required": false,
+            "example": "25"
+          },
+          "details_for_top": {
+            "type": "integer",
+            "description": "fetch followers, leader share and full-curve drawdown for the top N (max 10)",
+            "required": false,
+            "example": "5"
+          }
+        }
+      },
+      {
+        "action": "builder-stats",
+        "path": "/api/builder-stats",
+        "price": "$0.03",
+        "description": "Report builder-code revenue per Hyperliquid app",
+        "params": {
+          "app": {
+            "type": "string",
+            "description": "filter apps by name substring",
+            "required": false,
+            "example": "phantom"
+          },
+          "with_daily": {
+            "type": "boolean",
+            "description": "with one app matched, include its last 30 daily fee points",
+            "required": false,
+            "example": "true"
+          },
+          "category": {
+            "type": "string",
+            "description": "all = include exchanges, staking pools and lending protocols",
+            "required": false,
+            "example": "all"
+          },
+          "address": {
+            "type": "string",
+            "description": "a builder address for the daily fill statement",
+            "required": false,
+            "example": "0x88806a71d74ad0a510b350545c9ae490912f0888"
+          },
+          "date": {
+            "type": "string",
+            "description": "UTC day YYYYMMDD for the statement (default yesterday)",
+            "required": false,
+            "example": "20261019"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "apps to return (default 30, max 100)",
+            "required": false,
+            "example": "30"
+          }
+        }
+      },
+      {
+        "action": "monday-open-signal",
+        "path": "/api/monday-open-signal",
+        "price": "$0.03",
+        "description": "Compare weekend stock marks with Friday close",
+        "params": {
+          "symbols": {
+            "type": "string",
+            "description": "comma list of venue symbols (default SP500, XYZ100, 10 mega-caps, GOLD, BRENTOIL; max 25)",
+            "required": false,
+            "example": "TSLA,NVDA,SP500"
+          },
+          "week": {
+            "type": "integer",
+            "description": "0 = latest weekend (live if in progress), 1-4 = earlier weekends",
+            "required": false,
+            "example": "0"
+          }
+        }
+      },
+      {
+        "action": "oi-caps",
+        "path": "/api/oi-caps",
+        "price": "$0.02",
+        "description": "Check open-interest cap usage on Hyperliquid",
+        "params": {
+          "dex": {
+            "type": "string",
+            "description": "one dex (xyz, mkts, para, io, ... or native); default all",
+            "required": false,
+            "example": "xyz"
+          },
+          "coin": {
+            "type": "string",
+            "description": "one market symbol, e.g. TSLA or xyz:TSLA",
+            "required": false,
+            "example": "TSLA"
+          },
+          "min_usage_pct": {
+            "type": "number",
+            "description": "only markets at or above this usage (default 0)",
+            "required": false,
+            "example": "80"
+          },
+          "at_cap_only": {
+            "type": "boolean",
+            "description": "only markets currently at cap",
+            "required": false,
+            "example": "true"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "rows (default 100, max 400)",
+            "required": false,
+            "example": "50"
+          }
+        }
+      },
+      {
+        "action": "new-listings",
+        "path": "/api/new-listings",
+        "price": "$0.02",
+        "description": "List new and retired Hyperliquid markets",
+        "params": {
+          "days": {
+            "type": "integer",
+            "description": "7 | 30 | 90 (default 30)",
+            "required": false,
+            "example": "30"
+          },
+          "dex": {
+            "type": "string",
+            "description": "one dex (xyz, mkts, para, ... or native); default all",
+            "required": false,
+            "example": "xyz"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "rows per list (default 100, max 400)",
+            "required": false,
+            "example": "50"
+          }
+        }
+      },
+      {
+        "action": "sports-odds",
+        "path": "/api/sports-odds",
+        "price": "$0.03",
+        "description": "Decode sports odds from Hyperliquid HIP-4 markets",
+        "params": {
+          "sport": {
+            "type": "string",
+            "description": "filter by sport, e.g. soccer, american football, baseball",
+            "required": false,
+            "example": "soccer"
+          },
+          "competition": {
+            "type": "string",
+            "description": "filter by competition substring, e.g. europa, nfl",
+            "required": false,
+            "example": "europa"
+          },
+          "q": {
+            "type": "string",
+            "description": "free substring over teams, competition or award",
+            "required": false,
+            "example": "milan"
+          },
+          "kind": {
+            "type": "string",
+            "description": "match_result | tournament_winner | award_winner",
+            "required": false,
+            "example": "match_result"
+          },
+          "include_settled": {
+            "type": "boolean",
+            "description": "include settled or past-deadline questions (default false)",
+            "required": false,
+            "example": "false"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "questions (default 50, max 200)",
+            "required": false,
+            "example": "50"
+          },
+          "depth_for_top": {
+            "type": "integer",
+            "description": "read the live order book for the first N questions (default 3, max 10)",
+            "required": false,
+            "example": "3"
+          }
+        }
+      },
+      {
+        "action": "liquidation-watch",
+        "path": "/api/liquidation-watch",
+        "price": "$0.05",
+        "description": "Map positions near liquidation on Hyperliquid",
+        "params": {
+          "market": {
+            "type": "string",
+            "description": "one market, e.g. BTC (native) or TSLA with dex=xyz",
+            "required": false,
+            "example": "BTC"
+          },
+          "dex": {
+            "type": "string",
+            "description": "which dex to scan: native (default) or one HIP-3 dex such as xyz",
+            "required": false,
+            "example": "native"
+          },
+          "within_pct": {
+            "type": "number",
+            "description": "distance to liquidation price in percent (default 5, max 25)",
+            "required": false,
+            "example": "2"
+          },
+          "min_notional": {
+            "type": "number",
+            "description": "minimum position notional in USD (default 500000)",
+            "required": false,
+            "example": "1000000"
+          },
+          "scan_top": {
+            "type": "integer",
+            "description": "accounts to scan: 100, 200 (default) or 400, rounded up to the next bucket",
+            "required": false,
+            "example": "200"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "positions to return (default 50, max 200)",
+            "required": false,
+            "example": "50"
+          }
+        }
+      },
+      {
+        "action": "hl-alerts",
+        "path": "/api/hl-alerts",
+        "price": "$0.25",
+        "description": "Register a 24h Hyperliquid alert with callback",
+        "params": {
+          "metric": {
+            "type": "string",
+            "description": "mark | funding_apr_pct | oi_usd | change_24h_pct | oi_cap_pct | move_since_rule_pct",
+            "required": true,
+            "example": "mark"
+          },
+          "market": {
+            "type": "string",
+            "description": "market, e.g. BTC, TSLA or xyz:TSLA",
+            "required": true,
+            "example": "xyz:TSLA"
+          },
+          "op": {
+            "type": "string",
+            "description": "gt | lt | cross",
+            "required": true,
+            "example": "gt"
+          },
+          "threshold": {
+            "type": "number",
+            "description": "the level to compare against",
+            "required": true,
+            "example": "360"
+          },
+          "callback": {
+            "type": "string",
+            "description": "https URL to POST signed events to",
+            "required": false,
+            "example": "https://your.host/hook"
+          },
+          "rule_id": {
+            "type": "string",
+            "description": "FREE status poll: the rule id from registration (with secret); no payment on this path (never send on a registration call)",
+            "required": false
+          },
+          "secret": {
+            "type": "string",
+            "description": "FREE status poll: the rule secret from registration (never send on a registration call)",
+            "required": false
+          }
+        }
       }
     ]
   },
   "cyberpulse": {
     "name": "CyberPulse",
-    "baseUrl": "https://cyberpulse-six.vercel.app",
+    "baseUrl": "https://cyberpulse.theaslangroupllc.com",
     "description": "Global cybersecurity intelligence API — CVE briefs, vulnerability scanning, CISA KEV, OSINT, threat intelligence, ransomware tracking, breach checks, compliance gap analysis, dark web monitoring, and ",
     "globalCoverage": "Global",
     "endpoints": [
+      {
+        "action": "cve-check",
+        "path": "/api/cyber/cve-check",
+        "price": "$0.02",
+        "description": "CVE fact check — NVD + CISA KEV + OSV joined, deterministic",
+        "params": {
+          "id": {
+            "type": "string",
+            "description": "CVE identifier, e.g. CVE-2021-44228",
+            "required": true
+          }
+        }
+      },
       {
         "action": "cve-brief",
         "path": "/api/cyber/cve-brief",
@@ -4721,7 +6126,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "dealpulse": {
     "name": "DealPulse",
-    "baseUrl": "https://dealpulse-weld.vercel.app",
+    "baseUrl": "https://dealpulse.theaslangroupllc.com",
     "description": "Global deal intelligence API. AI-synthesized best deals, price history, coupon discovery, cashback optimization, subscription reviews, credit card stack analysis, grocery savings, student discounts, an",
     "globalCoverage": "Global",
     "endpoints": [
@@ -4910,7 +6315,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "subscription-rights",
         "path": "/api/deals/subscription-rights",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Subscription-trap rights check — state auto-renewal law duties, violations, and remedy math (deterministic, no LLM)",
         "params": {
           "state": {
@@ -5087,12 +6492,133 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "check",
+        "path": "/api/deals/check",
+        "price": "$0.50",
+        "description": "Verify which deals are real at a store right now",
+        "params": {
+          "store": {
+            "type": "string",
+            "description": "Store, brand, or restaurant name",
+            "required": true,
+            "example": "Nike"
+          },
+          "code": {
+            "type": "string",
+            "description": "A specific claimed promo code to verify against first-party sources",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "description": "2-letter ISO country code for regional offer validity",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "giftcard",
+        "path": "/api/deals/giftcard",
+        "price": "$0.25",
+        "description": "Report live discounted gift-card rates for a brand",
+        "params": {
+          "store": {
+            "type": "string",
+            "description": "Brand or store name",
+            "required": true,
+            "example": "Home Depot"
+          },
+          "country": {
+            "type": "string",
+            "description": "2-letter ISO country code",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "subscription-check",
+        "path": "/api/deals/subscription-check",
+        "price": "$0.25",
+        "description": "Deterministic $0.25 preview of the subscription demand letter",
+        "params": {
+          "state": {
+            "type": "string",
+            "description": "US state code (CA|NY|DC|VA|IL|VT|OR|HI|DE|FL letter-worthy)",
+            "required": true,
+            "example": "DC"
+          },
+          "signup_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD — selects the rule version in force",
+            "required": false
+          },
+          "signup_channel": {
+            "type": "string",
+            "description": "online | phone | in_person",
+            "required": false
+          },
+          "total_charged": {
+            "type": "string",
+            "description": "USD total from your billing records",
+            "required": false
+          },
+          "cancel_blocked": {
+            "type": "string",
+            "description": "true if cancellation was attempted and obstructed",
+            "required": false
+          },
+          "no_consent": {
+            "type": "string",
+            "description": "true if no affirmative consent was obtained",
+            "required": false
+          },
+          "no_renewal_reminder": {
+            "type": "string",
+            "description": "true if no renewal reminder arrived",
+            "required": false
+          },
+          "discovery_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD you discovered the practice (OR 1-yr / GA 2-yr discovery clocks)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "check-lite",
+        "path": "/api/deals/check-lite",
+        "price": "$0.25",
+        "description": "Deterministic $0.25 subset of deal-check — merchant-feed offers only",
+        "params": {
+          "store": {
+            "type": "string",
+            "description": "Store, brand, or restaurant name",
+            "required": true,
+            "example": "Nike"
+          },
+          "code": {
+            "type": "string",
+            "description": "Optional: a specific promo code to check against the merchant feed only",
+            "required": false
+          }
+        }
       }
     ]
   },
   "debtpulse": {
     "name": "DebtPulse",
-    "baseUrl": "https://debtpulse.vercel.app",
+    "baseUrl": "https://debtpulse.theaslangroupllc.com",
     "description": "Global debt elimination intelligence. All endpoints require x402 payment (USDC on Base mainnet) via the PAYMENT-SIGNATURE header. Supports US, UK, Australia, and Canada jurisdictions. Add ?lang= for a",
     "globalCoverage": "Global",
     "endpoints": [
@@ -5803,7 +7329,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "econsignalpulse": {
     "name": "EconSignalPulse",
-    "baseUrl": "https://econsignalpulse.vercel.app",
+    "baseUrl": "https://econsignalpulse.theaslangroupllc.com",
     "description": "Alternative economic intelligence API covering 190+ countries. Combines World Bank Open Data, IMF Datamapper forecasts, satellite nighttime lights research, and AIS shipping signals to produce institu",
     "globalCoverage": "Global",
     "endpoints": [
@@ -6120,7 +7646,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "edupulse": {
     "name": "EduPulse",
-    "baseUrl": "https://edupulse-xi-blond.vercel.app",
+    "baseUrl": "https://edupulse.theaslangroupllc.com",
     "description": "Global education intelligence API — 10 endpoints for students, test-takers, and lifelong learners worldwide. Study guide generation (any subject, any grade level, 190+ countries), adaptive quiz with e",
     "globalCoverage": "Global",
     "endpoints": [
@@ -6982,12 +8508,85 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "plan-check",
+        "path": "/api/loan/plan-check",
+        "price": "$0.50",
+        "description": "SAVE wind-down plan comparator — RAP vs IBR vs Tiered Standard",
+        "params": {
+          "agi": {
+            "type": "string",
+            "description": "Adjusted gross income",
+            "required": true,
+            "example": "48000"
+          },
+          "balance": {
+            "type": "string",
+            "description": "Total federal loan balance",
+            "required": true,
+            "example": "42000"
+          },
+          "dependents": {
+            "type": "string",
+            "description": "Dependents claimed (RAP $50/mo credit each)",
+            "required": false
+          },
+          "family_size": {
+            "type": "string",
+            "description": "Household size for IBR poverty-line math (default dependents+1)",
+            "required": false
+          },
+          "rate": {
+            "type": "string",
+            "description": "Weighted avg rate %, default 6.5",
+            "required": false
+          },
+          "borrower_status": {
+            "type": "string",
+            "description": "existing|new (new = first loan or consolidation on/after 2026-07-01)",
+            "required": false
+          },
+          "current_plan": {
+            "type": "string",
+            "description": "save|ibr|paye|icr|standard|graduated|extended|other|none",
+            "required": false
+          },
+          "pursuing_pslf": {
+            "type": "string",
+            "description": "true if working toward PSLF",
+            "required": false
+          },
+          "new_borrower_2014": {
+            "type": "string",
+            "description": "IBR tier: true=10%/20yr (default), false=15%/25yr",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "sample",
+        "path": "/api/exam/sample",
+        "price": "$0.20",
+        "description": "Exam-suite sampler / preview — deterministic, no LLM",
+        "params": {
+          "exam": {
+            "type": "string",
+            "description": "Any exam or certification worldwide, e.g. NCLEX, CPA, Bar, Series-3",
+            "required": true
+          },
+          "topic": {
+            "type": "string",
+            "description": "Optional topic — narrows the sample catalog context for prep/flashcards",
+            "required": false
+          }
+        }
       }
     ]
   },
   "glowpulse": {
     "name": "GlowPulse",
-    "baseUrl": "https://glowpulse-nine.vercel.app",
+    "baseUrl": "https://glowpulse.theaslangroupllc.com",
     "description": "Skincare and K-beauty intelligence: ingredient lookups, myth-vs-fact conflict checks, product decoding, pregnancy-safe and fungal-acne screening, dupe finding, routine building, and greenwashing claims checks. Grounded in EU CosIng, CIR/PubChem and Korean regulatory context.",
     "globalCoverage": "Global (EU, Korea, Japan, US regulatory layers)",
     "endpoints": [
@@ -7251,7 +8850,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "scentpulse": {
     "name": "ScentPulse",
-    "baseUrl": "https://scentpulse-xi.vercel.app",
+    "baseUrl": "https://scentpulse.theaslangroupllc.com",
     "description": "Fragrance intelligence: note profiles, batch-code age decoding, dupe/clone matching, blind-buy risk scores, reformulation and allergen checks, attar/oud navigation, collection valuation and layering guidance. IFRA and EU allergen-regulation grounded.",
     "globalCoverage": "Global (EU regs, Middle East attar market, Asia)",
     "endpoints": [
@@ -7565,7 +9164,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "tablepulse": {
     "name": "TablePulse",
-    "baseUrl": "https://tablepulse.vercel.app",
+    "baseUrl": "https://tablepulse.theaslangroupllc.com",
     "description": "Board-game and tabletop intelligence: group-profile recommendations, head-to-head comparisons, expansion checks, collection valuation, crowdfunding back-vs-wait analysis, party/solo/family finders, deal watching and award tracking (Spiel des Jahres).",
     "globalCoverage": "Global (DE/UK/EU/US markets, language-dependence aware)",
     "endpoints": [
@@ -7861,7 +9460,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "esgpulse": {
     "name": "ESGPulse",
-    "baseUrl": "https://esgpulse.vercel.app",
+    "baseUrl": "https://esgpulse.theaslangroupllc.com",
     "description": "AI-powered ESG and sustainability intelligence: CSRD compliance roadmaps, EU Taxonomy alignment, supply chain due diligence, emissions analysis, greenwashing risk, and ESG disclosure guidance. All end",
     "globalCoverage": "Global",
     "endpoints": [
@@ -8359,7 +9958,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "fanpulse": {
     "name": "FanPulse",
-    "baseUrl": "https://fanpulse-tau.vercel.app",
+    "baseUrl": "https://fanpulse.theaslangroupllc.com",
     "description": "Global fandom intelligence API. AI-synthesized fan guides, lore analysis, collectibles valuation, discography deep-dives, character analysis, easter egg discovery, quiz generation, and timeline recons",
     "globalCoverage": "Global",
     "endpoints": [
@@ -8594,7 +10193,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "fieldpulse": {
     "name": "FieldPulse",
-    "baseUrl": "https://fieldpulse-tan.vercel.app",
+    "baseUrl": "https://fieldpulse.theaslangroupllc.com",
     "description": "Global precision agriculture intelligence API. Synthesizes satellite NDVI data, Open-Meteo soil/weather data, USDA WASDE, FAO, and EPPO into structured, actionable intelligence for growers, agronomist",
     "globalCoverage": "Global",
     "endpoints": [
@@ -8636,7 +10235,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "weather-risk",
         "path": "/api/weather-risk",
         "price": "$0.08",
-        "description": "7-14 day crop-specific weather risk assessment",
+        "description": "7-day crop-specific weather risk assessment",
         "params": {
           "lat": {
             "type": "number",
@@ -8666,7 +10265,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "soil-intel",
         "path": "/api/soil-intel",
         "price": "$0.08",
-        "description": "Live soil moisture, temperature, and evapotranspiration intelligence",
+        "description": "Observed soil wetness and computed evapotranspiration intelligence",
         "params": {
           "lat": {
             "type": "number",
@@ -8808,7 +10407,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "planting-window",
         "path": "/api/planting-window",
         "price": "$0.05",
-        "description": "Optimal planting window based on soil temperature and frost dates",
+        "description": "Optimal planting window from air temperature, soil wetness and frost dates",
         "params": {
           "lat": {
             "type": "number",
@@ -8901,10 +10500,23 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "filingspulse": {
     "name": "FilingsPulse",
-    "baseUrl": "https://filingspulse.vercel.app",
+    "baseUrl": "https://filingspulse.theaslangroupllc.com",
     "description": "Global SEC/EDGAR and international filings intelligence API. AI-synthesized plain-language summaries of 10-K, 10-Q, 8-K, S-1/IPO filings. Insider ownership tracking, red flag detection, institutional ",
     "globalCoverage": "Global",
     "endpoints": [
+      {
+        "action": "quarterly",
+        "path": "/api/filings/quarterly",
+        "price": "$0.02",
+        "description": "Eight quarters of reported fundamentals from SEC XBRL, deterministic",
+        "params": {
+          "company": {
+            "type": "string",
+            "description": "Ticker, company name, or CIK",
+            "required": true
+          }
+        }
+      },
       {
         "action": "exchange",
         "path": "/api/filings/exchange",
@@ -9050,6 +10662,29 @@ export const VERTICALS: Record<string, Vertical> = {
           "event": {
             "type": "string",
             "description": "earnings | executive_change | merger | restatement | debt | cybersecurity | guidance_change",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "earnings",
+        "path": "/api/filings/earnings",
+        "price": "$0.25",
+        "description": "Earnings brief — deterministic quarterly series + next-report estimate + attributed consensus",
+        "params": {
+          "ticker": {
+            "type": "string",
+            "description": "US stock ticker (most reliable resolution), e.g. JPM",
+            "required": false
+          },
+          "company": {
+            "type": "string",
+            "description": "Company name (used if ticker not given)",
             "required": false
           },
           "lang": {
@@ -9249,8 +10884,8 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "findpulse": {
     "name": "FindPulse",
-    "baseUrl": "https://findpulse-omega.vercel.app",
-    "description": "Universal finder and discovery API. AI-synthesized best product recommendations, alternative product discovery, grant and scholarship search, used/refurbished alternatives, hidden deals, local busines",
+    "baseUrl": "https://findpulse.theaslangroupllc.com",
+    "description": "Product discovery for shopping and buyer agents — the research layer before the transaction. One-call pre-purchase buy/wait/avoid verdicts with official CPSC recall screens, best-product-for-use-case, comparisons, cheaper alternatives, gift finding, grants and scholarships.",
     "globalCoverage": "Global",
     "endpoints": [
       {
@@ -9475,12 +11110,76 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "gift",
+        "path": "/api/find/gift",
+        "price": "$0.10",
+        "description": "Gift finder by recipient and occasion",
+        "params": {
+          "recipient": {
+            "type": "string",
+            "description": "recipient",
+            "required": true
+          },
+          "occasion": {
+            "type": "string",
+            "description": "occasion",
+            "required": false
+          },
+          "budget": {
+            "type": "string",
+            "description": "budget",
+            "required": false
+          },
+          "interests": {
+            "type": "string",
+            "description": "interests",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "buy-check",
+        "path": "/api/find/buy-check",
+        "price": "$0.50",
+        "description": "Pre-purchase buy/wait/avoid verdict (one call)",
+        "params": {
+          "product": {
+            "type": "string",
+            "description": "product",
+            "required": true
+          },
+          "use_case": {
+            "type": "string",
+            "description": "use_case",
+            "required": false
+          },
+          "budget": {
+            "type": "string",
+            "description": "budget",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "buy-check-lite",
+        "path": "/api/find/buy-check-lite",
+        "price": "$0.25",
+        "description": "Recall screen preview (lite, agent-tier)",
+        "params": {
+          "product": {
+            "type": "string",
+            "description": "product",
+            "required": true
+          }
+        }
       }
     ]
   },
   "fitpulse": {
     "name": "FitPulse",
-    "baseUrl": "https://fitpulse-vert.vercel.app",
+    "baseUrl": "https://fitpulse.theaslangroupllc.com",
     "description": "Global fitness intelligence API. Evidence-based workout programming, nutrition science, supplement efficacy analysis, injury recovery protocols, race training plans, sleep optimization, plateau-breaki",
     "globalCoverage": "Global",
     "endpoints": [
@@ -9743,10 +11442,36 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "footballpulse": {
     "name": "FootballPulse",
-    "baseUrl": "https://footballpulse-six.vercel.app",
-    "description": "Global football/soccer betting intelligence API — match previews, Asian handicap, live in-play intel, value bets, accumulators, league stats, player intelligence, corner/booking markets, clean sheet p",
+    "baseUrl": "https://footballpulse.theaslangroupllc.com",
+    "description": "Football/soccer intelligence for fans, fantasy managers, and betting analysts. FPL checks grounded in the official Fantasy Premier League API (prices, ownership, injury flags, fixture difficulty, direct calls), match previews, World Cup and league intel, transfer news, and honest betting analysis.",
     "globalCoverage": "Global",
     "endpoints": [
+      {
+        "action": "fpl-check",
+        "path": "/api/fpl-check",
+        "price": "$0.25",
+        "description": "FPL player check or position value shortlist (official FPL API)",
+        "params": {
+          "player": {
+            "type": "string",
+            "description": "Player name for deep check (this or position required)",
+            "required": false,
+            "example": "Salah"
+          },
+          "position": {
+            "type": "string",
+            "description": "GK, DEF, MID, or FWD — ranked shortlist mode",
+            "required": false,
+            "example": "MID"
+          },
+          "max_price": {
+            "type": "string",
+            "description": "Budget cap in £m for shortlist mode",
+            "required": false,
+            "example": "8.0"
+          }
+        }
+      },
       {
         "action": "match-preview",
         "path": "/api/match-preview",
@@ -10072,7 +11797,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "franchisepulse": {
     "name": "FranchisePulse",
-    "baseUrl": "https://franchisepulse-six.vercel.app",
+    "baseUrl": "https://franchisepulse.theaslangroupllc.com",
     "description": "Global franchise intelligence API. AI-synthesized franchise discovery, FDD analysis, total cost modeling, SBA loan analysis, resale valuation, online/absentee franchise opportunities, and franchise br",
     "globalCoverage": "Global",
     "endpoints": [
@@ -10287,10 +12012,54 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "gamepulse": {
     "name": "GamePulse",
-    "baseUrl": "https://gamepulse-zeta.vercel.app",
-    "description": "Global gaming intelligence API. AI-synthesized meta analysis, tier lists, gaming hardware recommendations, PC specs optimization, esports match predictions, TCG card valuations (MTG, Pokémon, Yu-Gi-Oh",
+    "baseUrl": "https://gamepulse.theaslangroupllc.com",
+    "description": "Gaming economy intelligence — play, trade, earn. Live in-game item (skins) prices across Steam Market and Skinport with real cash-out math, Roblox niche viability with live player data, creative-skill earnings maps, game deals, buy-or-wait verdicts, meta analysis, TCG valuations, esports intelligence.",
     "globalCoverage": "Global",
     "endpoints": [
+      {
+        "action": "skin-check",
+        "path": "/api/items/skin-check",
+        "price": "$0.05",
+        "description": "Live skin/item price check with cash-out math",
+        "params": {
+          "item": {
+            "type": "string",
+            "description": "Item name — exact Steam market_hash_name works best, fuzzy accepted",
+            "required": true
+          },
+          "game": {
+            "type": "string",
+            "description": "cs2 (default), dota2, rust, tf2",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "roblox-check",
+        "path": "/api/creator/roblox-check",
+        "price": "$0.25",
+        "description": "Roblox niche viability check with live data",
+        "params": {
+          "niche": {
+            "type": "string",
+            "description": "Game niche keyword, e.g. tycoon, obby, horror, pet simulator",
+            "required": true
+          }
+        }
+      },
+      {
+        "action": "earn-map",
+        "path": "/api/creator/earn-map",
+        "price": "$0.15",
+        "description": "Creative-skill earnings map for the games industry",
+        "params": {
+          "skill": {
+            "type": "string",
+            "description": "music, audio, art, 3d, writing, animation, code, voice, video",
+            "required": true
+          }
+        }
+      },
       {
         "action": "deals",
         "path": "/api/gaming/deals",
@@ -10593,7 +12362,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "geopoliticalpulse": {
     "name": "GeopoliticalPulse",
-    "baseUrl": "https://geopoliticalpulse.vercel.app",
+    "baseUrl": "https://geopoliticalpulse.theaslangroupllc.com",
     "description": "Real-time geopolitical intelligence for investors, compliance teams, and AI agents. Political risk, conflict monitoring, sanctions, elections, trade tensions, and regional situational awareness for 19",
     "globalCoverage": "Global",
     "endpoints": [
@@ -10807,7 +12576,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "govspendpulse": {
     "name": "GovSpendPulse",
-    "baseUrl": "https://govspendpulse.vercel.app",
+    "baseUrl": "https://govspendpulse.theaslangroupllc.com",
     "description": "Global government procurement intelligence API. 9 endpoints covering US federal contracts (USASpending.gov), active solicitations (SAM.gov), EU tenders (TED), UK contracts, global development bank opp",
     "globalCoverage": "Global",
     "endpoints": [
@@ -11070,8 +12839,8 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "grantpulse": {
     "name": "GrantPulse",
-    "baseUrl": "https://grantpulse-three.vercel.app",
-    "description": "Grant discovery and application intelligence API. 8 endpoints powered by Grants.gov, USASpending.gov, and Claude. All endpoints require x402 payment (USDC on Base mainnet). Flagship match endpoint inc",
+    "baseUrl": "https://grantpulse.theaslangroupllc.com",
+    "description": "The funding-discovery layer for organisations anywhere — official sources fetched live: Grants.gov, the EU Funding & Tenders Portal (SEDIA), gov.uk Find a Grant, USAspending, IRS Form 990s. Match open calls to your profile (US federal/state, EU $0.25, UK $0.25, global development), check funders' real giving history, draft proposal sections and complete ready-to-send Letters of Inquiry ($2). 14 endpoints.",
     "globalCoverage": "Global",
     "endpoints": [
       {
@@ -11342,7 +13111,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "eu",
         "path": "/api/grant/eu",
-        "price": "$0.12",
+        "price": "$0.25",
         "description": "EU funding intelligence",
         "params": {
           "org_type": {
@@ -11460,15 +13229,178 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "uk",
+        "path": "/api/grant/uk",
+        "price": "$0.25",
+        "description": "Match UK grants from the official gov.uk Find a Grant service",
+        "params": {
+          "mission": {
+            "type": "string",
+            "description": "what the funding is for",
+            "required": false,
+            "example": "youth sports"
+          },
+          "org_type": {
+            "type": "string",
+            "description": "charity | CIC | private_company | individual | public_body",
+            "required": false,
+            "example": "charity"
+          },
+          "nation": {
+            "type": "string",
+            "description": "England | Scotland | Wales | Northern Ireland",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "language to respond in",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "loi",
+        "path": "/api/grant/loi",
+        "price": "$2.00",
+        "description": "Draft a complete ready-to-send Letter of Inquiry",
+        "params": {
+          "funder": {
+            "type": "string",
+            "description": "the foundation/programme being approached",
+            "required": true,
+            "example": "Ford Foundation"
+          },
+          "project": {
+            "type": "string",
+            "description": "what you want funded",
+            "required": true,
+            "example": "digital literacy program for rural seniors"
+          },
+          "org": {
+            "type": "string",
+            "description": "who you are — type, track record, location",
+            "required": false
+          },
+          "amount": {
+            "type": "string",
+            "description": "ask size, e.g. 75000 USD",
+            "required": false
+          },
+          "duration": {
+            "type": "string",
+            "description": "e.g. 2 years",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "language to respond in",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "loi-readiness",
+        "path": "/api/grant/loi-readiness",
+        "price": "$0.25",
+        "description": "Deterministic $0.25 readiness check for the LOI product",
+        "params": {
+          "funder": {
+            "type": "string",
+            "description": "the foundation/programme being approached",
+            "required": true,
+            "example": "Ford Foundation"
+          },
+          "project": {
+            "type": "string",
+            "description": "what you want funded",
+            "required": true,
+            "example": "digital literacy program for rural seniors"
+          },
+          "org": {
+            "type": "string",
+            "description": "who you are — type, track record, location",
+            "required": false
+          },
+          "amount": {
+            "type": "string",
+            "description": "ask size, e.g. 75000 USD",
+            "required": false
+          },
+          "duration": {
+            "type": "string",
+            "description": "e.g. 2 years",
+            "required": false
+          }
+        }
       }
     ]
   },
   "gridpulse": {
     "name": "GridPulse",
-    "baseUrl": "https://gridpulse-amber.vercel.app",
+    "baseUrl": "https://gridpulse.theaslangroupllc.com",
     "description": "Global energy grid intelligence API. NREL + EIA + Open-Meteo data synthesis. Home solar feasibility, electricity rate analysis, time-of-use optimization, EV charging cost modeling, battery storage ROI",
     "globalCoverage": "Global",
     "endpoints": [
+      {
+        "action": "carbon-intensity",
+        "path": "/api/energy/carbon-intensity",
+        "price": "$0.01",
+        "description": "Live grid carbon intensity now + forward curve (GB regions + 8 EU countries)",
+        "params": {
+          "region": {
+            "type": "string",
+            "description": "UK | a GB DNO region (london, north-scotland, …) | DE FR NL BE AT ES IT NO",
+            "required": false,
+            "example": "UK"
+          },
+          "hours": {
+            "type": "integer",
+            "description": "Forward window in hours, 1-48",
+            "required": false,
+            "example": "24"
+          }
+        }
+      },
+      {
+        "action": "compute-window",
+        "path": "/api/energy/compute-window",
+        "price": "$0.25",
+        "description": "Find the optimal 48h window to run a compute workload (carbon or cost)",
+        "params": {
+          "region": {
+            "type": "string",
+            "description": "UK (GB national) | a GB DNO region: london, north-scotland, south-scotland, north-west-england, north-east-england, yorkshire, north-wales, south-wales, west-midlands, east-midlands, east-england, south-west-england, south-england, south-east-england | an EU country: DE, FR, NL, BE, AT, ES, IT, NO",
+            "required": false,
+            "example": "UK"
+          },
+          "hours": {
+            "type": "number",
+            "description": "Job duration in hours",
+            "required": false,
+            "example": "4"
+          },
+          "mw": {
+            "type": "number",
+            "description": "Load in MW — scales the absolute CO2 and EUR savings",
+            "required": false,
+            "example": "1"
+          },
+          "goal": {
+            "type": "string",
+            "description": "What to optimise. cost and blend require a region with a published day-ahead price series (DE, FR, BE and other bidding zones).",
+            "required": false,
+            "example": "carbon"
+          },
+          "max_gco2": {
+            "type": "number",
+            "description": "Optional carbon budget in gCO2/kWh. Returns the earliest window meeting it, or satisfiable:false.",
+            "required": false,
+            "example": "80"
+          }
+        }
+      },
       {
         "action": "prices",
         "path": "/api/energy/prices",
@@ -11490,8 +13422,9 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {
           "region": {
             "type": "string",
-            "description": "ercot | caiso | pjm | miso | isone | nyiso | spp (default: ercot)",
-            "required": false
+            "description": "US ISO/RTO region",
+            "required": false,
+            "example": "ercot"
           }
         }
       },
@@ -11605,25 +13538,35 @@ export const VERTICALS: Record<string, Vertical> = {
         "price": "$0.10",
         "description": "Home battery storage analysis",
         "params": {
-          "state": {
+          "location": {
             "type": "string",
-            "description": "2-letter US state code",
-            "required": false
+            "description": "City, State or place name",
+            "required": true,
+            "example": "Austin, TX"
           },
-          "monthly_bill": {
+          "zip": {
+            "type": "string",
+            "description": "US ZIP code (refines the location)",
+            "required": false,
+            "example": "78701"
+          },
+          "monthly_kwh": {
             "type": "integer",
-            "description": "Average monthly electricity bill in USD",
-            "required": false
+            "description": "Average monthly consumption in kWh",
+            "required": false,
+            "example": "900"
           },
           "has_solar": {
             "type": "boolean",
-            "description": "true if existing or planned solar system",
-            "required": false
+            "description": "Whether the property already has solar",
+            "required": false,
+            "example": "false"
           },
-          "outage_priority": {
+          "lang": {
             "type": "string",
-            "description": "Priority for outage backup (essential-only, whole-home, ev-charging)",
-            "required": false
+            "description": "Response language (default en)",
+            "required": false,
+            "example": "en"
           }
         }
       },
@@ -11715,7 +13658,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "harvestpulse": {
     "name": "HarvestPulse",
-    "baseUrl": "https://harvestpulse.vercel.app",
+    "baseUrl": "https://harvestpulse.theaslangroupllc.com",
     "description": "Global farm-to-table and agricultural intelligence API. USDA + ERS data synthesis. Local food finder (farmers markets, CSAs, on-farm markets), seasonal produce calendars, organic certification lookup,",
     "globalCoverage": "Global",
     "endpoints": [
@@ -12025,8 +13968,8 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "herbapulse": {
     "name": "HerbaPulse",
-    "baseUrl": "https://herbapulse.vercel.app",
-    "description": "Global herbal medicine and botanical intelligence API. PubMed-grounded herb profiles, drug-herb interaction checker, traditional medicine system guides (Ayurveda, TCM, Amazonian, African), herbal reme",
+    "baseUrl": "https://herbapulse.theaslangroupllc.com",
+    "description": "The centralized natural-remedies layer — 10 endpoints. Home remedy protocol compiler (practical preparations with real ratios, honest evidence labels, safety rails, buyable ingredient lists), home apothecary kit builder (household-matched stocked cabinet), PubMed-grounded herb profiles, herb-drug interaction checker, supplement decoder, natural skincare, traditional medicine guides (Ayurveda, TCM), practitioner guidance, cannabis intelligence. Educational, never medical advice.",
     "globalCoverage": "Global",
     "endpoints": [
       {
@@ -12207,12 +14150,68 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "protocol",
+        "path": "/api/herba/protocol",
+        "price": "$0.15",
+        "description": "Home remedy protocol compiler",
+        "params": {
+          "condition": {
+            "type": "string",
+            "description": "Condition to compile remedy protocols for (or pass remedy=)",
+            "required": false
+          },
+          "remedy": {
+            "type": "string",
+            "description": "Specific remedy to compile, e.g. castor oil pack, fire cider",
+            "required": false
+          },
+          "audience": {
+            "type": "string",
+            "description": "adult (default) | child | pregnancy — tightens safety rails",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "apothecary",
+        "path": "/api/herba/apothecary",
+        "price": "$0.25",
+        "description": "Home apothecary kit builder",
+        "params": {
+          "household": {
+            "type": "string",
+            "description": "e.g. \"2 adults, 2 kids under 10\" or \"1 adult, pregnant\"",
+            "required": false
+          },
+          "focus": {
+            "type": "string",
+            "description": "Comma-separated: sleep, digestion, immune, first-aid, skin, stress",
+            "required": false
+          },
+          "budget": {
+            "type": "string",
+            "description": "starter | standard (default) | complete",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
       }
     ]
   },
   "homepulse": {
     "name": "HomePulse",
-    "baseUrl": "https://homepulse-seven.vercel.app",
+    "baseUrl": "https://homepulse.theaslangroupllc.com",
     "description": "Global home intelligence API. AI-synthesized home maintenance checklists, improvement ROI analysis, neighborhood research, smart home integration, energy efficiency guidance, contractor task briefings",
     "globalCoverage": "Global",
     "endpoints": [
@@ -12585,7 +14584,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "immigrationpulse": {
     "name": "ImmigrationPulse",
-    "baseUrl": "https://immigrationpulse.vercel.app",
+    "baseUrl": "https://immigrationpulse.theaslangroupllc.com",
     "description": "Global immigration intelligence API serving 281M+ migrants. 11 endpoints covering visa requirements, PR pathways, points calculators (Express Entry CRS, SkillSelect), digital nomad visas, citizenship ",
     "globalCoverage": "Global",
     "endpoints": [
@@ -12978,12 +14977,54 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "en"
           }
         }
+      },
+      {
+        "action": "category-check",
+        "path": "/api/category-check",
+        "price": "$0.05",
+        "description": "Express Entry 2026 category checker — eligibility across all 10 categories + observed cutoffs",
+        "params": {
+          "occupation_group": {
+            "type": "string",
+            "description": "healthcare|stem|trade|education|transport|physician|senior_manager|researcher|other",
+            "required": false,
+            "example": "healthcare"
+          },
+          "french_clb": {
+            "type": "string",
+            "description": "Best French CLB/NCLC level (all four abilities); 0 if none",
+            "required": false,
+            "example": "7"
+          },
+          "months_experience": {
+            "type": "string",
+            "description": "Months of experience in the occupation, last 3 years (anywhere)",
+            "required": false,
+            "example": "24"
+          },
+          "canadian_months": {
+            "type": "string",
+            "description": "Months gained IN Canada (new 2026 categories need 12 Canadian)",
+            "required": false
+          },
+          "caf_job_offer": {
+            "type": "string",
+            "description": "true if you hold a Canadian Armed Forces job offer",
+            "required": false
+          },
+          "crs": {
+            "type": "string",
+            "description": "Current CRS score for the strategy read",
+            "required": false,
+            "example": "445"
+          }
+        }
       }
     ]
   },
   "insurepulse": {
     "name": "InsurePulse",
-    "baseUrl": "https://insurepulse.vercel.app",
+    "baseUrl": "https://insurepulse.theaslangroupllc.com",
     "description": "AI-synthesized insurance intelligence. Auto coverage analysis, life insurance needs calculator, homeowners gap finder, annual coverage review, renters guidance — plus the Prompt-Pay Interest Engine: deterministic late-claim statutory interest math (TX 18%/prime+5, FL from notice date, NY no-fault 2%/mo, AZ 10%, GA 12%, CA 15%+penalty) with citation-locked demand letters. All endpoints require x402",
     "globalCoverage": "Global",
     "endpoints": [
@@ -13381,7 +15422,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "prompt-pay",
         "path": "/api/insure/prompt-pay",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Late-claim interest check — statutory prompt-pay interest math (deterministic, no LLM)",
         "params": {
           "state": {
@@ -13523,19 +15564,62 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "prompt-pay-check",
+        "path": "/api/insure/prompt-pay-check",
+        "price": "$0.25",
+        "description": "Agent-tier ($0.25) preview of the prompt-pay demand letter — statute/deadline/interest framework, deterministic, no LLM",
+        "params": {
+          "state": {
+            "type": "string",
+            "description": "US state code (TX|FL|NY|AZ|GA|CA computed; LA|CO flagged; NJ|WA honest-no)",
+            "required": true
+          },
+          "claim_type": {
+            "type": "string",
+            "description": "property | auto | health | disability | life",
+            "required": true
+          },
+          "claim_received_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD the insurer received the claim/notice/proof of loss",
+            "required": true
+          },
+          "claim_amount": {
+            "type": "string",
+            "description": "USD claim amount from your records",
+            "required": true
+          },
+          "paid_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD paid (omit if unpaid)",
+            "required": false
+          },
+          "weather_related": {
+            "type": "string",
+            "description": "TX property: true for hail/wind/hurricane (ch. 542A lane)",
+            "required": false
+          },
+          "plan_funding": {
+            "type": "string",
+            "description": "health: fully_insured | self_funded | government | church | unknown (ERISA gate)",
+            "required": false
+          }
+        }
       }
     ]
   },
   "legalpulse": {
     "name": "LegalPulse",
-    "baseUrl": "https://legalpulse-rho.vercel.app",
-    "description": "Global legal intelligence API — 10 endpoints covering the full legal lifecycle for individuals, entrepreneurs, and small businesses. Demand letter generation ($0.25), contract analysis + red flag iden",
+    "baseUrl": "https://legalpulse.theaslangroupllc.com",
+    "description": "The clearance layer before you sign, brand, send, or sue — 12 endpoints for legal agents and the people they work for. Pre-signature contract clearance with verbatim red-flag quotes ($0.50), trademark knock-out checks verified live against USPTO TSDR ($0.50), ready-to-send demand letters with statute citations ($2), tenant/employment/consumer rights, small claims, business formation, estate, IP. Jurisdiction-aware.",
     "globalCoverage": "Global",
     "endpoints": [
       {
         "action": "letter",
         "path": "/api/legal/letter",
-        "price": "$0.25",
+        "price": "$2.00",
         "description": "Advocacy letter writer",
         "params": {
           "type": {
@@ -13726,12 +15810,119 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           }
         }
+      },
+      {
+        "action": "sign-check",
+        "path": "/api/legal/sign-check",
+        "price": "$0.50",
+        "description": "Pre-signature contract clearance",
+        "params": {
+          "text": {
+            "type": "string",
+            "description": "the contract text, URL-encoded (or send as POST JSON body {\"text\":\"...\"}); min 200 chars, max 30000",
+            "required": true,
+            "example": "SERVICES AGREEMENT. This Agreement is made between Acme Corp (Client) and the Contractor. 1. SERVICES. Contractor shall provide consulting services as directed by Client. 2. PAYMENT. Client shall pay invoices within ninety (90) days of receipt. 3. TERMINATION. Client may terminate at any time without notice. 4. INDEMNITY. Contractor shall indemnify Client against all claims without limitation."
+          },
+          "role": {
+            "type": "string",
+            "description": "which party you are — freelancer | tenant | employee | customer | vendor | ...",
+            "required": false
+          },
+          "type": {
+            "type": "string",
+            "description": "freelance | lease | employment | nda | saas | service | purchase | ...",
+            "required": false
+          },
+          "jurisdiction": {
+            "type": "string",
+            "description": "optional — auto-detected from the document if omitted",
+            "required": false
+          },
+          "concerns": {
+            "type": "string",
+            "description": "optional — anything specific to check",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "trademark-check",
+        "path": "/api/legal/trademark-check",
+        "price": "$0.50",
+        "description": "Trademark knock-out check w/ live USPTO verification",
+        "params": {
+          "mark": {
+            "type": "string",
+            "description": "the brand/product name to check",
+            "required": true,
+            "example": "Nimbus Labs"
+          },
+          "goods": {
+            "type": "string",
+            "description": "what it will be sold as — sharpens class analysis",
+            "required": false,
+            "example": "project management software"
+          },
+          "serial": {
+            "type": "string",
+            "description": "optional CSV of known USPTO serial/registration numbers to verify directly",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "letter-triage",
+        "path": "/api/legal/letter-triage",
+        "price": "$0.25",
+        "description": "Letter-engine triage (agent-tier preview)",
+        "params": {
+          "situation": {
+            "type": "string",
+            "description": "describe the dispute",
+            "required": true,
+            "example": "landlord kept my deposit after move-out"
+          },
+          "type": {
+            "type": "string",
+            "description": "optional — auto-detected from situation if omitted",
+            "required": false
+          },
+          "recipient": {
+            "type": "string",
+            "description": "landlord | employer | contractor | business",
+            "required": false
+          },
+          "state": {
+            "type": "string",
+            "description": "2-letter US code, or a country name for non-US jurisdiction detection",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "trademark-precheck",
+        "path": "/api/legal/trademark-precheck",
+        "price": "$0.25",
+        "description": "Trademark precheck (agent-tier preview)",
+        "params": {
+          "mark": {
+            "type": "string",
+            "description": "the brand/product name to check (context only — this route does not search for conflicts)",
+            "required": true,
+            "example": "Nimbus Labs"
+          },
+          "serial": {
+            "type": "string",
+            "description": "CSV of known USPTO serial/registration numbers to verify live — required to get official records back",
+            "required": false
+          }
+        }
       }
     ]
   },
   "longevitypulse": {
     "name": "LongevityPulse",
-    "baseUrl": "https://longevitypulse.vercel.app",
+    "baseUrl": "https://longevitypulse.theaslangroupllc.com",
     "description": "Global longevity intelligence API — biomarker interpretation, supplement evidence, personalized protocols, clinical trials, Blue Zone research, WHO country longevity profiles, epigenetic clocks, dieta",
     "globalCoverage": "Global",
     "endpoints": [
@@ -13972,7 +16163,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "macropulse": {
     "name": "MacroPulse",
-    "baseUrl": "https://macropulse-alpha.vercel.app",
+    "baseUrl": "https://macropulse.theaslangroupllc.com",
     "description": "Real-time macro intelligence for forex and CFD traders. All endpoints require x402 payment (USDC on Base mainnet) via the PAYMENT-SIGNATURE header.",
     "globalCoverage": "Global",
     "endpoints": [
@@ -14017,19 +16208,6 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {}
       },
       {
-        "action": "equities-pulse",
-        "path": "/api/equities-pulse",
-        "price": "$0.10",
-        "description": "Equities pulse",
-        "params": {
-          "session": {
-            "type": "string",
-            "description": "Trading session. Auto-detected from UTC time if omitted.",
-            "required": false
-          }
-        }
-      },
-      {
         "action": "calendar",
         "path": "/api/calendar",
         "price": "$0.10",
@@ -14039,9 +16217,23 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "cot",
         "path": "/api/cot",
-        "price": "$0.15",
-        "description": "CFTC Commitment-of-Traders positioning for FX and commodity agents — institutional net positioning and weekly shifts across 7 major pairs plus gold and WTI, with crowding and contrarian signals.",
+        "price": "$0.02",
+        "description": "CFTC Commitments of Traders positioning — 21 markets, deterministic",
         "params": {}
+      },
+      {
+        "action": "bls-series",
+        "path": "/api/macro/bls-series",
+        "price": "$0.02",
+        "description": "US labor statistics by BLS series id — deterministic, computed YoY",
+        "params": {
+          "series": {
+            "type": "string",
+            "description": "Up to 5 comma-separated BLS series ids or aliases",
+            "required": true,
+            "example": "cpi,unemployment"
+          }
+        }
       },
       {
         "action": "eia-inventory",
@@ -14072,6 +16264,91 @@ export const VERTICALS: Record<string, Vertical> = {
         "params": {}
       },
       {
+        "action": "convert",
+        "path": "/api/fx/convert",
+        "price": "$0.005",
+        "description": "Currency conversion at the official ECB reference rate",
+        "params": {
+          "from": {
+            "type": "string",
+            "description": "Source currency, ISO 4217 alpha-3.",
+            "required": true,
+            "example": "USD"
+          },
+          "to": {
+            "type": "string",
+            "description": "Target currency, or a comma-separated list (max 30).",
+            "required": true,
+            "example": "EUR,GBP"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Amount to convert. Default 1 (the raw rate).",
+            "required": false,
+            "example": "1"
+          },
+          "date": {
+            "type": "string",
+            "description": "YYYY-MM-DD. Returns that day's ECB fixing, or the last fixing on or before it (whose date is reported back in `date`, with is_last_available_fixing=true). Omit for the latest.",
+            "required": false,
+            "example": "2024-03-15"
+          }
+        }
+      },
+      {
+        "action": "is-open",
+        "path": "/api/market/is-open",
+        "price": "$0.005",
+        "description": "Is the stock market open right now? Exchange status, trading hours and holiday calendar",
+        "params": {
+          "exchange": {
+            "type": "string",
+            "description": "Exchange code. Aliases accepted (TSE->JPX, XNYS->NYSE, FRANKFURT->XETRA, ...).",
+            "required": true
+          },
+          "at": {
+            "type": "string",
+            "description": "ISO 8601 timestamp to evaluate. Default: now.",
+            "required": false,
+            "example": "2026-12-25T14:30:00Z"
+          }
+        }
+      },
+      {
+        "action": "us",
+        "path": "/api/macro/us",
+        "price": "$0.01",
+        "description": "Official US macro indicators read from Chainlink contracts (GDP, PCE, SOFR)",
+        "params": {
+          "series": {
+            "type": "string",
+            "description": "Optional comma-separated filter. Any of: gdp_level, gdp_change, pce_level, pce_change, rfs_level, rfs_change, sofr. Omit for all seven.",
+            "required": false,
+            "example": "gdp_change,sofr"
+          }
+        }
+      },
+      {
+        "action": "us-revisions",
+        "path": "/api/macro/us-revisions",
+        "price": "$0.02",
+        "description": "The revision trail of a US macro series, from immutable on-chain round history",
+        "params": {
+          "series": {
+            "type": "string",
+            "description": "Which series to trace. Default gdp_change.",
+            "required": false,
+            "example": "gdp_change"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "How many prints to walk back. Default 8, max 24.",
+            "required": false,
+            "example": "8"
+          }
+        }
+      },
+      {
         "action": "sentiment",
         "path": "/api/sentiment",
         "price": "$0.05",
@@ -14086,10 +16363,93 @@ export const VERTICALS: Record<string, Vertical> = {
       }
     ]
   },
+  "mailpulse": {
+    "name": "MailPulse",
+    "baseUrl": "https://mailpulse.theaslangroupllc.com",
+    "description": "The fleet's first ACTION origin — does something in the world instead of answering a question. Sends a real physical letter (US First-Class, US Certified with optional electronic return receipt, or international) via USPS through Lob's Print & Mail network: paying causes real postage to print and mail, once payment settles. Free address-deliverability check precedes the paid send; free price quote locks the exact price for 15 minutes; cheap status/tracking poll follows up afterward. Every response reports mode: \"test\" | \"live\" — test mode costs nothing and mails nothing physical.",
+    "globalCoverage": "US + international mail via USPS/Lob",
+    "endpoints": [
+      {
+        "action": "verify-address",
+        "path": "/api/verify-address",
+        "price": "$0.01",
+        "description": "Verify a mailing address (US + international)",
+        "params": {}
+      },
+      {
+        "action": "letters",
+        "path": "/api/letters",
+        "price": "$3.00",
+        "description": "THE paid action: prints and mails a real physical letter via Lob once payment settles. Price varies by service — standard $3.00, certified $12.00, certified_return_receipt $14.00, international $5.00 — the amount shown here is the representative/minimum price; the actual x402 charge always matches the caller's quote_id-verified order from POST /api/quote (free, no x402 gate). Requires a client_request_id (8-128 chars) for idempotency.",
+        "params": {
+          "quote_id": {
+            "type": "string",
+            "description": "From POST /api/quote",
+            "required": true
+          },
+          "issued_at": {
+            "type": "string",
+            "description": "From POST /api/quote, copied verbatim",
+            "required": true
+          },
+          "amount_micro": {
+            "type": "string",
+            "description": "From POST /api/quote, copied verbatim",
+            "required": true
+          },
+          "client_request_id": {
+            "type": "string",
+            "description": "8-128 chars, unique per letter, enables idempotent retries",
+            "required": true
+          },
+          "service": {
+            "type": "string",
+            "description": "standard | certified | certified_return_receipt | international",
+            "required": true
+          },
+          "to": {
+            "type": "object",
+            "description": "Recipient address",
+            "required": true
+          },
+          "from": {
+            "type": "object",
+            "description": "Sender-of-record address (never The Aslan Group LLC — we are a paid conduit only)",
+            "required": true
+          },
+          "content": {
+            "type": "object",
+            "description": "{ html } or { file_url } — exactly one",
+            "required": true
+          }
+        }
+      },
+      {
+        "action": "{id}",
+        "path": "/api/letters/{id}",
+        "price": "$0.005",
+        "description": "Letter status / USPS tracking poll",
+        "params": {
+          "id": {
+            "type": "string",
+            "description": "Lob letter id returned by POST /api/letters",
+            "required": true
+          }
+        }
+      },
+      {
+        "action": "health",
+        "path": "/api/health",
+        "price": "FREE",
+        "description": "Liveness + current mode",
+        "params": {}
+      }
+    ]
+  },
   "marketpulse": {
     "name": "MarketPulse",
-    "baseUrl": "https://marketpulse-brown.vercel.app",
-    "description": "Marketing intelligence API for the AI era. LLM visibility, channel mix, content briefs, ad copy, local SEO, email sequences, competitor gap analysis, social strategy, ROI forecasting, and technical SE",
+    "baseUrl": "https://marketpulse.theaslangroupllc.com",
+    "description": "The AI-visibility layer for businesses anywhere in the world — get found by the assistants doing the choosing. Live AI-visibility check with verbatim site evidence ($0.50: per-crawler robots.txt rules, llms.txt, Schema.org, NAP), LLM visibility strategy, country-aware local SEO, channel mix, content briefs, ad copy, competitor gap, ROI forecasting. 12 endpoints, global platforms incl. WeChat/Douyin/LINE/Naver.",
     "globalCoverage": "Global",
     "endpoints": [
       {
@@ -14425,12 +16785,146 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "en"
           }
         }
+      },
+      {
+        "action": "ai-visibility-check",
+        "path": "/api/market/ai-visibility-check",
+        "price": "$0.50",
+        "description": "Live AI-visibility check (GEO/AEO) w/ verbatim site evidence",
+        "params": {
+          "domain": {
+            "type": "string",
+            "description": "the website to check — bare domain, any country",
+            "required": true,
+            "example": "stripe.com"
+          },
+          "business": {
+            "type": "string",
+            "description": "what the business does — sharpens the fix plan",
+            "required": false,
+            "example": "emergency plumber"
+          },
+          "location": {
+            "type": "string",
+            "description": "city + country — enables country-aware platform advice",
+            "required": false,
+            "example": "Manchester, UK"
+          },
+          "lang": {
+            "type": "string",
+            "description": "language to respond in — defaults to English",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "video-ad-script",
+        "path": "/api/market/video-ad-script",
+        "price": "$0.10",
+        "description": "Shot-by-shot video ad script",
+        "params": {
+          "platform": {
+            "type": "string",
+            "description": "Video platform/placement to script for",
+            "required": true,
+            "example": "TikTok"
+          },
+          "product": {
+            "type": "string",
+            "description": "The product or service being advertised",
+            "required": true,
+            "example": "meal prep delivery for busy parents"
+          },
+          "duration": {
+            "type": "string",
+            "description": "Target video length in seconds — defaults to 30",
+            "required": false,
+            "example": "30"
+          },
+          "audience": {
+            "type": "string",
+            "description": "Target audience — sharpens the hook and casting direction",
+            "required": false,
+            "example": "working parents with kids under 10"
+          },
+          "goal": {
+            "type": "string",
+            "description": "Campaign objective in plain language",
+            "required": false,
+            "example": "first orders"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Language to write the script in — defaults to English",
+            "required": false,
+            "example": "es"
+          }
+        }
+      },
+      {
+        "action": "voiceover-script",
+        "path": "/api/market/voiceover-script",
+        "price": "$0.08",
+        "description": "TTS-ready voiceover script",
+        "params": {
+          "product": {
+            "type": "string",
+            "description": "The product, service or business the voiceover is for",
+            "required": true,
+            "example": "online bookkeeping software for freelancers"
+          },
+          "format": {
+            "type": "string",
+            "description": "Voiceover format: video_ad, explainer, podcast_ad, youtube_intro or ivr_greeting — defaults to video_ad",
+            "required": false,
+            "example": "video_ad"
+          },
+          "duration": {
+            "type": "string",
+            "description": "Target length in seconds — defaults to 30",
+            "required": false,
+            "example": "30"
+          },
+          "tone": {
+            "type": "string",
+            "description": "Voice tone direction in plain language",
+            "required": false,
+            "example": "warm, confident, not salesy"
+          },
+          "audience": {
+            "type": "string",
+            "description": "Who is listening — sharpens the hook and vocabulary",
+            "required": false,
+            "example": "freelance designers"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Language to write the script in — defaults to English",
+            "required": false,
+            "example": "es"
+          }
+        }
+      },
+      {
+        "action": "ai-visibility-probe",
+        "path": "/api/market/ai-visibility-probe",
+        "price": "$0.25",
+        "description": "AI-visibility probe (GEO/AEO) — $0.25 agent-tier preview",
+        "params": {
+          "domain": {
+            "type": "string",
+            "description": "the website to check — bare domain, any country",
+            "required": true,
+            "example": "stripe.com"
+          }
+        }
       }
     ]
   },
   "mealpulse": {
     "name": "MealPulse",
-    "baseUrl": "https://mealpulse.vercel.app",
+    "baseUrl": "https://mealpulse.theaslangroupllc.com",
     "description": "Global meal planning and culinary intelligence API. AI-synthesized meal plans, recipe generation, dietary restriction guidance, grocery optimization, pantry utilization, batch cooking, food budgeting,",
     "globalCoverage": "Global",
     "endpoints": [
@@ -14658,7 +17152,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "mindpulse": {
     "name": "MindPulse",
-    "baseUrl": "https://mindpulse-lilac.vercel.app",
+    "baseUrl": "https://mindpulse.theaslangroupllc.com",
     "description": "Global mental health intelligence API. Evidence-based guidance on therapy platform matching, mental health assessment, burnout, psychiatric medication context, coping techniques, sleep disorders (CBT-",
     "globalCoverage": "Global",
     "endpoints": [
@@ -14992,8 +17486,8 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "nutripulse": {
     "name": "NutriPulse",
-    "baseUrl": "https://nutripulse-alpha.vercel.app",
-    "description": "Global nutrition intelligence API. PubMed-grounded supplement analysis, macro/micronutrient planning, food database lookups, glucose/metabolic health guidance, lab result interpretation, longevity nut",
+    "baseUrl": "https://nutripulse.theaslangroupllc.com",
+    "description": "Global nutrition intelligence API — 15 endpoints. GLP-1 nutrition companion (deterministic protein targets + muscle preservation for semaglutide/tirzepatide users), barcode-level ultra-processed food checks (NOVA + additive census, live Open Food Facts), supplement brand safety verification (FDA recalls verbatim + third-party-testing status), plus PubMed-grounded supplement analysis, glucose patterns, lab interpretation, longevity, prenatal.",
     "globalCoverage": "Global",
     "endpoints": [
       {
@@ -15276,6 +17770,348 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "glp1",
+        "path": "/api/nutrition/glp1",
+        "price": "$0.15",
+        "description": "GLP-1 nutrition companion",
+        "params": {
+          "drug": {
+            "type": "string",
+            "description": "semaglutide | ozempic | wegovy | tirzepatide | mounjaro | zepbound | liraglutide | saxenda | other",
+            "required": true
+          },
+          "weight_kg": {
+            "type": "number",
+            "description": "Body weight in kg (or pass weight_lb)",
+            "required": true
+          },
+          "weight_lb": {
+            "type": "number",
+            "description": "Body weight in lb (alternative to weight_kg)",
+            "required": false
+          },
+          "body_fat_pct": {
+            "type": "number",
+            "description": "Optional; switches protein math to fat-free mass",
+            "required": false
+          },
+          "weeks_on": {
+            "type": "number",
+            "description": "Weeks on the medication",
+            "required": false
+          },
+          "goal": {
+            "type": "string",
+            "description": "active-loss (default) | maintenance | coming-off",
+            "required": false
+          },
+          "symptoms": {
+            "type": "string",
+            "description": "Comma-separated: nausea, constipation, fatigue, reflux",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "upf-check",
+        "path": "/api/nutrition/upf-check",
+        "price": "$0.02",
+        "description": "Ultra-processed food check by barcode",
+        "params": {
+          "barcode": {
+            "type": "string",
+            "description": "EAN/UPC digits (preferred, exact product)",
+            "required": false
+          },
+          "name": {
+            "type": "string",
+            "description": "Brand name, best-effort fallback",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "supplement-check",
+        "path": "/api/nutrition/supplement-check",
+        "price": "$0.15",
+        "description": "Supplement brand safety verification",
+        "params": {
+          "brand": {
+            "type": "string",
+            "description": "Supplement brand to verify",
+            "required": true
+          },
+          "product": {
+            "type": "string",
+            "description": "Optional specific product",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false
+          }
+        }
+      }
+    ]
+  },
+  "airdroppulse": {
+    "name": "AirdropPulse",
+    "baseUrl": "https://airdroppulse.theaslangroupllc.com",
+    "description": "Machine-readable airdrop/points-campaign and concentrated-liquidity (LP) analytics, sold per-call via x402 micropayments (USDC on Base plus additional networks) — no API keys, agents pay programmatica",
+    "globalCoverage": "Global",
+    "endpoints": [
+      {
+        "action": "pool-ev",
+        "path": "/api/points/pool-ev",
+        "price": "$0.15",
+        "description": "Points-per-$1k-TVL-per-day ranking of every eligible GigaDex pool",
+        "params": {
+          "min_tvl_usd": {
+            "type": "number",
+            "description": "Exclude pools below this TVL in USD (default: 1000)",
+            "required": false,
+            "example": "1000"
+          }
+        }
+      },
+      {
+        "action": "campaign-status",
+        "path": "/api/points/campaign-status",
+        "price": "$0.05",
+        "description": "GigaDex points campaign clock, emission math, hypothetical value-per-point scenarios",
+        "params": {
+          "giga_per_point": {
+            "type": "number",
+            "description": "UNOFFICIAL community-implied GIGA-per-point figure used only for the hypothetical scenario table (default: 15; GigaDex has not confirmed any redemption terms)",
+            "required": false,
+            "example": "15"
+          },
+          "fdv_usd": {
+            "type": "number",
+            "description": "Optional additional fully-diluted-valuation scenario in USD to add to the illustrative table",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "position-audit",
+        "path": "/api/points/position-audit",
+        "price": "$0.10",
+        "description": "Points earned, share, in-range status and projection for a position or account",
+        "params": {
+          "token_id": {
+            "type": "string",
+            "description": "GigaDex position NFT token id (either this or account is required)",
+            "required": false
+          },
+          "account": {
+            "type": "string",
+            "description": "Account address 0x… — audits every position held by the account (either this or token_id is required)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "entry-guide",
+        "path": "/api/points/entry-guide",
+        "price": "$0.10",
+        "description": "How to participate: contracts, eligible pools, mechanics, GIGA Protect + fake-token warnings",
+        "params": {
+          "min_tvl_usd": {
+            "type": "number",
+            "description": "Exclude pools below this TVL in USD when listing eligible pools (default: 1000)",
+            "required": false,
+            "example": "1000"
+          }
+        }
+      },
+      {
+        "action": "range-model",
+        "path": "/api/lp/range-model",
+        "price": "$0.25",
+        "description": "Realized-vol range scenario table for a GigaDex pool",
+        "params": {
+          "pool": {
+            "type": "string",
+            "description": "GigaDex pool address 0x… (required — discover pools via /api/points/pool-ev or /api/points/entry-guide)",
+            "required": true
+          },
+          "horizon_days": {
+            "type": "number",
+            "description": "Holding-period horizon in days for the scenario table (default: 14, max 90)",
+            "required": false,
+            "example": "14"
+          },
+          "lookback_hours": {
+            "type": "number",
+            "description": "Hours of price history used for realized volatility (default: 168, max 720)",
+            "required": false,
+            "example": "168"
+          },
+          "chain": {
+            "type": "integer",
+            "description": "eip155 chain id. Default 4663 (GigaDex on Robinhood Chain, richest data). Supported: 1, 10, 56, 137, 143, 480, 999, 4663, 8453, 42161, 43114.",
+            "required": false,
+            "example": "4663"
+          }
+        }
+      },
+      {
+        "action": "il-forecast",
+        "path": "/api/lp/il-forecast",
+        "price": "$0.15",
+        "description": "Impermanent-loss vs fees scenario table across price moves for a pool + range",
+        "params": {
+          "pool": {
+            "type": "string",
+            "description": "GigaDex pool address 0x… (required — discover pools via /api/points/pool-ev or /api/points/entry-guide)",
+            "required": true
+          },
+          "lower_pct": {
+            "type": "number",
+            "description": "Lower range bound as % below current price, e.g. 15 = price × 0.85 (default: 15, clamped 0.5-95)",
+            "required": false,
+            "example": "15"
+          },
+          "upper_pct": {
+            "type": "number",
+            "description": "Upper range bound as % above current price, e.g. 15 = price × 1.15 (default: 15, clamped 0.5-500)",
+            "required": false,
+            "example": "15"
+          },
+          "horizon_days": {
+            "type": "number",
+            "description": "Holding-period horizon in days for the fee/probability estimate (default: 14, max 90)",
+            "required": false,
+            "example": "14"
+          },
+          "chain": {
+            "type": "integer",
+            "description": "eip155 chain id. Default 4663 (GigaDex on Robinhood Chain, richest data). Supported: 1, 10, 56, 137, 143, 480, 999, 4663, 8453, 42161, 43114.",
+            "required": false,
+            "example": "4663"
+          }
+        }
+      },
+      {
+        "action": "position-health",
+        "path": "/api/lp/position-health",
+        "price": "$0.05",
+        "description": "In-range status, % through band, edge distances, pending fees — the cheap monitoring poll",
+        "params": {
+          "token_id": {
+            "type": "string",
+            "description": "GigaDex position NFT token id (required)",
+            "required": true
+          },
+          "chain": {
+            "type": "integer",
+            "description": "eip155 chain id. Default 4663 (GigaDex on Robinhood Chain, richest data). Supported: 1, 10, 56, 137, 143, 480, 999, 4663, 8453, 42161, 43114.",
+            "required": false,
+            "example": "4663"
+          },
+          "manager": {
+            "type": "string",
+            "description": "NonfungiblePositionManager address override for uncataloged v3 forks (optional; generic chains only).",
+            "required": false
+          },
+          "pool": {
+            "type": "string",
+            "description": "v3 pool address for live-tick band health on generic chains (optional).",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "rebalance-check",
+        "path": "/api/lp/rebalance-check",
+        "price": "$0.10",
+        "description": "Current range vs recentered range, side-by-side scenario comparison",
+        "params": {
+          "token_id": {
+            "type": "string",
+            "description": "GigaDex position NFT token id (required)",
+            "required": true
+          },
+          "horizon_days": {
+            "type": "number",
+            "description": "Holding-period horizon in days for the scenario comparison (default: 14, max 90)",
+            "required": false,
+            "example": "14"
+          }
+        }
+      },
+      {
+        "action": "launch-check",
+        "path": "/api/long/launch-check",
+        "price": "$0.05",
+        "description": "Launch provenance verdict for a LONG.xyz / Doppler token on Robinhood Chain",
+        "params": {
+          "token": {
+            "type": "string",
+            "description": "ERC-20 token address 0x… on Robinhood Chain (required)",
+            "required": true
+          }
+        }
+      },
+      {
+        "action": "launch-feed",
+        "path": "/api/long/launch-feed",
+        "price": "$0.10",
+        "description": "Live new-launches feed for LONG.xyz / Doppler launchpads on Robinhood Chain",
+        "params": {
+          "limit": {
+            "type": "number",
+            "description": "number of most-recent launches to return (default: 20, max: 50)",
+            "required": false,
+            "example": "20"
+          },
+          "only_long": {
+            "type": "boolean",
+            "description": "true = only launches through LONG's primary integrator (default: false, all Doppler launches)",
+            "required": false,
+            "example": "false"
+          }
+        }
+      },
+      {
+        "action": "stock-backing",
+        "path": "/api/long/stock-backing",
+        "price": "$0.15",
+        "description": "Stock-backing analytics for LONG.xyz / Doppler tokens on Robinhood Chain",
+        "params": {
+          "token": {
+            "type": "string",
+            "description": "Doppler-launched token address 0x… (optional — omit for the per-stock aggregate backing table)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "campaigns",
+        "path": "/api/campaigns",
+        "price": "$0.10",
+        "description": "Curated registry of verifiably live airdrop/points campaigns across chains",
+        "params": {
+          "category": {
+            "type": "string",
+            "description": "Filter by campaign category (default: all)",
+            "required": false
+          },
+          "chain": {
+            "type": "string",
+            "description": "Substring filter on chain name, e.g. \"robinhood\", \"solana\" (default: all)",
+            "required": false
+          }
+        }
       }
     ]
   },
@@ -15289,7 +18125,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "legislation",
         "path": "/api/legislation",
         "price": "$0.15",
-        "description": "Legislative intelligence — plain English bill translation with sector impact",
+        "description": "Translate crypto bills to plain English with sector impact",
         "params": {
           "q": {
             "type": "string",
@@ -15320,7 +18156,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "rwa",
         "path": "/api/rwa",
         "price": "$0.15",
-        "description": "Real world asset market overview — top-of-funnel scan across asset classes",
+        "description": "Survey the real-world-asset market across asset classes",
         "params": {
           "action": {
             "type": "string",
@@ -15335,7 +18171,7 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "lang": {
             "type": "string",
-            "description": "lang",
+            "description": "lang parameter",
             "required": false,
             "example": "en"
           }
@@ -15345,7 +18181,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "scenario",
         "path": "/api/scenario",
         "price": "$0.20",
-        "description": "Sector impact scenario modeling — if/then structural analysis",
+        "description": "Model sector impact scenarios with if/then analysis",
         "params": {
           "trigger": {
             "type": "string",
@@ -15360,13 +18196,13 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "action": {
             "type": "string",
-            "description": "action",
+            "description": "action parameter",
             "required": false,
             "example": "ifthen"
           },
           "lang": {
             "type": "string",
-            "description": "lang",
+            "description": "lang parameter",
             "required": false,
             "example": "en"
           }
@@ -15376,7 +18212,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "transition",
         "path": "/api/transition",
         "price": "$0.10",
-        "description": "Onchain transition guide — practical onboarding by type",
+        "description": "Guide practical onchain onboarding by organization type",
         "params": {
           "type": {
             "type": "string",
@@ -15391,7 +18227,7 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "lang": {
             "type": "string",
-            "description": "lang",
+            "description": "lang parameter",
             "required": false,
             "example": "en"
           }
@@ -15401,23 +18237,23 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "monitor",
         "path": "/api/monitor",
         "price": "$0.10",
-        "description": "Institutional onchain activity monitor — weekly/monthly brief",
+        "description": "Monitor institutional onchain activity, weekly briefs",
         "params": {
           "period": {
             "type": "string",
-            "description": "period",
+            "description": "period parameter",
             "required": false,
             "example": "week"
           },
           "topic": {
             "type": "string",
-            "description": "topic",
+            "description": "topic parameter",
             "required": false,
             "example": "all"
           },
           "lang": {
             "type": "string",
-            "description": "lang",
+            "description": "lang parameter",
             "required": false,
             "example": "en"
           }
@@ -15427,11 +18263,11 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "compliance",
         "path": "/api/compliance",
         "price": "$0.15",
-        "description": "Regulatory compliance intelligence — jurisdiction-specific framework guidance",
+        "description": "Map regulatory compliance duties by jurisdiction",
         "params": {
           "jurisdiction": {
             "type": "string",
-            "description": "jurisdiction",
+            "description": "jurisdiction parameter",
             "required": false,
             "example": "us"
           },
@@ -15447,7 +18283,7 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "lang": {
             "type": "string",
-            "description": "lang",
+            "description": "lang parameter",
             "required": false,
             "example": "en"
           }
@@ -15457,7 +18293,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "tokenize",
         "path": "/api/tokenize",
         "price": "$0.15",
-        "description": "Tokenization intelligence — how to tokenize any asset type",
+        "description": "Explain how to tokenize any asset type, step by step",
         "params": {
           "asset_type": {
             "type": "string",
@@ -15466,39 +18302,13 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "action": {
             "type": "string",
-            "description": "action",
+            "description": "action parameter",
             "required": false,
             "example": "guide"
           },
           "lang": {
             "type": "string",
-            "description": "lang",
-            "required": false,
-            "example": "en"
-          }
-        }
-      },
-      {
-        "action": "yield",
-        "path": "/api/yield",
-        "price": "$0.25",
-        "description": "Tokenized yield intelligence — live rates and risk-adjusted comparison",
-        "params": {
-          "action": {
-            "type": "string",
-            "description": "action",
-            "required": false,
-            "example": "compare"
-          },
-          "risk": {
-            "type": "string",
-            "description": "Risk tolerance for recommendations framing",
-            "required": false,
-            "example": "medium"
-          },
-          "lang": {
-            "type": "string",
-            "description": "lang",
+            "description": "lang parameter",
             "required": false,
             "example": "en"
           }
@@ -15508,7 +18318,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "glossary",
         "path": "/api/glossary",
         "price": "$0.05",
-        "description": "Plain English decoder — any onchain finance or regulatory term",
+        "description": "Decode any onchain finance or regulatory term plainly",
         "params": {
           "term": {
             "type": "string",
@@ -15517,13 +18327,13 @@ export const VERTICALS: Record<string, Vertical> = {
           },
           "context": {
             "type": "string",
-            "description": "context",
+            "description": "context parameter",
             "required": false,
             "example": "general"
           },
           "lang": {
             "type": "string",
-            "description": "lang",
+            "description": "lang parameter",
             "required": false,
             "example": "en"
           }
@@ -15533,23 +18343,23 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "snapshot",
         "path": "/api/snapshot",
         "price": "$0.10",
-        "description": "State of the transition — weekly/monthly macro brief",
+        "description": "Summarize the onchain transition in a weekly macro brief",
         "params": {
           "scope": {
             "type": "string",
-            "description": "scope",
+            "description": "scope parameter",
             "required": false,
             "example": "global"
           },
           "timeframe": {
             "type": "string",
-            "description": "timeframe",
+            "description": "timeframe parameter",
             "required": false,
             "example": "weekly"
           },
           "lang": {
             "type": "string",
-            "description": "lang",
+            "description": "lang parameter",
             "required": false,
             "example": "en"
           }
@@ -15559,7 +18369,7 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "memecoin",
         "path": "/api/memecoin",
         "price": "$0.015",
-        "description": "Solana memecoin pre-trade safety + momentum verdict (deterministic, no-LLM)",
+        "description": "Scan a Solana memecoin pre-trade, deterministic verdict",
         "params": {
           "mint": {
             "type": "string",
@@ -15573,7 +18383,232 @@ export const VERTICALS: Record<string, Vertical> = {
         "action": "evmtoken",
         "path": "/api/evmtoken",
         "price": "$0.015",
-        "description": "EVM memecoin pre-trade safety + momentum verdict (deterministic, no-LLM, multi-chain)",
+        "description": "Scan an EVM token pre-trade, multi-chain, deterministic",
+        "params": {
+          "address": {
+            "type": "string",
+            "description": "ERC-20 token contract address (0x + 40 hex)",
+            "required": true,
+            "example": "0x532f27101965dd16442E59d40670FaF5eBB142E4"
+          },
+          "chain": {
+            "type": "string",
+            "description": "EVM chain (default base; robinhood = Robinhood Chain)",
+            "required": false,
+            "example": "base"
+          }
+        }
+      },
+      {
+        "action": "rwa-risk",
+        "path": "/api/rwa-risk",
+        "price": "$0.25",
+        "description": "Assess issuer and redemption risk for a named RWA product",
+        "params": {
+          "product": {
+            "type": "string",
+            "description": "Product to analyze",
+            "required": false,
+            "example": "BUIDL"
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang parameter",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "gold-check",
+        "path": "/api/gold-check",
+        "price": "$0.15",
+        "description": "Compare tokenized gold products: PAXG vs XAUT",
+        "params": {
+          "lang": {
+            "type": "string",
+            "description": "lang parameter",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "etf-flows",
+        "path": "/api/etf-flows",
+        "price": "$0.15",
+        "description": "Track US spot crypto ETF flows with per-issuer detail",
+        "params": {
+          "asset": {
+            "type": "string",
+            "description": "Which ETF complex to analyze",
+            "required": false,
+            "example": "all"
+          },
+          "lang": {
+            "type": "string",
+            "description": "lang parameter",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "clarity-watch",
+        "path": "/api/clarity-watch",
+        "price": "$0.10",
+        "description": "Track CLARITY Act status, CFTC/SEC split, passage odds",
+        "params": {
+          "lang": {
+            "type": "string",
+            "description": "lang parameter",
+            "required": false,
+            "example": "en"
+          }
+        }
+      },
+      {
+        "action": "vault-apy",
+        "path": "/api/vault-apy",
+        "price": "$0.02",
+        "description": "Live USDC yield panel on Base — onchain lending rates + realized Morpho vault APY, deterministic",
+        "params": {
+          "window": {
+            "type": "integer",
+            "description": "Trailing window in days for realized ERC-4626 vault APY (share-price delta, annualized).",
+            "required": false,
+            "example": "7"
+          },
+          "vault": {
+            "type": "string",
+            "description": "Optional address of ANY ERC-4626 vault on Base to read alongside the standard panel.",
+            "required": false
+          },
+          "scope": {
+            "type": "string",
+            "description": "pools = lending markets (Aave v3, Compound v3, Moonwell, Euler v2); vaults = MetaMorpho ERC-4626 panel; all = both.",
+            "required": false,
+            "example": "all"
+          }
+        }
+      },
+      {
+        "action": "asatoken",
+        "path": "/api/asatoken",
+        "price": "$0.015",
+        "description": "Scan an Algorand ASA pre-trade, deterministic verdict",
+        "params": {
+          "asset": {
+            "type": "string",
+            "description": "Algorand Standard Asset id (integer)",
+            "required": true,
+            "example": "31566704"
+          }
+        }
+      },
+      {
+        "action": "exit-depth",
+        "path": "/api/exit-depth",
+        "price": "$0.02",
+        "description": "Estimate sell-side depth of a v3 pool at 1-25% price impact",
+        "params": {
+          "token": {
+            "type": "string",
+            "description": "ERC-20 token address — primary pool auto-resolved via DexScreener",
+            "required": false,
+            "example": "0x532f27101965dd16442E59d40670FaF5eBB142E4"
+          },
+          "pool": {
+            "type": "string",
+            "description": "v3-compatible pool address to read directly (overrides token resolution)",
+            "required": false,
+            "example": "0x76Bf0abD20f1e0155Ce40A62615a90A709a6C3D8"
+          },
+          "chain": {
+            "type": "string",
+            "description": "ethereum|optimism|bsc|polygon|monad|world|hyperevm|robinhood|base|arbitrum|avalanche (default base)",
+            "required": false,
+            "example": "base"
+          }
+        }
+      },
+      {
+        "action": "holder-map",
+        "path": "/api/holder-map",
+        "price": "$0.02",
+        "description": "Map holder concentration with LP/burn/contract labeling",
+        "params": {
+          "address": {
+            "type": "string",
+            "description": "Token contract address (0x… EVM) or mint (base58 Solana)",
+            "required": true,
+            "example": "0x532f27101965dd16442E59d40670FaF5eBB142E4"
+          },
+          "chain": {
+            "type": "string",
+            "description": "solana|base|ethereum|bsc|arbitrum|polygon|optimism|avalanche|robinhood (default base; solana auto-detected)",
+            "required": false,
+            "example": "base"
+          }
+        }
+      },
+      {
+        "action": "narrative-check",
+        "path": "/api/narrative-check",
+        "price": "$0.15",
+        "description": "Check a project's public claims against observed chain data",
+        "params": {
+          "address": {
+            "type": "string",
+            "description": "Token contract address (0x… EVM) or mint (base58 Solana)",
+            "required": true,
+            "example": "0x532f27101965dd16442E59d40670FaF5eBB142E4"
+          },
+          "url": {
+            "type": "string",
+            "description": "Project's public website URL or domain",
+            "required": true,
+            "example": "example.xyz"
+          },
+          "chain": {
+            "type": "string",
+            "description": "solana|base|ethereum|bsc|arbitrum|polygon|optimism|avalanche|robinhood (default base)",
+            "required": false,
+            "example": "base"
+          }
+        }
+      },
+      {
+        "action": "receipts",
+        "path": "/api/receipts",
+        "price": "$0.35",
+        "description": "One-call composite token due-diligence report",
+        "params": {
+          "address": {
+            "type": "string",
+            "description": "Token contract address (0x… EVM) or mint (base58 Solana)",
+            "required": true,
+            "example": "0x532f27101965dd16442E59d40670FaF5eBB142E4"
+          },
+          "url": {
+            "type": "string",
+            "description": "Optional project website URL — unlocks the claim-by-claim narrative section",
+            "required": false,
+            "example": "example.xyz"
+          },
+          "chain": {
+            "type": "string",
+            "description": "solana|base|ethereum|bsc|arbitrum|polygon|optimism|avalanche|robinhood (default base)",
+            "required": false,
+            "example": "base"
+          }
+        }
+      },
+      {
+        "action": "honeypot",
+        "path": "/api/facet/honeypot",
+        "price": "$0.005",
+        "description": "Check honeypot sellability flags, half a cent",
         "params": {
           "address": {
             "type": "string",
@@ -15590,101 +18625,136 @@ export const VERTICALS: Record<string, Vertical> = {
         }
       },
       {
-        "action": "rwa-yield",
-        "path": "/api/rwa-yield",
-        "price": "$0.20",
-        "description": "Tokenized-treasury/MMF yield comparison — BUIDL, USDY, OUSG, USYC, USTB, BENJI",
+        "action": "liquidity",
+        "path": "/api/facet/liquidity",
+        "price": "$0.005",
+        "description": "Check token DEX liquidity and momentum, half a cent",
         "params": {
-          "action": {
+          "address": {
             "type": "string",
-            "description": "Analysis type",
-            "required": false,
-            "example": "compare"
+            "description": "ERC-20 token contract address (0x + 40 hex)",
+            "required": true,
+            "example": "0x532f27101965dd16442E59d40670FaF5eBB142E4"
           },
-          "product": {
+          "chain": {
             "type": "string",
-            "description": "Focus on one product",
+            "description": "EVM chain (default base)",
+            "required": false,
+            "example": "base"
+          }
+        }
+      },
+      {
+        "action": "rh-launches",
+        "path": "/api/rh-launches",
+        "price": "$0.01",
+        "description": "Live Uniswap-launchpad launch feed on Robinhood Chain, one cent",
+        "params": {
+          "limit": {
+            "type": "string",
+            "description": "max launches to return, 1-50 (default 25); newest first",
+            "required": false,
+            "example": "25"
+          }
+        }
+      },
+      {
+        "action": "iso-receipt",
+        "path": "/api/iso-receipt",
+        "price": "$0.05",
+        "description": "ISO 20022 camt.054-style receipt for an on-chain settlement (signed, verifiable)",
+        "params": {
+          "tx": {
+            "type": "string",
+            "description": "Transaction hash of the settlement",
+            "required": true,
+            "example": "0x0162aa1f0af7018ffdc9fb52ca2d4305e2c40a41d138c5f2cb37052016618384"
+          },
+          "chain": {
+            "type": "string",
+            "description": "ethereum|optimism|bsc|polygon|monad|world|hyperevm|robinhood|base|arbitrum|avalanche (default base)",
+            "required": false,
+            "example": "base"
+          },
+          "perspective": {
+            "type": "string",
+            "description": "Account-holder address: its inflows become credits, outflows debits",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "rwa-bnb",
+        "path": "/api/rwa-bnb",
+        "price": "$0.15",
+        "description": "Rank every RWA protocol by its BNB Chain TVL slice",
+        "params": {
+          "min_tvl_usd": {
+            "type": "string",
+            "description": "Exclude protocols below this BNB-chain TVL in USD (default 10000)",
+            "required": false,
+            "example": "10000"
+          },
+          "sort": {
+            "type": "string",
+            "description": "bnb_tvl (default) | change_7d | share",
+            "required": false,
+            "example": "bnb_tvl"
+          }
+        }
+      },
+      {
+        "action": "yield-check",
+        "path": "/api/yield-check",
+        "price": "$0.05",
+        "description": "Reality-check a dividend/reflection token's promised yield against live volume",
+        "params": {
+          "address": {
+            "type": "string",
+            "description": "Token contract address (EVM 0x… or Solana mint)",
+            "required": true
+          },
+          "tax_pct": {
+            "type": "string",
+            "description": "Stated total transaction tax percent (default 1)",
+            "required": false,
+            "example": "1"
+          },
+          "payout_share_pct": {
+            "type": "string",
+            "description": "Percent of tax paid to holders (default 100)",
+            "required": false,
+            "example": "100"
+          },
+          "promised_daily_usd": {
+            "type": "string",
+            "description": "Promised whole-pool daily payout in USD to compare",
             "required": false
           },
-          "jurisdiction": {
+          "holding_pct": {
             "type": "string",
-            "description": "Eligibility framing",
-            "required": false,
-            "example": "global"
+            "description": "Holding as percent of supply for per-holder math",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "token-safety",
+        "path": "/api/token-safety",
+        "price": "$0.015",
+        "description": "Token safety check for any token on 10 chains — is this token safe to buy? Deterministic CLEAR/CAUTION/AVOID verdict, chain auto-detected",
+        "params": {
+          "token": {
+            "type": "string",
+            "description": "Token address on any supported chain: 0x contract (EVM), base58 mint (Solana), or numeric ASA id (Algorand); chain auto-detected from its shape",
+            "required": true,
+            "example": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"
           },
-          "lang": {
+          "chain": {
             "type": "string",
-            "description": "lang",
+            "description": "Optional chain override — solana, algorand, base, ethereum, bsc, arbitrum, polygon, optimism, avalanche, robinhood",
             "required": false,
-            "example": "en"
-          }
-        }
-      },
-      {
-        "action": "rwa-risk",
-        "path": "/api/rwa-risk",
-        "price": "$0.25",
-        "description": "RWA issuer and redemption risk read for a named product",
-        "params": {
-          "product": {
-            "type": "string",
-            "description": "Product to analyze",
-            "required": false,
-            "example": "BUIDL"
-          },
-          "lang": {
-            "type": "string",
-            "description": "lang",
-            "required": false,
-            "example": "en"
-          }
-        }
-      },
-      {
-        "action": "gold-check",
-        "path": "/api/gold-check",
-        "price": "$0.15",
-        "description": "Tokenized gold comparison — PAXG vs XAUT",
-        "params": {
-          "lang": {
-            "type": "string",
-            "description": "lang",
-            "required": false,
-            "example": "en"
-          }
-        }
-      },
-      {
-        "action": "etf-flows",
-        "path": "/api/etf-flows",
-        "price": "$0.15",
-        "description": "Crypto ETF flow intelligence — US spot BTC/ETH/SOL, per-issuer breakdown",
-        "params": {
-          "asset": {
-            "type": "string",
-            "description": "Which ETF complex to analyze",
-            "required": false,
-            "example": "all"
-          },
-          "lang": {
-            "type": "string",
-            "description": "lang",
-            "required": false,
-            "example": "en"
-          }
-        }
-      },
-      {
-        "action": "clarity-watch",
-        "path": "/api/clarity-watch",
-        "price": "$0.10",
-        "description": "CLARITY Act tracker — live congress.gov status, CFTC/SEC split, passage odds",
-        "params": {
-          "lang": {
-            "type": "string",
-            "description": "lang",
-            "required": false,
-            "example": "en"
+            "example": "solana"
           }
         }
       }
@@ -15692,7 +18762,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "parentpulse": {
     "name": "ParentPulse",
-    "baseUrl": "https://parentpulse-delta.vercel.app",
+    "baseUrl": "https://parentpulse.theaslangroupllc.com",
     "description": "ParentPulse — child development and parenting intelligence: developmental milestones, nutrition guidance, pediatric health, sleep science, school selection, discipline strategies, childcare cost, and ",
     "globalCoverage": "Global",
     "endpoints": [
@@ -16031,7 +19101,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "patentpulse": {
     "name": "PatentPulse",
-    "baseUrl": "https://patentpulse-self.vercel.app",
+    "baseUrl": "https://patentpulse.theaslangroupllc.com",
     "description": "PatentPulse — global IP intelligence: USPTO/EPO/WIPO/JPO/CNIPA patent search, FTO analysis, SEP licensing, trademark clearance, prior art, and competitor patent landscape. Multilingual.",
     "globalCoverage": "Global",
     "endpoints": [
@@ -16276,7 +19346,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "petpulse": {
     "name": "PetPulse",
-    "baseUrl": "https://petpulse-alpha.vercel.app",
+    "baseUrl": "https://petpulse.theaslangroupllc.com",
     "description": "Global pet health and care intelligence API. AI-synthesized veterinary symptom triage, breed selection guides, pet nutrition analysis, medication safety (drug interactions, toxin exposure), senior pet",
     "globalCoverage": "Global",
     "endpoints": [
@@ -16602,15 +19672,74 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "recall-check",
+        "path": "/api/pet/recall-check",
+        "price": "$0.10",
+        "description": "Pet food recall check",
+        "params": {
+          "product": {
+            "type": "string",
+            "description": "Pet food brand or product name to check",
+            "required": true,
+            "example": "Pedigree chopped chicken"
+          },
+          "species": {
+            "type": "string",
+            "description": "Species (dog, cat, etc.)",
+            "required": false,
+            "example": "dog"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language (default en)",
+            "required": false,
+            "example": "en"
+          }
+        }
       }
     ]
   },
   "policypulse": {
     "name": "PolicyPulse",
-    "baseUrl": "https://policypulse-ten.vercel.app",
+    "baseUrl": "https://policypulse.theaslangroupllc.com",
     "description": "PolicyPulse — global legislative intelligence: US Congress, EU (EUR-Lex), UK Parliament, India, Brazil, Australia, and 50+ jurisdictions. Bill summaries, sector impact, passage probability, treaty ana",
     "globalCoverage": "Global",
     "endpoints": [
+      {
+        "action": "register",
+        "path": "/api/register",
+        "price": "$0.02",
+        "description": "Federal Register search — rules, proposed rules, notices, open comment periods",
+        "params": {
+          "q": {
+            "type": "string",
+            "description": "Search term",
+            "required": true
+          },
+          "type": {
+            "type": "string",
+            "description": "Rule | Proposed Rule | Notice | all",
+            "required": false
+          },
+          "agency": {
+            "type": "string",
+            "description": "Filter by agency",
+            "required": false
+          },
+          "mode": {
+            "type": "string",
+            "description": "search | open-comments",
+            "required": false
+          },
+          "limit": {
+            "type": "string",
+            "description": "1-20, default 8",
+            "required": false
+          }
+        }
+      },
       {
         "action": "legislation",
         "path": "/api/legislation",
@@ -16967,7 +20096,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "proppulse": {
     "name": "PropPulse",
-    "baseUrl": "https://proppulse-gules.vercel.app",
+    "baseUrl": "https://proppulse.theaslangroupllc.com",
     "description": "Global real estate intelligence API — 10 endpoints covering the full property lifecycle. Mortgage analysis (with Rocket Mortgage/LendingTree/Better lender links), affordability, rent-vs-buy modeling, ",
     "globalCoverage": "Global",
     "endpoints": [
@@ -17403,7 +20532,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "council-tax",
         "path": "/api/prop/council-tax",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "UK Council-Tax Banding Challenge Check",
         "params": {
           "country": {
@@ -17475,12 +20604,55 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "council-tax-check",
+        "path": "/api/prop/council-tax-check",
+        "price": "$0.25",
+        "description": "Council-Tax Challenge Letter Preview",
+        "params": {
+          "country": {
+            "type": "string",
+            "description": "Jurisdiction",
+            "required": true
+          },
+          "current_band": {
+            "type": "string",
+            "description": "Your band (A-H, +I Wales) from gov.uk/council-tax-bands",
+            "required": true
+          },
+          "neighbor_bands": {
+            "type": "string",
+            "description": "3-5 comparable neighbors' bands, comma-separated",
+            "required": false
+          },
+          "became_taxpayer_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD — within 6 months unlocks the formal statutory proposal",
+            "required": false
+          },
+          "band_change_date": {
+            "type": "string",
+            "description": "If the VOA changed the band recently",
+            "required": false
+          },
+          "physical_change": {
+            "type": "boolean",
+            "description": "Qualifying physical/use change (split/merge/demolition/renovation)",
+            "required": false
+          },
+          "risk_acknowledged": {
+            "type": "boolean",
+            "description": "Must be true to unlock letter_supportable — bands can go UP (VOA verbatim warning)",
+            "required": false
+          }
+        }
       }
     ]
   },
   "prospectpulse": {
     "name": "ProspectPulse",
-    "baseUrl": "https://prospectpulse-pi.vercel.app",
+    "baseUrl": "https://prospectpulse.theaslangroupllc.com",
     "description": "Global mineral and resource exploration intelligence. USGS MRDS deposit inventory, geochemical anomaly analysis, satellite scene availability, jurisdiction entry-risk, social license risk, critical mi",
     "globalCoverage": "Global",
     "endpoints": [
@@ -17750,12 +20922,46 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "en"
           }
         }
+      },
+      {
+        "action": "exploration-snapshot",
+        "path": "/api/prospect/exploration-snapshot",
+        "price": "$0.25",
+        "description": "Deterministic facts-only exploration snapshot (lite tier)",
+        "params": {
+          "region": {
+            "type": "string",
+            "description": "Target region | Atacama lithium triangle | Northern Ontario gold | West African gold belt | Copper Belt Zambia-DRC | Nevada gold province",
+            "required": false
+          },
+          "lat": {
+            "type": "number",
+            "description": "Latitude (decimal degrees)",
+            "required": false
+          },
+          "lon": {
+            "type": "number",
+            "description": "Longitude (decimal degrees)",
+            "required": false
+          },
+          "commodity": {
+            "type": "string",
+            "description": "Primary commodity | gold | copper | lithium | nickel | cobalt | REE | uranium | silver",
+            "required": false,
+            "example": "gold"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country for jurisdiction and governance | Chile | Canada | Ghana | Australia | DRC | Peru | Kazakhstan | Mongolia",
+            "required": false
+          }
+        }
       }
     ]
   },
   "racingpulse": {
     "name": "RacingPulse",
-    "baseUrl": "https://racingpulse.vercel.app",
+    "baseUrl": "https://racingpulse.theaslangroupllc.com",
     "description": "Global horse racing intelligence — live odds, going conditions, form analysis, arbitrage detection, speed ratings, and betting systems for 35 racecourses. All endpoints require x402 payment (USDC on B",
     "globalCoverage": "Global",
     "endpoints": [
@@ -17776,7 +20982,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "arbitrage",
         "path": "/api/arbitrage",
-        "price": "$0.07",
+        "price": "$0.05",
         "description": "Live arbitrage — filtered guaranteed-profit opportunities for a specific racing jurisdiction",
         "params": {
           "sport": {
@@ -17819,7 +21025,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "going",
         "path": "/api/going",
-        "price": "$0.07",
+        "price": "$0.02",
         "description": "Going conditions — live ground conditions derived from 7-day precipitation data",
         "params": {
           "track": {
@@ -17966,7 +21172,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "calculator",
         "path": "/api/calculator",
-        "price": "$0.07",
+        "price": "$0.02",
         "description": "Betting calculator — arbitrage stakes (Kelly), expected value, and profit calculations",
         "params": {
           "mode": {
@@ -18005,7 +21211,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "remittancepulse": {
     "name": "RemittancePulse",
-    "baseUrl": "https://remittancepulse.vercel.app",
+    "baseUrl": "https://remittancepulse.theaslangroupllc.com",
     "description": "Global remittance intelligence API covering the $700B+ annual global remittance market. 8 endpoints: corridor analysis (200+ corridors), provider comparison with true total cost (fee + FX markup), liv",
     "globalCoverage": "Global",
     "endpoints": [
@@ -18269,7 +21475,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "rights",
         "path": "/api/remit/rights",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Remittance-transfer rights check (Reg E Subpart B) — deterministic, no LLM",
         "params": {
           "issue": {
@@ -18441,12 +21647,50 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": false
           }
         }
+      },
+      {
+        "action": "rights-check",
+        "path": "/api/remit/rights-check",
+        "price": "$0.25",
+        "description": "Agent-tier preview of the $2 rights-letter — applicability verdict, deadlines, upsell",
+        "params": {
+          "issue": {
+            "type": "string",
+            "description": "issue",
+            "required": true
+          },
+          "provider": {
+            "type": "string",
+            "description": "provider",
+            "required": false
+          },
+          "principal": {
+            "type": "string",
+            "description": "principal",
+            "required": false
+          },
+          "fees_paid": {
+            "type": "string",
+            "description": "fees_paid",
+            "required": false
+          },
+          "date_available": {
+            "type": "string",
+            "description": "date_available",
+            "required": false
+          },
+          "sender_state": {
+            "type": "string",
+            "description": "sender_state",
+            "required": false
+          }
+        }
       }
     ]
   },
   "riskpulse": {
     "name": "RiskPulse",
-    "baseUrl": "https://riskpulse-five.vercel.app",
+    "baseUrl": "https://riskpulse.theaslangroupllc.com",
     "description": "Global risk intelligence API. AI-synthesized travel safety alerts, country risk profiles, sanctions screening, business risk analysis, supply chain disruption intelligence, nomad visa/tax guidance, ex",
     "globalCoverage": "Global",
     "endpoints": [
@@ -18574,6 +21818,47 @@ export const VERTICALS: Record<string, Vertical> = {
         }
       },
       {
+        "action": "quake-check",
+        "path": "/api/risk/quake-check",
+        "price": "$0.01",
+        "description": "Earthquake activity check — deterministic USGS primitive",
+        "params": {
+          "lat": {
+            "type": "number",
+            "description": "Latitude of the point of interest (omit both lat and lon for the global feed)",
+            "required": false
+          },
+          "lon": {
+            "type": "number",
+            "description": "Longitude of the point of interest",
+            "required": false
+          },
+          "radius_km": {
+            "type": "number",
+            "description": "Search radius in km (max 5000)",
+            "required": false,
+            "example": "500"
+          },
+          "min_magnitude": {
+            "type": "number",
+            "description": "Minimum magnitude (default 4.0 with a point, 5.0 global)",
+            "required": false
+          },
+          "days": {
+            "type": "integer",
+            "description": "Lookback window in days (max 365)",
+            "required": false,
+            "example": "30"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Max events returned (max 100)",
+            "required": false,
+            "example": "20"
+          }
+        }
+      },
+      {
         "action": "evac",
         "path": "/api/risk/evac",
         "price": "$0.10",
@@ -18669,7 +21954,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "safepulse": {
     "name": "SafePulse",
-    "baseUrl": "https://safepulse-xi.vercel.app",
+    "baseUrl": "https://safepulse.theaslangroupllc.com",
     "description": "SafePulse — product safety intelligence: CPSC, FDA, USDA FSIS, NHTSA recalls; EU RAPEX; home safety scores; child/vehicle safety ratings; food safety alerts worldwide.",
     "globalCoverage": "Global",
     "endpoints": [
@@ -18884,7 +22169,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "scholarpulse": {
     "name": "ScholarPulse",
-    "baseUrl": "https://scholarpulse-bice.vercel.app",
+    "baseUrl": "https://scholarpulse.theaslangroupllc.com",
     "description": "Global scholarship and student finance intelligence. 12 endpoints covering scholarship search (190+ countries), international scholarship matching, government programs, Erasmus+, US financial aid (Col",
     "globalCoverage": "Global",
     "endpoints": [
@@ -19376,7 +22661,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "seniorpulse": {
     "name": "SeniorPulse",
-    "baseUrl": "https://seniorpulse.vercel.app",
+    "baseUrl": "https://seniorpulse.theaslangroupllc.com",
     "description": "Global elder care intelligence API. AI-synthesized Medicare guidance, care facility evaluation, medication safety, benefits discovery, and caregiver support for seniors and their families worldwide. U",
     "globalCoverage": "Global",
     "endpoints": [
@@ -19859,6 +23144,88 @@ export const VERTICALS: Record<string, Vertical> = {
       }
     ]
   },
+  "shopperpulse": {
+    "name": "ShopperPulse",
+    "baseUrl": "https://shopperpulse.theaslangroupllc.com",
+    "description": "Birdie, the AI personal shopper — the fleet's shopping meta-agent. POST a shopping list (up to 3 items, free text or structured) and get 3 best-fit picks per item plus a stacked savings plan (loyalty %, coupons, discounted gift cards, right credit card), researched live across findpulse and dealpulse. Best fit to spec wins, not the cheapest listing. The early Birdie gets the deal.",
+    "globalCoverage": "Global",
+    "endpoints": [
+      {
+        "action": "trip",
+        "path": "/api/shopper/trip",
+        "price": "$0.25",
+        "description": "Full personal-shopper trip: 3 picks per item + stacked savings plan (POST)",
+        "params": {
+          "items": {
+            "type": "string",
+            "description": "JSON body array, max 3: [{query, budget_usd?, used?, ethical?, local?}]",
+            "required": false
+          },
+          "list": {
+            "type": "string",
+            "description": "JSON body alternative: free-text shopping list",
+            "required": false
+          },
+          "lang": {
+            "type": "string",
+            "description": "response language",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "health",
+        "path": "/api/health",
+        "price": "FREE",
+        "description": "Free liveness + configuration check",
+        "params": {}
+      },
+      {
+        "action": "recalls",
+        "path": "/api/safety/recalls",
+        "price": "$0.015",
+        "description": "Product safety & recall check — official government sources, deterministic",
+        "params": {
+          "q": {
+            "type": "string",
+            "description": "Product name, brand, or category",
+            "required": true,
+            "example": "silicone teething toy"
+          },
+          "country": {
+            "type": "string",
+            "description": "ISO-2 country code, or EU for EU/EEA-wide notices",
+            "required": false
+          },
+          "since": {
+            "type": "string",
+            "description": "Only recalls on/after this date (YYYY-MM-DD)",
+            "required": false
+          },
+          "limit": {
+            "type": "integer",
+            "description": "limit",
+            "required": false,
+            "example": "10"
+          }
+        }
+      },
+      {
+        "action": "merchant",
+        "path": "/api/safety/merchant",
+        "price": "$0.02",
+        "description": "Know Your Merchant (KYM) trust score — deterministic, live public-infrastructure signals",
+        "params": {
+          "domain": {
+            "type": "string",
+            "description": "Merchant domain or URL (normalized to the host)",
+            "required": true,
+            "example": "sweetwater.com"
+          }
+        }
+      }
+    ]
+  },
   "stablecoinpulse": {
     "name": "StablecoinPulse",
     "baseUrl": "https://stablecoinpulse.theaslangroupllc.com",
@@ -19910,24 +23277,6 @@ export const VERTICALS: Record<string, Vertical> = {
           "symbol": {
             "type": "string",
             "description": "Stablecoin ticker, e.g. USDT, USDC, DAI, USDE, USD1.",
-            "required": true
-          },
-          "lang": {
-            "type": "string",
-            "description": "Response language, e.g. en, es, fr, de, ja, zh, ko, pt, ar. Default en.",
-            "required": false
-          }
-        }
-      },
-      {
-        "action": "flows",
-        "path": "/api/flows",
-        "price": "$0.15",
-        "description": "Cross-chain stablecoin flow tracking",
-        "params": {
-          "symbol": {
-            "type": "string",
-            "description": "Stablecoin ticker, e.g. USDT, USDC, DAI, USDE.",
             "required": true
           },
           "lang": {
@@ -19997,116 +23346,20 @@ export const VERTICALS: Record<string, Vertical> = {
         }
       },
       {
-        "action": "snapshot",
-        "path": "/api/snapshot",
-        "price": "$0.10",
-        "description": "Stablecoin market snapshot",
-        "params": {
-          "lang": {
-            "type": "string",
-            "description": "Response language, e.g. en, es, fr, de, ja, zh, ko, pt, ar. Default en.",
-            "required": false
-          }
-        }
+        "action": "depeg-tick",
+        "path": "/api/depeg-tick",
+        "price": "$0.01",
+        "description": "Stablecoin peg tick — all majors, one call",
+        "params": {}
       }
     ]
   },
   "stateedge": {
     "name": "StatEdge",
-    "baseUrl": "https://stateedge.vercel.app",
+    "baseUrl": "https://stateedge.theaslangroupllc.com",
     "description": "Global sports analytics and intelligence API. AI-synthesized injury reports, ATS/spread analysis, matchup predictions, odds analysis, parlay optimization, referee tendency analysis, rest/travel advant",
     "globalCoverage": "Global",
     "endpoints": [
-      {
-        "action": "odds",
-        "path": "/api/odds",
-        "price": "$0.10",
-        "description": "Live betting odds consensus",
-        "params": {
-          "sport": {
-            "type": "string",
-            "description": "Sport or league code. Global coverage: EPL/LALIGA/BUNDESLIGA/SERIEA/LIGUE1/UCL for European soccer; AFL/NRL/NBL for Australia; SIXNATIONS/NRL for rugby; F1 for Formula 1; CRICKET_IPL/CRICKET_BBL for cricket.",
-            "required": false,
-            "example": "NFL"
-          }
-        }
-      },
-      {
-        "action": "injuries",
-        "path": "/api/injuries",
-        "price": "$0.08",
-        "description": "Injury report with fantasy and betting impact",
-        "params": {
-          "sport": {
-            "type": "string",
-            "description": "sport",
-            "required": false,
-            "example": "NFL"
-          },
-          "week": {
-            "type": "string",
-            "description": "Week number (NFL/NCAAF only)",
-            "required": false
-          }
-        }
-      },
-      {
-        "action": "matchups",
-        "path": "/api/matchups",
-        "price": "$0.10",
-        "description": "Matchup analysis for fantasy and betting",
-        "params": {
-          "sport": {
-            "type": "string",
-            "description": "Any sport/league code — global soccer leagues (EPL, LALIGA, etc.) fully supported",
-            "required": false,
-            "example": "NFL"
-          },
-          "week": {
-            "type": "string",
-            "description": "week",
-            "required": false
-          }
-        }
-      },
-      {
-        "action": "waiver",
-        "path": "/api/waiver",
-        "price": "$0.10",
-        "description": "Fantasy waiver wire recommendations",
-        "params": {
-          "sport": {
-            "type": "string",
-            "description": "sport",
-            "required": false,
-            "example": "NFL"
-          },
-          "week": {
-            "type": "string",
-            "description": "week",
-            "required": false
-          }
-        }
-      },
-      {
-        "action": "recap",
-        "path": "/api/recap",
-        "price": "$0.08",
-        "description": "Post-game recap with fantasy and betting implications",
-        "params": {
-          "sport": {
-            "type": "string",
-            "description": "sport",
-            "required": false,
-            "example": "NBA"
-          },
-          "team": {
-            "type": "string",
-            "description": "Team name (e.g. Lakers, Chiefs, Arsenal, Mumbai Indians)",
-            "required": true
-          }
-        }
-      },
       {
         "action": "global",
         "path": "/api/global",
@@ -20234,7 +23487,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "talentpulse": {
     "name": "TalentPulse",
-    "baseUrl": "https://talentpulse-six.vercel.app",
+    "baseUrl": "https://talentpulse.theaslangroupllc.com",
     "description": "Global workforce intelligence API — salary benchmarks, remote compliance, EOR cost models, skills demand, work visas, talent market analysis, executive compensation, layoff tracking, skills gap analys",
     "globalCoverage": "Global",
     "endpoints": [
@@ -20517,27 +23770,27 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "taxpulse": {
     "name": "TaxPulse",
-    "baseUrl": "https://taxpulse-phi.vercel.app",
-    "description": "Global tax intelligence API + citation-verified US STATE tax engine (California live: R&TC/FTB/OTA corpus, machine-verified citations). AI-synthesized tax guidance for 195 countries: income tax rates, VAT/GST, corporate tax, capital gains, crypto tax treatment, expat tax obligations, digital nomad tax stru",
+    "baseUrl": "https://taxpulse.theaslangroupllc.com",
+    "description": "Global tax intelligence API + citation-verified US STATE tax engine (California + New York live: R&TC/FTB/OTA and NY Tax Law/20 NYCRR/DTF/Tribunal corpora, machine-verified citations). AI-synthesized tax guidance for 195 countries: income tax rates, VAT/GST, corporate tax, capital gains, crypto tax treatment, expat tax obligations, digital nomad tax stru",
     "globalCoverage": "Global",
     "endpoints": [
       {
         "action": "state",
         "path": "/api/tax/state",
         "price": "$0.50",
-        "description": "US state income-tax answer — citation-verified (California)",
+        "description": "US state income-tax answer — citation-verified (California + New York)",
         "params": {
           "state": {
             "type": "string",
-            "description": "State code — CA (more states as corpora are ingested)",
+            "description": "State code — CA or NY (more states as corpora are ingested)",
             "required": true,
-            "example": "CA"
+            "example": "NY"
           },
           "question": {
             "type": "string",
             "description": "One concrete state-tax question",
             "required": true,
-            "example": "Is my HSA contribution deductible on my California return?"
+            "example": "Do I owe NY tax on days I work from home in New Jersey?"
           },
           "tax_year": {
             "type": "string",
@@ -20918,12 +24171,182 @@ export const VERTICALS: Record<string, Vertical> = {
             "required": true
           }
         }
+      },
+      {
+        "action": "529-check",
+        "path": "/api/tax/529-check",
+        "price": "$0.50",
+        "description": "529 withdrawal & rollover checker (K-12/credentialing/Roth/nonqualified + CA traps)",
+        "params": {
+          "purpose": {
+            "type": "string",
+            "description": "college|k12|credentialing|roth_rollover|nonqualified|apprenticeship|student_loan",
+            "required": true,
+            "example": "roth_rollover"
+          },
+          "amount": {
+            "type": "string",
+            "description": "Withdrawal/rollover amount",
+            "required": true,
+            "example": "15000"
+          },
+          "state": {
+            "type": "string",
+            "description": "State code; CA arms non-conformity traps",
+            "required": false
+          },
+          "tax_year": {
+            "type": "string",
+            "description": "Default 2026 (K-12 cap is year-dependent)",
+            "required": false
+          },
+          "earnings_portion": {
+            "type": "string",
+            "description": "1099-Q box 2 earnings (nonqualified math; default 40% estimate)",
+            "required": false
+          },
+          "account_age_years": {
+            "type": "string",
+            "description": "Roth rollover: account age for this beneficiary",
+            "required": false
+          },
+          "contributions_last_5y": {
+            "type": "string",
+            "description": "Roth rollover: contributions in the last 5 years (ineligible)",
+            "required": false
+          },
+          "beneficiary_earned_income": {
+            "type": "string",
+            "description": "Roth rollover: beneficiary earned income",
+            "required": false
+          },
+          "prior_roth_rollovers": {
+            "type": "string",
+            "description": "Roth rollover: lifetime amount already rolled",
+            "required": false
+          },
+          "penalty_exception": {
+            "type": "string",
+            "description": "none|scholarship|death|disability|military_academy|education_credit",
+            "required": false
+          },
+          "marginal_rate": {
+            "type": "string",
+            "description": "Marginal federal rate % for nonqualified estimate (default 22)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "aotc-recovery",
+        "path": "/api/tax/aotc-recovery",
+        "price": "$0.50",
+        "description": "Missed AOTC recovery — open-window 1040-X screen (up to $2,500/yr)",
+        "params": {
+          "tax_years": {
+            "type": "string",
+            "description": "Comma list, e.g. 2023,2024,2025",
+            "required": true,
+            "example": "2023,2024"
+          },
+          "expenses": {
+            "type": "string",
+            "description": "Qualified expenses per year (comma list or single broadcast)",
+            "required": true,
+            "example": "4000"
+          },
+          "magi": {
+            "type": "string",
+            "description": "MAGI per year (comma list or single broadcast)",
+            "required": true,
+            "example": "72000"
+          },
+          "filing_status": {
+            "type": "string",
+            "description": "single|mfj|mfs|hoh (list or single)",
+            "required": false
+          },
+          "claimed": {
+            "type": "string",
+            "description": "true if AOTC already claimed that year (list or single)",
+            "required": false
+          },
+          "prior_aotc_years": {
+            "type": "string",
+            "description": "AOTC/Hope years used before the earliest input year",
+            "required": false
+          },
+          "completed_first_4_years": {
+            "type": "string",
+            "description": "true if first 4 postsecondary years done before these years",
+            "required": false
+          },
+          "half_time": {
+            "type": "string",
+            "description": "false if under half-time enrollment",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "wallet-snapshot",
+        "path": "/api/crypto/wallet-snapshot",
+        "price": "$0.25",
+        "description": "Wallet snapshot (lite tier)",
+        "params": {
+          "address": {
+            "type": "string",
+            "description": "EVM wallet address (0x…)",
+            "required": true,
+            "example": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+          },
+          "chains": {
+            "type": "string",
+            "description": "CSV of chains. Default: all (ethereum,base,arbitrum,optimism,polygon,gnosis)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "529-check-lite",
+        "path": "/api/tax/529-check-lite",
+        "price": "$0.25",
+        "description": "529 withdrawal & rollover checker (lite tier)",
+        "params": {
+          "purpose": {
+            "type": "string",
+            "description": "college|k12|credentialing|roth_rollover|nonqualified|apprenticeship|student_loan",
+            "required": true,
+            "example": "roth_rollover"
+          },
+          "amount": {
+            "type": "string",
+            "description": "Withdrawal/rollover amount",
+            "required": true,
+            "example": "15000"
+          },
+          "state": {
+            "type": "string",
+            "description": "State code; CA arms non-conformity traps",
+            "required": false
+          },
+          "account_age_years": {
+            "type": "string",
+            "description": "Roth rollover: account age for this beneficiary",
+            "required": false
+          },
+          "beneficiary_earned_income": {
+            "type": "string",
+            "description": "Roth rollover: beneficiary earned income",
+            "required": false
+          }
+        }
       }
     ]
   },
   "tradepulse": {
     "name": "TradePulse",
-    "baseUrl": "https://tradepulse-five.vercel.app",
+    "baseUrl": "https://tradepulse.theaslangroupllc.com",
     "description": "Global trade intelligence API. AI-synthesized tariff rates, HS code classification, FTA duty analysis, landed cost calculation, trade compliance guidance, sanctions screening, market entry analysis, a",
     "globalCoverage": "Global",
     "endpoints": [
@@ -21322,7 +24745,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "transitpulse": {
     "name": "TransitPulse",
-    "baseUrl": "https://transitpulse.vercel.app",
+    "baseUrl": "https://transitpulse.theaslangroupllc.com",
     "description": "TransitPulse — global public transit intelligence: route reliability, delay prediction, multi-modal trip planning, city transit scores, and commute optimization for 500+ cities worldwide. NEW: rail/coach/ferry/cruise compensation recovery engine — UK Delay Repay, EU Rail 2021/782, ferry 1177/2010, coach 181/2011, US FMC cruise refunds, Athens Convention baggage — deterministic eligibility ($0.10) + citation-locked claim letters ($2.00).",
     "globalCoverage": "Global",
     "endpoints": [
@@ -21602,7 +25025,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "check",
         "path": "/api/rights/check",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Rail/Coach/Ferry/Cruise Compensation Eligibility Check",
         "params": {
           "mode": {
@@ -21834,7 +25257,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "travelpulse": {
     "name": "TravelPulse",
-    "baseUrl": "https://travelpulse-nu.vercel.app",
+    "baseUrl": "https://travelpulse.theaslangroupllc.com",
     "description": "Global travel intelligence API for AI agents: weather, hotel deals, theme-park wait times, translation, trip plans, visas, health, currency, insurance, points. Any destination + language. x402 USDC (Base + Solana); no accounts, no keys.",
     "globalCoverage": "Global",
     "endpoints": [
@@ -22316,7 +25739,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "check",
         "path": "/api/rights/check",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Flight compensation eligibility — EU261 / UK261 / Canada APPR / Brazil ANAC 400 / Turkey SHY / India DGCA (deterministic)",
         "params": {
           "from": {
@@ -22473,7 +25896,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "truthpulse": {
     "name": "TruthPulse",
-    "baseUrl": "https://truthpulse-five.vercel.app",
+    "baseUrl": "https://truthpulse.theaslangroupllc.com",
     "description": "Primary-source intelligence for FOIA releases, declassified archives, court records, forensic evidence, UAP disclosures, and conspiracy theory evidence briefs. Evidence-first. No spin. Global. All end",
     "globalCoverage": "Global",
     "endpoints": [
@@ -22826,7 +26249,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "venturepulse": {
     "name": "VenturePulse",
-    "baseUrl": "https://venturepulse-nine.vercel.app",
+    "baseUrl": "https://venturepulse.theaslangroupllc.com",
     "description": "Startup funding intelligence API. VC round data, investor matching, pitch deck scoring, term sheet decoding, cap table modeling, global accelerator directory, market sizing, legal formation, comparabl",
     "globalCoverage": "Global",
     "endpoints": [
@@ -23209,7 +26632,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "vetpulse": {
     "name": "VetPulse",
-    "baseUrl": "https://vetpulse-five.vercel.app",
+    "baseUrl": "https://api.vetpulse.theaslangroupllc.com",
     "description": "US veterans benefits intelligence API. AI-synthesized guidance on VA disability compensation, Aid & Attendance pension, TDIU, claim strategy, caregiver stipends, GI Bill, state benefits, VA healthcare",
     "globalCoverage": "Global",
     "endpoints": [
@@ -23572,7 +26995,7 @@ export const VERTICALS: Record<string, Vertical> = {
   },
   "waterpulse": {
     "name": "WaterPulse",
-    "baseUrl": "https://waterpulse-henna.vercel.app",
+    "baseUrl": "https://waterpulse.theaslangroupllc.com",
     "description": "Global water intelligence API. 9 endpoints covering US groundwater (USGS), streamflow, drought (US Drought Monitor), water quality (EPA WQP), aquifer sustainability, flood risk, global water stress, a",
     "globalCoverage": "Global",
     "endpoints": [
@@ -23628,6 +27051,19 @@ export const VERTICALS: Record<string, Vertical> = {
             "description": "lang",
             "required": false,
             "example": "en"
+          }
+        }
+      },
+      {
+        "action": "gauge",
+        "path": "/api/water/gauge",
+        "price": "$0.01",
+        "description": "River-gauge tick — deterministic USGS primitive",
+        "params": {
+          "site": {
+            "type": "string",
+            "description": "USGS site number (8-15 digits) — e.g. 01646500 (Potomac River near Washington DC)",
+            "required": true
           }
         }
       },
@@ -23795,12 +27231,30 @@ export const VERTICALS: Record<string, Vertical> = {
             "example": "en"
           }
         }
+      },
+      {
+        "action": "supply-snapshot",
+        "path": "/api/water/supply-snapshot",
+        "price": "$0.25",
+        "description": "Water supply numbers snapshot — deterministic preview",
+        "params": {
+          "location": {
+            "type": "string",
+            "description": "City or metro area — e.g. Phoenix AZ, Las Vegas NV, Atlanta GA, Denver CO (label only; data is state-level)",
+            "required": false
+          },
+          "state": {
+            "type": "string",
+            "description": "Two-letter US state code for USGS/drought data — e.g. AZ | NV | GA | CO",
+            "required": false
+          }
+        }
       }
     ]
   },
   "wealthpulse": {
     "name": "WealthPulse",
-    "baseUrl": "https://wealthpulse-phi.vercel.app",
+    "baseUrl": "https://wealthpulse.theaslangroupllc.com",
     "description": "Personal finance intelligence API. 12 endpoints grounded in live FRED rate data — financial health, retirement, debt, credit cards, mortgage, Social Security, tax optimization, Roth vs Traditional, em",
     "globalCoverage": "Global",
     "endpoints": [
@@ -24332,6 +27786,25 @@ export const VERTICALS: Record<string, Vertical> = {
         }
       },
       {
+        "action": "bank-check",
+        "path": "/api/wealth/bank-check",
+        "price": "$0.02",
+        "description": "FDIC bank-health check — deterministic Call Report primitive",
+        "params": {
+          "bank": {
+            "type": "string",
+            "description": "Bank name or FDIC certificate (CERT) number",
+            "required": true,
+            "example": "628"
+          },
+          "state": {
+            "type": "string",
+            "description": "2-letter US state code, disambiguates a common bank name",
+            "required": false
+          }
+        }
+      },
+      {
         "action": "unclaimed",
         "path": "/api/wealth/unclaimed",
         "price": "$0.50",
@@ -24362,7 +27835,7 @@ export const VERTICALS: Record<string, Vertical> = {
       {
         "action": "card-benefit",
         "path": "/api/wealth/card-benefit",
-        "price": "$0.10",
+        "price": "$0.05",
         "description": "Credit-Card Benefit Coverage Check",
         "params": {
           "issuer": {
@@ -24476,6 +27949,54 @@ export const VERTICALS: Record<string, Vertical> = {
           "lang": {
             "type": "string",
             "description": "Pack language (default English)",
+            "required": false
+          }
+        }
+      },
+      {
+        "action": "card-benefit-preview",
+        "path": "/api/wealth/card-benefit-preview",
+        "price": "$0.25",
+        "description": "Card-Benefit Coverage PREVIEW",
+        "params": {
+          "issuer": {
+            "type": "string",
+            "description": "Card issuer slug (chase, amex, capital-one, citi, hsbc, discover, amex-uk, rbc)",
+            "required": true
+          },
+          "card": {
+            "type": "string",
+            "description": "Card slug (sapphire-reserve, platinum, venture-x, ...)",
+            "required": true
+          },
+          "purchase_date": {
+            "type": "string",
+            "description": "Item/ticket purchase date YYYY-MM-DD (sharpens purchase/return-protection and warranty results)",
+            "required": false
+          },
+          "incident_date": {
+            "type": "string",
+            "description": "Damage/theft/delay date YYYY-MM-DD (sharpens deadline eligibility)",
+            "required": false
+          },
+          "item_price": {
+            "type": "number",
+            "description": "Item price",
+            "required": false
+          },
+          "warranty_years": {
+            "type": "number",
+            "description": "Extended warranty: original manufacturer warranty length",
+            "required": false
+          },
+          "delay_hours": {
+            "type": "number",
+            "description": "Trip delay: hours delayed",
+            "required": false
+          },
+          "phone_paid_on_card": {
+            "type": "boolean",
+            "description": "Cell phone: was the prior month's wireless bill paid on this card",
             "required": false
           }
         }

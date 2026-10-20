@@ -1,0 +1,73 @@
+{
+  "name": "Independent travel agent",
+  "slug": "independent-travel-agent",
+  "category": "Travel",
+  "summary": "Modern travel agenting through a host agency, with an intelligence engine doing fare timing, disruption risk, visa checks, and trip clearance that other agents do by feel.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/independent-travel-agent/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "travelpulse",
+      "name": "TravelPulse",
+      "base_url": "https://travelpulse.theaslangroupllc.com",
+      "openapi": "https://travelpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://travelpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/travel/trip-check",
+          "price": "$0.50",
+          "description": "One-call pre-booking trip clearance (visa + health + safety + weather + money)"
+        },
+        {
+          "path": "/api/travel/fare-intel",
+          "price": "$0.12",
+          "description": "Flight fare intelligence — when to book, cheapest months"
+        },
+        {
+          "path": "/api/travel/disruption",
+          "price": "$0.25",
+          "description": "Flight disruption risk for an airport and date"
+        },
+        {
+          "path": "/api/travel/visa",
+          "price": "$0.08",
+          "description": "Visa requirements by nationality and destination"
+        },
+        {
+          "path": "/api/travel/plan",
+          "price": "$0.20",
+          "description": "Trip itinerary"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=independent-travel-agent — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"travelpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: independent-travel-agent\"."
+  },
+  "setup_steps": [
+    "Choose a host agency (compare splits, training, and whether they handle seller-of-travel registration for you) and pick your niche.",
+    "Plan two real trips for friends at cost, running the full engine loop so your process is smooth before it’s paid.",
+    "Set a planning fee from day one, even a small one. Free planning attracts clients who ghost after taking your itinerary.",
+    "Build the disruption habit: every client departure gets a risk check the week before, with a heads-up note. That message is where referrals come from."
+  ],
+  "licensing_notes": [
+    "No general license, but four US states (California, Florida, Washington, Hawaii) require seller-of-travel registration, and rules bind you based on where your clients are, not just where you are. Most host agencies walk new agents through it. Selling travel insurance has its own licensing in many states; hosts typically route that properly. Outside the US, package-travel rules (UK/EU) matter once you bundle; under a host agency you’re usually inside their compliance umbrella. Confirm rather than assume."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

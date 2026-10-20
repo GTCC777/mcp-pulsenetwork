@@ -1,0 +1,94 @@
+{
+  "name": "Demand letter prep service",
+  "slug": "demand-letter-prep-service",
+  "category": "Doc-prep & paperwork",
+  "summary": "Help people write and send their own demand letters — deposits, refunds, billing errors, contractor disputes — with the applicable statute cited and proof of certified delivery. Engine cost is dimes for the research; mailing runs $6 wholesale; the client signs, and the client sends.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/demand-letter-prep-service/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "legalpulse",
+      "name": "LegalPulse",
+      "base_url": "https://legalpulse.theaslangroupllc.com",
+      "openapi": "https://legalpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://legalpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/legal/rights",
+          "price": "$0.08",
+          "description": "Know your rights"
+        },
+        {
+          "path": "/api/legal/tenant",
+          "price": "$0.10",
+          "description": "Tenant rights by state"
+        },
+        {
+          "path": "/api/legal/consumer",
+          "price": "$0.10",
+          "description": "Consumer rights — FDCPA, FCRA, FTC"
+        },
+        {
+          "path": "/api/legal/small-claims",
+          "price": "$0.08",
+          "description": "Small claims court guide"
+        }
+      ]
+    },
+    {
+      "vertical": "mailpulse",
+      "name": "MailPulse",
+      "base_url": "https://mailpulse.theaslangroupllc.com",
+      "openapi": "https://mailpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://mailpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/verify-address",
+          "price": "$0.01",
+          "description": "Verify a mailing address (US + international)"
+        },
+        {
+          "path": "/api/letters",
+          "price": "$3.00",
+          "description": "THE paid action: prints and mails a real physical letter via Lob once payment settles. Price varies by service — standard $3.00, certified $12.00, certified_return_receipt $14.00, international $5.00 — the amount shown here is the representative/minimum price; the actual x402 charge always matches the caller's quote_id-verified order from POST /api/quote (free, no x402 gate). Requires a client_request_id (8-128 chars) for idempotency."
+        },
+        {
+          "path": "/api/letters/{id}",
+          "price": "$0.005",
+          "description": "Letter status / USPS tracking poll"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=demand-letter-prep-service — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"legalpulse,mailpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: demand-letter-prep-service\"."
+  },
+  "setup_steps": [
+    "Write your own demand letter first, for a real deposit or billing dispute if you have one on hand, start to finish including the certified mail step, so you’ve walked the whole path before charging anyone.",
+    "Write the scope page in plain language: what you do (research, draft, mail), what you never do (give legal advice, sign anything, send anything in your own name, threaten criminal action), and where the lawyer referral line sits.",
+    "Set one flat price for the package (draft plus certified mailing) and one lower price for draft-only, for clients who want to print and mail it themselves.",
+    "Offer three letters free or at cost to people you know with a live dispute, and track what happens after the certified receipt lands. A refunded deposit or a paid invoice is your best testimonial.",
+    "Introduce yourself to a local tenant-rights group or small-business network; referrals in this lane come from people who’ve seen the statute work, not from ads."
+  ],
+  "licensing_notes": [
+    "Drafting a letter that the client reads, edits, signs, and sends in their own name is self-help document preparation in most places and doesn’t require a license; giving legal advice about strategy, or negotiating and representing the client in a dispute, is the unauthorized practice of law almost everywhere. Stay a preparer: you supply the citation and the draft, the client supplies the decision and the signature. Flat fee, never a percentage of any recovery. Where a state or country regulates \"legal document assistants\" or similar (a handful of US states do), register if it applies to you before you charge your first customer."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false,
+    "scope_boundary": "This is self-help document preparation, not legal advice, and the difference is the whole business. The client is always the author of the letter and always the one who sends it, even though your engine drafted it and your process mailed it. You operate software and logistics; you never recommend a legal strategy, never sign a letter, never send one in your own name, and never threaten criminal charges or \"we will report you\" in a civil demand letter, because that can cross into extortion in some jurisdictions regardless of intent. Civil next steps only: small claims, a regulatory complaint, a refund request escalation. If a client’s situation is bigger than a demand letter, personal injury, a real contract fight, anything headed for litigation, you say so plainly and point them to a lawyer. That referral costs you nothing and it is the single fastest way to earn trust in this business."
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

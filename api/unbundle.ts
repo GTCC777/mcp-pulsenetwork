@@ -10,6 +10,7 @@
 // Params: product (required) — the gated product name to decompose. list=true — catalog only.
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { handlePaymentGate } from '../lib/x402.js';
+import { paidCacheArm } from '../lib/paid-cache.js';
 import { matchProduct, catalogSummary } from '../lib/unbundle.js';
 
 const AMOUNT = '1000000'; // $1.00
@@ -50,7 +51,9 @@ async function handlerImpl(req: VercelRequest, res: VercelResponse): Promise<voi
   const product = str(q.product);
   const listOnly = str(q.list) === 'true';
 
+  res.setHeader('Cache-Control', 'private, no-store');
   res.setHeader('PAYMENT-RESPONSE', gate.settlementHeader);
+  paidCacheArm(req, res);
   res.setHeader('cache-control', 's-maxage=3600, stale-while-revalidate=86400');
 
   if (listOnly || !product) {

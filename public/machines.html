@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Data APIs robots can pay for — x402, USDC on Base &amp; Solana | PulseNetwork</title>
+<meta name="description" content="Pre-mission weather, ground hazards, grid carbon intensity, CVE checks — pay-per-call data APIs for drones, AMRs, humanoids and EVs. No API keys: the machine pays USDC over x402. Compatible with peaqOS machine wallets, Virtuals agents, and any x402 client.">
+<link rel="canonical" href="https://pulse.theaslangroupllc.com/machines">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"PulseNetwork machine-economy data APIs","description":"Pay-per-call data APIs for robots and machines — weather, hazards, grid carbon, CVE checks — payable in USDC over the x402 protocol on Base and Solana.","numberOfItems":22,"itemListElement":[{"@type":"ListItem","position":1,"name":"ClimatePulse /api/climate/now","url":"https://climatepulse.theaslangroupllc.com/api/climate/now"},{"@type":"ListItem","position":2,"name":"ClimatePulse /api/climate/forecast","url":"https://climatepulse.theaslangroupllc.com/api/climate/forecast"},{"@type":"ListItem","position":3,"name":"ClimatePulse /api/climate/severe","url":"https://climatepulse.theaslangroupllc.com/api/climate/severe"},{"@type":"ListItem","position":4,"name":"ClimatePulse /api/climate/air","url":"https://climatepulse.theaslangroupllc.com/api/climate/air"},{"@type":"ListItem","position":5,"name":"ClimatePulse /api/climate/smoke","url":"https://climatepulse.theaslangroupllc.com/api/climate/smoke"},{"@type":"ListItem","position":11,"name":"WaterPulse /api/water/gauge","url":"https://waterpulse.theaslangroupllc.com/api/water/gauge"},{"@type":"ListItem","position":12,"name":"WaterPulse /api/water/flood-risk","url":"https://waterpulse.theaslangroupllc.com/api/water/flood-risk"},{"@type":"ListItem","position":13,"name":"WaterPulse /api/water/streamflow","url":"https://waterpulse.theaslangroupllc.com/api/water/streamflow"},{"@type":"ListItem","position":14,"name":"RiskPulse /api/risk/quake-check","url":"https://riskpulse.theaslangroupllc.com/api/risk/quake-check"},{"@type":"ListItem","position":15,"name":"RiskPulse /api/risk/alerts","url":"https://riskpulse.theaslangroupllc.com/api/risk/alerts"},{"@type":"ListItem","position":16,"name":"RiskPulse /api/risk/evac","url":"https://riskpulse.theaslangroupllc.com/api/risk/evac"},{"@type":"ListItem","position":21,"name":"GridPulse /api/energy/carbon-intensity","url":"https://gridpulse.theaslangroupllc.com/api/energy/carbon-intensity"},{"@type":"ListItem","position":22,"name":"GridPulse /api/energy/compute-window","url":"https://gridpulse.theaslangroupllc.com/api/energy/compute-window"},{"@type":"ListItem","position":23,"name":"GridPulse /api/energy/prices","url":"https://gridpulse.theaslangroupllc.com/api/energy/prices"},{"@type":"ListItem","position":24,"name":"GridPulse /api/energy/tou","url":"https://gridpulse.theaslangroupllc.com/api/energy/tou"},{"@type":"ListItem","position":25,"name":"GridPulse /api/energy/ev-cost","url":"https://gridpulse.theaslangroupllc.com/api/energy/ev-cost"},{"@type":"ListItem","position":31,"name":"CyberPulse /api/cyber/cve-check","url":"https://cyberpulse.theaslangroupllc.com/api/cyber/cve-check"},{"@type":"ListItem","position":32,"name":"CyberPulse /api/cyber/cisa-kev","url":"https://cyberpulse.theaslangroupllc.com/api/cyber/cisa-kev"},{"@type":"ListItem","position":33,"name":"CyberPulse /api/cyber/vuln-scan","url":"https://cyberpulse.theaslangroupllc.com/api/cyber/vuln-scan"},{"@type":"ListItem","position":41,"name":"TransitPulse /api/transit/status","url":"https://transitpulse.theaslangroupllc.com/api/transit/status"},{"@type":"ListItem","position":42,"name":"TransitPulse /api/transit/delays","url":"https://transitpulse.theaslangroupllc.com/api/transit/delays"},{"@type":"ListItem","position":43,"name":"TransitPulse /api/transit/airport","url":"https://transitpulse.theaslangroupllc.com/api/transit/airport"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can a robot pay for an API without an account or API key?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every endpoint here is x402-native: an unauthenticated call returns HTTP 402 with a machine-readable USDC quote; the machine signs the payment authorization with its own wallet and replays the request. No signup, no key, no rate plan — solvency is the only credential."}},{"@type":"Question","name":"Which chains and tokens can a machine pay with?","acceptedAnswer":{"@type":"Answer","text":"Every 402 response quotes USDC on Base (eip155:8453, x402 v2 \"exact\" scheme via EIP-3009 TransferWithAuthorization) and USDC on Solana mainnet in the same accepts[] array. Pay with either."}},{"@type":"Question","name":"Does this work with peaqOS machine wallets?","acceptedAnswer":{"@type":"Answer","text":"Yes. peaqOS executes x402 v2 exact/EIP-3009 USDC-on-Base payments — the same scheme these endpoints quote — so a Machine-NFT wallet can order any endpoint here through the standard peaqOS payment-intent flow with no adapter credentials."}},{"@type":"Question","name":"Does this work with Virtuals agents and ACP?","acceptedAnswer":{"@type":"Answer","text":"Yes. Any x402-capable agent, including Virtuals EconomyOS agents, can call these endpoints directly; ACP job budgets can also settle over x402. PulseNetwork is a registered ACP seller."}},{"@type":"Question","name":"How does a machine discover these endpoints at runtime?","acceptedAnswer":{"@type":"Answer","text":"Via the x402 Bazaar / agentic.market (search \"theaslangroupllc\"), this page, /openapi.json and /llms.txt on every host, or the PulseNetwork MCP server. Every paid response also carries source attribution and terms inline."}}]}</script>
+<style>
+:root{--bg:#05080d;--ink:#eaf1f9;--mut:#8fa1b8;--acc:#37e29b;--lion:#f0b429;--card:#0b1119;--line:#1a2433}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{padding:22px 0;border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--ink)}.brand .lion{color:var(--lion)}
+.nav{display:flex;gap:18px;flex-wrap:wrap}.nav a{color:var(--mut);font-size:13.5px}.nav a:hover{color:var(--ink)}
+.hero{padding:56px 0 30px}
+h1{font-size:clamp(26px,4.4vw,40px);line-height:1.18;letter-spacing:-.02em;max-width:21ch}
+.hero p.lede{color:var(--mut);max-width:64ch;margin-top:14px}
+.hero .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.chip{border:1px solid var(--line);border-radius:99px;padding:4px 12px;font-size:12.5px;color:var(--mut)}
+.group{padding:26px 0;border-top:1px solid var(--line)}
+.group h2{font-size:20px;margin-bottom:4px}
+.need{color:var(--mut);font-size:14.5px;max-width:70ch}
+.eps{list-style:none;margin-top:14px}
+.ep{display:grid;grid-template-columns:minmax(0,300px) 62px 1fr;gap:4px 14px;padding:9px 0;border-bottom:1px dashed var(--line);align-items:baseline}
+.ep-path{font:13px ui-monospace,Menlo,monospace;overflow-wrap:anywhere}
+.badge{color:var(--lion);font-size:12.5px;font-weight:600;text-align:right}
+.ep-desc{color:var(--mut);font-size:13.5px}
+.ep-host{grid-column:1/-1;color:#5b6b80;font-size:11.5px;font-family:ui-monospace,Menlo,monospace}
+.how{padding:34px 0;border-top:1px solid var(--line)}
+.how h2{font-size:20px;margin-bottom:10px}
+pre{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;font:12.5px/1.7 ui-monospace,Menlo,monospace;overflow-x:auto;color:#c8d6e8;margin:14px 0}
+.faq{padding:34px 0;border-top:1px solid var(--line)}
+.faq h2{font-size:20px;margin-bottom:14px}
+.faq h3{font-size:15.5px;margin:18px 0 4px}
+.faq p{color:var(--mut);font-size:14.5px;max-width:74ch}
+footer{padding:44px 0 56px;color:var(--mut);font-size:14px;border-top:1px solid var(--line);margin-top:30px}
+@media (max-width:640px){.ep{grid-template-columns:1fr 62px}.ep-desc{grid-column:1/-1}}
+@media (prefers-color-scheme: light){:root{--bg:#fbfdff;--ink:#0c1522;--mut:#4a5b70;--card:#f0f4f9;--line:#dbe4ee}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <span class="brand"><span class="lion">◆</span> PulseNetwork <span style="color:var(--mut);font-weight:400">/ machines</span></span>
+  <nav class="nav"><a href="/">All 73 APIs</a><a href="/openapi.json">openapi.json</a><a href="/llms.txt">llms.txt</a><a href="/wholesale">Wholesale</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <h1>Data APIs robots can pay for.</h1>
+  <p class="lede">Your robot can buy a weather check before takeoff. Pre-mission weather, ground-route hazards, grid carbon intensity for charge scheduling, CVE checks for fleet firmware: 22 endpoints a drone, AMR, humanoid, EV, or delivery rover pays for per call in USDC over the <strong>x402</strong> protocol. No API keys, no accounts, no rate plans: HTTP 402 quote → machine wallet signs → data. Works with peaqOS machine wallets, Virtuals / EconomyOS agents, Coinbase agentic wallets, and any x402 client.</p>
+  <div class="chips">
+    <span class="chip">x402 v2 · exact · EIP-3009</span>
+    <span class="chip">USDC on Base (eip155:8453)</span>
+    <span class="chip">USDC on Solana mainnet</span>
+    <span class="chip">$0.01 to $0.25 typical</span>
+    <span class="chip">attribution + terms in every response</span>
+  </div>
+</div></section>
+
+<div class="wrap">
+    <section class="group" id="mission-weather">
+      <h2>Pre-mission weather &amp; air</h2>
+      <p class="need">Should this drone take off? Wind, storms, air quality, and wildfire smoke, checked in one paid call before the mission starts.</p>
+      <ul class="eps">
+        <li class="ep">
+          <code class="ep-path"><a href="https://climatepulse.theaslangroupllc.com/api/climate/now" rel="noopener">/api/climate/now</a></code>
+          <span class="badge">$0.05</span>
+          <span class="ep-desc">Current conditions</span>
+          <span class="ep-host">climatepulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://climatepulse.theaslangroupllc.com/api/climate/forecast" rel="noopener">/api/climate/forecast</a></code>
+          <span class="badge">$0.08</span>
+          <span class="ep-desc">Multi-day forecast</span>
+          <span class="ep-host">climatepulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://climatepulse.theaslangroupllc.com/api/climate/severe" rel="noopener">/api/climate/severe</a></code>
+          <span class="badge">$0.08</span>
+          <span class="ep-desc">Severe weather and preparedness</span>
+          <span class="ep-host">climatepulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://climatepulse.theaslangroupllc.com/api/climate/air" rel="noopener">/api/climate/air</a></code>
+          <span class="badge">$0.05</span>
+          <span class="ep-desc">Real-time air quality + health risk assessment</span>
+          <span class="ep-host">climatepulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://climatepulse.theaslangroupllc.com/api/climate/smoke" rel="noopener">/api/climate/smoke</a></code>
+          <span class="badge">$0.05</span>
+          <span class="ep-desc">Wildfire smoke tracking and respiratory risk assessment</span>
+          <span class="ep-host">climatepulse.theaslangroupllc.com</span>
+        </li>
+      </ul>
+    </section>
+    <section class="group" id="ground-hazards">
+      <h2>Ground-route hazards</h2>
+      <p class="need">Is the route safe for a rover or AMR? River levels, flood risk, seismic activity, and situational alerts along the way.</p>
+      <ul class="eps">
+        <li class="ep">
+          <code class="ep-path"><a href="https://waterpulse.theaslangroupllc.com/api/water/gauge" rel="noopener">/api/water/gauge</a></code>
+          <span class="badge">$0.01</span>
+          <span class="ep-desc">River-gauge tick — deterministic USGS primitive (latest discharge + gage height for one site, 7-day range); no LLM</span>
+          <span class="ep-host">waterpulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://waterpulse.theaslangroupllc.com/api/water/flood-risk" rel="noopener">/api/water/flood-risk</a></code>
+          <span class="badge">$0.15</span>
+          <span class="ep-desc">Flood risk intelligence</span>
+          <span class="ep-host">waterpulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://waterpulse.theaslangroupllc.com/api/water/streamflow" rel="noopener">/api/water/streamflow</a></code>
+          <span class="badge">$0.05</span>
+          <span class="ep-desc">Streamflow — river discharge (USGS)</span>
+          <span class="ep-host">waterpulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://riskpulse.theaslangroupllc.com/api/risk/quake-check" rel="noopener">/api/risk/quake-check</a></code>
+          <span class="badge">$0.01</span>
+          <span class="ep-desc">Earthquake activity check — deterministic USGS FDSN primitive (events near a point or global M5+ feed, code-computed summary); no LLM</span>
+          <span class="ep-host">riskpulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://riskpulse.theaslangroupllc.com/api/risk/alerts" rel="noopener">/api/risk/alerts</a></code>
+          <span class="badge">$0.10</span>
+          <span class="ep-desc">Situational security alerts</span>
+          <span class="ep-host">riskpulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://riskpulse.theaslangroupllc.com/api/risk/evac" rel="noopener">/api/risk/evac</a></code>
+          <span class="badge">$0.10</span>
+          <span class="ep-desc">Evacuation plan</span>
+          <span class="ep-host">riskpulse.theaslangroupllc.com</span>
+        </li>
+      </ul>
+    </section>
+    <section class="group" id="charge-compute">
+      <h2>Charging &amp; compute scheduling</h2>
+      <p class="need">When should the fleet charge or run heavy compute? Live grid carbon intensity, electricity prices, time-of-use windows, and EV cost math.</p>
+      <ul class="eps">
+        <li class="ep">
+          <code class="ep-path"><a href="https://gridpulse.theaslangroupllc.com/api/energy/carbon-intensity" rel="noopener">/api/energy/carbon-intensity</a></code>
+          <span class="badge">$0.01</span>
+          <span class="ep-desc">Live grid carbon intensity, deterministic — current gCO2/kWh, forward curve to 48h, cleanest/dirtiest slots. GB national + 14 DNO regions via NESO; DE FR NL BE AT ES IT NO via energy-charts (Fraunhofer ISE). No LLM, no key.</span>
+          <span class="ep-host">gridpulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://gridpulse.theaslangroupllc.com/api/energy/compute-window" rel="noopener">/api/energy/compute-window</a></code>
+          <span class="badge">$0.25</span>
+          <span class="ep-desc">Carbon- and cost-aware compute scheduling: the optimal window in the next 48h to run a workload, with kg CO2 and EUR saved vs starting now, over official NESO/Fraunhofer forward curves. Deterministic sliding-window minimum — identical inputs, identical windows.</span>
+          <span class="ep-host">gridpulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://gridpulse.theaslangroupllc.com/api/energy/prices" rel="noopener">/api/energy/prices</a></code>
+          <span class="badge">$0.08</span>
+          <span class="ep-desc">Electricity prices by state</span>
+          <span class="ep-host">gridpulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://gridpulse.theaslangroupllc.com/api/energy/tou" rel="noopener">/api/energy/tou</a></code>
+          <span class="badge">$0.08</span>
+          <span class="ep-desc">Time-of-use rate optimization</span>
+          <span class="ep-host">gridpulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://gridpulse.theaslangroupllc.com/api/energy/ev-cost" rel="noopener">/api/energy/ev-cost</a></code>
+          <span class="badge">$0.08</span>
+          <span class="ep-desc">EV charging cost vs gasoline</span>
+          <span class="ep-host">gridpulse.theaslangroupllc.com</span>
+        </li>
+      </ul>
+    </section>
+    <section class="group" id="fleet-software">
+      <h2>Fleet software safety</h2>
+      <p class="need">Is the stack the fleet runs on exposed? Deterministic CVE fact-checks and the CISA Known-Exploited-Vulnerabilities catalog for firmware and dependency triage.</p>
+      <ul class="eps">
+        <li class="ep">
+          <code class="ep-path"><a href="https://cyberpulse.theaslangroupllc.com/api/cyber/cve-check" rel="noopener">/api/cyber/cve-check</a></code>
+          <span class="badge">$0.02</span>
+          <span class="ep-desc">CVE fact check, deterministic — NVD record (CVSS, dates) + CISA KEV exploited-in-the-wild flag + OSV fixed versions per ecosystem, joined by id. Never a false not-found: registry outages are reported, not disguised.</span>
+          <span class="ep-host">cyberpulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://cyberpulse.theaslangroupllc.com/api/cyber/cisa-kev" rel="noopener">/api/cyber/cisa-kev</a></code>
+          <span class="badge">$0.08</span>
+          <span class="ep-desc">CISA KEV — Known Exploited Vulnerabilities catalog search</span>
+          <span class="ep-host">cyberpulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://cyberpulse.theaslangroupllc.com/api/cyber/vuln-scan" rel="noopener">/api/cyber/vuln-scan</a></code>
+          <span class="badge">$0.12</span>
+          <span class="ep-desc">Vulnerability scan — all known CVEs for any software + version</span>
+          <span class="ep-host">cyberpulse.theaslangroupllc.com</span>
+        </li>
+      </ul>
+    </section>
+    <section class="group" id="delivery-ops">
+      <h2>Delivery &amp; transit ops</h2>
+      <p class="need">Hand-off timing for last-mile machines: live service status, current delays, and airport ground context.</p>
+      <ul class="eps">
+        <li class="ep">
+          <code class="ep-path"><a href="https://transitpulse.theaslangroupllc.com/api/transit/status" rel="noopener">/api/transit/status</a></code>
+          <span class="badge">$0.05</span>
+          <span class="ep-desc">Live Service Status</span>
+          <span class="ep-host">transitpulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://transitpulse.theaslangroupllc.com/api/transit/delays" rel="noopener">/api/transit/delays</a></code>
+          <span class="badge">$0.05</span>
+          <span class="ep-desc">Current Transit Delays</span>
+          <span class="ep-host">transitpulse.theaslangroupllc.com</span>
+        </li>
+        <li class="ep">
+          <code class="ep-path"><a href="https://transitpulse.theaslangroupllc.com/api/transit/airport" rel="noopener">/api/transit/airport</a></code>
+          <span class="badge">$0.08</span>
+          <span class="ep-desc">Airport Transit Guide</span>
+          <span class="ep-host">transitpulse.theaslangroupllc.com</span>
+        </li>
+      </ul>
+    </section></div>
+
+<section class="how"><div class="wrap">
+  <h2>How a machine pays</h2>
+  <p class="need">Standard x402, the same flow peaqOS replays for Machine-NFT wallets and any agent framework can run directly:</p>
+  <pre># 1. Unauthenticated call returns the quote
+curl https://climatepulse.theaslangroupllc.com/api/climate/severe?location=Austin,TX
+# → HTTP 402 { accepts: [ { scheme:"exact", network:"eip155:8453", asset: USDC, amount:"80000" },
+#              { scheme:"exact", network:"solana:5eykt4…", asset: USDC, amount:"80000" } ] }
+
+# 2. Machine wallet signs EIP-3009 TransferWithAuthorization for the quoted amount
+# 3. Replay with the X-PAYMENT header → 200 + data + attribution + terms</pre>
+  <p class="need">Discovery at runtime: the x402 Bazaar / <a href="https://agentic.market" rel="noopener">agentic.market</a> (search “theaslangroupllc”), each host’s <code>/openapi.json</code> + <code>/agent.json</code> + <code>/llms.txt</code>, or the <a href="/">PulseNetwork hub</a> and MCP server.</p>
+</div></section>
+
+<section class="faq"><div class="wrap">
+  <h2>Machine-economy FAQ</h2>
+  <h3>Can a robot pay for an API without an account or API key?</h3><p>Yes. Every endpoint here is x402-native: an unauthenticated call returns HTTP 402 with a machine-readable USDC quote; the machine signs the payment authorization with its own wallet and replays the request. No signup, no key, no rate plan. Solvency is the only credential.</p>
+  <h3>Which chains and tokens can a machine pay with?</h3><p>Every 402 response quotes USDC on Base (eip155:8453, x402 v2 &quot;exact&quot; scheme via EIP-3009 TransferWithAuthorization) and USDC on Solana mainnet in the same accepts[] array. Pay with either.</p>
+  <h3>Does this work with peaqOS machine wallets?</h3><p>Yes. peaqOS executes x402 v2 exact/EIP-3009 USDC-on-Base payments (the same scheme these endpoints quote), so a Machine-NFT wallet can order any endpoint here through the standard peaqOS payment-intent flow with no adapter credentials.</p>
+  <h3>Does this work with Virtuals agents and ACP?</h3><p>Yes. Any x402-capable agent, including Virtuals EconomyOS agents, can call these endpoints directly; ACP job budgets can also settle over x402. PulseNetwork is a registered ACP seller.</p>
+  <h3>How does a machine discover these endpoints at runtime?</h3><p>Via the x402 Bazaar / agentic.market (search &quot;theaslangroupllc&quot;), this page, /openapi.json and /llms.txt on every host, or the PulseNetwork MCP server. Every paid response also carries source attribution and terms inline.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <p>PulseNetwork is operated by The Aslan Group LLC. Robot-fleet, marketplace, or catalog inquiries: <a href="mailto:info@theaslangroupllc.com">info@theaslangroupllc.com</a>. Full catalog: <a href="/">73 verticals, 900 endpoints</a>.</p>
+</div></footer>
+</body>
+</html>

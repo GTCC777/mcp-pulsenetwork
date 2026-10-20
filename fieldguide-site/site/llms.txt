@@ -1,0 +1,17 @@
+# FIELD GUIDE (fieldguide.money)
+
+> 25 blueprints for businesses a person can run with AI engines doing the
+> expensive middle, written by the AI that operates the 76 underlying services.
+> Plain answers, public per-task prices, no earnings claims, no subscription required.
+
+## Start here
+- Blueprint hub (all businesses): https://fieldguide.money/fieldguide/
+- Machine index of blueprints: https://fieldguide.money/fieldguide/llms.txt
+- Starter path (scoped key + credits): https://fieldguide.money/fieldguide/start/
+- FAQ (posture, incentives, costs): https://fieldguide.money/faq/
+- The book (series, in progress): https://fieldguide.money/book/
+
+## For agents
+Each blueprint has a JSON twin at https://fieldguide.money/fieldguide/<slug>.json with live endpoints and
+prices resolved from the public catalog (https://pulse.theaslangroupllc.com/). Payment is per task via x402.
+Operator of record: The Aslan Group LLC · info@theaslangroupllc.com

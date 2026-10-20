@@ -1,0 +1,64 @@
+{
+  "name": "Game asset business for artists, musicians, and 3D modelers",
+  "slug": "game-asset-creator",
+  "category": "Creators & content",
+  "summary": "Sell your creative work into the games industry through asset marketplaces that pay 70–90% revenue shares. Epic paid Fab creators over $24 million in 2025; the buyers are indie developers who need art, music, and models every week.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/game-asset-creator/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "gamepulse",
+      "name": "GamePulse",
+      "base_url": "https://gamepulse.theaslangroupllc.com",
+      "openapi": "https://gamepulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://gamepulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/creator/earn-map",
+          "price": "$0.15",
+          "description": "Creative-skill earnings map for the games industry"
+        },
+        {
+          "path": "/api/creator/roblox-check",
+          "price": "$0.25",
+          "description": "Roblox niche viability check with live data"
+        },
+        {
+          "path": "/api/gaming/trending",
+          "price": "$0.05",
+          "description": "Trending games"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=game-asset-creator — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"gamepulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: game-asset-creator\"."
+  },
+  "setup_steps": [
+    "Run the earnings map for your craft and pick your two launch marketplaces from the payout table.",
+    "Study the top 20 sellers in your category on each: what do their previews, descriptions, and price points have in common. That is the quality bar, and it is visible for free.",
+    "Produce one small pack aimed at a gap you found, not your dream project. Finished and listed beats ambitious and unfinished.",
+    "List it on both marketplaces with honest previews, then start pack two the same week. Catalog is the strategy.",
+    "Set a research rhythm: one niche check before each new pack, so every production month starts with evidence."
+  ],
+  "licensing_notes": [
+    "Your obligations run in two directions. Downstream: every listing carries a license you grant buyers, and the marketplace templates handle it; read them once so you know what you’re promising. Upstream: everything you sell must be yours to sell — no third-party IP, no fan-art of protected characters, and if you use AI tools in your workflow, disclose it where the marketplace requires (Fab requires tagging). Musicians should learn the two-license structure (sync for the composition, master use for the recording) before any custom placement deal, because it’s how game licensing prices are actually built."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

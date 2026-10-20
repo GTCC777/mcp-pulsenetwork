@@ -1,16 +1,43 @@
 {
   "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
   "name": "PulseNetwork",
-  "description": "Pay-per-query access to 73 specialized intelligence verticals (800+ endpoints) over x402 (USDC on Base and Solana, no API keys). Token-safety/honeypot scanning for Solana memecoins and EVM tokens, crypto security and DeFi-yield intelligence, sports and prediction-market reads, insurance, immigration, and dozens more domains.",
+  "description": "Pay-per-query access to 76 specialized intelligence verticals (958 endpoints) over x402 \u2014 USDC on Base, Solana, Polygon, Arbitrum, World, HyperEVM, Monad; USDG on Robinhood Chain; XRP/RLUSD on XRPL. No API keys. Token-safety/honeypot scanning for Solana memecoins and EVM tokens (8 chains incl. Robinhood Chain), crypto security and DeFi-yield intelligence, market data, macro, sports and prediction-market reads, insurance, immigration, and dozens more domains.",
   "services": [
-    { "name": "web", "endpoint": "https://pulse.theaslangroupllc.com" },
-    { "name": "MCP", "endpoint": "https://pulse.theaslangroupllc.com/mcp" },
-    { "name": "A2A", "endpoint": "https://pulse.theaslangroupllc.com/.well-known/agent-card.json", "version": "0.3.0" }
+    {
+      "name": "web",
+      "endpoint": "https://pulse.theaslangroupllc.com"
+    },
+    {
+      "name": "MCP",
+      "endpoint": "https://pulse.theaslangroupllc.com/mcp"
+    },
+    {
+      "name": "A2A",
+      "endpoint": "https://pulse.theaslangroupllc.com/.well-known/agent-card.json",
+      "version": "0.3.0"
+    }
   ],
   "x402Support": true,
   "active": true,
   "registrations": [
-    { "agentId": 57008, "agentRegistry": "eip155:8453:0x8004A169FB4a3325136EB29fA0ceB6D2e539a432" }
+    {
+      "agentId": 57008,
+      "agentRegistry": "eip155:8453:0x8004A169FB4a3325136EB29fA0ceB6D2e539a432"
+    },
+    {
+      "agentId": 36917,
+      "agentRegistry": "eip155:1:0x8004A169FB4a3325136EB29fA0ceB6D2e539a432"
+    },
+    {
+      "agentId": 1213,
+      "agentRegistry": "eip155:42161:0x8004A169FB4a3325136EB29fA0ceB6D2e539a432"
+    },
+    {
+      "agentId": 930,
+      "agentRegistry": "eip155:1776:0x8004A169FB4a3325136EB29fA0ceB6D2e539a432"
+    }
   ],
-  "supportedTrust": ["reputation"]
+  "supportedTrust": [
+    "reputation"
+  ]
 }

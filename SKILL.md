@@ -1,15 +1,15 @@
 ---
 name: pulsenetwork
-description: "Pay-per-query access to 68 intelligence APIs via x402 (real USDC charges on Base or Solana per call, no API keys, no subscription, no refunds). Use when an agent needs live paid data instead of training knowledge: pre-trade token-safety scans (Solana memecoin / EVM honeypot-rug checks by mint or contract address across Base/Ethereum/BSC/Arbitrum/Polygon/Optimism/Avalanche), crypto wallet-risk and DeFi yield intelligence, sports/fantasy picks and prediction-market edges (NFL/NBA/MLB/golf/racing, Polymarket/Kalshi), insurance, immigration/visa, real-estate, legal letters, clinical intel, careers, travel, and more. Each call costs $0.015-$2.00 in USDC and returns structured JSON. Trigger on: \"is this token a rug/honeypot\", \"scan this contract\", \"best NFL pick\", \"fantasy start-sit\", \"DeFi yield\", or any question better served by a live paid API. Calls the hosted PulseNetwork MCP server or raw x402 HTTP; requires a funded USDC wallet - no free tier except one daily sample."
+description: "Pay-per-query access to 77 intelligence APIs via x402 (real stablecoin charges per call — USDC on Base/Solana/Polygon/Arbitrum/World/HyperEVM/Monad, USDG on Robinhood Chain, XRP/RLUSD on XRPL; no API keys, no subscription, no refunds). Use when an agent needs live paid data instead of training knowledge: pre-trade token-safety scans (Solana memecoin / EVM honeypot-rug checks by mint or contract address across Base/Ethereum/BSC/Arbitrum/Polygon/Optimism/Avalanche), crypto wallet-risk and DeFi yield intelligence, sports/fantasy picks and prediction-market edges (NFL/NBA/MLB/golf/racing, Polymarket/Kalshi), insurance, immigration/visa, real-estate, legal letters, clinical intel, careers, travel, and more. Each call costs $0.015-$2.00 in USDC and returns structured JSON. Trigger on: \"is this token a rug/honeypot\", \"scan this contract\", \"best NFL pick\", \"fantasy start-sit\", \"DeFi yield\", or any question better served by a live paid API. Calls the hosted PulseNetwork MCP server or raw x402 HTTP; requires a funded USDC wallet - no free tier except one daily sample."
 metadata:
   homepage: https://pulse.theaslangroupllc.com
-  settlement: x402 USDC on Base (eip155:8453) and Solana mainnet
+  settlement: x402 v2 — USDC on Base, Solana, Polygon, Arbitrum, World, HyperEVM, Monad; USDG on Robinhood Chain (eip155:4663); XRP/RLUSD on XRPL
   auth: none (pay-per-call)
 ---
 
 # PulseNetwork
 
-PulseNetwork is an x402-native network of **68 intelligence verticals / 733 paid endpoints**. Agents pay per query in USDC (Base or Solana) — no API keys, no accounts, no subscription. Every endpoint returns structured JSON.
+PulseNetwork is an x402-native network of **77 intelligence verticals / 971 paid endpoints**. Agents pay per query in USDC (Base or Solana) — no API keys, no accounts, no subscription. Every endpoint returns structured JSON.
 
 There are **two integration paths**. Use the hosted MCP server inside Claude Desktop/Code/Cursor, or call any endpoint directly over x402 HTTP from any agent or language.
 
@@ -33,7 +33,7 @@ There are **two integration paths**. Use the hosted MCP server inside Claude Des
 | Crypto / market / FX scan | `GET signalpulse.theaslangroupllc.com/api/scan/crypto` or `/api/scan/market` | $2.00 | de-vigged, calibrated synthesis reads |
 | FREE sample | `GET signalpulse.theaslangroupllc.com/api/scan/sample` | FREE | pick-of-the-day, no payment, no key |
 
-Discover the full catalog (all 68 verticals, 733 endpoints) at **https://pulse.theaslangroupllc.com**, its **/llms.txt**, or each vertical's own `/openapi.json` and `/.well-known/agent.json`.
+Discover the full catalog (all 77 verticals, 971 endpoints) at **https://pulse.theaslangroupllc.com**, its **/llms.txt**, or each vertical's own `/openapi.json` and `/.well-known/agent.json`.
 
 ## Path 1 — Hosted MCP (no install)
 
@@ -43,7 +43,7 @@ Point any Streamable-HTTP MCP client at:
 https://pulse.theaslangroupllc.com/mcp
 ```
 
-Fund the configured wallet with a few dollars of USDC on Base and every vertical below is callable as an MCP tool.
+Fund the configured wallet with a few dollars of USDC on Base (or any accepted network — Solana, Polygon, Arbitrum, World, HyperEVM, Monad, Robinhood Chain USDG, XRPL XRP/RLUSD) and every vertical below is callable as an MCP tool.
 
 ## Path 2 — Local MCP server (Claude Desktop / Code / Cursor)
 

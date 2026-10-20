@@ -1,0 +1,73 @@
+{
+  "name": "Senior living placement advisor",
+  "slug": "senior-living-placement",
+  "category": "Local & care",
+  "summary": "Guide families through choosing senior care, free to the family and paid by referral fee from the community, with engine-backed quality comparisons behind every recommendation.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/senior-living-placement/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "seniorpulse",
+      "name": "SeniorPulse",
+      "base_url": "https://seniorpulse.theaslangroupllc.com",
+      "openapi": "https://seniorpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://seniorpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/senior/facility",
+          "price": "$0.15",
+          "description": "Care facility evaluation guide"
+        },
+        {
+          "path": "/api/senior/nh-compare",
+          "price": "$0.15",
+          "description": "Nursing home / care home quality comparison (CMS Care Compare by default; country-aware)"
+        },
+        {
+          "path": "/api/senior/benefits",
+          "price": "$0.10",
+          "description": "Benefits eligibility assessment (US by default; country-aware)"
+        },
+        {
+          "path": "/api/senior/veterans",
+          "price": "$0.15",
+          "description": "VA Aid & Attendance and senior veteran benefits (US by default; country-aware)"
+        },
+        {
+          "path": "/api/senior/medicare",
+          "price": "$0.15",
+          "description": "Medicare plan guidance (or country-equivalent senior health coverage)"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=senior-living-placement — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"seniorpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: senior-living-placement\"."
+  },
+  "setup_steps": [
+    "Check your state’s rules on placement agencies first; requirements differ sharply by state.",
+    "Tour ten communities in your area before you have a single client, and run the quality comparison on each. You now know your market better than most people selling in it.",
+    "Sign referral agreements with an honest handful, and write your disclosure sheet.",
+    "Introduce yourself to two hospital discharge planners and one elder-law attorney. They meet families on decision day."
+  ],
+  "licensing_notes": [
+    "Several US states regulate placement or referral agencies (registration, written disclosure of referral fees, sometimes bonding), and the rules keep tightening because bad actors earned it. Know your state’s requirements before your first placement. Two lines to hold everywhere: written fee disclosure to the family, and never presenting yourself as a neutral government-style service when you’re commission-paid. No medical advice; you’re a navigator, not a clinician."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": true
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

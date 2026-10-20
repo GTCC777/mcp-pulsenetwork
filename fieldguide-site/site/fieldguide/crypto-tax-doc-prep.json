@@ -1,0 +1,68 @@
+{
+  "name": "Crypto tax documentation prep",
+  "slug": "crypto-tax-doc-prep",
+  "category": "Finance-adjacent",
+  "summary": "Prepare organized, citation-verified crypto activity documentation that clients hand to their CPA. The messy-wallet problem is real, growing, and most tax preparers won’t touch it.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/crypto-tax-doc-prep/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "taxpulse",
+      "name": "TaxPulse",
+      "base_url": "https://taxpulse.theaslangroupllc.com",
+      "openapi": "https://taxpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://taxpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/crypto/wallet-review",
+          "price": "$12.00",
+          "description": "Citation-verified crypto wallet tax review"
+        },
+        {
+          "path": "/api/crypto/wallet-sleuth",
+          "price": "$1.50",
+          "description": "On-chain wallet investigation"
+        },
+        {
+          "path": "/api/crypto/wallet-guard",
+          "price": "$0.50",
+          "description": "Wallet drainer-protection scan"
+        },
+        {
+          "path": "/api/tax/crypto",
+          "price": "$0.12",
+          "description": "Cryptocurrency tax by jurisdiction"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=crypto-tax-doc-prep — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"taxpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: crypto-tax-doc-prep\"."
+  },
+  "setup_steps": [
+    "Run the full documentation pack on your own wallets first. Your own messy history is the practice ground.",
+    "Price per wallet-complexity tier, flat, with the engine’s $12 review cost baked in.",
+    "Introduce yourself to three local CPAs in January with a one-page \"what I hand you\" sample. You’re solving their problem, not competing.",
+    "Book off-season security reviews with the same client list; it smooths the seasonality."
+  ],
+  "licensing_notes": [
+    "The boundary: preparing documentation is unlicensed; preparing or signing tax returns for compensation triggers preparer rules (PTIN in the US, equivalents elsewhere), and giving tax advice is the CPA’s or tax attorney’s job. Your deliverable ends with \"questions for your preparer,\" not answers to them. Kept there, you’re a bookkeeping-adjacent documentation service, and CPAs will refer clients to you rather than turn the work away. This page is educational information, not tax advice."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

@@ -1,0 +1,166 @@
+{
+ "version": 1,
+ "x402Version": 2,
+ "name": "PulseNetwork MCP Server",
+ "description": "The PulseNetwork MCP Server gives any AI agent instant access to 77 domain-specific intelligence APIs — all x402-native, all pay-per-query via USDC on Base. One integration, 77 verticals. Covers personal finance, real estate, immigration, legal, healthcare, crypto, careers, sustainability, travel, sports, and more. Global coverage with multi-language support.",
+ "resources": [
+  {
+   "resource": "https://pulse.theaslangroupllc.com/api/ideas",
+   "method": "GET",
+   "price_usd": 0,
+   "asset": "USDC",
+   "networks": [
+    "eip155:8453",
+    "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+    "xrpl:0",
+    "eip155:137",
+    "eip155:42161",
+    "eip155:480",
+    "eip155:999",
+    "eip155:143",
+    "algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73k",
+    "eip155:196"
+   ],
+   "description": "Business model menu — free top-of-funnel list of AI reseller business ideas"
+  },
+  {
+   "resource": "https://pulse.theaslangroupllc.com/api/blueprint",
+   "method": "GET",
+   "price_usd": 0.01,
+   "asset": "USDC",
+   "networks": [
+    "eip155:8453",
+    "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+    "xrpl:0",
+    "eip155:137",
+    "eip155:42161",
+    "eip155:480",
+    "eip155:999",
+    "eip155:143",
+    "algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73k",
+    "eip155:196"
+   ],
+   "description": "Tailored business-in-a-box recommender — how to make money with AI"
+  },
+  {
+   "resource": "https://pulse.theaslangroupllc.com/api/affiliate/register",
+   "method": "POST",
+   "price_usd": 0,
+   "asset": "USDC",
+   "networks": [
+    "eip155:8453",
+    "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+    "xrpl:0",
+    "eip155:137",
+    "eip155:42161",
+    "eip155:480",
+    "eip155:999",
+    "eip155:143",
+    "algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73k",
+    "eip155:196"
+   ],
+   "description": "Self-serve affiliate code registration — zero-build passive income"
+  },
+  {
+   "resource": "https://pulse.theaslangroupllc.com/api/affiliate/stats",
+   "method": "GET",
+   "price_usd": 0,
+   "asset": "USDC",
+   "networks": [
+    "eip155:8453",
+    "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+    "xrpl:0",
+    "eip155:137",
+    "eip155:42161",
+    "eip155:480",
+    "eip155:999",
+    "eip155:143",
+    "algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73k",
+    "eip155:196"
+   ],
+   "description": "Public affiliate code stats — revenue, calls, distinct buyers, earnings owed"
+  },
+  {
+   "resource": "https://pulse.theaslangroupllc.com/api/wholesale/register",
+   "method": "POST",
+   "price_usd": 0,
+   "asset": "USDC",
+   "networks": [
+    "eip155:8453",
+    "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+    "xrpl:0",
+    "eip155:137",
+    "eip155:42161",
+    "eip155:480",
+    "eip155:999",
+    "eip155:143",
+    "algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73k",
+    "eip155:196"
+   ],
+   "description": "Self-serve prepaid wholesale key — low-build reselling at 50% of retail"
+  },
+  {
+   "resource": "https://pulse.theaslangroupllc.com/api/wholesale/stats",
+   "method": "GET",
+   "price_usd": 0,
+   "asset": "USDC",
+   "networks": [
+    "eip155:8453",
+    "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+    "xrpl:0",
+    "eip155:137",
+    "eip155:42161",
+    "eip155:480",
+    "eip155:999",
+    "eip155:143",
+    "algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73k",
+    "eip155:196"
+   ],
+   "description": "Wholesale key status and balance lookup (holder-only)"
+  },
+  {
+   "resource": "https://pulse.theaslangroupllc.com/api/wholesale/deposit",
+   "method": "GET",
+   "price_usd": 5,
+   "asset": "USDC",
+   "networks": [
+    "eip155:8453",
+    "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+    "xrpl:0",
+    "eip155:137",
+    "eip155:42161",
+    "eip155:480",
+    "eip155:999",
+    "eip155:143",
+    "algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73k",
+    "eip155:196"
+   ],
+   "description": "Top up a wholesale key's prepaid balance via x402 USDC"
+  },
+  {
+   "resource": "https://pulse.theaslangroupllc.com/api/unbundle",
+   "method": "GET",
+   "price_usd": 1,
+   "asset": "USDC",
+   "networks": [
+    "eip155:8453",
+    "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+    "xrpl:0",
+    "eip155:137",
+    "eip155:42161",
+    "eip155:480",
+    "eip155:999",
+    "eip155:143",
+    "algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73k",
+    "eip155:196"
+   ],
+   "description": "The Unbundler — decompose any gated data product into its free public upstreams"
+  }
+ ],
+ "links": {
+  "openapi": "https://pulse.theaslangroupllc.com/openapi.json",
+  "llms": "https://pulse.theaslangroupllc.com/llms.txt",
+  "agent": "https://pulse.theaslangroupllc.com/.well-known/agent.json"
+ },
+ "contact": "info@theaslangroupllc.com"
+}

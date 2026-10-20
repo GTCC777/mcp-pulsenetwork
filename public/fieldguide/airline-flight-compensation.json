@@ -1,0 +1,88 @@
+{
+  "name": "Airline compensation service",
+  "slug": "airline-flight-compensation",
+  "category": "Recovery & money-finding",
+  "summary": "Check flight-delay compensation eligibility and draft citation-backed claim letters. Engine cost is about $2.10 per client; services like this commonly charge $20 to $50 flat.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/airline-flight-compensation/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "travelpulse",
+      "name": "TravelPulse",
+      "base_url": "https://travelpulse.theaslangroupllc.com",
+      "openapi": "https://travelpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://travelpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/rights/check",
+          "price": "$0.05",
+          "description": "Flight compensation eligibility — EU261 / UK261 / Canada APPR / Brazil ANAC 400 / Turkey SHY / India DGCA (deterministic)"
+        },
+        {
+          "path": "/api/rights/letter",
+          "price": "$2.00",
+          "description": "Citation-backed flight compensation claim letter (6 regimes, ready to send)"
+        },
+        {
+          "path": "/api/travel/disruption",
+          "price": "$0.25",
+          "description": "Flight disruption risk for an airport and date"
+        }
+      ]
+    },
+    {
+      "vertical": "mailpulse",
+      "name": "MailPulse",
+      "base_url": "https://mailpulse.theaslangroupllc.com",
+      "openapi": "https://mailpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://mailpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/verify-address",
+          "price": "$0.01",
+          "description": "Verify a mailing address (US + international)"
+        },
+        {
+          "path": "/api/letters",
+          "price": "$3.00",
+          "description": "THE paid action: prints and mails a real physical letter via Lob once payment settles. Price varies by service — standard $3.00, certified $12.00, certified_return_receipt $14.00, international $5.00 — the amount shown here is the representative/minimum price; the actual x402 charge always matches the caller's quote_id-verified order from POST /api/quote (free, no x402 gate). Requires a client_request_id (8-128 chars) for idempotency."
+        },
+        {
+          "path": "/api/letters/{id}",
+          "price": "$0.005",
+          "description": "Letter status / USPS tracking poll"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=airline-flight-compensation — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"travelpulse,mailpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: airline-flight-compensation\"."
+  },
+  "setup_steps": [
+    "Run five eligibility checks on your own past flights and your family’s. Real claims often surface immediately, and a recovered claim of your own is your best marketing story.",
+    "Set your flat fee. Services in this lane commonly charge $20 to $50 per letter; your engine cost is about $2.10.",
+    "Put up a one-page site: who it’s for, what you charge, what you don’t do (no contingency, no representation).",
+    "Tell one frequent-flyer community what you do. Delayed passengers search for help within days of the flight, so answer fresh posts.",
+    "Deliver your first three letters at half price in exchange for a testimonial."
+  ],
+  "licensing_notes": [
+    "Drafting a claim letter that the passenger signs and sends is self-help document preparation, and in most places it doesn’t require a license. What does attract regulation is working on contingency (taking a percentage of the award) or representing passengers in disputes; several European countries regulate claim agencies that do exactly that. This blueprint stays flat-fee and stays out of representation on purpose. Check the consumer-services rules where you operate before you charge your first customer."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "name": "Unclaimed money search service",
+  "slug": "unclaimed-money-finder",
+  "category": "Recovery & money-finding",
+  "summary": "Run flat-fee unclaimed-property searches across state and national databases. Roughly one in seven people has money sitting in a government database.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/unclaimed-money-finder/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "wealthpulse",
+      "name": "WealthPulse",
+      "base_url": "https://wealthpulse.theaslangroupllc.com",
+      "openapi": "https://wealthpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://wealthpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/wealth/unclaimed",
+          "price": "$0.50",
+          "description": "Find unclaimed money owed to you"
+        },
+        {
+          "path": "/api/wealth/card-benefit",
+          "price": "$0.05",
+          "description": "Credit-Card Benefit Coverage Check"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=unclaimed-money-finder — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"wealthpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: unclaimed-money-finder\"."
+  },
+  "setup_steps": [
+    "Search yourself, your family, and five friends. Found money is the whole pitch, and you’ll usually find some.",
+    "Write your one-page disclosure: flat fee, no percentage, owners can search free themselves, you never handle funds.",
+    "Read your state’s finder rules (or your country’s equivalent) and confirm your flat-fee posture clears them.",
+    "Offer the search free to three local estate attorneys or executors in exchange for referrals; estates are the highest-yield searches."
+  ],
+  "licensing_notes": [
+    "This is the one recovery blueprint with real state-by-state rules: many US states regulate \"finders\" or \"locators\" of unclaimed property, and the rules typically target contingency arrangements (percentage fees), with registration requirements and fee caps. This blueprint charges a flat search fee regardless of outcome, never takes a percentage, and never takes custody of funds or files claims on the owner’s behalf, which keeps you outside most finder statutes. Still, read your state’s unclaimed-property law before launch, and disclose in writing that owners can always search and claim for free."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

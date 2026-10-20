@@ -1,0 +1,93 @@
+{
+  "name": "Medical bill review assistance",
+  "slug": "medical-bill-review",
+  "category": "Recovery & money-finding",
+  "summary": "Help patients find billing errors, check their rights, and prepare citation-backed dispute letters for bills they were never supposed to owe.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/medical-bill-review/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "clearcarepulse",
+      "name": "ClearCarePulse",
+      "base_url": "https://clearcarepulse.theaslangroupllc.com",
+      "openapi": "https://clearcarepulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://clearcarepulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/care/rights",
+          "price": "$0.05",
+          "description": "Medical-Bill Rights Check (quiz-first)"
+        },
+        {
+          "path": "/api/care/rights-letter",
+          "price": "$5.00",
+          "description": "Citation-Locked Medical-Bill Letter"
+        },
+        {
+          "path": "/api/care/search",
+          "price": "$0.15",
+          "description": "Procedure price search"
+        },
+        {
+          "path": "/api/care/negotiate",
+          "price": "$0.10",
+          "description": "Medical bill negotiation guide"
+        }
+      ]
+    },
+    {
+      "vertical": "mailpulse",
+      "name": "MailPulse",
+      "base_url": "https://mailpulse.theaslangroupllc.com",
+      "openapi": "https://mailpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://mailpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/verify-address",
+          "price": "$0.01",
+          "description": "Verify a mailing address (US + international)"
+        },
+        {
+          "path": "/api/letters",
+          "price": "$3.00",
+          "description": "THE paid action: prints and mails a real physical letter via Lob once payment settles. Price varies by service — standard $3.00, certified $12.00, certified_return_receipt $14.00, international $5.00 — the amount shown here is the representative/minimum price; the actual x402 charge always matches the caller's quote_id-verified order from POST /api/quote (free, no x402 gate). Requires a client_request_id (8-128 chars) for idempotency."
+        },
+        {
+          "path": "/api/letters/{id}",
+          "price": "$0.005",
+          "description": "Letter status / USPS tracking poll"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=medical-bill-review — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"clearcarepulse,mailpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: medical-bill-review\"."
+  },
+  "setup_steps": [
+    "Review two real bills free for people you know, start to finish, so you’ve walked the full path before charging.",
+    "Write your scope page: what you do (review, rights check, letter prep), what you never do (negotiate for you, give medical or legal advice, take a percentage).",
+    "Set a flat fee per bill review. Keep it simple; one number.",
+    "Introduce yourself to two independent insurance agents and one patient-advocacy community. Referrals in this lane come from trust, not ads."
+  ],
+  "licensing_notes": [
+    "Patient billing advocacy is unlicensed in most US states today, and this blueprint keeps it that way by staying in document-preparation territory: the patient signs, sends, and negotiates. Two lines you do not cross: negotiating or settling insurance claims for a fee (that’s licensed public-adjuster or attorney work in most states) and anything that resembles medical advice. Outside the US, check whether patient-advocacy or claims-management rules apply where you operate.",
+    "Handle documents with care: collect the minimum, store nothing longer than the engagement requires, and say so in writing."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": true
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

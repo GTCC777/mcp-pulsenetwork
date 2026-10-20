@@ -1,0 +1,86 @@
+{
+  "name": "Retail arbitrage and resale flipping",
+  "slug": "resale-flipping",
+  "category": "Commerce & flipping",
+  "summary": "Source underpriced retail, clearance, and secondhand goods and resell them online, with a margin check that prices the exit before you spend a dollar on the buy.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/resale-flipping/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "arbipulse",
+      "name": "ArbiPulse",
+      "base_url": "https://arbipulse.theaslangroupllc.com",
+      "openapi": "https://arbipulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://arbipulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/flip-check",
+          "price": "$0.50",
+          "description": "Retail resale arbitrage check (comps + fees + verdict)"
+        }
+      ]
+    },
+    {
+      "vertical": "dealpulse",
+      "name": "DealPulse",
+      "base_url": "https://dealpulse.theaslangroupllc.com",
+      "openapi": "https://dealpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://dealpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/deals/giftcard",
+          "price": "$0.25",
+          "description": "Report live discounted gift-card rates for a brand"
+        },
+        {
+          "path": "/api/deals/check",
+          "price": "$0.50",
+          "description": "Verify which deals are real at a store right now"
+        }
+      ]
+    },
+    {
+      "vertical": "findpulse",
+      "name": "FindPulse",
+      "base_url": "https://findpulse.theaslangroupllc.com",
+      "openapi": "https://findpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://findpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/find/recall",
+          "price": "$0.05",
+          "description": "Product recall lookup"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=resale-flipping — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"arbipulse,dealpulse,findpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: resale-flipping\"."
+  },
+  "setup_steps": [
+    "Walk one clearance section and run the margin check on ten items you would have bought on instinct. Count how many come back PASS. That number is the tuition you did not pay.",
+    "Set a floor for month one: buy FLIP verdicts only. THIN margins are for later, when you know your categories and your sell-through speed.",
+    "List everything within 48 hours, priced at or just under the median comparable. Velocity teaches faster than margin while you learn.",
+    "Track every flip in a spreadsheet: buy price, fees, sale price, days held. After twenty flips the spreadsheet will tell you which categories are yours."
+  ],
+  "licensing_notes": [
+    "No license to resell general merchandise in most places, with exceptions worth checking: some jurisdictions regulate secondhand dealers (registration, records, hold periods), some categories are restricted or unwise to resell (recalled products, certain cosmetics and food items), and some brands are gated on Amazon regardless of where you bought the stock. Flipping profit is taxable income everywhere, and marketplaces now report seller totals to tax authorities in many countries. Never resell a recalled product; the engine can check."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

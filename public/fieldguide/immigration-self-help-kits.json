@@ -1,0 +1,74 @@
+{
+  "name": "Immigration self-help information service",
+  "slug": "immigration-self-help-kits",
+  "category": "Doc-prep & paperwork",
+  "summary": "Sell research and information packs (points scores, pathway comparisons, cost breakdowns) that immigrants take to their attorney or use for self-filed applications. Strictly information, never advice.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/immigration-self-help-kits/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "immigrationpulse",
+      "name": "ImmigrationPulse",
+      "base_url": "https://immigrationpulse.theaslangroupllc.com",
+      "openapi": "https://immigrationpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://immigrationpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/points",
+          "price": "$0.10",
+          "description": "Skilled-worker points calculator — Canada Express Entry CRS, Australia SkillSelect, UK PBS, Germany Chancenkarte, Austria Red-White-Red Card"
+        },
+        {
+          "path": "/api/category-check",
+          "price": "$0.05",
+          "description": "Express Entry 2026 category checker — eligibility across all 10 categories + observed cutoffs"
+        },
+        {
+          "path": "/api/pathway",
+          "price": "$0.20",
+          "description": "Permanent residency roadmap — every pathway ranked for nationality + destination"
+        },
+        {
+          "path": "/api/cost",
+          "price": "$0.10",
+          "description": "Complete immigration cost breakdown — government fees + attorney + hidden costs"
+        },
+        {
+          "path": "/api/compare",
+          "price": "$0.15",
+          "description": "Side-by-side immigration comparison across multiple destination countries"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=immigration-self-help-kits — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"immigrationpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: immigration-self-help-kits\"."
+  },
+  "setup_steps": [
+    "Write your disclaimer and your \"what I don’t do\" list before anything else, and put both on every page and every deliverable.",
+    "Build one sample research pack for a fictional profile and show it to a licensed practitioner. Ask them where the advice line is; most will tell you gladly, and some will become your referral partners.",
+    "Serve your own community first, in its own language, where trust already exists.",
+    "Price the pack flat. Keep it modest; volume and referrals matter more than margin here."
+  ],
+  "licensing_notes": [
+    "This is the most tightly regulated blueprint in the Field Guide, and the rules protect your customers from real predators. In the US, giving immigration advice for compensation is the practice of law: only attorneys and DOJ-accredited representatives may do it, and \"notario\" operations get prosecuted. Canada restricts paid advice to lawyers and licensed consultants (RCIC); the UK requires IAA (formerly OISC) registration for immigration advice. Selling general information and personalized data lookups is legal in these places; selecting forms for someone, advising strategy, or completing applications for a fee is not, unless you’re credentialed.",
+    "Run it clean: written disclaimer on everything (\"information service, not legal advice, not a law firm\"), no case strategy, and a referral list of licensed practitioners you hand out freely. If you love this field, the credentialed route (RCIC in Canada, IAA in the UK, DOJ accreditation via a nonprofit in the US) turns this side business into a profession."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": true
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

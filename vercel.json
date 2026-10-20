@@ -6,12 +6,28 @@
       "destination": "/api/mcp"
     },
     {
+      "source": "/agent",
+      "destination": "/api/agent"
+    },
+    {
+      "source": "/hire",
+      "destination": "/hire.html"
+    },
+    {
       "source": "/affiliates",
       "destination": "/affiliates.html"
     },
     {
       "source": "/wholesale",
       "destination": "/wholesale.html"
+    },
+    {
+      "source": "/machines",
+      "destination": "/machines.html"
+    },
+    {
+      "source": "/cdp-x402-sdk",
+      "destination": "/cdp-x402-sdk.html"
     },
     {
       "source": "/publishers",
@@ -32,7 +48,53 @@
   ],
   "functions": {
     "api/mcp.ts": {
-      "maxDuration": 60
+      "maxDuration": 300
+    },
+    "api/hire/prospect-ledger.ts": {
+      "maxDuration": 300
+    },
+    "api/hire/vendor-dd-memo.ts": {
+      "maxDuration": 300
+    },
+    "api/hire/market-entry-brief.ts": {
+      "maxDuration": 300
     }
-  }
+  },
+  "headers": [
+    {
+      "source": "/.well-known/talkshi-verification/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "source": "/.well-known/x402",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/.well-known/xrp-ledger.toml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/toml; charset=utf-8"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    }
+  ]
 }

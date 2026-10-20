@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pay for real APIs with the CDP x402 SDK — 73 live endpoints to point your agent at | PulseNetwork</title>
+<meta name="description" content="Working quickstart for the Coinbase CDP x402 SDK: give an agent a managed wallet with spend controls and pay real x402 APIs — token safety scans from $0.015, weather, CVE checks and 900+ more endpoints. Verified against @coinbase/cdp-sdk 1.54 on launch day.">
+<link rel="canonical" href="https://pulse.theaslangroupllc.com/cdp-x402-sdk">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Pay for real APIs with the CDP x402 SDK","description":"Quickstart for paying live x402 APIs with the Coinbase CDP x402 SDK — managed wallets, spend controls, and 73 PulseNetwork APIs verified compatible on the SDK's launch day.","datePublished":"2026-07-23","dateModified":"2026-07-23","author":{"@type":"Organization","name":"The Aslan Group LLC","url":"https://pulse.theaslangroupllc.com/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Starter x402 endpoints for CDP SDK agents","description":"Cheap, fast pay-per-call endpoints to make an agent's first x402 payment with the CDP SDK.","numberOfItems":4,"itemListElement":[{"@type":"ListItem","position":1,"name":"OnchainPulse /api/evmtoken — EVM token safety scan","url":"https://onchainpulse.theaslangroupllc.com/api/evmtoken"},{"@type":"ListItem","position":2,"name":"OnchainPulse /api/memecoin — Solana memecoin safety scan","url":"https://onchainpulse.theaslangroupllc.com/api/memecoin"},{"@type":"ListItem","position":3,"name":"CyberPulse /api/cyber/cve-check — CVE lookup","url":"https://cyberpulse.theaslangroupllc.com/api/cyber/cve-check"},{"@type":"ListItem","position":4,"name":"ClimatePulse /api/climate/now — current weather","url":"https://climatepulse.theaslangroupllc.com/api/climate/now"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the CDP x402 SDK work with PulseNetwork APIs?","acceptedAnswer":{"@type":"Answer","text":"Yes — verified 2026-07-23, the day the SDK shipped. Every PulseNetwork endpoint quotes the x402 v2 exact scheme in USDC on Base (eip155:8453), which is exactly what CdpX402Client registers by default. Most endpoints also quote USDC on Solana in the same accepts[] array. Payments settle through the CDP facilitator, the same infrastructure the SDK's server side uses."}},{"@type":"Question","name":"Do I need API keys to call these endpoints?","acceptedAnswer":{"@type":"Answer","text":"No. An unauthenticated request returns HTTP 402 with a machine-readable USDC quote. Your client signs the payment authorization and replays the request. No signup, no key, no rate plan — solvency is the only credential."}},{"@type":"Question","name":"How much does a first test cost?","acceptedAnswer":{"@type":"Answer","text":"A token safety scan is $0.015 per call. A CVE check is $0.02. Current weather is $0.05. Funding a wallet with $1 of USDC on Base covers dozens of test calls; gas for the payment authorization is sponsored."}},{"@type":"Question","name":"Do the SDK's spend controls work against these endpoints?","acceptedAnswer":{"@type":"Answer","text":"Yes — verified. A per-payment cap set below an endpoint's price blocks the payment client-side before any funds move (SpendControlError, code per_payment_cap); caps at or above the price let the payment settle normally."}},{"@type":"Question","name":"Do any PulseNetwork endpoints support usage-based pricing (the upto scheme)?","acceptedAnswer":{"@type":"Answer","text":"Yes — six endpoints settle a metered amount via the x402 upto scheme with Permit2, each verified on-chain with a CDP managed wallet: longevity clinical-trials ($0.04 + $0.003/trial), US federal contracts and EU tenders ($0.03 + $0.0025/result each), FOIA/declassified new-releases ($0.03 + $0.0025/release), football accumulator ($0.07 + $0.01/leg), and exam flashcards ($0.20 + $0.015/card). You authorize the flat exact price as the ceiling and pay only for what you request. The one-time Permit2 allowance is gas-sponsored, so a fresh CDP managed wallet pays with no setup."}},{"@type":"Question","name":"Should my trading agent check a token before buying it?","acceptedAnswer":{"@type":"Answer","text":"Yes. Honeypot detection, mintable/pausable flags, liquidity and holder concentration are exactly the failure modes autonomous buyers hit. OnchainPulse scans EVM tokens across 8 chains (including Robinhood Chain) and Solana memecoins for $0.015 — cheaper than any bad fill."}},{"@type":"Question","name":"How does an agent discover these endpoints at runtime?","acceptedAnswer":{"@type":"Answer","text":"Via the x402 Bazaar (the CDP SDK's server side advertises there too), x402scan, this hub's /openapi.json and /llms.txt, or the PulseNetwork MCP server at /mcp."}}]}</script>
+<style>
+:root{--bg:#05080d;--ink:#eaf1f9;--mut:#8fa1b8;--acc:#37e29b;--lion:#f0b429;--card:#0b1119;--line:#1a2433}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{padding:22px 0;border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--ink)}.brand .lion{color:var(--lion)}
+.nav{display:flex;gap:18px;flex-wrap:wrap}.nav a{color:var(--mut);font-size:13.5px}.nav a:hover{color:var(--ink)}
+.hero{padding:56px 0 30px}
+h1{font-size:clamp(26px,4.4vw,40px);line-height:1.18;letter-spacing:-.02em;max-width:24ch}
+.hero p.lede{color:var(--mut);max-width:64ch;margin-top:14px}
+.hero .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.chip{border:1px solid var(--line);border-radius:99px;padding:4px 12px;font-size:12.5px;color:var(--mut)}
+.chip.ok{color:var(--acc);border-color:var(--acc)}
+.group{padding:26px 0;border-top:1px solid var(--line)}
+.group h2{font-size:20px;margin-bottom:4px}
+.need{color:var(--mut);font-size:14.5px;max-width:70ch}
+.eps{list-style:none;margin-top:14px}
+.ep{display:grid;grid-template-columns:minmax(0,300px) 62px 1fr;gap:4px 14px;padding:9px 0;border-bottom:1px dashed var(--line);align-items:baseline}
+.ep-path{font:13px ui-monospace,Menlo,monospace;overflow-wrap:anywhere}
+.badge{color:var(--lion);font-size:12.5px;font-weight:600;text-align:right}
+.ep-desc{color:var(--mut);font-size:13.5px}
+.ep-host{grid-column:1/-1;color:#5b6b80;font-size:11.5px;font-family:ui-monospace,Menlo,monospace}
+.how{padding:34px 0;border-top:1px solid var(--line)}
+.how h2{font-size:20px;margin-bottom:10px}
+.how p{color:var(--mut);font-size:14.5px;max-width:74ch;margin:8px 0}
+pre{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;font:12.5px/1.7 ui-monospace,Menlo,monospace;overflow-x:auto;color:#c8d6e8;margin:14px 0}
+.faq{padding:34px 0;border-top:1px solid var(--line)}
+.faq h2{font-size:20px;margin-bottom:14px}
+.faq h3{font-size:15.5px;margin:18px 0 4px}
+.faq p{color:var(--mut);font-size:14.5px;max-width:74ch}
+footer{padding:44px 0 56px;color:var(--mut);font-size:14px;border-top:1px solid var(--line);margin-top:30px}
+@media (max-width:640px){.ep{grid-template-columns:1fr 62px}.ep-desc{grid-column:1/-1}}
+@media (prefers-color-scheme: light){:root{--bg:#fbfdff;--ink:#0c1522;--mut:#4a5b70;--card:#f0f4f9;--line:#dbe4ee}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <span class="brand"><span class="lion">◆</span> PulseNetwork <span style="color:var(--mut);font-weight:400">/ cdp-x402-sdk</span></span>
+  <nav class="nav"><a href="/">All 73 APIs</a><a href="/openapi.json">openapi.json</a><a href="/llms.txt">llms.txt</a><a href="/machines">Machines</a><a href="/wholesale">Wholesale</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <h1>Your agent has a wallet now. Here's something worth buying.</h1>
+  <p class="lede">Coinbase's new <strong>CDP x402 SDK</strong> gives any agent a managed wallet, spend controls, and hosted settlement in three lines of code. What the quickstarts don't include is a real API to point it at. PulseNetwork is <strong>73 live x402 APIs / 900+ endpoints</strong> — token safety scans, weather, CVE checks, market and macro data — payable per call in USDC from <strong>$0.015</strong>. Compatibility with the new SDK's payment pipeline and spend controls was verified the day it shipped.</p>
+  <div class="chips">
+    <span class="chip ok">✓ verified 2026-07-23 · @coinbase/cdp-sdk 1.54 · @x402/core 2.19</span>
+    <span class="chip">x402 v2 · exact · USDC on Base</span>
+    <span class="chip">USDC on Solana in the same quote</span>
+    <span class="chip">no API keys, no accounts</span>
+  </div>
+</div></section>
+
+<section class="how"><div class="wrap">
+  <h2>Quickstart: first paid call in ~20 lines</h2>
+  <p>Install the SDK and the x402 packages it builds on:</p>
+  <pre>npm install @coinbase/cdp-sdk @x402/core @x402/evm @x402/svm @x402/extensions @x402/fetch</pre>
+  <p>Set <code>CDP_API_KEY_ID</code>, <code>CDP_API_KEY_SECRET</code>, and <code>CDP_WALLET_SECRET</code> from the <a href="https://portal.cdp.coinbase.com/" rel="noopener">CDP Portal</a>. The client provisions a managed wallet on first use — no private keys to store.</p>
+  <pre>import { CdpX402Client } from "@coinbase/cdp-sdk/x402";
+import { wrapFetchWithPayment } from "@x402/fetch";
+
+const client = new CdpX402Client();
+
+// Fund this address with a little USDC on Base before the first payment:
+const { evmAddress } = await client.getAddresses();
+console.log("fund me:", evmAddress);
+
+const payingFetch = wrapFetchWithPayment(fetch, client);
+
+// $0.015 — honeypot / rug-risk scan for any EVM token
+const res = await payingFetch(
+  "https://onchainpulse.theaslangroupllc.com/api/evmtoken?address=0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984&chain=base"
+);
+console.log(await res.json());</pre>
+  <p>That's the whole flow: the endpoint answers with an HTTP 402 quote, the SDK signs a USDC payment authorization with the managed wallet, replays the request, and the data comes back. Settlement runs through the CDP facilitator — the same infrastructure PulseNetwork has settled on since launch.</p>
+
+  <h2 style="margin-top:28px">Spend controls, verified against a live endpoint</h2>
+  <p>Caps are enforced client-side before any funds move. A cap below the endpoint's price throws <code>SpendControlError</code> (<code>per_payment_cap</code>) instead of paying; within caps, the payment settles normally. Both behaviors were tested against the endpoint above on 2026-07-23. Amounts are atomic USDC units (6 decimals — <code>15000n</code> = $0.015).</p>
+  <pre>const USDC_BASE = "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913";
+
+const client = new CdpX402Client({
+  spendControls: {
+    maxAmountPerPayment:     { atomic: 50_000n,  asset: USDC_BASE }, // ≤ $0.05 per call
+    maxCumulativeSpend:      { atomic: 1_000_000n, asset: USDC_BASE }, // ≤ $1.00 …
+    maxCumulativeSpendWindow: "24h",                                   // … per day
+  },
+});</pre>
+
+  <h2 style="margin-top:28px">Usage-based pricing (upto scheme) — six live endpoints</h2>
+  <p>The SDK's other launch feature is the <code>upto</code> scheme: your agent authorizes a maximum, the seller settles only what the request actually used. Six PulseNetwork endpoints run it in production — every one verified on-chain with a CDP managed wallet. <code>CdpX402Client</code> supports upto on Base out of the box, and the one-time Permit2 allowance is gas-sponsored — a fresh managed wallet with zero ETH pays with no setup. Exact-scheme payments still work everywhere at the flat price.</p>
+  <ul>
+    <li><code>longevitypulse…/api/longevity/clinical-trials?max_trials=</code> — $0.04 + $0.003/trial (1–20, authorize $0.10)</li>
+    <li><code>govspendpulse…/api/govspend/us-contracts?limit=</code> — $0.03 + $0.0025/award (1–20, authorize $0.08)</li>
+    <li><code>govspendpulse…/api/govspend/eu-tenders?limit=</code> — $0.03 + $0.0025/notice (1–20, authorize $0.08)</li>
+    <li><code>truthpulse…/api/truth/new-releases?limit=</code> — $0.03 + $0.0025/release (1–20, authorize $0.08)</li>
+    <li><code>footballpulse…/api/accumulator?max_legs=</code> — $0.07 + $0.01/leg (2–8, authorize $0.15)</li>
+    <li><code>edupulse…/api/exam/flashcards?count=</code> — $0.20 + $0.015/card (1–20, authorize $0.50)</li>
+  </ul>
+  <pre>// authorize up to $0.10, settle $0.049 for 3 trials — same payingFetch as above
+const res = await payingFetch(
+  "https://longevitypulse.theaslangroupllc.com/api/longevity/clinical-trials?condition=rapamycin&max_trials=3"
+);</pre>
+</div></section>
+
+<div class="wrap">
+  <section class="group" id="starter-endpoints">
+    <h2>Four cheap endpoints for your first payments</h2>
+    <p class="need">Small, fast, and useful — good smoke tests for a new paying agent. The full catalog (73 APIs, 900+ endpoints, $0.01–$2.00) is on the <a href="/">hub</a> and in <a href="/openapi.json">openapi.json</a>.</p>
+    <ul class="eps">
+      <li class="ep">
+        <code class="ep-path"><a href="https://onchainpulse.theaslangroupllc.com/api/evmtoken" rel="noopener">/api/evmtoken?address=&amp;chain=</a></code>
+        <span class="badge">$0.015</span>
+        <span class="ep-desc">EVM token safety scan — honeypot, mint/pause flags, liquidity, holder concentration. 8 chains incl. Base &amp; Robinhood Chain.</span>
+        <span class="ep-host">onchainpulse.theaslangroupllc.com</span>
+      </li>
+      <li class="ep">
+        <code class="ep-path"><a href="https://onchainpulse.theaslangroupllc.com/api/memecoin" rel="noopener">/api/memecoin?address=&lt;mint&gt;</a></code>
+        <span class="badge">$0.015</span>
+        <span class="ep-desc">Solana memecoin safety scan — pass the SPL mint address (base58).</span>
+        <span class="ep-host">onchainpulse.theaslangroupllc.com</span>
+      </li>
+      <li class="ep">
+        <code class="ep-path"><a href="https://cyberpulse.theaslangroupllc.com/api/cyber/cve-check" rel="noopener">/api/cyber/cve-check?cve=</a></code>
+        <span class="badge">$0.02</span>
+        <span class="ep-desc">CVE lookup with severity, exploitation status, and remediation context.</span>
+        <span class="ep-host">cyberpulse.theaslangroupllc.com</span>
+      </li>
+      <li class="ep">
+        <code class="ep-path"><a href="https://climatepulse.theaslangroupllc.com/api/climate/now" rel="noopener">/api/climate/now?location=</a></code>
+        <span class="badge">$0.05</span>
+        <span class="ep-desc">Current weather conditions for any location.</span>
+        <span class="ep-host">climatepulse.theaslangroupllc.com</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="group" id="trading-agents">
+    <h2>Running a trading agent? Scan before you buy.</h2>
+    <p class="need">Coinbase for Agents gives your agent the order book and execution. It does not tell you whether the token you're about to buy can be sold back. A $0.015 safety scan before each entry catches honeypots, mintable supply, pausable transfers, fake liquidity, and whale-concentrated holders — the exact failure modes autonomous buyers hit. Add it as the pre-trade gate: if the scan flags critical risk, skip the trade. One avoided bad fill pays for thousands of scans.</p>
+    <pre>// pre-trade gate: refuse to buy anything that fails a safety scan
+const scan = await payingFetch(
+  `https://onchainpulse.theaslangroupllc.com/api/evmtoken?address=${token}&chain=base`
+);
+const report = await scan.json();
+if (report.verdict !== "low_risk") skipTrade(report);</pre>
+  </section>
+</div>
+
+<section class="faq"><div class="wrap">
+  <h2>FAQ</h2>
+  <h3>Does the CDP x402 SDK work with these APIs?</h3>
+  <p>Yes — verified 2026-07-23, the day the SDK shipped. Every endpoint quotes the x402 v2 <code>exact</code> scheme in USDC on Base (<code>eip155:8453</code>), which is what <code>CdpX402Client</code> registers by default. Most endpoints also quote USDC on Solana in the same <code>accepts[]</code> array, and the token scanners additionally quote native USDG on Robinhood Chain (<code>eip155:4663</code>).</p>
+  <h3>Do I need an API key or account?</h3>
+  <p>No. An unauthenticated call returns HTTP 402 with a machine-readable quote; your client pays and replays. Solvency is the only credential.</p>
+  <h3>How do I fund the wallet?</h3>
+  <p>Call <code>client.getAddresses()</code> and send a little USDC on Base to the EVM address. $1 covers dozens of test calls. On Base Sepolia (set <code>environment: "development"</code>), use <code>cdp.evm.requestFaucet()</code> — note these endpoints are mainnet, so testnet funds won't pay here.</p>
+  <h3>What about the response itself?</h3>
+  <p>JSON, with source attribution and terms inline. Paid responses are never cached publicly.</p>
+  <h3>How do agents find these endpoints at runtime?</h3>
+  <p>The x402 Bazaar, x402scan, <a href="/openapi.json">/openapi.json</a>, <a href="/llms.txt">/llms.txt</a>, or the PulseNetwork MCP server at <code>/mcp</code>.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <p><span class="brand"><span class="lion">◆</span> PulseNetwork</span> — 73 pay-per-call intelligence APIs by The Aslan Group LLC. <a href="/">Catalog</a> · <a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · contact: info@theaslangroupllc.com</p>
+</div></footer>
+</body>
+</html>

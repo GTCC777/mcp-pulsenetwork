@@ -5,3 +5,4 @@ dist/
 .vercel
 
 .vercel
+.fleet-verticals.tmp.mjs

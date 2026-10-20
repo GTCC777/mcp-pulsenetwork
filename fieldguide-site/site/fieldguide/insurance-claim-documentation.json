@@ -1,0 +1,92 @@
+{
+  "name": "Insurance claim documentation prep",
+  "slug": "insurance-claim-documentation",
+  "category": "Doc-prep & paperwork",
+  "summary": "Help policyholders document storm and disaster claims properly, and check whether insurers owe statutory late-payment interest. Documentation and letters only; adjusting requires a license.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/insurance-claim-documentation/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "insurepulse",
+      "name": "InsurePulse",
+      "base_url": "https://insurepulse.theaslangroupllc.com",
+      "openapi": "https://insurepulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://insurepulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/insure/claim",
+          "price": "$0.08",
+          "description": "Insurance claims guidance"
+        },
+        {
+          "path": "/api/insure/prompt-pay",
+          "price": "$0.05",
+          "description": "Late-claim interest check — statutory prompt-pay interest math (deterministic, no LLM)"
+        },
+        {
+          "path": "/api/insure/prompt-pay-letter",
+          "price": "$2.00",
+          "description": "Citation-locked late-claim interest demand letter ($2)"
+        },
+        {
+          "path": "/api/insure/home",
+          "price": "$0.10",
+          "description": "Homeowners insurance gap analysis"
+        }
+      ]
+    },
+    {
+      "vertical": "mailpulse",
+      "name": "MailPulse",
+      "base_url": "https://mailpulse.theaslangroupllc.com",
+      "openapi": "https://mailpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://mailpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/verify-address",
+          "price": "$0.01",
+          "description": "Verify a mailing address (US + international)"
+        },
+        {
+          "path": "/api/letters",
+          "price": "$3.00",
+          "description": "THE paid action: prints and mails a real physical letter via Lob once payment settles. Price varies by service — standard $3.00, certified $12.00, certified_return_receipt $14.00, international $5.00 — the amount shown here is the representative/minimum price; the actual x402 charge always matches the caller's quote_id-verified order from POST /api/quote (free, no x402 gate). Requires a client_request_id (8-128 chars) for idempotency."
+        },
+        {
+          "path": "/api/letters/{id}",
+          "price": "$0.005",
+          "description": "Letter status / USPS tracking poll"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=insurance-claim-documentation — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"insurepulse,mailpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: insurance-claim-documentation\"."
+  },
+  "setup_steps": [
+    "Build the pre-loss documentation offer first: a home inventory session sold in calm weather. It’s recurring, uncontroversial, and it seeds the client list that calls you after a storm.",
+    "Learn your state’s prompt-pay statute by running five test checks with different claim timelines.",
+    "Write the scope disclaimer (documentation and letters, no negotiation, no adjusting) and read your state’s public-adjuster statute so you know exactly why it’s there.",
+    "Introduce yourself to two independent insurance agents; they refer documentation help without hesitation because it makes their claims go smoother."
+  ],
+  "licensing_notes": [
+    "The bright line: helping someone document their own claim and preparing letters they send is generally lawful; negotiating, adjusting, or settling a claim on someone’s behalf for a fee requires a public adjuster license in most US states (and equivalents elsewhere), and states like Florida and Texas police this actively after storms. Never touch the negotiation, never take a percentage of the payout, and put the disclaimer in writing. Some states also regulate post-disaster solicitation; know your state’s rules before you market after a storm."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": true
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

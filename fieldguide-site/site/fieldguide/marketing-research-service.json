@@ -1,0 +1,73 @@
+{
+  "name": "Marketing research service for local businesses",
+  "slug": "marketing-research-service",
+  "category": "B2B services",
+  "summary": "Sell answer-ready marketing intelligence to small businesses: how visible they are to AI assistants, where competitors beat them, and what to do about it, delivered as flat-fee reports.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/marketing-research-service/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "marketpulse",
+      "name": "MarketPulse",
+      "base_url": "https://marketpulse.theaslangroupllc.com",
+      "openapi": "https://marketpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://marketpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/market/llm-visibility",
+          "price": "$0.15",
+          "description": "LLM visibility analysis"
+        },
+        {
+          "path": "/api/market/competitor-gap",
+          "price": "$0.10",
+          "description": "Competitor gap analysis"
+        },
+        {
+          "path": "/api/market/local-seo",
+          "price": "$0.08",
+          "description": "Local SEO optimization guide"
+        },
+        {
+          "path": "/api/market/content-brief",
+          "price": "$0.15",
+          "description": "Dual-optimized content brief"
+        },
+        {
+          "path": "/api/market/ad-copy",
+          "price": "$0.08",
+          "description": "Ready-to-use ad copy variants"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=marketing-research-service — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"marketpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: marketing-research-service\"."
+  },
+  "setup_steps": [
+    "Run the full report on three local businesses you frequent, free, and hand it over in person. One will hire you for something.",
+    "Lead every pitch with the AI-visibility angle. \"Do you know what ChatGPT says when someone asks for a plumber in your town?\" opens doors that \"SEO analysis\" doesn’t.",
+    "Fix your flat price and your one-week turnaround, and put both on the site.",
+    "Build the quarterly re-check as a subscription from day one; movement over time is what makes clients stay."
+  ],
+  "licensing_notes": [
+    "None. The honesty rules are the usual ones: report what the checks actually found, no traffic or revenue promises, and clearly mark estimates as estimates."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

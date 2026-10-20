@@ -9,6 +9,7 @@
 // matching x-internal-key (master or scoped) bypasses payment automatically.
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { handlePaymentGate } from '../lib/x402.js';
+import { paidCacheArm } from '../lib/paid-cache.js';
 import { loadModels, recommend, enrich, economics, type RecommendQuery } from '../lib/business-models.js';
 
 const AMOUNT = '10000'; // $0.01
@@ -54,7 +55,9 @@ async function handlerImpl(req: VercelRequest, res: VercelResponse): Promise<voi
   const tailored = (query.interests?.length || query.skills?.length || query.model) && score > 0.5;
 
   res.setHeader('cache-control', 's-maxage=600, stale-while-revalidate=3600');
+  res.setHeader('Cache-Control', 'private, no-store');
   res.setHeader('PAYMENT-RESPONSE', gate.settlementHeader);
+  paidCacheArm(req, res);
   res.status(200).json({
     goal: query.goal ?? 'make money with AI',
     business: model.title,

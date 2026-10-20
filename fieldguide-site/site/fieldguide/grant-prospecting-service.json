@@ -1,0 +1,73 @@
+{
+  "name": "Grant prospecting for nonprofits",
+  "slug": "grant-prospecting-service",
+  "category": "B2B services",
+  "summary": "Sell funder research to small nonprofits: matched grant lists, foundation giving histories from 990-PF data, and deadline calendars they could never staff internally.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/grant-prospecting-service/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "grantpulse",
+      "name": "GrantPulse",
+      "base_url": "https://grantpulse.theaslangroupllc.com",
+      "openapi": "https://grantpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://grantpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/grant/match",
+          "price": "$0.15",
+          "description": "Personalized grant matching"
+        },
+        {
+          "path": "/api/grant/funder-990",
+          "price": "$0.25",
+          "description": "Private foundation giving intelligence (IRS Form 990-PF)"
+        },
+        {
+          "path": "/api/grant/org-intel",
+          "price": "$0.20",
+          "description": "Nonprofit financial intelligence (IRS Form 990)"
+        },
+        {
+          "path": "/api/grant/deadline",
+          "price": "$0.08",
+          "description": "Grant deadline tracker"
+        },
+        {
+          "path": "/api/grant/writer",
+          "price": "$0.20",
+          "description": "Grant narrative drafting"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=grant-prospecting-service — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"grantpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: grant-prospecting-service\"."
+  },
+  "setup_steps": [
+    "Build one complete sample pipeline for a real local nonprofit, free, in exchange for a testimonial and permission to show the (redacted) deliverable.",
+    "Price monthly and flat. Small nonprofits budget in monthly line items.",
+    "Pitch five more local organizations with the sample in hand. Local wins beat cold outreach in this sector.",
+    "Track one number per client: dollars applied for from your pipeline. It’s the renewal conversation."
+  ],
+  "licensing_notes": [
+    "No license. One ethical rule that doubles as positioning: charge flat fees, not percentages of grants won. Percentage compensation violates fundraising-profession ethics (AFP code) and several funders prohibit it. Some US states require registration for \"fundraising counsel\"; the definitions usually target campaign management rather than research services, but check your state’s charitable-solicitation law once you’re advising on strategy rather than just researching."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

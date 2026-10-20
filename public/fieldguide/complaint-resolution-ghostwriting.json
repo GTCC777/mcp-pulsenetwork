@@ -1,0 +1,101 @@
+{
+  "name": "Complaint-resolution ghostwriting",
+  "slug": "complaint-resolution-ghostwriting",
+  "category": "Odd jobs & side gigs",
+  "summary": "Write the effective complaint letters people can’t write when they’re furious: airline refunds, warranty runarounds, billing disputes, deposit returns. They sign and send; you charge flat per letter.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/complaint-resolution-ghostwriting/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "legalpulse",
+      "name": "LegalPulse",
+      "base_url": "https://legalpulse.theaslangroupllc.com",
+      "openapi": "https://legalpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://legalpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/legal/letter",
+          "price": "$2.00",
+          "description": "Advocacy letter writer"
+        },
+        {
+          "path": "/api/legal/consumer",
+          "price": "$0.10",
+          "description": "Consumer rights — FDCPA, FCRA, FTC"
+        },
+        {
+          "path": "/api/legal/tenant",
+          "price": "$0.10",
+          "description": "Tenant rights by state"
+        }
+      ]
+    },
+    {
+      "vertical": "dealpulse",
+      "name": "DealPulse",
+      "base_url": "https://dealpulse.theaslangroupllc.com",
+      "openapi": "https://dealpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://dealpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/deals/subscription-letter",
+          "price": "$2.00",
+          "description": "Citation-locked subscription demand letter — refund / unconditional-gift / cancellation-obstruction ($2)"
+        }
+      ]
+    },
+    {
+      "vertical": "mailpulse",
+      "name": "MailPulse",
+      "base_url": "https://mailpulse.theaslangroupllc.com",
+      "openapi": "https://mailpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://mailpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/verify-address",
+          "price": "$0.01",
+          "description": "Verify a mailing address (US + international)"
+        },
+        {
+          "path": "/api/letters",
+          "price": "$3.00",
+          "description": "THE paid action: prints and mails a real physical letter via Lob once payment settles. Price varies by service — standard $3.00, certified $12.00, certified_return_receipt $14.00, international $5.00 — the amount shown here is the representative/minimum price; the actual x402 charge always matches the caller's quote_id-verified order from POST /api/quote (free, no x402 gate). Requires a client_request_id (8-128 chars) for idempotency."
+        },
+        {
+          "path": "/api/letters/{id}",
+          "price": "$0.005",
+          "description": "Letter status / USPS tracking poll"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=complaint-resolution-ghostwriting — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"legalpulse,dealpulse,mailpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: complaint-resolution-ghostwriting\"."
+  },
+  "setup_steps": [
+    "Write three letters free for people you know with live grievances, and track outcomes; resolved complaints are your testimonials.",
+    "Set two flat prices: single letter, and letter-plus-escalation pair.",
+    "Build the ten-minute intake form; a good form is half the product.",
+    "Post one anonymized before-and-after (the rant they drafted, the letter you sent, the refund email). It sells the service better than any explanation."
+  ],
+  "licensing_notes": [
+    "Ghostwriting letters that the customer signs and sends in their own name is lawful self-help support; representing someone in a dispute or negotiating for them crosses into regulated territory (and legal advice belongs to lawyers). Flat fee, never a percentage of the recovery. Where a matter is clearly legal-scale (injury, large sums, litigation), your letter says one thing: see a lawyer, and here’s the referral path."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

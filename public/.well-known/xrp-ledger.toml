@@ -1,0 +1,12 @@
+# xrp-ledger.toml — PulseNetwork pay-per-call data services
+# Spec: https://xrpl.org/docs/references/xrp-ledger-toml
+# Every PulseNetwork x402 service settles XRP and RLUSD payments to the account below.
+# Catalog of services: https://pulse.theaslangroupllc.com
+
+[METADATA]
+modified = 2026-10-19T03:11:16.310Z
+
+[[ACCOUNTS]]
+address = "rMnHeutYALco8RYFVcmuU4BCgSzBpPEh32"
+network = "main"
+desc = "Receives x402 payments (XRP and RLUSD) for every PulseNetwork service. Operator: The Aslan Group LLC. Catalog: https://pulse.theaslangroupllc.com"

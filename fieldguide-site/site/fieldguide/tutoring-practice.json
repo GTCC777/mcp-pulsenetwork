@@ -1,0 +1,78 @@
+{
+  "name": "Tutoring practice, engine-assisted",
+  "slug": "tutoring-practice",
+  "category": "Education",
+  "summary": "Run a tutoring business where prep, practice material, and progress diagnosis are generated per student instead of consuming your evenings.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/tutoring-practice/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "edupulse",
+      "name": "EduPulse",
+      "base_url": "https://edupulse.theaslangroupllc.com",
+      "openapi": "https://edupulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://edupulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/study/guide",
+          "price": "$0.10",
+          "description": "Study guide generation — any subject, any grade, any country"
+        },
+        {
+          "path": "/api/study/quiz",
+          "price": "$0.10",
+          "description": "Practice quiz with adaptive difficulty and answer explanations"
+        },
+        {
+          "path": "/api/study/misconception",
+          "price": "$0.10",
+          "description": "Misconception diagnosis — pinpoints the exact knowledge gap behind a wrong answer"
+        },
+        {
+          "path": "/api/exam/prep",
+          "price": "$1.00",
+          "description": "Exam-style practice questions — 200+ exams, rubric-matched difficulty"
+        },
+        {
+          "path": "/api/exam/mock",
+          "price": "$1.00",
+          "description": "Full mock exam simulation — timed, scored, with performance report"
+        },
+        {
+          "path": "/api/exam/flashcards",
+          "price": "$0.50",
+          "description": "Spaced-repetition flashcard set — import into Anki or Quizlet"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=tutoring-practice — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"edupulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: tutoring-practice\"."
+  },
+  "setup_steps": [
+    "Pick one subject and one exam you already know cold. Depth beats breadth for referrals.",
+    "Take two students at a founding rate and run the full engine-assisted loop: pre-session materials, misconception diagnosis, weekly parent note.",
+    "Raise your rate for student three. Your prep quality is now visibly better than the hourly-tutor norm.",
+    "Ask both founding families for one referral each at week four, with a specific sentence they can forward."
+  ],
+  "licensing_notes": [
+    "Tutoring is unlicensed nearly everywhere. Two practical notes: background-check expectations are real when you work with minors (get one proactively; parents notice), and if you advertise special-education expertise, know your jurisdiction’s rules about what only credentialed specialists may claim."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

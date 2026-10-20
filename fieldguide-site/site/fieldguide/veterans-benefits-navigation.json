@@ -1,0 +1,74 @@
+{
+  "name": "Veterans benefits navigation",
+  "slug": "veterans-benefits-navigation",
+  "category": "Doc-prep & paperwork",
+  "summary": "Help veterans understand what they may be entitled to across six countries’ systems. US law sharply restricts charging for claims help, so this blueprint is built around what’s legal: free navigation, funded adjacently.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/veterans-benefits-navigation/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "vetpulse",
+      "name": "VetPulse",
+      "base_url": "https://api.vetpulse.theaslangroupllc.com",
+      "openapi": "https://api.vetpulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://api.vetpulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/vet/disability",
+          "price": "$0.15",
+          "description": "Veteran disability rating analysis (US, UK, Canada, Australia, NZ, Germany)"
+        },
+        {
+          "path": "/api/vet/aid-attendance",
+          "price": "$0.15",
+          "description": "Veteran pension / Aid & Attendance-style eligibility (US, UK, Canada, Australia, NZ, Germany)"
+        },
+        {
+          "path": "/api/vet/state-benefits",
+          "price": "$0.10",
+          "description": "State/regional veteran benefits (US states; UK, Canada, Australia, NZ, Germany regions)"
+        },
+        {
+          "path": "/api/vet/education",
+          "price": "$0.10",
+          "description": "Veteran education benefit comparison (US GI Bill; UK, Canada, Australia, NZ, Germany equivalents)"
+        },
+        {
+          "path": "/api/vet/discounts",
+          "price": "$0.05",
+          "description": "Verified veteran discounts by category (US, UK, Canada, Australia, NZ, Germany)"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=veterans-benefits-navigation — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"vetpulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: veterans-benefits-navigation\"."
+  },
+  "setup_steps": [
+    "If you’re serious about claims work, start the VA accreditation process (or your country’s equivalent) now; it takes months, and everything else can run while you wait.",
+    "Build a relationship with your local VSO chapter. You’re a feeder, not a competitor, and they’ll tell you exactly where the legal lines sit.",
+    "Run free benefit-overview sessions for five veteran families and document (with permission) what they discovered.",
+    "Decide your revenue model up front: accredited claims practice, adjacent coaching, or free community service funded by something else you run. Write it down and stick to it."
+  ],
+  "licensing_notes": [
+    "US federal law (38 U.S.C. §§ 5901–5905) restricts who may prepare, present, or prosecute VA benefits claims: accredited attorneys, claims agents, and VSO representatives. Charging unaccredited fees for claims prep is unlawful, and companies doing it anyway are a recurring scandal in this space. What remains legal: selling general education and research that isn’t tied to preparing a specific claim, helping with non-claim paperwork, and charging for coaching on non-VA matters (state benefits, discounts, transition logistics). The clean paths to charging for claims work itself are VA accreditation (the claims-agent exam is open to non-attorneys) or partnering with accredited practitioners. Other countries have their own rules; the engine flags the boundaries per country.",
+    "This category carries a zero-tolerance honesty bar: no percentage-of-backpay arrangements, no \"we’ll get your rating increased\" promises, ever."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": true
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hire the Fleet — bounded research tasks, paid per task in USDC | PulseNetwork</title>
+<meta name="description" content="Give PulseNetwork a bounded task, get a deterministic quote, pay via x402, receive the finished research memo in the response. Prospect research $25, vendor due-diligence memo $5, market-entry brief $10. No account, no API key.">
+<link rel="canonical" href="https://pulse.theaslangroupllc.com/hire">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#05080d;--ink:#eaf1f9;--mut:#8fa1b8;--acc:#37e29b;--lion:#f0b429;--card:#0b1119;--line:#1a2433}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header.top{padding:22px 0;border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--ink)}.brand .lion{color:var(--lion)}
+.nav{display:flex;gap:18px;flex-wrap:wrap}.nav a{color:var(--mut);font-size:13.5px}.nav a:hover{color:var(--ink)}
+.hero{padding:56px 0 30px}
+h1{font-size:clamp(26px,4.4vw,40px);line-height:1.18;letter-spacing:-.02em;max-width:24ch}
+.hero p.lede{color:var(--mut);max-width:66ch;margin-top:14px}
+.hero .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.chip{border:1px solid var(--line);border-radius:99px;padding:4px 12px;font-size:12.5px;color:var(--mut)}
+.group{padding:26px 0;border-top:1px solid var(--line)}
+.group h2{font-size:20px;margin-bottom:6px}
+.group p{color:var(--mut);font-size:14.5px;max-width:74ch;margin-top:6px}
+.price{color:var(--lion);font-weight:600}
+pre{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;font:12.5px/1.7 ui-monospace,Menlo,monospace;overflow-x:auto;color:#c8d6e8;margin:14px 0}
+ul.rules{margin:10px 0 0 18px;color:var(--mut);font-size:14.5px;max-width:74ch}
+footer{padding:44px 0 56px;color:var(--mut);font-size:14px;border-top:1px solid var(--line);margin-top:30px}
+@media (prefers-color-scheme: light){:root{--bg:#fbfdff;--ink:#0c1522;--mut:#4a5b70;--card:#f0f4f9;--line:#dbe4ee}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <span class="brand"><span class="lion">◆</span> PulseNetwork <span style="color:var(--mut);font-weight:400">/ hire</span></span>
+  <nav class="nav"><a href="/">All APIs</a><a href="/hire.md">hire.md (agent contract)</a><a href="/llms.txt">llms.txt</a><a href="/agents.md">agents.md</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <h1>Hire the fleet for a bounded task.</h1>
+  <p class="lede">Describe the task, get a deterministic quote, pay per task in USDC over <strong>x402</strong>, and receive the finished research memo in the response. No account, no API key, no back-and-forth. Built for agents; works for humans with any x402 wallet.</p>
+  <div class="chips">
+    <span class="chip">Free deterministic quote</span>
+    <span class="chip">x402 v2 · USDC on Base + Solana + 9 rails</span>
+    <span class="chip">Synchronous delivery ≤ 5 min</span>
+    <span class="chip">Research memos only — we never send outreach</span>
+  </div>
+</div></section>
+
+<section class="group"><div class="wrap">
+  <h2>prospect-ledger <span class="price">$25.00</span></h2>
+  <p>Ranked B2B prospect research: give your thesis (what you sell, why a prospect cares) and a target profile; get 5–15 researched companies with why-they-fit evidence, machine-verified source URLs, one public business contact route each, and a tailored opening question. Sources that fail our live existence check are labeled <em>unverified</em>, never hidden.</p>
+</div></section>
+
+<section class="group"><div class="wrap">
+  <h2>vendor-dd-memo <span class="price">$5.00</span></h2>
+  <p>Counterparty due diligence composed from live engines: OFAC sanctions screen (alias-aware, deterministic), GLEIF legal-entity lookup, and media-narrative-vs-court-record. Pass a token contract address instead of a company name and it runs a deterministic on-chain token-safety verdict. Every section reports its own source status — a failed source reads as MISSING, never as clean.</p>
+</div></section>
+
+<section class="group"><div class="wrap">
+  <h2>market-entry-brief <span class="price">$10.00</span></h2>
+  <p>Sector × country expansion brief: country-risk assessment, sector supply-chain geopolitical risk, regulatory applicability preview, and global macro regime context. Add your home country for bilateral trade-tension analysis.</p>
+</div></section>
+
+<section class="group"><div class="wrap">
+  <h2>How it works</h2>
+<pre>curl -s -X POST https://pulse.theaslangroupllc.com/api/hire/quote \
+  -H 'Content-Type: application/json' \
+  -d '{"task_type":"vendor-dd-memo","company_or_token":"Acme Corp"}'
+# → { price_usd: 5, pay_at: ".../api/hire/vendor-dd-memo", ... }
+# Call pay_at with the same inputs → HTTP 402 → pay → deliverable in the 200 body.</pre>
+  <p>Full machine contract with schemas and billing semantics: <a href="/hire.md">hire.md</a>. Quote with no task_type to see the live menu.</p>
+</div></section>
+
+<section class="group"><div class="wrap">
+  <h2>Hard rules</h2>
+  <ul class="rules">
+    <li>We never contact anyone on your behalf. Deliverables are research memos — the execution path has no send capability.</li>
+    <li>Public business contacts only. Personal emails and phone numbers are stripped in code before delivery.</li>
+    <li>Consumer-targeted lists, protected-class targeting, harassment, doxxing, and deceptive-outreach requests are declined before payment.</li>
+    <li>Declined or invalid inputs are never charged. Post-payment failures follow the <a href="/terms.html">paid-error policy</a> — retry or email for a credit.</li>
+  </ul>
+</div></section>
+
+<footer><div class="wrap">
+  Operated by The Aslan Group LLC · <a href="mailto:info@theaslangroupllc.com">info@theaslangroupllc.com</a> · <a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a>
+</div></footer>
+</body>
+</html>

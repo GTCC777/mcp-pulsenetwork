@@ -1,0 +1,73 @@
+{
+  "name": "Research assistant service for authors and academics",
+  "slug": "author-research-assistant",
+  "category": "Creators & content",
+  "summary": "Sell verified-citation research support to nonfiction authors, grad students, and academics: bibliography checks, literature briefs, and source verification, with an engine that refuses to invent references.",
+  "updated": "2026-07-31",
+  "human_page": "https://pulse.theaslangroupllc.com/fieldguide/author-research-assistant/",
+  "hub": "https://pulse.theaslangroupllc.com/fieldguide/",
+  "engines": [
+    {
+      "vertical": "citepulse",
+      "name": "CitePulse",
+      "base_url": "https://citepulse.theaslangroupllc.com",
+      "openapi": "https://citepulse.theaslangroupllc.com/openapi.json",
+      "llms_txt": "https://citepulse.theaslangroupllc.com/llms.txt",
+      "endpoints": [
+        {
+          "path": "/api/ref-check",
+          "price": "$0.02",
+          "description": "Bibliography verification (flagship)"
+        },
+        {
+          "path": "/api/literature-brief",
+          "price": "$0.25",
+          "description": "Grounded literature synthesis"
+        },
+        {
+          "path": "/api/topic-scan",
+          "price": "$0.20",
+          "description": "Rising-topic research scan"
+        },
+        {
+          "path": "/api/paper",
+          "price": "$0.02",
+          "description": "Single-paper lookup"
+        },
+        {
+          "path": "/api/author",
+          "price": "$0.02",
+          "description": "Author metrics"
+        }
+      ]
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "networks": [
+      "base",
+      "solana"
+    ],
+    "pricing_note": "Prices shown are the live public catalog — the same wholesale sheet agents pay per call. No subscription.",
+    "human_onramp": "Self-serve starter key (no crypto wallet needed): https://pulse.theaslangroupllc.com/fieldguide/start/?bp=author-research-assistant — scoped key with a $0.25 trial balance; top up by card (Stripe) or USDC. API: POST https://pulse.theaslangroupllc.com/api/wholesale/register {contact, scope: \"citepulse\"}. Email fallback: info@theaslangroupllc.com with subject \"Starter key: author-research-assistant\"."
+  },
+  "setup_steps": [
+    "Verify the bibliography of one published book in your field and write up what you found (politely). That document is your calling card.",
+    "Price per reference batch and per brief, flat, published on the site.",
+    "Post your integrity policy (verification and research, no ghostwriting) where clients can see it.",
+    "Pitch three small presses and two dissertation-coaching services; they have recurring verification needs and no staff for it."
+  ],
+  "licensing_notes": [
+    "None. The professional line that matters is academic integrity: you verify, research, and map sources; you don’t ghostwrite student work that will be submitted as their own. State that policy on your site; the clients you want will trust you more for it."
+  ],
+  "compliance": {
+    "earnings": "Educational content. No earnings claims or income projections; results depend on operator effort, market, and pricing.",
+    "posture": "Flat-fee self-help document preparation where documents are involved: the customer signs and files; the operator never represents clients or works on contingency.",
+    "sensitive_category": false
+  },
+  "publisher": {
+    "name": "The Aslan Group LLC",
+    "contact": "info@theaslangroupllc.com"
+  }
+}
